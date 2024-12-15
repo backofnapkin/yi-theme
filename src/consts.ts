@@ -16,13 +16,13 @@
  * beian {string} Chinese policy
  */
 export const site = {
-  title: 'Astro Theme Yi', // required
+  title: '', // required
   favicon: '/favicon.svg', // required
-  description: 'Welcome to my independent blog website! ',
-  author: "Astro-Yi", // required
+  description: 'BackofNapkin.co offers online calculators and tools designed to help entrepreneurs estimate business projections, make smarter decisions, and launch with confidence.',
+  author: "Brett Lindenberg", // required
   avatar: '/avatar.png', // required
-  url: 'https://xxxxxx.com', // required
-  motto: 'Actions speak louder than words.',
+  url: 'https://backofnapkin.co', // required
+  motto: 'Make smarter decisions and launch with confidence.',
   recentBlogSize: 5,
   archivePageSize: 25,
   postPageSize: 10,
@@ -65,46 +65,20 @@ export const categories = [
     href: "/blog/1",
   },
   {
-    name: "Feed",
+    name: "About",
     iconClass: "ri-lightbulb-flash-line",
-    href: "/feed/1",
+    href: "/about/",
   },
   // {
-  //   name: "Memos",
+  //   name: "Join Us",
   //   iconClass: "ri-quill-pen-line",
-  //   href: "/memos",
+  //   href: "/join-us/",
   // },
   {
-    name: "Archive",
+    name: "Contact",
     iconClass: "ri-archive-line",
-    href: "/archive/1",
+    href: "/contact/",
   },
-  {
-    name: "Message",
-    iconClass: "ri-chat-1-line",
-    href: "/message",
-  },
-  {
-    name: "Search",
-    iconClass: "ri-search-line",
-    href: "/search",
-  },
-  {
-    name: "More",
-    iconClass: "ri-more-fill",
-    href: "javascript:void(0);",
-    children: [
-      {
-        name: 'About',
-        iconClass: 'ri-information-line',
-        href: '/about',
-      },
-      {
-        name: 'Friends',
-        iconClass: 'ri-user-5-line',
-        href: '/friends',
-        target: '_self',
-      },
     ]
   }
 ]
@@ -114,29 +88,19 @@ export const categories = [
  */
 export const infoLinks = [
   {
-    icon: 'ri-telegram-fill',
-    name: 'telegram',
-    outlink: 'xxxxxxx',
-  },
-  {
     icon: 'ri-twitter-fill',
     name: 'twitter',
-    outlink: 'xxxxxxx',
+    outlink: 'https://x.com/thebrettlind',
   },
   {
-    icon: 'ri-instagram-fill',
-    name: 'instagram',
-    outlink: 'xxxxxxx',
+    icon: 'ri-youtube-fill',
+    name: 'youtube',
+    outlink: 'https://www.youtube.com/@backofnapkin',
   },
   {
-    icon: 'ri-github-fill',
-    name: 'github',
-    outlink: 'xxxxxxx',
-  },
-  {
-    icon: 'ri-rss-fill',
-    name: 'rss',
-    outlink: 'xxxxxxx',
+    icon: 'ri-mail-fill',
+    name: 'email',
+    outlink: 'mailto:brett.lindenberg@gmail.com',
   }
 ]
 

@@ -11,6 +11,8 @@ Welcome to BackofNapkin.co! I created this website with a simple goal: to help e
 
 Before I start any venture, I always grab a pen and paper to sketch out different projections. I love going through the process of writing down key inputs and watching how adjustments to sales, costs, and profit margins affect the bottom line.
 
+### My Goal
+
 My goal here is to launch a new tool each day that makes projections easier for business owners by offering accurate, easy-to-use online tools and calculators. I research the data behind every tool and consult industry experts to ensure the numbers reflect real-world business scenarios and inputs.
 
 My hope is that these resources will give you the confidence to move forward with your business idea or make adjustments. In many cases, you may discover a business idea doesn’t make sense based on the numbers. That's okay! I hope that I can help some founders avoid major financial setbacks investing in a new business that doesn’t make financial sense.

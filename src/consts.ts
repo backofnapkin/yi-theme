@@ -16,7 +16,7 @@
  * beian {string} Chinese policy
  */
 export const site = {
-  title: '', // required
+  title: 'BackofNapkin.co', // required
   favicon: '/favicon.svg', // required
   description: 'BackofNapkin.co offers online calculators and tools designed to help entrepreneurs estimate business projections, make smarter decisions, and launch with confidence.',
   author: "Brett Lindenberg", // required

@@ -8,40 +8,51 @@ import Comment from '../components/Comment.astro'
 import Donate from '../components/Donate.astro'
 import {donate, comment, config} from "../consts";
 
-const {frontmatter = {comment: false, donate: false, title: undefined, description: undefined}} = Astro.props;
+interface Props {
+  frontmatter: {
+    title?: string;
+    description?: string;
+    comment?: boolean;
+    donate?: boolean;
+  };
+}
+
+const { frontmatter } = Astro.props as Props;
+
+// Debug logging
+console.log('IndexPage Props:', {
+  title: frontmatter?.title,
+  description: frontmatter?.description
+});
 ---
 
 <html lang={config.lang}>
-<BaseHead title={frontmatter.title} description={frontmatter.description} />
-
-<body class="bg-skin-secondary relative">
-<Header/>
-<main class="container p-4 pt-20 text-skin-base pb-32 min-h-full relative" id="app">
-  <div class="grid grid-cols-4 gap-8">
-    <div class="col-span-4 xl:col-span-3">
-      <slot></slot>
-      {
-        donate.enable && frontmatter.donate &&
-        <Donate></Donate>
-      }
-      {
-        comment.enable && frontmatter.comment &&
-        <Comment></Comment>
-      }
-    </div>
-    <div>
-      <div class="hidden xl:block space-y-6">
-        <Profile></Profile>
-        <BlogAside></BlogAside>
+  <BaseHead 
+    title={frontmatter?.title} 
+    description={frontmatter?.description}
+  />
+  <body class="bg-skin-secondary relative">
+    <Header/>
+    <main class="container p-4 pt-20 text-skin-base pb-32 min-h-full relative" id="app">
+      <div class="grid grid-cols-4 gap-8">
+        <div class="col-span-4 xl:col-span-3">
+          <slot></slot>
+          {donate.enable && frontmatter.donate && <Donate />}
+          {comment.enable && frontmatter.comment && <Comment />}
+        </div>
+        <div>
+          <div class="hidden xl:block space-y-6">
+            <Profile/>
+            <BlogAside/>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
-  <Footer/>
-</main>
-</body>
-<script>
-  document.body.querySelectorAll("a").forEach(item => {
-    item.setAttribute("rel", "nofollow noreferrer");
-  });
-</script>
+      <Footer/>
+    </main>
+  </body>
+  <script>
+    document.body.querySelectorAll("a").forEach(item => {
+      item.setAttribute("rel", "nofollow noreferrer");
+    });
+  </script>
 </html>

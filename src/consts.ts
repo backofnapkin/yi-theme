@@ -22,7 +22,7 @@ export const site = {
   author: "Brett Lindenberg", // required
   avatar: '/avatar.png', // required
   url: 'https://backofnapkin.co', // required
-  motto: 'Make smarter decisions and launch with confidence.',
+  motto: 'Crunch the numbers on your next idea.',
   recentBlogSize: 5,
   archivePageSize: 25,
   postPageSize: 10,

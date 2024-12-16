@@ -2,31 +2,64 @@
 import IndexPage from "../layouts/IndexPage.astro";
 
 const frontmatter = {
-  title: "Contact Us | BackofNapkin.co",
-  description: "Get in touch about our business calculators",
-  pubDate: "12/16/2024",
-  comment: false,
-  donate: false
+    comment: false,
+    donate: false
+};
+
+const meta = {
+    title: "Contact Us | Back of Napkin",
+    description: "Get in touch with Back of Napkin. We help turn your innovative ideas into reality. Contact us to discuss your next big project or business idea."
 };
 ---
 
 <IndexPage frontmatter={frontmatter}>
-  <article> <!-- Adding article wrapper as Yi theme might expect it -->
-    <h1 class="text-3xl font-bold mb-6">Contact Us</h1>
-      
-    <p class="mb-8 text-gray-600">
-      Have questions about our calculators? Want to suggest a new tool? We'd love to hear from you.
-    </p>
+    <div class="prose prose-lg dark:prose-invert mx-auto">
+        <h1 class="text-4xl font-bold text-center mb-8 text-gradient">Contact Us</h1>
+        
+        <div class="contact-container">
+            <p class="text-center text-lg mb-8">
+                Have an idea you want to discuss? We'd love to hear from you!
+            </p>
 
-    <div class="w-full overflow-x-hidden"> <!-- Added overflow control -->
-      <iframe 
-        src="https://docs.google.com/forms/d/e/1FAIpQLScJE86owMxlwHzRbh3TRpSUo_1uWaTblIFgVE-TMjd3pfuVPg/viewform?embedded=true" 
-        width="100%" 
-        height="678" 
-        frameborder="0" 
-        marginheight="0" 
-        marginwidth="0"
-      >Loading…</iframe>
+            <div class="contact-methods space-y-6">
+                <div class="text-center">
+                    <h2 class="text-2xl font-semibold mb-2">Email Us</h2>
+                    <a href="mailto:contact@backofnapkin.co" class="text-accent hover:text-accent-light transition-colors">
+                        contact@backofnapkin.co
+                    </a>
+                </div>
+            </div>
+        </div>
     </div>
-  </article>
 </IndexPage>
+
+<style>
+    .text-gradient {
+        background-image: var(--accent-gradient);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-size: 400%;
+        background-position: 0%;
+    }
+
+    .contact-container {
+        padding: 2rem;
+        border-radius: 8px;
+        background: linear-gradient(rgba(var(--accent-dark), 66%), rgba(var(--accent-dark), 33%));
+        border: 1px solid rgba(var(--accent-light), 25%);
+    }
+
+    .text-accent {
+        color: rgb(var(--accent-light));
+    }
+
+    .text-accent:hover {
+        color: rgb(var(--accent));
+    }
+
+    @media (max-width: 600px) {
+        .contact-container {
+            padding: 1rem;
+        }
+    }
+</style>

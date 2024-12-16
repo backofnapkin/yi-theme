@@ -1,18 +1,32 @@
 ---
 import IndexPage from "../layouts/IndexPage.astro";
 
-const pageTitle = {
+const frontmatter = {
   title: "Contact Us | BackofNapkin.co",
-  description: "Get in touch about our business calculators using a simple contact form."
+  description: "Get in touch about our business calculators",
+  pubDate: "12/16/2024",
+  comment: false,
+  donate: false
 };
 ---
 
 <IndexPage frontmatter={frontmatter}>
+  <article> <!-- Adding article wrapper as Yi theme might expect it -->
+    <h1 class="text-3xl font-bold mb-6">Contact Us</h1>
+      
+    <p class="mb-8 text-gray-600">
+      Have questions about our calculators? Want to suggest a new tool? We'd love to hear from you.
+    </p>
 
-<h1>Contact Us</h1>
-
-<p>Have questions about the calculators? Want to suggest a new tool or partner? Reach out below.</p>
-
-
-<iframe src="https://docs.google.com/forms/d/e/1FAIpQLScJE86owMxlwHzRbh3TRpSUo_1uWaTblIFgVE-TMjd3pfuVPg/viewform?embedded=true" width="640" height="678" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
+    <div class="w-full overflow-x-hidden"> <!-- Added overflow control -->
+      <iframe 
+        src="https://docs.google.com/forms/d/e/1FAIpQLScJE86owMxlwHzRbh3TRpSUo_1uWaTblIFgVE-TMjd3pfuVPg/viewform?embedded=true" 
+        width="100%" 
+        height="678" 
+        frameborder="0" 
+        marginheight="0" 
+        marginwidth="0"
+      >Loading…</iframe>
+    </div>
+  </article>
 </IndexPage>

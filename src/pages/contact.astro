@@ -1,11 +1,20 @@
 ---
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import Profile from '../components/Profile.astro';
+import BlogAside from '../components/BlogAside.astro';
+import Comment from '../components/Comment.astro';
+import Donate from '../components/Donate.astro';
+import {donate, comment, config} from "../consts";
+
 const title = "Contact Us | BackOfNapkin.co";
 const description = "Let's talk about calculators and business tools. I have a form on this page to contact me.";
 ---
 
 # Contact us
     
-    <p class="mb-8 text-gray-600">
+    <p>
       Have questions about the calculators? Want to suggest a new tool or send a check? I'd love to hear from you.
     </p>
 

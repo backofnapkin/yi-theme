@@ -78,8 +78,6 @@ export const categories = [
     name: "Contact",
     iconClass: "ri-archive-line",
     href: "/contact/",
-  },
-    ]
   }
 ]
 

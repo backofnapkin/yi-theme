@@ -1,14 +1,13 @@
 ---
 import IndexPage from "../layouts/IndexPage.astro";
+import ContactInfo from "../components/ContactInfo.astro";
+import "../styles/contact.css";
 
 const frontmatter = {
+    title: "Contact Us | Back of Napkin - Turn Your Ideas into Reality",
+    description: "Get in touch with Back of Napkin. We help turn your innovative ideas into reality. Contact us to discuss your next big project or business idea.",
     comment: false,
     donate: false
-};
-
-const meta = {
-    title: "Contact Us | Back of Napkin - Turn Your Ideas into Reality",
-    description: "Get in touch with Back of Napkin. We help turn your innovative ideas into reality. Contact us to discuss your next big project or business idea."
 };
 ---
 
@@ -20,58 +19,7 @@ const meta = {
             <p class="text-center text-lg mb-8">
                 Have an idea you want to discuss? We'd love to hear from you!
             </p>
-
-            <div class="contact-methods space-y-6">
-                <div class="text-center">
-                    <h2 class="text-2xl font-semibold mb-2">Email Us</h2>
-                    <a href="mailto:contact@backofnapkin.co" class="text-accent hover:text-accent-light transition-colors">
-                        contact@backofnapkin.co
-                    </a>
-                </div>
-
-                <div class="text-center">
-                    <h2 class="text-2xl font-semibold mb-2">Follow Us</h2>
-                    <div class="flex justify-center gap-4">
-                        <a href="https://twitter.com/backofnapkinco" class="text-accent hover:text-accent-light transition-colors">
-                            Twitter
-                        </a>
-                        <a href="https://linkedin.com/company/backofnapkin" class="text-accent hover:text-accent-light transition-colors">
-                            LinkedIn
-                        </a>
-                    </div>
-                </div>
-            </div>
+            <ContactInfo />
         </div>
     </div>
 </IndexPage>
-
-<style>
-    .text-gradient {
-        background-image: var(--accent-gradient);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-size: 400%;
-        background-position: 0%;
-    }
-
-    .contact-container {
-        padding: 2rem;
-        border-radius: 8px;
-        background: linear-gradient(rgba(var(--accent-dark), 66%), rgba(var(--accent-dark), 33%));
-        border: 1px solid rgba(var(--accent-light), 25%);
-    }
-
-    .text-accent {
-        color: rgb(var(--accent-light));
-    }
-
-    .text-accent:hover {
-        color: rgb(var(--accent));
-    }
-
-    @media (max-width: 600px) {
-        .contact-container {
-            padding: 1rem;
-        }
-    }
-</style>

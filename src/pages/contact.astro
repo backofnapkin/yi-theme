@@ -1,23 +1,10 @@
 ---
-import IndexPage from "../layouts/IndexPage.astro";
 
-const frontmatter = {
-    title: "Contact Us | Back of Napkin - Turn Your Ideas into Reality",
-    description: "Get in touch with Back of Napkin. We help turn your innovative ideas into reality. Contact us to discuss your next big project or business idea.",
-    comment: false,
-    donate: false
-};
 ---
+<head>
+<title>Contact Us - BackofNapkin.co</title>
+</head>
+<body>
+Contact me here. 
+</body>
 
-<IndexPage frontmatter={frontmatter}>
-    <div class="prose prose-lg dark:prose-invert mx-auto">
-        <h1 class="text-4xl font-bold text-center mb-8 text-gradient">Contact Us</h1>
-        
-        <div class="contact-container">
-            <p class="text-center text-lg mb-8">
-                Have an idea you want to discuss? We'd love to hear from you!
-            </p>
-            <ContactInfo />
-        </div>
-    </div>
-</IndexPage>

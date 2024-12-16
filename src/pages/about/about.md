@@ -1,4 +1,6 @@
 ---
+title: About BackofNapkin.co
+description: Learn about this website and the calculators and business projection tools I'm building. 
 donate: false
 comment: false
 ---

@@ -1,10 +1,17 @@
 ---
+import BaseHead from '../components/BaseHead.astro';
 
+const title = "Contact Us";
+const description = "A powerful scientific calculator with advanced mathematical functions and unit conversions";
 ---
-<head>
-<title>Contact Us - BackofNapkin.co</title>
-</head>
-<body>
-Contact me here. 
-</body>
 
+<html lang="en">
+  <head>
+    <BaseHead title={title} description={description} />
+    <!-- or with SEO component: -->
+    <!-- <SEO title={title} description={description} /> -->
+  </head>
+  <body>
+    Testing out the code. 
+  </body>
+</html>

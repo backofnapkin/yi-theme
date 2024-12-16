@@ -9,17 +9,42 @@ import Donate from '../components/Donate.astro';
 import {donate, comment, config} from "../consts";
 
 const title = "Contact Us | BackOfNapkin.co";
-const description = "Let's talk about calculators and business tools. I have a form on this page to contact me.";
+const description = "Get in touch about our business calculators";
+
+const frontmatter = {
+  comment: false,
+  donate: false
+};
 ---
 
-# Contact us
-    
-    <p>
-      Have questions about the calculators? Want to suggest a new tool or send a check? I'd love to hear from you.
-    </p>
+<!DOCTYPE html>
+<html lang={config.lang}>
+<head>
+  <BaseHead title={title} description={description}/>
+</head>
+<body>
+<Header/>
+<main class="mx-auto max-w-7xl w-full">
+  <div class="lg:flex">
+    <article class="lg:w-[73%] w-full overflow-x-hidden px-6 lg:pr-8">
+      <h1 class="text-3xl font-bold mb-6">Contact Us</h1>
+      
+      <p class="mb-8 text-gray-600">
+        Have questions about our calculators? Want to suggest a new tool? We'd love to hear from you.
+      </p>
 
-  
-<iframe src="https://docs.google.com/forms/d/e/1FAIpQLScJE86owMxlwHzRbh3TRpSUo_1uWaTblIFgVE-TMjd3pfuVPg/viewform?embedded=true" width="640" height="678" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
+     <iframe src="https://docs.google.com/forms/d/e/1FAIpQLScJE86owMxlwHzRbh3TRpSUo_1uWaTblIFgVE-TMjd3pfuVPg/viewform?embedded=true" width="640" height="678" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
 
-  </main>
-</BaseLayout>
+      {frontmatter.comment && <Comment />}
+      {frontmatter.donate && <Donate />}
+    </article>
+
+    <aside class="lg:w-[27%] w-full px-6 lg:pl-0">
+      <Profile />
+      <BlogAside/>
+    </aside>
+  </div>
+</main>
+<Footer/>
+</body>
+</html>

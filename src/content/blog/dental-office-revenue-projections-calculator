@@ -4,12 +4,12 @@ import IndexPage from "../../layouts/IndexPage.astro";
 const frontmatter = {
   comment: false,
   donate: false,
-  title: "Food Truck Business Revenue & Profit Projection Calculator",
-  description: "Input sales, expenses, and costs to project earnings with our Food Truck Business Revenue and Profit Projection calculator for free.",
+  title: "New Dental Office Profitability & Revenue Projections Calculator",
+  description: "Calculate the profitability of your dental practice. Plan smart with revenue forecasts based on client volume, overhead analysis, and employee cost breakdowns.",
   author: "Brett Lindenberg",
-  category: "Food Business Calculators",
+  category: "Business Calculators",
   date: "2024-12-17",
-  tags: ["web-development", "programming", "beginners"],
+  tags: ["dental-practice"],
   image: {
     url: "/blog-placeholder-1.jpg",
     alt: "Web Development Illustration"

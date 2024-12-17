@@ -1,24 +1,32 @@
 ---
 import IndexPage from "../layouts/IndexPage.astro";
-import BaseHead from "../components/BaseHead.astro"; 
+
+const frontmatter = {
+  comment: false,
+  donate: false
+};
 
 const title = "Contact Us - BackofNapkin.co";
 const description = "Contact us to ask questions about any of the calculators with a simple form.";
 ---
 
-<html lang="en">
-  <head>
-    <BaseHead title={title} description={description} />
-    <!-- or with SEO component: -->
-    <!-- <SEO title={title} description={description} /> -->
-  </head>
-<body>
-Have ideas for a new calculator? Questions? Send me a message using the form below. 
-    <div class="container mx-auto px-4 py-8">
-      <!-- Google Form iframe goes here -->
-      <div class="w-full">
-<iframe src="https://docs.google.com/forms/d/e/1FAIpQLScJE86owMxlwHzRbh3TRpSUo_1uWaTblIFgVE-TMjd3pfuVPg/viewform?embedded=true" width="640" height="678" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
-      </div>
+<IndexPage frontmatter={frontmatter}>
+  <div class="prose prose-lg mx-auto">
+    <h1>{title}</h1>
+    <p>Have ideas for a new calculator? Questions? Send me a message using the form below.</p>
+    
+    <div class="mt-8">
+      <iframe 
+        src="https://docs.google.com/forms/d/e/1FAIpQLScJE86owMxlwHzRbh3TRpSUo_1uWaTblIFgVE-TMjd3pfuVPg/viewform?embedded=true" 
+        width="100%" 
+        height="678" 
+        frameborder="0" 
+        marginheight="0" 
+        marginwidth="0"
+        class="w-full"
+      >
+        Loading…
+      </iframe>
     </div>
-  </body>
-</html>
+  </div>
+</IndexPage>

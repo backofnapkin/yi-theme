@@ -5,23 +5,24 @@ import { Calculator, PlusCircle, MinusCircle, Printer, Download } from 'lucide-r
 const frontmatter = {
   comment: false,
   donate: false,
-  title: "New Dental Office Profitability & Revenue Projections Calculator",
-  description: "Calculate the profitability of your dental practice. Plan smart with revenue forecasts based on client volume, overhead analysis, and employee cost breakdowns.",
+  title: "Dental Practice Revenue & Profitability Calculator",
+  description: "Calculate profitability and revenue projections for your dental practice with our comprehensive financial planning tool.",
   author: "Brett Lindenberg",
   category: "Business Calculators",
   date: "2024-12-17",
   tags: ["dental-practice"],
   image: {
     url: "/blog-placeholder-1.jpg",
-    alt: "Web Development Illustration"
+    alt: "Dental Practice Calculator"
   }
+};
 
-// Rich snippets
+// Rich snippets for SEO
 const schema = {
   "@context": "https://schema.org",
   "@type": "SoftwareApplication",
-  "name": title,
-  "description": description,
+  "name": frontmatter.title,
+  "description": frontmatter.description,
   "applicationCategory": "BusinessApplication",
   "operatingSystem": "Web Browser",
   "offers": {
@@ -40,7 +41,7 @@ const schema = {
 };
 ---
 
-<IndexPage title={title} description={description}>
+<IndexPage {...frontmatter}>
   <!-- Schema markup for rich results -->
   <script type="application/ld+json" set:html={JSON.stringify(schema)} />
 
@@ -51,11 +52,11 @@ const schema = {
         <div class="flex items-center justify-center gap-3 mb-4">
           <Calculator size={40} class="text-custom-active" />
           <h1 class="text-4xl font-bold text-skin-base">
-            {title}
+            {frontmatter.title}
           </h1>
         </div>
         <p class="text-xl text-skin-base">
-          {description}
+          {frontmatter.description}
         </p>
       </div>
 
@@ -265,33 +266,9 @@ const schema = {
 </IndexPage>
 
 <script>
-  // Initialize Chart.js and its components
+  // Initialize Chart.js
   import Chart from 'chart.js/auto';
-  import {
-    CategoryScale,
-    LinearScale,
-    PointElement,
-    LineElement,
-    Title,
-    Tooltip,
-    Legend,
-    ArcElement,
-    Filler
-  } from 'chart.js';
-
-  // Register Chart.js components
-  Chart.register(
-    CategoryScale,
-    LinearScale,
-    PointElement,
-    LineElement,
-    Title,
-    Tooltip,
-    Legend,
-    ArcElement,
-    Filler
-  );
-
+  
   // Make Chart.js available globally
   window.Chart = Chart;
 

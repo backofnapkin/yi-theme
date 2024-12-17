@@ -30,5 +30,7 @@ export default defineConfig({
   markdown: {
     remarkPlugins: [remarkModifiedTime, resetRemark, remarkDirective, remarkAsides({}),remarkCollapse({}),remarkGithubCard()],
     rehypePlugins: [lazyLoadImage],
+    layouts: {
+      default: './src/layouts/MarkdownPost.astro'
   }
 });

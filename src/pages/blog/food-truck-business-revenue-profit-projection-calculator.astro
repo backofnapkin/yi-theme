@@ -1,0 +1,73 @@
+---
+import IndexPage from "../../layouts/IndexPage.astro";
+
+const frontmatter = {
+  comment: false,
+  donate: false,
+  title: "Food Truck Business Revenue & Profit Projection Calculator",
+  description: "Input sales, expenses, and costs to project earnings with our Food Truck Business Revenue and Profit Projection calculator for free.",
+  author: "Brett Lindenberg",
+  category: "Food Business Calculators",
+  date: "2024-12-17",
+  tags: ["web-development", "programming", "beginners"],
+  image: {
+    url: "/blog-placeholder-1.jpg",
+    alt: "Web Development Illustration"
+  }
+};
+---
+
+<IndexPage 
+  frontmatter={frontmatter}
+  title={frontmatter.title}
+  description={frontmatter.description}
+>
+  <div class="prose prose-lg mx-auto">
+    <h1>{frontmatter.title}</h1>
+    
+    <div class="metadata text-sm text-gray-500 mb-6">
+      <span>By {frontmatter.author}</span> • 
+      <span>{frontmatter.category}</span> • 
+      <time datetime={frontmatter.date}>{new Date(frontmatter.date).toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+      })}</time>
+    </div>
+
+    <div class="tags mb-8">
+      {frontmatter.tags.map(tag => (
+        <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">
+          #{tag}
+        </span>
+      ))}
+    </div>
+
+    <p>
+      Starting your journey in web development can seem overwhelming at first. 
+      In this guide, we'll break down the essential concepts and tools you need to know.
+    </p>
+    
+    <h2>Key Topics We'll Cover</h2>
+    <ul>
+      <li>HTML fundamentals and semantic markup</li>
+      <li>CSS styling and responsive design</li>
+      <li>JavaScript basics for interactivity</li>
+      <li>Modern development tools and workflows</li>
+    </ul>
+
+    <h2>Getting Started</h2>
+    <p>
+      The first step in your web development journey is understanding the basic building blocks.
+      We'll start with HTML, which provides the structure for your web pages.
+    </p>
+
+    <div class="mt-8">
+      <h3>Next Steps</h3>
+      <p>
+        Stay tuned for upcoming posts where we'll dive deeper into each of these topics
+        and build practical projects together.
+      </p>
+    </div>
+  </div>
+</IndexPage>

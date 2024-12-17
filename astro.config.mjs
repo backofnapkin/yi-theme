@@ -33,4 +33,5 @@ export default defineConfig({
     layouts: {
       default: './src/layouts/MarkdownPost.astro'
   }
+}   
 });

@@ -1,8 +1,18 @@
 ---
-import IndexPage from "src/layouts/IndexPage.astro";
+import IndexPage from "../layouts/IndexPage.astro";
+
+const frontmatter = {
+  comment: false,
+  donate: false
+};
+
+const title = "404 - Page Not Found"; // Add this
+const description = "The page you're looking for doesn't exist"; // Add this
 ---
 
-<IndexPage>
-  <div>404</div>
-  <div>Oops,This Page Could Not Be Found!</div>
+<IndexPage frontmatter={frontmatter} title={title} description={description}>
+  <div class="prose prose-lg mx-auto">
+    <h1>{title}</h1>
+    <p>Sorry, we couldn't find the page you were looking for.</p>
+  </div>
 </IndexPage>

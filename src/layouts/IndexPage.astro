@@ -8,7 +8,9 @@ import Comment from '../components/Comment.astro'
 import Donate from '../components/Donate.astro'
 import {donate, comment, config} from "../consts";
 
-const {frontmatter = {comment: false, donate: false}, title, description} = Astro.props
+const {frontmatter = {comment: false, donate: false}, title, description} = Astro.props;
+const pageTitle = frontmatter?.title || title;
+const pageDescription = frontmatter?.description || description;
 ---
 
 <html lang={config.lang}>

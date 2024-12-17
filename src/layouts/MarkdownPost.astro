@@ -1,0 +1,16 @@
+---
+import IndexPage from './IndexPage.astro';
+
+// Get frontmatter data and pass it to IndexPage
+const { frontmatter } = Astro.props;
+---
+<IndexPage 
+    title={frontmatter.title}
+    description={frontmatter.description}
+    frontmatter={frontmatter}
+>
+    <article class="markdown-body">
+        <h1>{frontmatter.title}</h1>
+        <slot />
+    </article>
+</IndexPage>

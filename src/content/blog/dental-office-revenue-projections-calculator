@@ -265,9 +265,33 @@ const schema = {
 </IndexPage>
 
 <script>
-  // Initialize Chart.js
+  // Initialize Chart.js and its components
   import Chart from 'chart.js/auto';
-  
+  import {
+    CategoryScale,
+    LinearScale,
+    PointElement,
+    LineElement,
+    Title,
+    Tooltip,
+    Legend,
+    ArcElement,
+    Filler
+  } from 'chart.js';
+
+  // Register Chart.js components
+  Chart.register(
+    CategoryScale,
+    LinearScale,
+    PointElement,
+    LineElement,
+    Title,
+    Tooltip,
+    Legend,
+    ArcElement,
+    Filler
+  );
+
   // Make Chart.js available globally
   window.Chart = Chart;
 

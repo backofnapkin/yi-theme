@@ -1,53 +1,113 @@
-import type { CalculatorInputs, FinancialProjections } from './types';
+import { defaultEmployees, defaultOverhead, scenarioDetails } from './constants';
+import { calculateFinancials, calculateScenarios } from './calculations';
+import { formatCurrency } from './formatters';
+import { createSalaryChart, createProjectionChart } from './charts';
+import { addEmployee, addOverheadCost, getInputs } from './dom';
+import { downloadCSV } from './export';
+import { validateInputs } from './validation';
+import type { Scenarios } from './types';
 
-export function generateCSVContent(
-  inputs: CalculatorInputs,
-  projections: FinancialProjections
-): string {
-  const rows = [
-    ['Dental Practice Financial Report'],
-    [`Practice Name: ${inputs.practiceName}`],
-    [''],
-    ['Financial Metrics'],
-    ['Metric,Value'],
-    [`Monthly Revenue,${projections.monthlyRevenue}`],
-    [`Annual Revenue,${projections.annualRevenue}`],
-    [`Monthly Overhead,${projections.monthlyOverhead}`],
-    [`Annual Overhead,${projections.annualOverhead}`],
-    [`Net Income (Monthly),${projections.netIncome}`],
-    [`Profit Margin,${projections.profitMargin.toFixed(1)}%`],
-    [''],
-    ['Employee Salaries'],
-    ['Title,Monthly Salary'],
-    ...inputs.employees.map(emp => `${emp.title},${emp.monthlySalary}`),
-    [''],
-    ['Overhead Costs'],
-    ['Expense,Monthly Amount'],
-    ...inputs.overheadCosts.map(cost => `${cost.name},${cost.monthlyAmount}`),
-    [''],
-    ['5 Year Projections'],
-    ['Year,Projected Profit'],
-    ...projections.yearlyProjections.map((profit, i) => `Year ${i + 1},${profit}`)
-  ];
+let currentScenarios: Scenarios | null = null;
+let salaryChart: Chart | null = null;
+let roiChart: Chart | null = null;
+let scenarioChart: Chart | null = null;
 
-  return rows.join('\n');
+document.addEventListener('DOMContentLoaded', function() {
+  initializeCalculator();
+});
+
+function initializeCalculator() {
+  const employeesContainer = document.getElementById('employees-container');
+  const overheadContainer = document.getElementById('overhead-container');
+
+  if (!employeesContainer || !overheadContainer) return;
+
+  // Initialize default values
+  initializeDefaultValues(employeesContainer, overheadContainer);
+
+  // Set up event listeners
+  setupEventListeners(employeesContainer, overheadContainer);
 }
 
-export function downloadCSV(
-  inputs: CalculatorInputs,
-  projections: FinancialProjections
-): void {
-  const csvContent = generateCSVContent(inputs, projections);
-  const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
-  const link = document.createElement('a');
+function initializeDefaultValues(employeesContainer: HTMLElement, overheadContainer: HTMLElement) {
+  defaultEmployees.forEach(emp => addEmployee(employeesContainer, emp.title, emp.monthlySalary));
+  defaultOverhead.forEach(cost => addOverheadCost(overheadContainer, cost.name, cost.monthlyAmount));
+}
+
+function setupEventListeners(employeesContainer: HTMLElement, overheadContainer: HTMLElement) {
+  // Add employee and overhead buttons
+  document.getElementById('add-employee')?.addEventListener('click', () => 
+    addEmployee(employeesContainer));
+  document.getElementById('add-overhead')?.addEventListener('click', () => 
+    addOverheadCost(overheadContainer));
+
+  // Calculate, print, and export buttons
+  document.getElementById('calculate-btn')?.addEventListener('click', calculateResults);
+  document.getElementById('print-btn')?.addEventListener('click', () => window.print());
+  document.getElementById('download-csv')?.addEventListener('click', handleExport);
+
+  // Scenario tabs
+  document.querySelectorAll('.tab').forEach(tab => {
+    tab.addEventListener('click', () => handleScenarioChange(tab));
+  });
+}
+
+function handleScenarioChange(tab: Element) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  tab.classList.add('active');
+  updateScenario(tab.getAttribute('data-scenario') as 'current' | 'best' | 'worst' || 'current');
+}
+
+function handleExport() {
+  const inputs = getInputs();
+  const projections = calculateFinancials(inputs);
+  downloadCSV(inputs, projections);
+}
+
+function calculateResults() {
+  const inputs = getInputs();
   
-  if (navigator.msSaveBlob) {
-    navigator.msSaveBlob(blob, 'dental-practice-projections.csv');
-  } else {
-    link.href = URL.createObjectURL(blob);
-    link.setAttribute('download', 'dental-practice-projections.csv');
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+  // Validate inputs
+  const errors = validateInputs(inputs);
+  if (errors.length > 0) {
+    alert('Please correct the following errors:\n\n' + errors.join('\n'));
+    return;
+  }
+
+  // Calculate projections and scenarios
+  const projections = calculateFinancials(inputs);
+  currentScenarios = calculateScenarios(inputs);
+
+  // Update UI
+  showResults();
+  updatePracticeName(inputs.practiceName);
+  updateMetrics(projections);
+  updateCharts(projections, inputs.employees);
+  updateScenario('current');
+}
+
+function showResults() {
+  const resultsElement = document.getElementById('results');
+  if (resultsElement) {
+    resultsElement.classList.remove('hidden');
+  }
+}
+
+function updatePracticeName(name: string) {
+  const practiceNameElement = document.getElementById('results-practice-name');
+  if (practiceNameElement) {
+    practiceNameElement.textContent = name;
+  }
+}
+
+// ... rest of your existing update functions (updateMetrics, updateCharts, updateScenario) ...
+
+// Add error handling wrapper
+function safeExecute<T>(fn: () => T, fallback: T): T {
+  try {
+    return fn();
+  } catch (error) {
+    console.error('Error in calculator:', error);
+    return fallback;
   }
 }

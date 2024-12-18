@@ -16,7 +16,7 @@ export interface CalculatorInputs {
   daysPerWeek: number;
   startupCosts: number;
   employees: Employee[];
-  overheadCosts: OverheadCost[];
+  overhead: OverheadCost[];
 }
 
 export interface FinancialProjections {

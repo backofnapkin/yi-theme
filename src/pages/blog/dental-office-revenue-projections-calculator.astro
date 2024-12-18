@@ -1,0 +1,277 @@
+---
+import IndexPage from "../../layouts/IndexPage.astro";
+import { Calculator, PlusCircle, MinusCircle, Printer, Download } from 'lucide-react';
+
+const frontmatter = {
+  comment: false,
+  donate: false,
+  title: "Dental Practice Revenue & Profitability Calculator",
+  description: "Calculate profitability and revenue projections for your dental practice with our comprehensive financial planning tool.",
+  author: "Brett Lindenberg",
+  category: "Business Calculators",
+  date: "2024-12-17",
+  tags: ["dental-practice"],
+  image: {
+    url: "/blog-placeholder-1.jpg",
+    alt: "Dental Practice Calculator"
+  }
+};
+
+// Rich snippets for SEO
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": frontmatter.title,
+  "description": frontmatter.description,
+  "applicationCategory": "BusinessApplication",
+  "operatingSystem": "Web Browser",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "featureList": [
+    "Dental practice revenue calculator",
+    "Staff salary analysis",
+    "Overhead cost tracking",
+    "Profit margin calculation",
+    "Scenario planning",
+    "Financial reporting"
+  ]
+};
+---
+
+<IndexPage {...frontmatter}>
+  <!-- Schema markup for rich results -->
+  <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+
+  <div class="min-h-screen bg-skin-fill py-8 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-7xl mx-auto">
+      <!-- Header Section -->
+      <div class="text-center mb-8">
+        <div class="flex items-center justify-center gap-3 mb-4">
+          <Calculator size={40} class="text-custom-active" />
+          <h1 class="text-4xl font-bold text-skin-base">
+            {frontmatter.title}
+          </h1>
+        </div>
+        <p class="text-xl text-skin-base">
+          {frontmatter.description}
+        </p>
+      </div>
+
+      <div class="space-y-8">
+        <!-- Basic Information Section -->
+        <div class="bg-skin-card p-6 rounded-lg shadow-md">
+          <h2 class="text-2xl font-bold text-skin-base mb-6">Basic Information</h2>
+          
+          <div class="grid gap-4 md:grid-cols-2">
+            <div>
+              <label class="block text-sm font-medium text-skin-base">Practice Name</label>
+              <input
+                type="text"
+                id="practice-name"
+                class="mt-1 block w-full rounded-md border-skin-base shadow-sm focus:border-custom-active focus:ring-custom-active"
+                value="Dave's Dental Office"
+              />
+            </div>
+
+            <div>
+              <label class="block text-sm font-medium text-skin-base">Number of Dental Chairs</label>
+              <input
+                type="number"
+                id="dental-chairs"
+                class="mt-1 block w-full rounded-md border-skin-base shadow-sm focus:border-custom-active focus:ring-custom-active"
+                value="2"
+                min="1"
+                max="99"
+              />
+            </div>
+
+            <div>
+              <label class="block text-sm font-medium text-skin-base">Patients per Chair per Day</label>
+              <input
+                type="number"
+                id="patients-per-chair"
+                class="mt-1 block w-full rounded-md border-skin-base shadow-sm focus:border-custom-active focus:ring-custom-active"
+                value="10"
+                min="1"
+              />
+            </div>
+
+            <div>
+              <label class="block text-sm font-medium text-skin-base">Revenue per Patient ($)</label>
+              <input
+                type="number"
+                id="revenue-per-patient"
+                class="mt-1 block w-full rounded-md border-skin-base shadow-sm focus:border-custom-active focus:ring-custom-active"
+                value="432"
+                min="0"
+              />
+            </div>
+
+            <div>
+              <label class="block text-sm font-medium text-skin-base">Days Open per Week</label>
+              <input
+                type="number"
+                id="days-per-week"
+                class="mt-1 block w-full rounded-md border-skin-base shadow-sm focus:border-custom-active focus:ring-custom-active"
+                value="5"
+                min="1"
+                max="7"
+              />
+            </div>
+
+            <div>
+              <label class="block text-sm font-medium text-skin-base">Total Startup Costs ($)</label>
+              <input
+                type="number"
+                id="startup-costs"
+                class="mt-1 block w-full rounded-md border-skin-base shadow-sm focus:border-custom-active focus:ring-custom-active"
+                value="500000"
+                min="0"
+              />
+            </div>
+          </div>
+        </div>
+
+        <!-- Employee Wages Section -->
+        <div class="bg-skin-card p-6 rounded-lg shadow-md">
+          <div class="flex justify-between items-center mb-6">
+            <h2 class="text-2xl font-bold text-skin-base">Employee Wages</h2>
+            <button
+              id="add-employee"
+              class="flex items-center gap-2 px-4 py-2 bg-custom-active text-white rounded-md hover:bg-custom-hover transition-colors"
+            >
+              <PlusCircle size={20} />
+              Add Employee
+            </button>
+          </div>
+          <div id="employees-container" class="space-y-4">
+            <!-- Employees will be added here dynamically -->
+          </div>
+        </div>
+
+        <!-- Overhead Costs Section -->
+        <div class="bg-skin-card p-6 rounded-lg shadow-md">
+          <div class="flex justify-between items-center mb-6">
+            <h2 class="text-2xl font-bold text-skin-base">Overhead Costs</h2>
+            <button
+              id="add-overhead"
+              class="flex items-center gap-2 px-4 py-2 bg-custom-active text-white rounded-md hover:bg-custom-hover transition-colors"
+            >
+              <PlusCircle size={20} />
+              Add Cost
+            </button>
+          </div>
+          <div id="overhead-container" class="space-y-4">
+            <!-- Overhead costs will be added here dynamically -->
+          </div>
+        </div>
+
+        <!-- Calculate Button -->
+        <button
+          id="calculate-btn"
+          class="w-full px-8 py-3 bg-custom-active text-white text-lg font-semibold rounded-lg hover:bg-custom-hover transition-colors"
+        >
+          Calculate Results
+        </button>
+
+        <!-- Results Section -->
+        <div id="results" class="hidden">
+          <div class="bg-skin-card p-6 rounded-lg shadow-md">
+            <div class="flex justify-between items-center mb-6">
+              <h2 class="text-2xl font-bold text-skin-base">
+                Financial Analysis for <span id="results-practice-name"></span>
+              </h2>
+              <div class="flex gap-4 print:hidden">
+                <button
+                  id="print-btn"
+                  class="flex items-center gap-2 px-4 py-2 bg-custom-second text-skin-base rounded-md hover:bg-custom-third transition-colors"
+                >
+                  <Printer size={20} />
+                  Print Report
+                </button>
+                <button
+                  id="download-csv"
+                  class="flex items-center gap-2 px-4 py-2 bg-custom-forth text-skin-base rounded-md hover:bg-custom-fifth transition-colors"
+                >
+                  <Download size={20} />
+                  Download CSV
+                </button>
+              </div>
+            </div>
+
+            <div class="grid gap-6 md:grid-cols-3">
+              <!-- Metrics will be populated dynamically -->
+            </div>
+
+            <div class="grid gap-8 md:grid-cols-2 mt-8">
+              <div class="p-4 bg-skin-secondary rounded-lg">
+                <h3 class="text-xl font-bold text-skin-base mb-4">Salary Breakdown</h3>
+                <canvas id="salary-chart"></canvas>
+              </div>
+
+              <div class="p-4 bg-skin-secondary rounded-lg">
+                <h3 class="text-xl font-bold text-skin-base mb-4">5 Year ROI Projection</h3>
+                <canvas id="roi-chart"></canvas>
+              </div>
+            </div>
+          </div>
+
+          <!-- Scenarios Section -->
+          <div class="bg-skin-card p-6 rounded-lg shadow-md mt-8">
+            <h2 class="text-2xl font-bold text-skin-base mb-4">Financial Projections Scenarios</h2>
+            
+            <div class="flex space-x-2 border-b border-skin-base mb-6">
+              <button
+                class="tab active px-4 py-2 text-skin-base hover:text-custom-hover transition-colors"
+                data-scenario="current"
+              >
+                Current Projections
+              </button>
+              <button
+                class="tab px-4 py-2 text-skin-base hover:text-custom-hover transition-colors"
+                data-scenario="best"
+              >
+                Best Case
+              </button>
+              <button
+                class="tab px-4 py-2 text-skin-base hover:text-custom-hover transition-colors"
+                data-scenario="worst"
+              >
+                Worst Case
+              </button>
+            </div>
+
+            <div class="scenario-metrics grid gap-6 md:grid-cols-3 mb-6">
+              <!-- Scenario metrics will be populated dynamically -->
+            </div>
+
+            <div class="h-80 mb-6">
+              <canvas id="scenario-chart"></canvas>
+            </div>
+
+            <div class="bg-skin-secondary p-4 rounded-lg">
+              <h3 class="text-lg font-semibold text-skin-base mb-2">Scenario Details</h3>
+              <ul id="scenario-details" class="space-y-2 text-skin-base">
+                <!-- Scenario details will be populated dynamically -->
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</IndexPage>
+
+<script>
+  // Initialize Chart.js
+  import Chart from 'chart.js/auto';
+  
+  // Make Chart.js available globally
+  window.Chart = Chart;
+
+  // Import the calculator script - update the path
+  import '../scripts/dental-calculator/index.ts';
+</script>

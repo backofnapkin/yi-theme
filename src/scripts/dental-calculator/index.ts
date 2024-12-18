@@ -3,8 +3,49 @@ import { calculateFinancials, calculateScenarios } from './calculations';
 import { formatCurrency } from './formatters';
 import { createSalaryChart, createProjectionChart } from './charts';
 import { addEmployee, addOverheadCost, getInputs } from './dom';
-import { downloadCSV } from './export';
-import type { Scenarios } from './types';
+import type { Scenarios, Inputs, Projections } from './types';
+
+export const downloadCSV = (inputs: Inputs, projections: Projections) => {
+  // Convert the data to CSV format
+  const data = [
+    ['Practice Information'],
+    ['Practice Name', inputs.practiceName],
+    ['Dental Chairs', inputs.dentalChairs],
+    ['Patients per Chair', inputs.patientsPerChair],
+    ['Revenue per Patient', inputs.revenuePerPatient],
+    ['Days per Week', inputs.daysPerWeek],
+    ['Startup Costs', inputs.startupCosts],
+    [],
+    ['Financial Projections'],
+    ['Monthly Revenue', projections.monthlyRevenue],
+    ['Annual Revenue', projections.annualRevenue],
+    ['Monthly Overhead', projections.monthlyOverhead],
+    ['Annual Overhead', projections.annualOverhead],
+    ['Net Income (Monthly)', projections.netIncome],
+    ['Profit Margin', `${projections.profitMargin}%`],
+    [],
+    ['Employees'],
+    ['Title', 'Monthly Salary'],
+    ...inputs.employees.map(emp => [emp.title, emp.monthlySalary]),
+    [],
+    ['Overhead Costs'],
+    ['Name', 'Monthly Amount'],
+    ...inputs.overhead.map(cost => [cost.name, cost.monthlyAmount])
+  ];
+
+  // Convert array to CSV string
+  const csvContent = data.map(row => row.join(',')).join('\n');
+
+  // Create and download the file
+  const blob = new Blob([csvContent], { type: 'text/csv' });
+  const url = window.URL.createObjectURL(blob);
+  const link = document.createElement('a');
+  link.href = url;
+  link.setAttribute('download', `${inputs.practiceName.replace(/\s+/g, '-')}-projections.csv`);
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+};
 
 let currentScenarios: Scenarios | null = null;
 let salaryChart: Chart | null = null;
@@ -69,7 +110,7 @@ function calculateResults() {
   updateScenario('current');
 }
 
-function updateMetrics(projections) {
+function updateMetrics(projections: Projections) {
   const metricsContainer = document.querySelector('#results .grid');
   if (metricsContainer) {
     metricsContainer.innerHTML = `
@@ -101,7 +142,7 @@ function updateMetrics(projections) {
   }
 }
 
-function updateCharts(projections, employees) {
+function updateCharts(projections: Projections, employees: Array<{title: string, monthlySalary: number}>) {
   const salaryCtx = document.getElementById('salary-chart')?.getContext('2d');
   const roiCtx = document.getElementById('roi-chart')?.getContext('2d');
 

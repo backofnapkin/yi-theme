@@ -1,4 +1,4 @@
-import { Employee, OverheadCost } from './types';
+import type { Employee, OverheadCost, CalculatorInputs } from './types';
 
 export function addEmployee(container: HTMLElement, title = '', salary = 0) {
   const employeeDiv = document.createElement('div');
@@ -59,6 +59,6 @@ export function getInputs() {
     daysPerWeek: Number((document.getElementById('days-per-week') as HTMLInputElement)?.value || 0),
     startupCosts: Number((document.getElementById('startup-costs') as HTMLInputElement)?.value || 0),
     employees,
-    overheadCosts
+    overhead: overheadCosts
   };
 }

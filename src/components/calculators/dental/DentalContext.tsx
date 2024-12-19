@@ -38,7 +38,7 @@ type CalculatorState = {
   results: Results | null;
 };
 
-// Create the context with default values
+// Context and Provider Type
 type DentalContextType = {
   state: CalculatorState;
   updateBasicInfo: (field: keyof BasicInfo, value: string | number) => void;
@@ -53,142 +53,128 @@ type DentalContextType = {
 
 const DentalContext = createContext<DentalContextType | undefined>(undefined);
 
-// Create the provider component
 export const DentalProvider = ({ children }: { children: React.ReactNode }) => {
   const [state, setState] = useState<CalculatorState>({
     basicInfo: {
-      practiceName: "Dave's Dental Office",
+      practiceName: "Default Practice",
       dentalChairs: 2,
       patientsPerChair: 10,
-      revenuePerPatient: 432,
+      revenuePerPatient: 500,
       daysPerWeek: 5,
       startupCosts: 500000,
     },
-    employees: [
-      { id: 1, title: 'Dentist', salary: 150000 },
-      { id: 2, title: 'Dental Hygienist', salary: 75000 },
-      { id: 3, title: 'Dental Assistant', salary: 45000 }
-    ],
-    overhead: [
-      { id: 1, name: 'Rent', amount: 5000 },
-      { id: 2, name: 'Utilities', amount: 1000 }
-    ],
-    results: null
+    employees: [],
+    overhead: [],
+    results: null,
   });
 
   const updateBasicInfo = (field: keyof BasicInfo, value: string | number) => {
-    setState(prev => ({
+    setState((prev) => ({
       ...prev,
-      basicInfo: {
-        ...prev.basicInfo,
-        [field]: value
-      }
+      basicInfo: { ...prev.basicInfo, [field]: value },
     }));
   };
 
   const addEmployee = () => {
-    const newId = Math.max(0, ...state.employees.map(e => e.id)) + 1;
-    setState(prev => ({
+    const newId = state.employees.length + 1;
+    setState((prev) => ({
       ...prev,
-      employees: [...prev.employees, { id: newId, title: '', salary: 0 }]
+      employees: [...prev.employees, { id: newId, title: '', salary: 0 }],
     }));
   };
 
   const updateEmployee = (id: number, field: keyof Employee, value: string | number) => {
-    setState(prev => ({
+    setState((prev) => ({
       ...prev,
-      employees: prev.employees.map(emp =>
+      employees: prev.employees.map((emp) =>
         emp.id === id ? { ...emp, [field]: value } : emp
-      )
+      ),
     }));
   };
 
   const removeEmployee = (id: number) => {
-    setState(prev => ({
+    setState((prev) => ({
       ...prev,
-      employees: prev.employees.filter(emp => emp.id !== id)
+      employees: prev.employees.filter((emp) => emp.id !== id),
     }));
   };
 
   const addOverheadCost = () => {
-    const newId = Math.max(0, ...state.overhead.map(o => o.id)) + 1;
-    setState(prev => ({
+    const newId = state.overhead.length + 1;
+    setState((prev) => ({
       ...prev,
-      overhead: [...prev.overhead, { id: newId, name: '', amount: 0 }]
+      overhead: [...prev.overhead, { id: newId, name: '', amount: 0 }],
     }));
   };
 
   const updateOverheadCost = (id: number, field: keyof OverheadCost, value: string | number) => {
-    setState(prev => ({
+    setState((prev) => ({
       ...prev,
-      overhead: prev.overhead.map(cost =>
+      overhead: prev.overhead.map((cost) =>
         cost.id === id ? { ...cost, [field]: value } : cost
-      )
+      ),
     }));
   };
 
   const removeOverheadCost = (id: number) => {
-    setState(prev => ({
+    setState((prev) => ({
       ...prev,
-      overhead: prev.overhead.filter(cost => cost.id !== id)
+      overhead: prev.overhead.filter((cost) => cost.id !== id),
     }));
   };
 
   const calculateResults = () => {
-    const { dentalChairs, patientsPerChair, revenuePerPatient, daysPerWeek } = state.basicInfo;
-    
-    // Calculate monthly revenue
-    const dailyRevenue = dentalChairs * patientsPerChair * revenuePerPatient;
-    const monthlyRevenue = dailyRevenue * daysPerWeek * 4.33; // 4.33 weeks per month average
-    const annualRevenue = monthlyRevenue * 12;
+    const { basicInfo, employees, overhead } = state;
 
-    // Calculate overhead
-    const monthlyOverhead = state.overhead.reduce((total, cost) => total + cost.amount, 0);
-    const annualOverhead = monthlyOverhead * 12;
+    const monthlyRevenue =
+      basicInfo.dentalChairs *
+      basicInfo.patientsPerChair *
+      basicInfo.revenuePerPatient *
+      basicInfo.daysPerWeek *
+      4.33;
 
-    // Calculate employee costs
-    const monthlySalaries = state.employees.reduce((total, emp) => total + emp.salary / 12, 0);
-    const totalMonthlyOverhead = monthlyOverhead + monthlySalaries;
-    const totalAnnualOverhead = totalMonthlyOverhead * 12;
+    const monthlyOverhead =
+      overhead.reduce((total, cost) => total + cost.amount, 0) +
+      employees.reduce((total, emp) => total + emp.salary / 12, 0);
 
-    // Calculate net income and profit margin
-    const netIncome = monthlyRevenue - totalMonthlyOverhead;
-    const profitMargin = (netIncome / monthlyRevenue) * 100;
+    const netIncome = monthlyRevenue - monthlyOverhead;
 
-    setState(prev => ({
+    setState((prev) => ({
       ...prev,
       results: {
         monthlyRevenue,
-        annualRevenue,
-        monthlyOverhead: totalMonthlyOverhead,
-        annualOverhead: totalAnnualOverhead,
+        annualRevenue: monthlyRevenue * 12,
+        monthlyOverhead,
+        annualOverhead: monthlyOverhead * 12,
         netIncome,
-        profitMargin
-      }
+        profitMargin: (netIncome / monthlyRevenue) * 100,
+      },
     }));
   };
 
   return (
-    <DentalContext.Provider value={{
-      state,
-      updateBasicInfo,
-      addEmployee,
-      updateEmployee,
-      removeEmployee,
-      addOverheadCost,
-      updateOverheadCost,
-      removeOverheadCost,
-      calculateResults
-    }}>
+    <DentalContext.Provider
+      value={{
+        state,
+        updateBasicInfo,
+        addEmployee,
+        updateEmployee,
+        removeEmployee,
+        addOverheadCost,
+        updateOverheadCost,
+        removeOverheadCost,
+        calculateResults,
+      }}
+    >
       {children}
     </DentalContext.Provider>
   );
 };
 
-// Create a custom hook for using the context
+// Custom hook for consuming the context
 export const useDentalContext = () => {
   const context = useContext(DentalContext);
-  if (context === undefined) {
+  if (!context) {
     throw new Error('useDentalContext must be used within a DentalProvider');
   }
   return context;

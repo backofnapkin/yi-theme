@@ -1,33 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { useDentalContext } from './DentalContext';
 import { PlusCircle } from 'lucide-react';
 
-type Employee = {
-  id: number;
-  title: string;
-  salary: number;
-};
-
 export const EmployeeSection = () => {
-  const [employees, setEmployees] = useState<Employee[]>([
-    { id: 1, title: 'Dentist', salary: 150000 },
-    { id: 2, title: 'Dental Hygienist', salary: 75000 },
-    { id: 3, title: 'Dental Assistant', salary: 45000 }
-  ]);
-
-  const addEmployee = () => {
-    const newId = Math.max(0, ...employees.map(e => e.id)) + 1;
-    setEmployees([...employees, { id: newId, title: '', salary: 0 }]);
-  };
-
-  const removeEmployee = (id: number) => {
-    setEmployees(employees.filter(emp => emp.id !== id));
-  };
-
-  const updateEmployee = (id: number, field: 'title' | 'salary', value: string | number) => {
-    setEmployees(employees.map(emp => 
-      emp.id === id ? { ...emp, [field]: value } : emp
-    ));
-  };
+  const { state, addEmployee, updateEmployee, removeEmployee } = useDentalContext();
+  const { employees } = state;
 
   return (
     <div className="bg-skin-card p-6 rounded-lg shadow-md">
@@ -52,6 +29,7 @@ export const EmployeeSection = () => {
                 value={employee.title}
                 onChange={(e) => updateEmployee(employee.id, 'title', e.target.value)}
                 className="mt-1 block w-full rounded-md border-skin-base shadow-sm focus:border-custom-active focus:ring-custom-active"
+                placeholder="Enter title"
               />
             </div>
             <div>
@@ -61,12 +39,14 @@ export const EmployeeSection = () => {
                 value={employee.salary}
                 onChange={(e) => updateEmployee(employee.id, 'salary', Number(e.target.value))}
                 min="0"
+                step="1000"
                 className="mt-1 block w-full rounded-md border-skin-base shadow-sm focus:border-custom-active focus:ring-custom-active"
               />
             </div>
             <button
               onClick={() => removeEmployee(employee.id)}
               className="p-2 text-red-500 hover:text-red-700"
+              aria-label="Remove employee"
             >
               <svg 
                 xmlns="http://www.w3.org/2000/svg" 

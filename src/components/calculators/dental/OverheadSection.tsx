@@ -1,148 +1,72 @@
-import React, { createContext, useContext, useState } from 'react';
+import React from 'react';
+import { useDentalContext } from './DentalContext';
+import { PlusCircle } from 'lucide-react';
 
-// Define our types
-type BasicInfo = {
-  practiceName: string;
-  dentalChairs: number;
-  patientsPerChair: number;
-  revenuePerPatient: number;
-  daysPerWeek: number;
-  startupCosts: number;
-};
-
-type Employee = {
-  id: number;
-  title: string;
-  salary: number;
-};
-
-type OverheadCost = {
-  id: number;
-  name: string;
-  amount: number;
-};
-
-type CalculatorState = {
-  basicInfo: BasicInfo;
-  employees: Employee[];
-  overhead: OverheadCost[];
-};
-
-// Create the context with default values
-type DentalContextType = {
-  state: CalculatorState;
-  updateBasicInfo: (field: keyof BasicInfo, value: string | number) => void;
-  addEmployee: () => void;
-  updateEmployee: (id: number, field: keyof Employee, value: string | number) => void;
-  removeEmployee: (id: number) => void;
-  addOverheadCost: () => void;
-  updateOverheadCost: (id: number, field: keyof OverheadCost, value: string | number) => void;
-  removeOverheadCost: (id: number) => void;
-};
-
-const DentalContext = createContext<DentalContextType | undefined>(undefined);
-
-// Create the provider component
-export const DentalProvider = ({ children }: { children: React.ReactNode }) => {
-  const [state, setState] = useState<CalculatorState>({
-    basicInfo: {
-      practiceName: "Dave's Dental Office",
-      dentalChairs: 2,
-      patientsPerChair: 10,
-      revenuePerPatient: 432,
-      daysPerWeek: 5,
-      startupCosts: 500000,
-    },
-    employees: [
-      { id: 1, title: 'Dentist', salary: 150000 },
-      { id: 2, title: 'Dental Hygienist', salary: 75000 },
-      { id: 3, title: 'Dental Assistant', salary: 45000 }
-    ],
-    overhead: [
-      { id: 1, name: 'Rent', amount: 5000 },
-      { id: 2, name: 'Utilities', amount: 1000 }
-    ]
-  });
-
-  const updateBasicInfo = (field: keyof BasicInfo, value: string | number) => {
-    setState(prev => ({
-      ...prev,
-      basicInfo: {
-        ...prev.basicInfo,
-        [field]: value
-      }
-    }));
-  };
-
-  const addEmployee = () => {
-    const newId = Math.max(0, ...state.employees.map(e => e.id)) + 1;
-    setState(prev => ({
-      ...prev,
-      employees: [...prev.employees, { id: newId, title: '', salary: 0 }]
-    }));
-  };
-
-  const updateEmployee = (id: number, field: keyof Employee, value: string | number) => {
-    setState(prev => ({
-      ...prev,
-      employees: prev.employees.map(emp =>
-        emp.id === id ? { ...emp, [field]: value } : emp
-      )
-    }));
-  };
-
-  const removeEmployee = (id: number) => {
-    setState(prev => ({
-      ...prev,
-      employees: prev.employees.filter(emp => emp.id !== id)
-    }));
-  };
-
-  const addOverheadCost = () => {
-    const newId = Math.max(0, ...state.overhead.map(o => o.id)) + 1;
-    setState(prev => ({
-      ...prev,
-      overhead: [...prev.overhead, { id: newId, name: '', amount: 0 }]
-    }));
-  };
-
-  const updateOverheadCost = (id: number, field: keyof OverheadCost, value: string | number) => {
-    setState(prev => ({
-      ...prev,
-      overhead: prev.overhead.map(cost =>
-        cost.id === id ? { ...cost, [field]: value } : cost
-      )
-    }));
-  };
-
-  const removeOverheadCost = (id: number) => {
-    setState(prev => ({
-      ...prev,
-      overhead: prev.overhead.filter(cost => cost.id !== id)
-    }));
-  };
+export const OverheadSection = () => {
+  const { state, addOverheadCost, updateOverheadCost, removeOverheadCost } = useDentalContext();
+  const { overhead } = state;
 
   return (
-    <DentalContext.Provider value={{
-      state,
-      updateBasicInfo,
-      addEmployee,
-      updateEmployee,
-      removeEmployee,
-      addOverheadCost,
-      updateOverheadCost,
-      removeOverheadCost
-    }}>
-      {children}
-    </DentalContext.Provider>
+    <div className="bg-skin-card p-6 rounded-lg shadow-md">
+      <div className="flex justify-between items-center mb-6">
+        <h2 className="text-2xl font-bold text-skin-base">Overhead Costs</h2>
+        <button
+          onClick={addOverheadCost}
+          className="flex items-center gap-2 px-4 py-2 bg-custom-active text-white rounded-md hover:bg-custom-hover transition-colors"
+        >
+          <PlusCircle size={20} />
+          Add Cost
+        </button>
+      </div>
+      
+      <div className="space-y-4">
+        {overhead.map(cost => (
+          <div key={cost.id} className="grid grid-cols-3 gap-4 items-end">
+            <div>
+              <label className="block text-sm font-medium text-skin-base">Expense Name</label>
+              <input
+                type="text"
+                value={cost.name}
+                onChange={(e) => updateOverheadCost(cost.id, 'name', e.target.value)}
+                className="mt-1 block w-full rounded-md border-skin-base shadow-sm focus:border-custom-active focus:ring-custom-active"
+                placeholder="Enter expense name"
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-skin-base">Monthly Amount ($)</label>
+              <input
+                type="number"
+                value={cost.amount}
+                onChange={(e) => updateOverheadCost(cost.id, 'amount', Number(e.target.value))}
+                min="0"
+                step="100"
+                className="mt-1 block w-full rounded-md border-skin-base shadow-sm focus:border-custom-active focus:ring-custom-active"
+              />
+            </div>
+            <button
+              onClick={() => removeOverheadCost(cost.id)}
+              className="p-2 text-red-500 hover:text-red-700"
+              aria-label="Remove overhead cost"
+            >
+              <svg 
+                xmlns="http://www.w3.org/2000/svg" 
+                width="20" 
+                height="20" 
+                viewBox="0 0 24 24" 
+                fill="none" 
+                stroke="currentColor" 
+                strokeWidth="2" 
+                strokeLinecap="round" 
+                strokeLinejoin="round"
+              >
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="15" y1="9" x2="9" y2="15"></line>
+                <line x1="9" y1="9" x2="15" y2="15"></line>
+              </svg>
+            </button>
+          </div>
+        ))}
+      </div>
+    </div>
   );
-};
-
-// Create a custom hook for using the context
-export const useDentalContext = () => {
-  const context = useContext(DentalContext);
-  if (context === undefined) {
-    throw new Error('useDentalContext must be used within a DentalProvider');
-  }
-  return context;
 };

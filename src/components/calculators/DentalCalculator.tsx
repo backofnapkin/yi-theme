@@ -1,19 +1,11 @@
 import React from 'react';
-import { DentalProvider } from './dental/DentalContext';
+import { useDentalContext, DentalProvider } from './dental/DentalContext';
 import { BasicInfo } from './dental/BasicInfo';
 import { EmployeeSection } from './dental/EmployeeSection';
 import { OverheadSection } from './dental/OverheadSection';
 import { ResultsSection } from './dental/ResultsSection';
 
-const DentalCalculator = () => {
-  return (
-    <DentalProvider>
-      <Calculator />
-    </DentalProvider>
-  );
-};
-
-// Separate component to use the context
+// Separate Calculator component that uses context
 const Calculator = () => {
   const { state, calculateResults } = useDentalContext();
   const [showResults, setShowResults] = React.useState(false);
@@ -36,14 +28,17 @@ const Calculator = () => {
         Calculate Results
       </button>
       
-      {showResults && (
-        <ResultsSection 
-          practiceName={state.basicInfo.practiceName}
-          metrics={state.results!}
-          employees={state.employees}
-        />
-      )}
+      {showResults && <ResultsSection />}
     </div>
+  );
+};
+
+// Main component that provides context
+const DentalCalculator = () => {
+  return (
+    <DentalProvider>
+      <Calculator />
+    </DentalProvider>
   );
 };
 

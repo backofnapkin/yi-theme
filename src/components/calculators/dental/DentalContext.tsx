@@ -22,10 +22,20 @@ type OverheadCost = {
   amount: number;
 };
 
+type Results = {
+  monthlyRevenue: number;
+  annualRevenue: number;
+  monthlyOverhead: number;
+  annualOverhead: number;
+  netIncome: number;
+  profitMargin: number;
+};
+
 type CalculatorState = {
   basicInfo: BasicInfo;
   employees: Employee[];
   overhead: OverheadCost[];
+  results: Results | null;
 };
 
 // Create the context with default values
@@ -38,6 +48,7 @@ type DentalContextType = {
   addOverheadCost: () => void;
   updateOverheadCost: (id: number, field: keyof OverheadCost, value: string | number) => void;
   removeOverheadCost: (id: number) => void;
+  calculateResults: () => void;
 };
 
 const DentalContext = createContext<DentalContextType | undefined>(undefined);
@@ -61,7 +72,8 @@ export const DentalProvider = ({ children }: { children: React.ReactNode }) => {
     overhead: [
       { id: 1, name: 'Rent', amount: 5000 },
       { id: 2, name: 'Utilities', amount: 1000 }
-    ]
+    ],
+    results: null
   });
 
   const updateBasicInfo = (field: keyof BasicInfo, value: string | number) => {
@@ -122,6 +134,40 @@ export const DentalProvider = ({ children }: { children: React.ReactNode }) => {
     }));
   };
 
+  const calculateResults = () => {
+    const { dentalChairs, patientsPerChair, revenuePerPatient, daysPerWeek } = state.basicInfo;
+    
+    // Calculate monthly revenue
+    const dailyRevenue = dentalChairs * patientsPerChair * revenuePerPatient;
+    const monthlyRevenue = dailyRevenue * daysPerWeek * 4.33; // 4.33 weeks per month average
+    const annualRevenue = monthlyRevenue * 12;
+
+    // Calculate overhead
+    const monthlyOverhead = state.overhead.reduce((total, cost) => total + cost.amount, 0);
+    const annualOverhead = monthlyOverhead * 12;
+
+    // Calculate employee costs
+    const monthlySalaries = state.employees.reduce((total, emp) => total + emp.salary / 12, 0);
+    const totalMonthlyOverhead = monthlyOverhead + monthlySalaries;
+    const totalAnnualOverhead = totalMonthlyOverhead * 12;
+
+    // Calculate net income and profit margin
+    const netIncome = monthlyRevenue - totalMonthlyOverhead;
+    const profitMargin = (netIncome / monthlyRevenue) * 100;
+
+    setState(prev => ({
+      ...prev,
+      results: {
+        monthlyRevenue,
+        annualRevenue,
+        monthlyOverhead: totalMonthlyOverhead,
+        annualOverhead: totalAnnualOverhead,
+        netIncome,
+        profitMargin
+      }
+    }));
+  };
+
   return (
     <DentalContext.Provider value={{
       state,
@@ -131,7 +177,8 @@ export const DentalProvider = ({ children }: { children: React.ReactNode }) => {
       removeEmployee,
       addOverheadCost,
       updateOverheadCost,
-      removeOverheadCost
+      removeOverheadCost,
+      calculateResults
     }}>
       {children}
     </DentalContext.Provider>

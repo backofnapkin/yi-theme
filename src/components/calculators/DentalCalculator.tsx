@@ -23,7 +23,7 @@ const Calculator = () => {
       
 <button
   onClick={handleCalculate}
-  className="w-full px-8 py-3 bg-custom-active text-white text-lg font-semibold rounded-lg hover:bg-custom-hover transition-colors ring-2 ring-skin-border/50"
+  className="w-full px-8 py-3 bg-custom-active text-white text-lg font-semibold rounded-lg hover:bg-custom-hover transition-all ring-2 ring-skin-border/50 shadow-md hover:shadow-lg"
 >
   Calculate Results
 </button>

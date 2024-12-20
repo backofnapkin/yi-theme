@@ -279,3 +279,11 @@ menu {
 .MathJax svg {
   display: inline;
 }
+
+/* 
+=== Astro Content Link Styles ===
+Applies link colors specifically to content links in .astro pages 
+*/
+.prose a {
+  @apply cursor-pointer text-skin-active;
+}

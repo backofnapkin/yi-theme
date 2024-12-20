@@ -74,8 +74,10 @@ export const ResultsSection = () => {
              tooltip: {
                callbacks: {
                  label: function(context) {
-                   const value = formatCurrency(context.raw as number);
-                   return `${context.label}: ${value}`;
+                    const value = context.raw as number;
+                    const total = context.dataset.data.reduce((a: number, b: number) => a + b, 0);
+                    const percentage = ((value / total) * 100).toFixed(1);
+                    return `${context.label}: ${formatCurrency(value)} (${percentage}%)`;
                  }
                }
              }

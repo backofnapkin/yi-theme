@@ -59,7 +59,7 @@ export const DentalProvider = ({ children }: { children: React.ReactNode }) => {
      practiceName: "Default Practice",
      dentalChairs: 2,
      patientsPerChair: 10,
-     revenuePerPatient: 500,
+     revenuePerPatient: 432,
      daysPerWeek: 5,
      startupCosts: 500000,
    },

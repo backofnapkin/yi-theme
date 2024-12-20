@@ -1,9 +1,15 @@
 import React from 'react';
 import { useDentalContext } from './DentalContext';
+import { formatNumber, parseFormattedNumber } from '../../../scripts/dental-calculator/formatters';
 
 export const BasicInfo = () => {
   const { state, updateBasicInfo } = useDentalContext();
   const { basicInfo } = state;
+
+  const handleNumberInput = (field: keyof typeof basicInfo, value: string) => {
+    const numberValue = parseFormattedNumber(value);
+    updateBasicInfo(field, numberValue);
+  };
 
   return (
     <div className="bg-skin-card p-6 rounded-lg shadow-md">
@@ -19,7 +25,6 @@ export const BasicInfo = () => {
             className="mt-1 block w-full rounded-md border-skin-base shadow-sm focus:border-custom-active focus:ring-custom-active"
           />
         </div>
-
         <div>
           <label className="block text-sm font-medium text-skin-base">Number of Dental Chairs</label>
           <input
@@ -31,7 +36,6 @@ export const BasicInfo = () => {
             max={99}
           />
         </div>
-
         <div>
           <label className="block text-sm font-medium text-skin-base">Patients per Chair per Day</label>
           <input
@@ -42,18 +46,15 @@ export const BasicInfo = () => {
             min={1}
           />
         </div>
-
         <div>
           <label className="block text-sm font-medium text-skin-base">Revenue per Patient ($)</label>
           <input
-            type="number"
-            value={basicInfo.revenuePerPatient}
-            onChange={(e) => updateBasicInfo('revenuePerPatient', Number(e.target.value))}
+            type="text"
+            value={formatNumber(basicInfo.revenuePerPatient)}
+            onChange={(e) => handleNumberInput('revenuePerPatient', e.target.value)}
             className="mt-1 block w-full rounded-md border-skin-base shadow-sm focus:border-custom-active focus:ring-custom-active"
-            min={0}
           />
         </div>
-
         <div>
           <label className="block text-sm font-medium text-skin-base">Days Open per Week</label>
           <input
@@ -65,15 +66,13 @@ export const BasicInfo = () => {
             max={7}
           />
         </div>
-
         <div>
           <label className="block text-sm font-medium text-skin-base">Total Startup Costs ($)</label>
           <input
-            type="number"
-            value={basicInfo.startupCosts}
-            onChange={(e) => updateBasicInfo('startupCosts', Number(e.target.value))}
+            type="text"
+            value={formatNumber(basicInfo.startupCosts)}
+            onChange={(e) => handleNumberInput('startupCosts', e.target.value)}
             className="mt-1 block w-full rounded-md border-skin-base shadow-sm focus:border-custom-active focus:ring-custom-active"
-            min={0}
           />
         </div>
       </div>

@@ -297,7 +297,7 @@ export const ResultsSection = () => {
 
        <div className="space-y-8 mt-8">
          <div className="p-6 bg-skin-secondary rounded-lg">
-           <h3 className="text-xl font-bold text-skin-base mb-4">Salary Breakdown</h3>
+           <h3 className="text-xl font-bold text-skin-base mb-4">Monthly Salary Breakdown</h3>
            <div className="h-[400px] w-full">
              <canvas ref={salaryChartRef}></canvas>
            </div>

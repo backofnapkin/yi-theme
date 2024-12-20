@@ -99,9 +99,9 @@ menu {
     @apply text-end mb-1 break-words hover:text-skin-active;
   }
 
-  a {
-    @apply cursor-pointer;
-  }
+a {
+  @apply cursor-pointer text-skin-active;
+}
 
   .menu-icon {
     @apply text-xl mr-2

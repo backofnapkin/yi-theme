@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useDentalContext } from './DentalContext';
-import { PlusCircle } from 'lucide-react';
+import { PlusCircle, Info } from 'lucide-react';
 import { formatNumber, parseFormattedNumber } from '../../../scripts/dental-calculator/formatters';
 
 export const EmployeeSection = () => {
  const { state, addEmployee, updateEmployee, removeEmployee } = useDentalContext();
  const { employees } = state;
+ const [showInfo, setShowInfo] = useState(false);
 
  const handleSalaryChange = (id: number, value: string) => {
    const numberValue = parseFormattedNumber(value);
@@ -15,7 +16,16 @@ export const EmployeeSection = () => {
  return (
    <div className="bg-skin-card p-6 rounded-lg shadow-md">
      <div className="flex justify-between items-center mb-6">
-       <h2 className="text-2xl font-bold text-skin-base">Employee Wages</h2>
+       <div className="flex items-center gap-2">
+         <h2 className="text-2xl font-bold text-skin-base">Employee Wages</h2>
+         <button
+           onClick={() => setShowInfo(!showInfo)}
+           className="p-1 text-skin-base hover:text-skin-active transition-colors"
+           aria-label="Information about employee wages section"
+         >
+           <Info size={20} />
+         </button>
+       </div>
        <button
          onClick={addEmployee}
          className="flex items-center gap-2 px-4 py-2 bg-custom-active text-white rounded-md hover:bg-custom-hover transition-colors"
@@ -24,6 +34,14 @@ export const EmployeeSection = () => {
          Add Employee
        </button>
      </div>
+
+     {showInfo && (
+       <div className="mb-4 p-4 rounded-lg bg-skin-fill border border-skin-border">
+         <p className="text-sm text-skin-base">
+           Enter each employee role you plan to hire and monthly salary.
+         </p>
+       </div>
+     )}
      
      <div className="space-y-4">
        {employees.map(employee => (

@@ -3,6 +3,7 @@ import IndexPage from "../../layouts/IndexPage.astro";
 import DentalCalculator from "../../components/calculators/DentalCalculator";
 import { Calculator } from 'lucide-react';
 import YouTubeEmbed from '../../components/YouTubeEmbed.astro';
+import YouTubeEmbed from '../../components/ImageEmbed.astro';
 
 const frontmatter = {
   comment: false,
@@ -97,6 +98,12 @@ const schema = {
           <li>Marketing costs (default: $3,500/month, based on <a href="https://firstdentist.com/how-much-should-a-dental-practice-spend-on-marketing/">FirstDentist's recommendations</a>)</li>
           <li>Loan payments</li>
         </ul>
+
+<ImageEmbed
+  src="/images/dentist-office.png"
+  alt="outside a dentist office"
+  description="Outside the dentist office I go to."
+/>
 
         <h3 class="text-xl font-bold mt-8">What You'll Learn</h3>
         <p>The calculator will give you the following outputs that can be printed or saved in a CSV file:</p>

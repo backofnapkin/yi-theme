@@ -1,48 +1,89 @@
 ---
-import IndexPage from "src/layouts/IndexPage.astro";
-import getPostsByCategory from "src/utils/getPostsByCategory";
-import getUniqueCategory from "src/utils/getUniqeCategory";
-import SearchTitle from "src/components/SearchTitle.astro";
-import {formatDate} from "../../utils/formatDate";
-import {sortPostsByDate} from "src/utils/sortPostsByDate";
-import {getCollectionByName} from "../../utils/getCollectionByName";
-import {formatDate} from "../../utils/formatDate";
+import IndexPage from "../../layouts/IndexPage.astro";
+import SearchTitle from "../../components/SearchTitle.astro";
+import { formatDate } from "../../utils/formatDate";
+import { sortPostsByDate } from "../../utils/sortPostsByDate";
+import { getCollectionByName } from "../../utils/getCollectionByName";
+
 export async function getStaticPaths() {
+  // Get blog posts
   const posts = await getCollectionByName("blog");
-  const category = getUniqueCategory(posts);
-  return category.map((category) => {
-    return {
-      params: {
-        category,
-      },
-      props: {
-        category,
-      },
-    };
-  });
+  
+  // Get calculator pages from src/pages directory
+  const calculatorPages = await Astro.glob('../../pages/*.astro');
+  const filteredCalculatorPages = calculatorPages.filter(page => 
+    // Only include pages that have frontmatter with a category
+    page.frontmatter && page.frontmatter.category
+  );
+
+  // Combine all unique categories
+  const categories = new Set([
+    ...posts.map(post => post.data.category),
+    ...filteredCalculatorPages.map(page => page.frontmatter.category)
+  ]);
+
+  return Array.from(categories).map((category) => ({
+    params: { category },
+    props: { 
+      category,
+    },
+  }));
 }
-const {category} = Astro.props;
-let posts = await getCollectionByName("blog");
-const categoryPosts = getPostsByCategory(posts, category);
-const resultPosts = sortPostsByDate(categoryPosts);
+
+const { category } = Astro.props;
+
+// Get all content for this category
+const posts = await getCollectionByName("blog");
+const calculatorPages = await Astro.glob('../../pages/*.astro');
+
+// Filter blog posts by category
+const categoryPosts = posts.filter(post => post.data.category === category);
+
+// Filter calculator pages by category
+const categoryCalculators = calculatorPages.filter(page => 
+  page.frontmatter && 
+  page.frontmatter.category === category
+).map(page => ({
+  title: page.frontmatter.title,
+  description: page.frontmatter.description,
+  date: page.frontmatter.date,
+  // Get the slug from the file path
+  slug: page.url || page.file.split('/').pop()?.replace('.astro', '')
+}));
+
+// Combine and sort all content
+const allContent = [...categoryPosts, ...categoryCalculators].sort((a, b) => {
+  const dateA = new Date(a.data?.date || a.date || 0);
+  const dateB = new Date(b.data?.date || b.date || 0);
+  return dateB.getTime() - dateA.getTime();
+});
 ---
 
 <IndexPage>
   <SearchTitle label={category}/>
   <ul class="text-skin-base">
     {
-      resultPosts.map((post) => (
+      allContent.map((item) => (
         <li style="list-style-type: disc;" class="ml-4 my-2">
-          <a href={'/' + post.collection + '/' + post.slug}>
+          <a href={
+            'data' in item ? 
+            `/${item.collection}/${item.slug}` : 
+            `/${item.slug}`
+          }>
             <span class="mr-4">
-        {formatDate(post.data.date)}
+              {('data' in item ? item.data.date : item.date) && 
+                formatDate('data' in item ? item.data.date : item.date)}
             </span>
             <span class="hover:text-skin-active">
-            {post.data.title}
+              {'data' in item ? item.data.title : item.title}
             </span>
           </a>
         </li>
       ))
     }
   </ul>
+
+  {allContent.length === 0 && (
+    <p class="text-skin-base">No content available in this category yet.</p>
+  )}
 </IndexPage>

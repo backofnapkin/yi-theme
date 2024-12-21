@@ -9,8 +9,8 @@ export async function getStaticPaths() {
   // Get blog posts
   const posts = await getCollectionByName("blog");
   
-  // Get calculator pages from src/pages directory
-  const calculatorPages = await Astro.glob('../../pages/*.astro');
+  // Get calculator pages from both root and subdirectories
+  const calculatorPages = await Astro.glob('../../pages/**/*.astro');
   const filteredCalculatorPages = calculatorPages.filter(page => 
     // Only include pages that have frontmatter with a category
     page.frontmatter && page.frontmatter.category
@@ -24,9 +24,7 @@ export async function getStaticPaths() {
 
   return Array.from(categories).map((category) => ({
     params: { category },
-    props: { 
-      category,
-    },
+    props: { category },
   }));
 }
 
@@ -34,7 +32,7 @@ const { category } = Astro.props;
 
 // Get all content for this category
 const posts = await getCollectionByName("blog");
-const calculatorPages = await Astro.glob('../../pages/*.astro');
+const calculatorPages = await Astro.glob('../../pages/**/*.astro');
 
 // Filter blog posts by category
 const categoryPosts = posts.filter(post => post.data.category === category);
@@ -47,8 +45,8 @@ const categoryCalculators = calculatorPages.filter(page =>
   title: page.frontmatter.title,
   description: page.frontmatter.description,
   date: page.frontmatter.date,
-  // Get the slug from the file path
-  slug: page.url || page.file.split('/').pop()?.replace('.astro', '')
+  // Get the slug from the file path, maintaining the original URL structure
+  slug: page.url || page.file.split('/pages/')[1]?.replace('.astro', '')
 }));
 
 // Combine and sort all content

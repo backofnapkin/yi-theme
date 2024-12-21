@@ -15,31 +15,32 @@ import {remarkGithubCard} from './src/plugins/remark-github-card.js'
 import {lazyLoadImage} from "./src/plugins/lazy-load-image.js";
 
 export default defineConfig({
-  site: 'https://astro-yi-nu.vercel.app',
-  build: {
-    format: 'file'
-  },
-  outDir: './dist',
-  integrations: [
-    sitemap(), 
-    tailwind(), 
-    react(),
-    expressiveCode({
-      plugins: [pluginLineNumbers(), pluginCollapsibleSections()],
-      themes: ["github-dark", "github-light"],
-      styleOverrides: {
-        codeFontFamily: "jetbrains-mono",
-        uiFontFamily: "jetbrains-mono",
-      },
-      themeCssSelector: (theme) => `[data-theme="${theme.type}"]`
-    }), 
-    mdx()
-  ],
-  markdown: {
-    remarkPlugins: [remarkModifiedTime, resetRemark, remarkDirective, remarkAsides({}),remarkCollapse({}),remarkGithubCard()],
-    rehypePlugins: [lazyLoadImage],
-    layouts: {
-      default: './src/layouts/MarkdownPost.astro'
-    }
-  }   
+ site: 'https://astro-yi-nu.vercel.app',
+ trailingSlash: "always",
+ build: {
+   format: 'file'
+ },
+ outDir: './dist',
+ integrations: [
+   sitemap(), 
+   tailwind(), 
+   react(),
+   expressiveCode({
+     plugins: [pluginLineNumbers(), pluginCollapsibleSections()],
+     themes: ["github-dark", "github-light"],
+     styleOverrides: {
+       codeFontFamily: "jetbrains-mono",
+       uiFontFamily: "jetbrains-mono",
+     },
+     themeCssSelector: (theme) => `[data-theme="${theme.type}"]`
+   }), 
+   mdx()
+ ],
+ markdown: {
+   remarkPlugins: [remarkModifiedTime, resetRemark, remarkDirective, remarkAsides({}),remarkCollapse({}),remarkGithubCard()],
+   rehypePlugins: [lazyLoadImage],
+   layouts: {
+     default: './src/layouts/MarkdownPost.astro'
+   }
+ }   
 });

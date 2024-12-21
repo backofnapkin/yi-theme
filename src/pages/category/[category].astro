@@ -5,39 +5,48 @@ import { formatDate } from "../../utils/formatDate";
 import { sortPostsByDate } from "../../utils/sortPostsByDate";
 import { getCollectionByName } from "../../utils/getCollectionByName";
 
+// Helper function to convert category to URL-friendly slug
+function categoryToSlug(category: string) {
+  return category.toLowerCase().replace(/\s+/g, '-');
+}
+
+// Helper function to convert slug back to original category
+function slugToCategory(slug: string) {
+  // Add your category mappings here
+  const categoryMap = {
+    'business-calculators': 'Business Calculators'
+  };
+  return categoryMap[slug] || slug.replace(/-/g, ' ');
+}
+
 export async function getStaticPaths() {
-  // Get blog posts
   const posts = await getCollectionByName("blog");
-  
-  // Get calculator pages from both root and subdirectories
   const calculatorPages = await Astro.glob('../../pages/**/*.astro');
   const filteredCalculatorPages = calculatorPages.filter(page => 
-    // Only include pages that have frontmatter with a category
     page.frontmatter && page.frontmatter.category
   );
 
-  // Combine all unique categories
   const categories = new Set([
     ...posts.map(post => post.data.category),
     ...filteredCalculatorPages.map(page => page.frontmatter.category)
   ]);
 
   return Array.from(categories).map((category) => ({
-    params: { category },
-    props: { category },
+    params: { 
+      category: categoryToSlug(category) // Convert to URL-friendly slug
+    },
+    props: { 
+      category // Pass original category name
+    },
   }));
 }
 
 const { category } = Astro.props;
-
-// Get all content for this category
 const posts = await getCollectionByName("blog");
 const calculatorPages = await Astro.glob('../../pages/**/*.astro');
 
-// Filter blog posts by category
+// Filter using original category name
 const categoryPosts = posts.filter(post => post.data.category === category);
-
-// Filter calculator pages by category
 const categoryCalculators = calculatorPages.filter(page => 
   page.frontmatter && 
   page.frontmatter.category === category
@@ -45,11 +54,9 @@ const categoryCalculators = calculatorPages.filter(page =>
   title: page.frontmatter.title,
   description: page.frontmatter.description,
   date: page.frontmatter.date,
-  // Get the slug from the file path, maintaining the original URL structure
   slug: page.url || page.file.split('/pages/')[1]?.replace('.astro', '')
 }));
 
-// Combine and sort all content
 const allContent = [...categoryPosts, ...categoryCalculators].sort((a, b) => {
   const dateA = new Date(a.data?.date || a.date || 0);
   const dateB = new Date(b.data?.date || b.date || 0);

@@ -7,7 +7,6 @@ import remarkDirective from "remark-directive";
 import expressiveCode from "astro-expressive-code";
 import {pluginLineNumbers} from '@expressive-code/plugin-line-numbers'
 import {pluginCollapsibleSections} from '@expressive-code/plugin-collapsible-sections'
-
 import {remarkModifiedTime,} from "./src/plugins/remark-modified-time.mjs";
 import {resetRemark} from "./src/plugins/reset-remark.js";
 import {remarkAsides} from  './src/plugins/remark-asides.js'
@@ -17,10 +16,15 @@ import {lazyLoadImage} from "./src/plugins/lazy-load-image.js";
 
 export default defineConfig({
   site: 'https://astro-yi-nu.vercel.app',
+  build: {
+    format: 'file'
+  },
+  outDir: './dist',
+  trailingSlash: 'never',
   integrations: [
     sitemap(), 
     tailwind(), 
-    react(),  // Changed from solid() to react()
+    react(),
     expressiveCode({
       plugins: [pluginLineNumbers(), pluginCollapsibleSections()],
       themes: ["github-dark", "github-light"],

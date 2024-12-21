@@ -1,0 +1,64 @@
+---
+// ImageEmbed.astro
+interface Props {
+  src: string;
+  alt: string;
+  description?: string;
+  className?: string;
+  columns?: 1 | 2 | 3 | 4;  // Matches your existing image-cols-* classes
+}
+
+const { 
+  src, 
+  alt, 
+  description, 
+  className = "",
+  columns = 1
+} = Astro.props;
+
+const containerClass = columns > 1 ? `image-cols-${columns}` : '';
+---
+
+<figure class={`my-8 overflow-hidden break-inside-avoid ${containerClass} ${className}`}>
+  <div class="relative rounded-lg border border-skin-line bg-skin-card shadow-sm transition-all duration-200 hover:border-skin-active">
+    <div class="p-2">
+      <img
+        src={src}
+        alt={alt}
+        class="mx-auto h-auto max-h-[400px] w-auto max-w-full rounded-md object-contain"
+        loading="lazy"
+      />
+      {description && (
+        <figcaption class="mt-2 text-center text-sm text-skin-base opacity-80">
+          {description}
+        </figcaption>
+      )}
+    </div>
+  </div>
+</figure>
+
+<style>
+  /* Match your existing scroll behavior */
+  figure {
+    scroll-behavior: smooth;
+  }
+  
+  /* Match your existing image transitions */
+  img {
+    transition: transform 0.2s ease;
+  }
+  
+  img:hover {
+    transform: scale(1.01);
+  }
+  
+  /* Ensure proper dark mode handling */
+  :global(html[data-theme="dark"]) figure div {
+    background-color: rgb(var(--color-card));
+    border-color: rgba(var(--color-border), 0.3);
+  }
+  
+  :global(html[data-theme="dark"]) figure div:hover {
+    border-color: rgb(var(--color-border-active));
+  }
+</style>

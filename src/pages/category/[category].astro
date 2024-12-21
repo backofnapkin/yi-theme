@@ -14,7 +14,11 @@ function categoryToSlug(category: string) {
 function slugToCategory(slug: string) {
   // Add your category mappings here
   const categoryMap = {
-    'business-calculators': 'Business Calculators'
+    'business-calculators': 'Business Calculators',
+    'food-business-calculators': 'Food Business Calculators',
+    'lawn-care-calculators': 'Lawn Care Calculators',
+    'personal-finance-calculators': 'Personal Finance Calculators',
+    'contractor-calculators': 'Contractor Calculators'
   };
   return categoryMap[slug] || slug.replace(/-/g, ' ');
 }

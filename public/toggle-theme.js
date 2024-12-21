@@ -1,60 +1,47 @@
-const primaryColorScheme = ""; // "light" | "dark"
+const primaryColorScheme = "light"; // Force light theme
 
-// Get theme data from local storage
-const currentTheme = localStorage.getItem("theme");
-
+// Always return light theme
 function getPreferTheme() {
-  // return theme value in local storage if it is set
-  if (currentTheme) return currentTheme;
-
-  // return primary color scheme if it is set
-  if (primaryColorScheme) return primaryColorScheme;
-
-  // return user device's prefer color scheme
-  return window.matchMedia("(prefers-color-scheme: dark)").matches
-    ? "dark"
-    : "light";
+  return "light";
 }
 
-let themeValue = getPreferTheme();
+let themeValue = "light";
 
 function setPreference() {
-  localStorage.setItem("theme", themeValue);
+  localStorage.setItem("theme", "light");
   reflectPreference();
 }
 
 function reflectPreference() {
-  document.firstElementChild.setAttribute("data-theme", themeValue);
-
-  document.querySelector("#theme-btn")?.setAttribute("aria-label", themeValue);
+  document.firstElementChild.setAttribute("data-theme", "light");
+  document.querySelector("#theme-btn")?.setAttribute("aria-label", "light");
 }
 
-// set early so no page flashes / CSS is made aware
+// set early so no page flashes
 reflectPreference();
 
 function init() {
-  // set on load so screen readers can get the latest value on the button
   reflectPreference();
-
-  // now this script can find and listen for clicks on the control
+  
+  // Remove click listeners since we want to stay on light theme
   document.querySelector("#theme-btn")?.addEventListener("click", () => {
-    themeValue = themeValue === "light" ? "dark" : "light";
-    setPreference();
+    // Do nothing - keep light theme
+    reflectPreference();
   });
+  
   document.querySelector("#theme-btn-mobile")?.addEventListener("click", () => {
-    themeValue = themeValue === "light" ? "dark" : "light";
-    setPreference();
+    // Do nothing - keep light theme
+    reflectPreference();
   });
 }
 
-
 window.onload = () => {
-  init()
+  init();
 };
 
-// sync with system changes
+// Ignore system preference changes
 window.matchMedia("(prefers-color-scheme: dark)")
-  .addEventListener("change", ({matches: isDark}) => {
-    themeValue = isDark ? "dark" : "light";
-    setPreference();
+  .addEventListener("change", () => {
+    // Do nothing - keep light theme
+    reflectPreference();
   });

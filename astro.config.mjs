@@ -20,7 +20,6 @@ export default defineConfig({
     format: 'file'
   },
   outDir: './dist',
-  trailingSlash: 'never',
   integrations: [
     sitemap(), 
     tailwind(), 

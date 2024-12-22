@@ -8,22 +8,63 @@ import {sortPostsByDate} from "../utils/sortPostsByDate";
 import {site} from '../consts'
 import {t} from '../i18n/utils'
 
+console.log('Starting BlogAside component...');
+
 // Get all content (both blogs and calculators)
 const allContent = await getCollectionByName('all');
+console.log('Received all content:', allContent.map(post => ({
+  title: post.data.title,
+  category: post.data.category,
+  collection: post.collection,
+  id: post.id,
+  slug: post.slug
+})));
+
 let tagArr = getUniqueTags(allContent);
+console.log('Extracted tags:', tagArr);
+
 let categoryCount = getCountByCategory(allContent);
+console.log('Category count before processing:', categoryCount);
+
 let sortPosts = await sortPostsByDate(allContent);
+console.log('Sorted posts:', sortPosts.map(post => ({
+  title: post.data.title,
+  date: post.data.date,
+  category: post.data.category
+})));
+
 let resultPosts = sortPosts.splice(0, site.recentBlogSize);
+console.log('Final result posts:', resultPosts.map(post => ({
+  title: post.data.title,
+  url: getPostUrl(post)
+})));
 
 // Helper function to get the correct URL for each content type
 function getPostUrl(post: any) {
+  console.log('Getting URL for post:', {
+    title: post.data.title,
+    collection: post.collection,
+    id: post.id,
+    slug: post.slug
+  });
+  
   if (post.collection === 'astro-pages') {
-    // For calculator pages, strip '/src/pages' and '.astro' from the path
-    return post.id.replace('/src/pages', '').replace('.astro', '');
+    const url = post.id.replace('/src/pages', '').replace('.astro', '');
+    console.log('Generated calculator URL:', url);
+    return url;
   }
-  return `/blog/${post.slug}`;
+  const url = `/blog/${post.slug}`;
+  console.log('Generated blog URL:', url);
+  return url;
 }
+
+// Debug categories before rendering
+console.log('Categories before rendering:', {
+  categoryKeys: Object.keys(categoryCount),
+  categoryEntries: Object.entries(categoryCount)
+});
 ---
+
 <div>
   {
     Object.keys(categoryCount).length > 0 && (
@@ -33,17 +74,24 @@ function getPostUrl(post: any) {
     )
   }
   {
-    Object.keys(categoryCount).map((category) => (
-      <a
-        class="my-1 truncate block hover:text-skin-active"
-        title={category + " (" + categoryCount[category] + ")"}
-        href={"/category/" + category}
-      >
-        {(category === 'uncategorized' ? t('sidebar.uncategorized') : category) + " (" + categoryCount[category] + ")"}
-      </a>
-    ))
+    Object.keys(categoryCount).map((category) => {
+      console.log('Rendering category:', {
+        category,
+        count: categoryCount[category]
+      });
+      return (
+        
+          class="my-1 truncate block hover:text-skin-active"
+          title={category + " (" + categoryCount[category] + ")"}
+          href={"/category/" + category}
+        >
+          {(category === 'uncategorized' ? t('sidebar.uncategorized') : category) + " (" + categoryCount[category] + ")"}
+        </a>
+      );
+    })
   }
 </div>
+
 <div>
   {
     tagArr.length > 0 && (
@@ -56,28 +104,44 @@ function getPostUrl(post: any) {
   <div class="flex flex-wrap">
     {
       tagArr &&
-      tagArr.map((tag) =>
-        <a class="inline-block truncate m-1 border p-1 text-sm rounded hover:text-skin-active" title={tag} href={"/tags/" + tag}>{tag}</a>
-      )
+      tagArr.map((tag) => {
+        console.log('Rendering tag:', tag);
+        return (
+          <a class="inline-block truncate m-1 border p-1 text-sm rounded hover:text-skin-active" 
+             title={tag} 
+             href={"/tags/" + tag}
+          >
+            {tag}
+          </a>
+        );
+      })
     }
   </div>
 </div>
+
 <div>
   <div class="aside-widget">
     <i class="ri-file-line menu-icon"></i> {t('sidebar.recentArticle')}
   </div>
   <div class="flex flex-col">
     {
-      resultPosts.map((post) => (
-        <a
-          href={getPostUrl(post)}
-          class="truncate cursor-pointr mt-1 hover:text-skin-active"
-          title={post.data.title}
-        >
-          {post.data.title}
-        </a>
-      ))
+      resultPosts.map((post) => {
+        console.log('Rendering recent post:', {
+          title: post.data.title,
+          url: getPostUrl(post)
+        });
+        return (
+          
+            href={getPostUrl(post)}
+            class="truncate cursor-pointr mt-1 hover:text-skin-active"
+            title={post.data.title}
+          >
+            {post.data.title}
+          </a>
+        );
+      })
     }
   </div>
 </div>
+
 {comment.enable && comment.type === "waline" && <CommentAside/>}

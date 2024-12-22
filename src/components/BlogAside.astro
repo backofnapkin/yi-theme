@@ -8,14 +8,6 @@ import {sortPostsByDate} from "../utils/sortPostsByDate";
 import {site} from '../consts'
 import {t} from '../i18n/utils'
 
-// Helper function to format category URLs
-function formatCategoryUrl(category: string) {
-  return category
-    .toLowerCase()
-    .replace(/\s+/g, '-')     // Replace spaces with hyphens
-    .replace(/[^a-z0-9-]/g, ''); // Remove special characters
-}
-
 // Get all content (both blogs and calculators)
 const allContent = await getCollectionByName('all');
 let tagArr = getUniqueTags(allContent);
@@ -31,6 +23,11 @@ function getPostUrl(post: any) {
   }
   return `/blog/${post.slug}`;
 }
+
+// Simple category URL formatter
+function formatCategory(cat: string) {
+  return cat.toLowerCase().split(' ').join('-');
+}
 ---
 <div>
   {
@@ -45,7 +42,7 @@ function getPostUrl(post: any) {
       
         class="my-1 truncate block hover:text-skin-active"
         title={category + " (" + categoryCount[category] + ")"}
-        href={"/category/" + formatCategoryUrl(category)}
+        href={"/category/" + formatCategory(category)}
       >
         {(category === 'uncategorized' ? t('sidebar.uncategorized') : category) + " (" + categoryCount[category] + ")"}
       </a>

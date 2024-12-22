@@ -23,11 +23,6 @@ function getPostUrl(post: any) {
   }
   return `/blog/${post.slug}`;
 }
-
-// Simple category URL formatter
-function formatCategory(cat: string) {
-  return cat.toLowerCase().split(' ').join('-');
-}
 ---
 <div>
   {
@@ -42,7 +37,7 @@ function formatCategory(cat: string) {
       
         class="my-1 truncate block hover:text-skin-active"
         title={category + " (" + categoryCount[category] + ")"}
-        href={"/category/" + formatCategory(category)}
+        href={"/category/" + category.toLowerCase().split(' ').join('-')}
       >
         {(category === 'uncategorized' ? t('sidebar.uncategorized') : category) + " (" + categoryCount[category] + ")"}
       </a>

@@ -6,9 +6,11 @@ const getCountByCategory = (posts) => {
   const filteredPosts = posts.filter(({data}) => {
     return import.meta.env.PROD ? !data.draft : true
   });
+  
   filteredPosts.forEach(post => {
     category = _.compact([...category, ..._.flattenDeep(dealLabel(post.data.category))])
   });
+  
   let result = _.countBy(category)
   if(result['uncategorized']){
     let num = result['uncategorized']

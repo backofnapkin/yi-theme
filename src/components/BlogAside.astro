@@ -10,14 +10,7 @@ import {t} from '../i18n/utils'
 
 // Get all content (both blogs and calculators)
 const allContent = await getCollectionByName('all');
-
-// Add debug logging in a way that works with Astro
-const debugContent = allContent.map(post => ({
-  title: post.data.title,
-  category: post.data.category,
-  collection: post.collection,
-}));
-console.log('Content debug:', debugContent);
+console.log('Content categories:', allContent.map(post => post.data.category));
 
 let tagArr = getUniqueTags(allContent);
 let categoryCount = getCountByCategory(allContent);
@@ -29,7 +22,6 @@ let resultPosts = sortPosts.splice(0, site.recentBlogSize);
 // Helper function to get the correct URL for each content type
 function getPostUrl(post: any) {
   if (post.collection === 'astro-pages') {
-    // For calculator pages, strip '/src/pages' and '.astro' from the path
     return post.id.replace('/src/pages', '').replace('.astro', '');
   }
   return `/blog/${post.slug}`;

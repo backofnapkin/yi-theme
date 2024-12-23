@@ -2,9 +2,6 @@ import React, { useEffect, useRef } from 'react';
 import { useDentalContext } from './DentalContext';
 import { Printer, Download } from 'lucide-react';
 import Chart from 'chart.js/auto';
-import ChartDataLabels from 'chartjs-plugin-datalabels';
-
-Chart.register(ChartDataLabels);
 
 export const ResultsSection = () => {
   const { state } = useDentalContext();
@@ -143,29 +140,16 @@ export const ResultsSection = () => {
                     return formatCurrency(context.raw as number);
                   }
                 }
-              },
-              datalabels: {
-                align: 'top',
-                anchor: 'end',
-                color: 'rgb(80, 73, 69)',
-                font: {
-                  weight: 'bold',
-                  size: 12
-                },
-                formatter: function(value) {
-                  return formatCurrency(value);
-                },
-                offset: 8,
-                padding: 6,
-                backgroundColor: 'rgba(241, 241, 241, 0.9)',
-                borderRadius: 4
               }
             },
             scales: {
               y: {
-                display: false,
+                display: true,
                 grid: {
                   display: false
+                },
+                ticks: {
+                  callback: (value) => formatCurrency(Number(value))
                 }
               },
               x: {
@@ -183,7 +167,7 @@ export const ResultsSection = () => {
             },
             layout: {
               padding: {
-                top: 40,
+                top: 20,
                 right: 20,
                 bottom: 20,
                 left: 20
@@ -389,7 +373,7 @@ export const ResultsSection = () => {
                   <div className="flex items-center gap-2 mb-2">
                     <div className="w-4 h-4 rounded-full bg-[#059669]"></div>
                     <h5 className="font-semibold">Best Case Scenario</h5>
-                    </div>
+                  </div>
                   <p className="text-sm text-skin-base">
                     Assumes +2 patients per chair per day and operating 7 days per week, 
                     maximizing chair utilization and weekend appointments

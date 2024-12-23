@@ -59,110 +59,123 @@ const schema = {
         <p class="text-xl text-skin-base">
           {frontmatter.description}
         </p>
+        <div class="flex items-center justify-center gap-4 mt-4 text-skin-base opacity-75">
+          <div class="flex items-center gap-2">
+            <span>By {frontmatter.author}</span>
+          </div>
+          <span>•</span>
+          <div>
+            {new Date(frontmatter.date).toLocaleDateString('en-US', {
+              year: 'numeric',
+              month: 'long',
+              day: 'numeric'
+            })}
+          </div>
+        </div>
       </div>
 
       <DentalCalculator client:load />
     </div>
   </div>
      
-<div class="prose prose-lg max-w-none mt-12 text-skin-base">
-        <h2 class="text-2xl font-bold mb-4">How to use this calculator</h2>
-        <p>
-          This dental practice calculator helps you understand the financial side of running a dental practice. 
-          I built this tool using industry research and national averages to provide realistic starting points 
-          for many of the default calculations and cited my sources below.
-        </p>
+  <div class="prose prose-lg max-w-none mt-12 text-skin-base">
+    <h2 class="text-2xl font-bold mb-4">How to use this calculator</h2>
+    <p>
+      This dental practice calculator helps you understand the financial side of running a dental practice. 
+      I built this tool using industry research and national averages to provide realistic starting points 
+      for many of the default calculations and cited my sources below.
+    </p>
 
-        <p class="font-semibold mt-4">Start by entering the basics into this tool:</p>
-        <ul class="list-disc pl-6 space-y-2">
-          <li>Your practice name</li>
-          <li>Number of dental chairs (industry research shows practices vary widely here)</li>
-          <li>Patients per chair daily (default: 10 patients, based on industry average of <a href="https://medicalmarketingguru.com/blog/whats-average-patient-base-dental-professional-needs">8-15 patients per day</a>)</li>
-          <li>Average revenue per patient (default: $432, based on <a href="https://www.valuepenguin.com/dental-health-report">ValuePenguin's national dental health report</a>)</li>
-          <li>Days open per week (default: 5)</li>
-          <li>Startup costs (default: $500,000, based on <a href="https://www.usdentalpractices.com/helpful-resources/how-much-does-it-cost-to-buy-a-dental-practice">US Dental Practices' research</a> on typical practice startup costs)</li>
-        </ul>
+    <p class="font-semibold mt-4">Start by entering the basics into this tool:</p>
+    <ul class="list-disc pl-6 space-y-2">
+      <li>Your practice name</li>
+      <li>Number of dental chairs (industry research shows practices vary widely here)</li>
+      <li>Patients per chair daily (default: 10 patients, based on industry average of <a href="https://medicalmarketingguru.com/blog/whats-average-patient-base-dental-professional-needs">8-15 patients per day</a>)</li>
+      <li>Average revenue per patient (default: $432, based on <a href="https://www.valuepenguin.com/dental-health-report">ValuePenguin's national dental health report</a>)</li>
+      <li>Days open per week (default: 5)</li>
+      <li>Startup costs (default: $500,000, based on <a href="https://www.usdentalpractices.com/helpful-resources/how-much-does-it-cost-to-buy-a-dental-practice">US Dental Practices' research</a> on typical practice startup costs)</li>
+    </ul>
 
-        <h3 class="text-xl font-bold mt-8">Staff and Wages</h3>
-        <p>The calculator's default staffing setup reflects current national salary averages:</p>
-        <ul class="list-disc pl-6 space-y-2">
-          <li><strong>Dentist</strong> ($19,141/month, calculated from <a href="https://www.indeed.com/career/dentist/salaries">Indeed's national average</a> of $229,700 annually)</li>
-          <li><strong>Hygienist</strong> ($8,165/month, based on <a href="https://www.indeed.com/career/dental-hygienist/salaries">Indeed's reported average</a> of $51.03/hour)</li>
-          <li><strong>Dental Assistant</strong> ($4,160/month, derived from <a href="https://www.danb.org/career-center/dental-assistant-salary">DANB's reported rate</a> of $26/hour)</li>
-          <li><strong>Administrative Staff</strong> ($3,360/month, based on <a href="https://www.ziprecruiter.com/Salaries/Dental-Administrator-Salary">ZipRecruiter's average</a> of $21/hour)</li>
-        </ul>
+    <h3 class="text-xl font-bold mt-8">Staff and Wages</h3>
+    <p>The calculator's default staffing setup reflects current national salary averages:</p>
+    <ul class="list-disc pl-6 space-y-2">
+      <li><strong>Dentist</strong> ($19,141/month, calculated from <a href="https://www.indeed.com/career/dentist/salaries">Indeed's national average</a> of $229,700 annually)</li>
+      <li><strong>Hygienist</strong> ($8,165/month, based on <a href="https://www.indeed.com/career/dental-hygienist/salaries">Indeed's reported average</a> of $51.03/hour)</li>
+      <li><strong>Dental Assistant</strong> ($4,160/month, derived from <a href="https://www.danb.org/career-center/dental-assistant-salary">DANB's reported rate</a> of $26/hour)</li>
+      <li><strong>Administrative Staff</strong> ($3,360/month, based on <a href="https://www.ziprecruiter.com/Salaries/Dental-Administrator-Salary">ZipRecruiter's average</a> of $21/hour)</li>
+    </ul>
 
-        <h3 class="text-xl font-bold mt-8">Monthly Expenses</h3>
-        <p>The calculator includes research-backed expense defaults:</p>
-        <ul class="list-disc pl-6 space-y-2">
-          <li>Rent or mortgage payments, utilities, dental supplies</li>
-          <li>Marketing costs (default: $3,500/month, based on <a href="https://firstdentist.com/how-much-should-a-dental-practice-spend-on-marketing/">FirstDentist's recommendations</a>)</li>
-          <li>Loan payments</li>
-        </ul>
+    <h3 class="text-xl font-bold mt-8">Monthly Expenses</h3>
+    <p>The calculator includes research-backed expense defaults:</p>
+    <ul class="list-disc pl-6 space-y-2">
+      <li>Rent or mortgage payments, utilities, dental supplies</li>
+      <li>Marketing costs (default: $3,500/month, based on <a href="https://firstdentist.com/how-much-should-a-dental-practice-spend-on-marketing/">FirstDentist's recommendations</a>)</li>
+      <li>Loan payments</li>
+    </ul>
 
-<ImageEmbed
-  src="/images/dentist-office.png"
-  alt="outside a dentist office"
-  description="Outside the dentist office I go to."
-/>
+    <ImageEmbed
+      src="/images/dentist-office.png"
+      alt="outside a dentist office"
+      description="Outside the dentist office I go to."
+    />
 
-        <h3 class="text-xl font-bold mt-8">What You'll Learn</h3>
-        <p>The calculator will give you the following outputs that can be printed or saved in a CSV file:</p>
-        <ul class="list-disc pl-6 space-y-2">
-          <li>Monthly and yearly revenue projections (aligned with <a href="https://www.statista.com/statistics/965365/patient-visits-among-all-dentists-us-per-year/">Statista's reporting</a> of approximately 3,800 patient visits per dentist annually)</li>
-          <li>Complete cost analysis</li>
-          <li>Projected profits</li>
-          <li>Investment recovery timeline</li>
-          <li>Visual expense breakdowns</li>
-          <li><strong>Three scenarios:</strong> expected, best case, and conservative estimates</li>
-        </ul>
+    <h3 class="text-xl font-bold mt-8">What You'll Learn</h3>
+    <p>The calculator will give you the following outputs that can be printed or saved in a CSV file:</p>
+    <ul class="list-disc pl-6 space-y-2">
+      <li>Monthly and yearly revenue projections (aligned with <a href="https://www.statista.com/statistics/965365/patient-visits-among-all-dentists-us-per-year/">Statista's reporting</a> of approximately 3,800 patient visits per dentist annually)</li>
+      <li>Complete cost analysis</li>
+      <li>Projected profits</li>
+      <li>Investment recovery timeline</li>
+      <li>Visual expense breakdowns</li>
+      <li><strong>Three scenarios:</strong> expected, best case, and conservative estimates</li>
+    </ul>
 
-        <h2 class="text-2xl font-bold mt-12 mb-4">Understanding the calculations</h2>
-        <div class="space-y-8">
-          <div>
-            <p class="font-bold mb-2">Revenue Calculations:</p>
-            <pre class="bg-skin-card p-4 rounded-lg overflow-x-auto">
-              <code>
+    <h2 class="text-2xl font-bold mt-12 mb-4">Understanding the calculations</h2>
+    <div class="space-y-8">
+      <div>
+        <p class="font-bold mb-2">Revenue Calculations:</p>
+        <pre class="bg-skin-card p-4 rounded-lg overflow-x-auto">
+          <code>
 Monthly Patients = (Patients per Chair × Days per Week × 4 weeks) × Number of Chairs
 Monthly Revenue = Monthly Patients × Revenue per Patient
 Annual Revenue = Monthly Revenue × 12 months</code>
-            </pre>
-          </div>
+        </pre>
+      </div>
 
-          <div>
-            <p class="font-bold mb-2">Overhead Calculations:</p>
-            <pre class="bg-skin-card p-4 rounded-lg overflow-x-auto">
-              <code>
+      <div>
+        <p class="font-bold mb-2">Overhead Calculations:</p>
+        <pre class="bg-skin-card p-4 rounded-lg overflow-x-auto">
+          <code>
 Total Monthly Salaries = Sum of all employee monthly salaries
 Total Monthly Overhead = Total Monthly Salaries + Sum of all overhead costs
 Annual Overhead = Monthly Overhead × 12 months</code>
-            </pre>
-          </div>
+        </pre>
+      </div>
 
-          <div>
-            <p class="font-bold mb-2">Profit Calculations:</p>
-            <pre class="bg-skin-card p-4 rounded-lg overflow-x-auto">
-              <code>
+      <div>
+        <p class="font-bold mb-2">Profit Calculations:</p>
+        <pre class="bg-skin-card p-4 rounded-lg overflow-x-auto">
+          <code>
 Monthly Net Income = Monthly Revenue - Monthly Overhead
 Annual Net Income = Monthly Net Income × 12
 Profit Margin = (Monthly Net Income ÷ Monthly Revenue) × 100</code>
-            </pre>
-          </div>
-        </div>
+        </pre>
+      </div>
+    </div>
 
-        <h2 class="text-2xl font-bold mt-12 mb-4">Examining Dental Practice Revenue</h2>
-        <p>
-          While this dental practice calculator helps crunch the numbers, <a href="https://www.hellotend.com/leadership/dr-chris-salierno">Dr. Chris Salerno</a>, 
-          of <a href="https://www.thecuriousdentist.com/about">The Curious Dentist</a> and the Chief Dental Officer at Tend, 
-          emphasizes that when it comes to practice profitability: the timing of revenue can matter as much as the amount when 
-          it comes to paying your bills on time.
-        </p>
+    <h2 class="text-2xl font-bold mt-12 mb-4">Examining Dental Practice Revenue</h2>
+    <p>
+      While this dental practice calculator helps crunch the numbers, <a href="https://www.hellotend.com/leadership/dr-chris-salierno">Dr. Chris Salerno</a>, 
+      of <a href="https://www.thecuriousdentist.com/about">The Curious Dentist</a> and the Chief Dental Officer at Tend, 
+      emphasizes that when it comes to practice profitability: the timing of revenue can matter as much as the amount when 
+      it comes to paying your bills on time.
+    </p>
 
-        <p class="mt-4">
-          Here are a few nuances the calculator won't tell you about operating a dentist office: insurance reimbursements can 
-          take 30-90 days to hit your bank account, while cash patients pay on the spot. This timing differential can make or 
-          break a new practice's cash flow even when the raw numbers look solid on paper.
-        </p>
+    <p class="mt-4">
+      Here are a few nuances the calculator won't tell you about operating a dentist office: insurance reimbursements can 
+      take 30-90 days to hit your bank account, while cash patients pay on the spot. This timing differential can make or 
+      break a new practice's cash flow even when the raw numbers look solid on paper.
+    </p>
 
     <YouTubeEmbed 
       id="SQwneZHqxmk"
@@ -170,30 +183,29 @@ Profit Margin = (Monthly Net Income ÷ Monthly Revenue) × 100</code>
       className="mb-8"
     />
 
-        <div class="mt-8">
-          <p>Here are a few nuances to keep in mind based on the Mastering Dental Economics presentation with Chris:</p>
-          <ol class="list-decimal pl-6 space-y-2">
-            <li><strong>Don't just look at top line revenue.</strong> "The famous statistic is that <a href="https://www.ada.org/resources/careers/career-transitions/articles/talk-to-3-banks-the-first-step-in-buying-a-dental-practice">less than 1% of dental practices in the U.S. default</a> on their loan... However, the other side of that is just because a practice isn't failing doesn't mean it's successful," Salerno notes.</li>
-            <li><strong>Find the Profit Sweet Spot:</strong> Salerno breaks down the target overhead ranges by specialty: "Research shows the average overhead for a practice in the U.S. can be as high as 70 or 75 percent... many consultants would say that a good target for general dentists could be closer to maybe sixty percent overhead taking home 40 percent."</li>
-            <li><strong>Staff Costs:</strong> "From a business standpoint, it's the largest part of your overhead is how is your team members and you compensate them that is the number one line item," Salerno states.</li>
-          </ol>
-        </div>
-
-        <p class="mt-8"><strong>The Bottom Line:</strong> While the calculator provides a starting framework for financial planning, Salerno's insights remind us that successful dental practices need to balance the raw numbers with real-world timing of cash flows. A practice showing $100,000 monthly revenue might only see $70,000 of that in the first month with insurance reimbursements trickling in over the following months.</p>
-
-        <h2 class="text-2xl font-bold mt-12 mb-4">Related tools:</h2>
-        <p>
-          <strong>
-            <a href="/market-demand-calculator-business">Market Demand Calculator for New Business Ideas</a>
-          </strong>: Go deeper into projecting market demand for your dental practice with this tool.
-        </p>
-<main>
-  <article>
-    <slot />
-  </article>
-  <AuthorBox />
-</main>
-      </div>
+    <div class="mt-8">
+      <p>Here are a few nuances to keep in mind based on the Mastering Dental Economics presentation with Chris:</p>
+      <ol class="list-decimal pl-6 space-y-2">
+        <li><strong>Don't just look at top line revenue.</strong> "The famous statistic is that <a href="https://www.ada.org/resources/careers/career-transitions/articles/talk-to-3-banks-the-first-step-in-buying-a-dental-practice">less than 1% of dental practices in the U.S. default</a> on their loan... However, the other side of that is just because a practice isn't failing doesn't mean it's successful," Salerno notes.</li>
+        <li><strong>Find the Profit Sweet Spot:</strong> Salerno breaks down the target overhead ranges by specialty: "Research shows the average overhead for a practice in the U.S. can be as high as 70 or 75 percent... many consultants would say that a good target for general dentists could be closer to maybe sixty percent overhead taking home 40 percent."</li>
+        <li><strong>Staff Costs:</strong> "From a business standpoint, it's the largest part of your overhead is how is your team members and you compensate them that is the number one line item," Salerno states.</li>
+      </ol>
     </div>
+
+    <p class="mt-8"><strong>The Bottom Line:</strong> While the calculator provides a starting framework for financial planning, Salerno's insights remind us that successful dental practices need to balance the raw numbers with real-world timing of cash flows. A practice showing $100,000 monthly revenue might only see $70,000 of that in the first month with insurance reimbursements trickling in over the following months.</p>
+
+    <h2 class="text-2xl font-bold mt-12 mb-4">Related tools:</h2>
+    <p>
+      <strong>
+        <a href="/market-demand-calculator-business">Market Demand Calculator for New Business Ideas</a>
+      </strong>: Go deeper into projecting market demand for your dental practice with this tool.
+    </p>
   </div>
+  
+  <main>
+    <article>
+      <slot />
+    </article>
+    <AuthorBox />
+  </main>
 </IndexPage>

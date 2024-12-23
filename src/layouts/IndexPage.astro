@@ -6,11 +6,19 @@ import Profile from '../components/Profile.astro';
 import BlogAside from '../components/BlogAside.astro';
 import Comment from '../components/Comment.astro';
 import Donate from '../components/Donate.astro';
-import {donate, comment, config} from "../consts";
+import { donate, comment, config } from "../consts";
 
-const {frontmatter = {comment: false, donate: false}, title, description} = Astro.props;
+const { frontmatter = { comment: false, donate: false }, title, description } = Astro.props;
 const pageTitle = frontmatter?.title || title;
 const pageDescription = frontmatter?.description || description;
+const pageAuthor = frontmatter?.author || "Unknown Author";
+const pageDate = frontmatter?.date
+  ? new Date(frontmatter.date).toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+    })
+  : null;
 ---
 
 <html lang={config.lang}>
@@ -22,6 +30,15 @@ const pageDescription = frontmatter?.description || description;
   <div class="grid grid-cols-4 gap-8">
     <!-- Main Content -->
     <div class="col-span-4 xl:col-span-3">
+      <!-- Page Header with Title, Date, and Author -->
+      <header class="mb-8">
+        <h1 class="text-4xl font-bold text-skin-base mb-4">{pageTitle}</h1>
+        {pageDate && (
+          <p class="text-sm text-skin-muted mb-2">Published on {pageDate}</p>
+        )}
+        <p class="text-sm text-skin-muted">By {pageAuthor}</p>
+      </header>
+
       <slot></slot>
       {
         donate.enable && frontmatter.donate &&

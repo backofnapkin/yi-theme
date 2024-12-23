@@ -39,11 +39,6 @@ const pageDate = frontmatter?.date
         <p class="text-sm text-skin-muted">By {pageAuthor}</p>
       </header>
 
-      <!-- Debug Output for Frontmatter -->
-      <pre class="text-xs text-red-500">
-        {JSON.stringify(frontmatter, null, 2)}
-      </pre>
-
       <slot></slot>
       {
         donate.enable && frontmatter.donate &&

@@ -8,15 +8,15 @@ const bio = `
 const imageUrl = '/images/brett-lindenberg-author.jpg';
 ---
 
-<div class="author-box p-4 border rounded-lg bg-skin-card">
-  <div class="flex items-center space-x-4">
-    <img src={imageUrl} alt={authorName} class="author-image w-16 h-16 rounded-full border" />
-    <h2 class="text-lg font-bold">{authorName}</h2>
+<div class="author-box">
+  <div class="flex items-center space-x-6">
+    <img src={imageUrl} alt={authorName} class="author-image" />
+    <h2>{authorName}</h2>
   </div>
-  <p class="text-sm text-gray-500 mt-4 whitespace-pre-line">{bio}</p>
-  <div class="social-links flex mt-4 space-x-4">
+  <p class="mt-4 whitespace-pre-line">{bio}</p>
+  <div class="social-links flex mt-6 space-x-4">
     {infoLinks.map((link) => (
-      <a href={link.outlink} class={link.icon + ' text-xl hover:text-skin-active'} target="_blank" rel="noopener noreferrer">
+      <a href={link.outlink} class={link.icon} target="_blank" rel="noopener noreferrer">
         <span class="sr-only">{link.name}</span>
       </a>
     ))}

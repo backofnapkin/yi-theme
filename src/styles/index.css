@@ -294,36 +294,39 @@ Applies link colors specifically to content links in .astro pages
 }
 /* Author Box Styles */
 .author-box {
-  background: var(--color-fill-secondary);
-  border: 1px solid var(--color-border);
-  border-radius: 0.5rem;
-  padding: 1rem;
+  background: var(--color-fill); /* Slightly darker than the secondary background */
+  border: 1px solid var(--color-border-active); /* Highlight with a more vibrant border */
+  border-radius: 0.75rem; /* Slightly larger rounding for a modern look */
+  padding: 1.5rem; /* Increased padding for a spacious feel */
   margin-top: 2rem;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Stronger shadow to add depth */
 }
 
 .author-box .author-image {
-  border: 2px solid var(--color-border);
-  width: 64px;
-  height: 64px;
+  border: 2px solid var(--color-border-active); /* Match the border to the box */
+  width: 80px; /* Slightly larger image */
+  height: 80px;
   object-fit: cover;
 }
 
 .author-box h2 {
   margin: 0;
-  color: var(--color-text);
+  color: var(--color-text-active); /* Use an active text color for emphasis */
+  font-size: 1.25rem; /* Slightly larger font */
 }
 
 .author-box p {
-  margin: 0;
+  margin: 0.5rem 0 0; /* Add spacing above the bio */
   color: var(--color-text-secondary);
+  line-height: 1.6;
 }
 
 .author-box .social-links a {
   color: var(--color-text);
-  transition: color 0.3s ease-in-out;
+  transition: color 0.3s ease-in-out, transform 0.3s ease;
 }
 
 .author-box .social-links a:hover {
   color: var(--color-border-active);
+  transform: scale(1.1); /* Slight zoom on hover for interactivity */
 }

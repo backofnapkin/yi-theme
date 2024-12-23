@@ -8,6 +8,11 @@ import {sortPostsByDate} from "../utils/sortPostsByDate";
 import {site} from '../consts'
 import {t} from '../i18n/utils'
 
+// Helper function to convert category to URL-friendly slug
+function categoryToSlug(category: string) {
+  return category.toLowerCase().replace(/\s+/g, '-');
+}
+
 // Get all content (both blogs and calculators)
 const allContent = await getCollectionByName('all');
 let tagArr = getUniqueTags(allContent);
@@ -34,10 +39,10 @@ function getPostUrl(post: any) {
   }
   {
     Object.keys(categoryCount).map((category) => (
-      <a
+      
         class="my-1 truncate block hover:text-skin-active"
         title={category + " (" + categoryCount[category] + ")"}
-        href={"/category/" + category}
+        href={`/category/${categoryToSlug(category)}`}
       >
         {(category === 'uncategorized' ? t('sidebar.uncategorized') : category) + " (" + categoryCount[category] + ")"}
       </a>
@@ -69,7 +74,7 @@ function getPostUrl(post: any) {
   <div class="flex flex-col">
     {
       resultPosts.map((post) => (
-        <a
+        
           href={getPostUrl(post)}
           class="truncate cursor-pointr mt-1 hover:text-skin-active"
           title={post.data.title}

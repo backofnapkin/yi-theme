@@ -8,18 +8,6 @@ import {sortPostsByDate} from "../utils/sortPostsByDate";
 import {site} from '../consts'
 import {t} from '../i18n/utils'
 
-// Helper function to convert category to URL-friendly slug
-function categoryToSlug(category: string) {
-  const categoryMap = {
-    'Business Calculators': 'business-calculators',
-    'Food Business Calculators': 'food-business-calculators',
-    'Lawn Care Calculators': 'lawn-care-calculators',
-    'Personal Finance Calculators': 'personal-finance-calculators',
-    'Contractor Calculators': 'contractor-calculators'
-  };
-  return categoryMap[category] || category.toLowerCase().replace(/\s+/g, '-');
-}
-
 // Get all content (both blogs and calculators)
 const allContent = await getCollectionByName('all');
 let tagArr = getUniqueTags(allContent);
@@ -35,6 +23,9 @@ function getPostUrl(post: any) {
   }
   return `/blog/${post.slug}`;
 }
+
+// Simple category slug conversion
+const categoryToUrl = (category: string) => category.toLowerCase().replace(/\s+/g, '-');
 ---
 <div>
   {
@@ -49,7 +40,7 @@ function getPostUrl(post: any) {
       
         class="my-1 truncate block hover:text-skin-active"
         title={category + " (" + categoryCount[category] + ")"}
-        href={"/category/" + categoryToSlug(category)}
+        href={"/category/" + categoryToUrl(category)}
       >
         {(category === 'uncategorized' ? t('sidebar.uncategorized') : category) + " (" + categoryCount[category] + ")"}
       </a>

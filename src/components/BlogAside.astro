@@ -23,18 +23,6 @@ function getPostUrl(post: any) {
   }
   return `/blog/${post.slug}`;
 }
-
-// Helper function to convert category to URL-friendly slug
-function categoryToSlug(category: string) {
-  const categoryMap = {
-    'Business Calculators': 'business-calculators',
-    'Food Business Calculators': 'food-business-calculators',
-    'Lawn Care Calculators': 'lawn-care-calculators',
-    'Personal Finance Calculators': 'personal-finance-calculators',
-    'Contractor Calculators': 'contractor-calculators'
-  };
-  return categoryMap[category] || category.toLowerCase().replace(/\s+/g, '-');
-}
 ---
 <div>
   {
@@ -46,10 +34,10 @@ function categoryToSlug(category: string) {
   }
   {
     Object.keys(categoryCount).map((category) => (
-      
+      <a
         class="my-1 truncate block hover:text-skin-active"
         title={category + " (" + categoryCount[category] + ")"}
-        href={"/category/" + categoryToSlug(category)}
+        href={"/category/" + category}
       >
         {(category === 'uncategorized' ? t('sidebar.uncategorized') : category) + " (" + categoryCount[category] + ")"}
       </a>
@@ -81,7 +69,7 @@ function categoryToSlug(category: string) {
   <div class="flex flex-col">
     {
       resultPosts.map((post) => (
-        
+        <a
           href={getPostUrl(post)}
           class="truncate cursor-pointr mt-1 hover:text-skin-active"
           title={post.data.title}

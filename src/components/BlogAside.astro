@@ -23,9 +23,6 @@ function getPostUrl(post: any) {
   }
   return `/blog/${post.slug}`;
 }
-
-// Simple category slug conversion
-const categoryToUrl = (category: string) => category.toLowerCase().replace(/\s+/g, '-');
 ---
 <div>
   {
@@ -37,10 +34,10 @@ const categoryToUrl = (category: string) => category.toLowerCase().replace(/\s+/
   }
   {
     Object.keys(categoryCount).map((category) => (
-      
+      <a
         class="my-1 truncate block hover:text-skin-active"
         title={category + " (" + categoryCount[category] + ")"}
-        href={"/category/" + categoryToUrl(category)}
+        href={"/category/" + category}
       >
         {(category === 'uncategorized' ? t('sidebar.uncategorized') : category) + " (" + categoryCount[category] + ")"}
       </a>
@@ -72,7 +69,7 @@ const categoryToUrl = (category: string) => category.toLowerCase().replace(/\s+/
   <div class="flex flex-col">
     {
       resultPosts.map((post) => (
-        
+        <a
           href={getPostUrl(post)}
           class="truncate cursor-pointr mt-1 hover:text-skin-active"
           title={post.data.title}

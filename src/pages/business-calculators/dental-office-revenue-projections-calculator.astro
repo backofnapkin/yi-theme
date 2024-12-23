@@ -44,7 +44,16 @@ const schema = {
 };
 ---
 
-<IndexPage {...frontmatter}>
+<IndexPage 
+  title={frontmatter.title}
+  description={frontmatter.description}
+  author={frontmatter.author}
+  date={frontmatter.date}
+  comment={frontmatter.comment}
+  donate={frontmatter.donate}
+  image={frontmatter.image}
+  category={frontmatter.category}
+  tags={frontmatter.tags}>
   <script type="application/ld+json" set:html={JSON.stringify(schema)} />
   
   <div class="min-h-screen bg-skin-fill py-8 px-4 sm:px-6 lg:px-8">

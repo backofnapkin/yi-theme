@@ -23,6 +23,11 @@ function getPostUrl(post: any) {
   }
   return `/blog/${post.slug}`;
 }
+
+// Helper function to format category URLs
+function formatCategoryUrl(category: string) {
+  return "/category/" + category.toLowerCase().replace(/\s+/g, '-');
+}
 ---
 <div>
   {
@@ -37,7 +42,7 @@ function getPostUrl(post: any) {
       <a
         class="my-1 truncate block hover:text-skin-active"
         title={category + " (" + categoryCount[category] + ")"}
-        href={"/category/" + category}
+        href={formatCategoryUrl(category)}
       >
         {(category === 'uncategorized' ? t('sidebar.uncategorized') : category) + " (" + categoryCount[category] + ")"}
       </a>

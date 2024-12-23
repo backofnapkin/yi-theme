@@ -44,10 +44,15 @@ const pageDate = date
       <!-- Page Header with Title, Date, and Author -->
       <header class="mb-8">
         <h1 class="text-4xl font-bold text-skin-base mb-4">{pageTitle}</h1>
-        {pageDate && (
-          <p class="text-sm text-skin-muted mb-2">Published on {pageDate}</p>
-        )}
-        <p class="text-sm text-skin-muted">By {pageAuthor}</p>
+        <div class="flex items-center gap-2 text-sm text-skin-muted">
+          {pageDate && (
+            <>
+              <span>Published on {pageDate}</span>
+              <span>•</span>
+            </>
+          )}
+          <span>By {pageAuthor}</span>
+        </div>
       </header>
       <slot></slot>
       {

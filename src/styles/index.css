@@ -287,3 +287,8 @@ Applies link colors specifically to content links in .astro pages
 .prose a {
   @apply cursor-pointer text-skin-active;
 }
+
+/* Hide tags section in sidebar */
+.hide-tags {
+  display: none;
+}

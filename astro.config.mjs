@@ -15,10 +15,10 @@ import { remarkGithubCard } from './src/plugins/remark-github-card.js';
 import { lazyLoadImage } from "./src/plugins/lazy-load-image.js";
 
 export default defineConfig({
-  site: 'https://backofnapkin.netlify.app/', // Updated to use Netlify URL as the base
+  site: 'https://backofnapkin.netlify.app/',
   trailingSlash: "always",
   build: {
-    format: 'directory' // Avoid .html extensions in URLs
+    format: 'directory'
   },
   outDir: './dist',
   integrations: [
@@ -48,6 +48,19 @@ export default defineConfig({
     rehypePlugins: [lazyLoadImage],
     layouts: {
       default: './src/layouts/MarkdownPost.astro'
+    }
+  },
+  vite: {
+    build: {
+      rollupOptions: {
+        external: ['chartjs-plugin-datalabels']
+      }
+    },
+    ssr: {
+      noExternal: ['chartjs-plugin-datalabels']
+    },
+    optimizeDeps: {
+      include: ['chartjs-plugin-datalabels']
     }
   }
 });

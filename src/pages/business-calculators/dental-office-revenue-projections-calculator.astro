@@ -59,19 +59,6 @@ const schema = {
         <p class="text-xl text-skin-base">
           {frontmatter.description}
         </p>
-        <div class="flex items-center justify-center gap-4 mt-4 text-skin-base opacity-75">
-          <div class="flex items-center gap-2">
-            <span>By {frontmatter.author}</span>
-          </div>
-          <span>•</span>
-          <div>
-            {new Date(frontmatter.date).toLocaleDateString('en-US', {
-              year: 'numeric',
-              month: 'long',
-              day: 'numeric'
-            })}
-          </div>
-        </div>
       </div>
 
       <DentalCalculator client:load />
@@ -201,11 +188,4 @@ Profit Margin = (Monthly Net Income ÷ Monthly Revenue) × 100</code>
       </strong>: Go deeper into projecting market demand for your dental practice with this tool.
     </p>
   </div>
-  
-  <main>
-    <article>
-      <slot />
-    </article>
-    <AuthorBox />
-  </main>
 </IndexPage>

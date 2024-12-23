@@ -330,3 +330,13 @@ Applies link colors specifically to content links in .astro pages
   color: var(--color-border-active);
   transform: scale(1.1); /* Slight zoom on hover for interactivity */
 }
+/* Sidebar styles for mobile view */
+@media (max-width: 1024px) {
+  .block.xl\\:hidden {
+    margin-top: 2rem;
+    padding: 1rem;
+    background: var(--color-fill);
+    border: 1px solid var(--color-border);
+    border-radius: 0.5rem;
+  }
+}

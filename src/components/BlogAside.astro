@@ -7,12 +7,9 @@ import getCountByCategory from "../utils/getCountByCategory";
 import {sortPostsByDate} from "../utils/sortPostsByDate";
 import {site} from '../consts'
 import {t} from '../i18n/utils'
-import _ from 'lodash'
 
-// Helper function to convert category to URL-friendly slug
-function categoryToSlug(category: string) {
+function categoryToSlug(category) {
   if (!category) return '';
-  // Handle specific known categories to ensure consistent slugs
   const categoryMap = {
     'Business Calculators': 'business-calculators',
     'Food Business Calculators': 'food-business-calculators',
@@ -20,92 +17,73 @@ function categoryToSlug(category: string) {
     'Personal Finance Calculators': 'personal-finance-calculators',
     'Contractor Calculators': 'contractor-calculators'
   };
-
-  // If it's a known category, use the mapped slug
-  if (categoryMap[category]) {
-    return categoryMap[category];
-  }
-
-  // Otherwise, generate a slug
-  return _.trim(category)
-    .toLowerCase()
-    .replace(/\s+/g, '-')
-    .replace(/[^\w\-]+/g, '')
-    .replace(/\-\-+/g, '-');
+  return categoryMap[category] || category.toLowerCase().replace(/\s+/g, '-');
 }
 
-// Get all content (both blogs and calculators)
 const allContent = await getCollectionByName('all');
-let tagArr = getUniqueTags(allContent);
-let categoryCount = getCountByCategory(allContent);
-let sortPosts = await sortPostsByDate(allContent);
-let resultPosts = sortPosts.splice(0, site.recentBlogSize);
+const tagArr = getUniqueTags(allContent);
+const categoryCount = getCountByCategory(allContent);
+const sortPosts = await sortPostsByDate(allContent);
+const resultPosts = sortPosts.splice(0, site.recentBlogSize);
 
-// Helper function to get the correct URL for each content type
-function getPostUrl(post: any) {
+function getPostUrl(post) {
   if (post.collection === 'astro-pages') {
     return post.id.replace('/src/pages', '').replace('.astro', '');
   }
   return `/blog/${post.slug}`;
 }
 ---
+
 <div>
-  {
-    Object.keys(categoryCount).length > 0 && (
-      <div class="aside-widget">
-        <i class="ri-folder-line menu-icon"/>{t('sidebar.categories')}
-      </div>
-    )
+  {Object.keys(categoryCount).length > 0 && 
+    <div class="aside-widget">
+      <i class="ri-folder-line menu-icon"/>{t('sidebar.categories')}
+    </div>
   }
-  {
-    Object.keys(categoryCount).map((category) => {
-      const slug = categoryToSlug(category);
-      return (
-        
-          class="my-1 truncate block hover:text-skin-active"
-          title={category + " (" + categoryCount[category] + ")"}
-          href={"/category/" + slug}
-        >
-          {(category === 'uncategorized' ? t('sidebar.uncategorized') : category) + " (" + categoryCount[category] + ")"}
-        </a>
-      );
-    })
-  }
+  {Object.keys(categoryCount).map(category => 
+    
+      class="my-1 truncate block hover:text-skin-active"
+      title={`${category} (${categoryCount[category]})`}
+      href={`/category/${categoryToSlug(category)}`}
+    >
+      {category === 'uncategorized' ? t('sidebar.uncategorized') : category} ({categoryCount[category]})
+    </a>
+  )}
 </div>
+
 <div>
-  {
-    tagArr.length > 0 && (
-      <div class="aside-widget">
-        <i class="ri-price-tag-3-line menu-icon"/>
-        {t('sidebar.tags')}
-      </div>
-    )
+  {tagArr.length > 0 && 
+    <div class="aside-widget">
+      <i class="ri-price-tag-3-line menu-icon"/>{t('sidebar.tags')}
+    </div>
   }
   <div class="flex flex-wrap">
-    {
-      tagArr &&
-      tagArr.map((tag) =>
-        <a class="inline-block truncate m-1 border p-1 text-sm rounded hover:text-skin-active" title={tag} href={"/tags/" + tag}>{tag}</a>
-      )
-    }
+    {tagArr && tagArr.map(tag => 
+      <a class="inline-block truncate m-1 border p-1 text-sm rounded hover:text-skin-active" 
+         title={tag} 
+         href={`/tags/${tag}`}
+      >
+        {tag}
+      </a>
+    )}
   </div>
 </div>
+
 <div>
   <div class="aside-widget">
     <i class="ri-file-line menu-icon"></i> {t('sidebar.recentArticle')}
   </div>
   <div class="flex flex-col">
-    {
-      resultPosts.map((post) => (
-        
-          href={getPostUrl(post)}
-          class="truncate cursor-pointr mt-1 hover:text-skin-active"
-          title={post.data.title}
-        >
-          {post.data.title}
-        </a>
-      ))
-    }
+    {resultPosts.map(post => 
+      
+        href={getPostUrl(post)}
+        class="truncate cursor-pointr mt-1 hover:text-skin-active"
+        title={post.data.title}
+      >
+        {post.data.title}
+      </a>
+    )}
   </div>
 </div>
+
 {comment.enable && comment.type === "waline" && <CommentAside/>}

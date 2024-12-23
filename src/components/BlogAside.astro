@@ -5,19 +5,19 @@ import {getCollectionByName} from "../utils/getCollectionByName";
 import getUniqueTags from "../utils/getUniqueTags";
 import getCountByCategory from "../utils/getCountByCategory";
 import {sortPostsByDate} from "../utils/sortPostsByDate";
-import {site} from '../consts'
-import {t} from '../i18n/utils'
+import {site} from '../consts';
+import {t} from '../i18n/utils';
 
 function categoryToSlug(category) {
-  if (!category) return '';
-  const categoryMap = {
+  const map = {
     'Business Calculators': 'business-calculators',
     'Food Business Calculators': 'food-business-calculators',
     'Lawn Care Calculators': 'lawn-care-calculators',
     'Personal Finance Calculators': 'personal-finance-calculators',
     'Contractor Calculators': 'contractor-calculators'
   };
-  return categoryMap[category] || category.toLowerCase().replace(/\s+/g, '-');
+  if (map[category]) return map[category];
+  return category.toLowerCase().replace(/\s+/g, '-');
 }
 
 const allContent = await getCollectionByName('all');
@@ -33,48 +33,53 @@ function getPostUrl(post) {
   return `/blog/${post.slug}`;
 }
 ---
-
 <div>
-  {Object.keys(categoryCount).length > 0 && 
+  {Object.keys(categoryCount).length > 0 && (
     <div class="aside-widget">
-      <i class="ri-folder-line menu-icon"/>{t('sidebar.categories')}
+      <i class="ri-folder-line menu-icon"></i>
+      {t('sidebar.categories')}
     </div>
-  }
-  {Object.keys(categoryCount).map(category => 
-    
-      class="my-1 truncate block hover:text-skin-active"
-      title={`${category} (${categoryCount[category]})`}
-      href={`/category/${categoryToSlug(category)}`}
+  )}
+
+  {Object.keys(categoryCount).map((category) => (
+    <a 
+      class="my-1 truncate block hover:text-skin-active" 
+      title={category + " (" + categoryCount[category] + ")"} 
+      href={"/category/" + categoryToSlug(category)}
     >
       {category === 'uncategorized' ? t('sidebar.uncategorized') : category} ({categoryCount[category]})
     </a>
-  )}
+  ))}
 </div>
 
 <div>
-  {tagArr.length > 0 && 
+  {tagArr.length > 0 && (
     <div class="aside-widget">
-      <i class="ri-price-tag-3-line menu-icon"/>{t('sidebar.tags')}
+      <i class="ri-price-tag-3-line menu-icon"></i>
+      {t('sidebar.tags')}
     </div>
-  }
+  )}
+
   <div class="flex flex-wrap">
-    {tagArr && tagArr.map(tag => 
-      <a class="inline-block truncate m-1 border p-1 text-sm rounded hover:text-skin-active" 
-         title={tag} 
-         href={`/tags/${tag}`}
+    {tagArr.map((tag) => (
+      <a 
+        class="inline-block truncate m-1 border p-1 text-sm rounded hover:text-skin-active" 
+        title={tag} 
+        href={"/tags/" + tag}
       >
         {tag}
       </a>
-    )}
+    ))}
   </div>
 </div>
 
 <div>
   <div class="aside-widget">
-    <i class="ri-file-line menu-icon"></i> {t('sidebar.recentArticle')}
+    <i class="ri-file-line menu-icon"></i>
+    {t('sidebar.recentArticle')}
   </div>
   <div class="flex flex-col">
-    {resultPosts.map(post => 
+    {resultPosts.map((post) => (
       
         href={getPostUrl(post)}
         class="truncate cursor-pointr mt-1 hover:text-skin-active"
@@ -82,7 +87,7 @@ function getPostUrl(post) {
       >
         {post.data.title}
       </a>
-    )}
+    ))}
   </div>
 </div>
 

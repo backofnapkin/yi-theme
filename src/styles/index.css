@@ -290,5 +290,5 @@ Applies link colors specifically to content links in .astro pages
 
 /* Hide tags section in sidebar */
 .hide-tags {
-  display: none;
+  display: none !important;
 }

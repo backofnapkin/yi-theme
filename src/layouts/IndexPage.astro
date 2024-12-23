@@ -2,10 +2,10 @@
 import BaseHead from '../components/BaseHead.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import Profile from '../components/Profile.astro'
-import BlogAside from '../components/BlogAside.astro'
-import Comment from '../components/Comment.astro'
-import Donate from '../components/Donate.astro'
+import Profile from '../components/Profile.astro';
+import BlogAside from '../components/BlogAside.astro';
+import Comment from '../components/Comment.astro';
+import Donate from '../components/Donate.astro';
 import {donate, comment, config} from "../consts";
 
 const {frontmatter = {comment: false, donate: false}, title, description} = Astro.props;
@@ -20,6 +20,7 @@ const pageDescription = frontmatter?.description || description;
 <Header/>
 <main class="container p-4 pt-20 text-skin-base pb-32 min-h-full relative" id="app">
   <div class="grid grid-cols-4 gap-8">
+    <!-- Main Content -->
     <div class="col-span-4 xl:col-span-3">
       <slot></slot>
       {
@@ -31,6 +32,8 @@ const pageDescription = frontmatter?.description || description;
         <Comment></Comment>
       }
     </div>
+
+    <!-- Sidebar for Desktop -->
     <div>
       <div class="hidden xl:block space-y-6">
         <Profile></Profile>
@@ -38,6 +41,13 @@ const pageDescription = frontmatter?.description || description;
       </div>
     </div>
   </div>
+
+  <!-- Sidebar for Mobile -->
+  <div class="block xl:hidden mt-8 space-y-6">
+    <Profile></Profile>
+    <BlogAside></BlogAside>
+  </div>
+
   <Footer/>
 </main>
 </body>

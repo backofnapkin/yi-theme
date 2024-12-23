@@ -38,7 +38,7 @@ export  const en = {
   'search.searchLabelOne':'Found ',
   'search.searchLabelTwo': ' article(s) in total',
   'sidebar.categories': 'Categories',
-  'sidebar.recentArticle': 'Recent Articles',
+  'sidebar.recentArticle': 'Latest Calculators',
   'sidebar.recentComments': 'Recent Comments',
   'sidebar.tags': 'Tags',
   'sidebar.uncategorized': 'uncategorized',

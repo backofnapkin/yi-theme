@@ -15,10 +15,10 @@ import { remarkGithubCard } from './src/plugins/remark-github-card.js';
 import { lazyLoadImage } from "./src/plugins/lazy-load-image.js";
 
 export default defineConfig({
-  site: 'https://astro-yi-nu.vercel.app',
+  site: 'https://backofnapkin.netlify.app/', // Updated to use Netlify URL as the base
   trailingSlash: "always",
   build: {
-    format: 'directory' // Changed from 'file' to 'directory' to avoid .html extensions
+    format: 'directory' // Avoid .html extensions in URLs
   },
   outDir: './dist',
   integrations: [

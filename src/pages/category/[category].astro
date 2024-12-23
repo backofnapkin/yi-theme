@@ -7,42 +7,42 @@ import { getCollectionByName } from "../../utils/getCollectionByName";
 
 // Helper function to convert category to URL-friendly slug
 export function categoryToSlug(category: string) {
- return category.toLowerCase().replace(/\s+/g, '-');
+  return category.toLowerCase().replace(/\s+/g, '-');
 }
 
 // Helper function to convert slug back to original category 
 export function slugToCategory(slug: string) {
- // Add your category mappings here
- const categoryMap = {
-   'business-calculators': 'Business Calculators',
-   'food-business-calculators': 'Food Business Calculators', 
-   'lawn-care-calculators': 'Lawn Care Calculators',
-   'personal-finance-calculators': 'Personal Finance Calculators',
-   'contractor-calculators': 'Contractor Calculators'
- };
- return categoryMap[slug] || slug.replace(/-/g, ' ');
+  // Add your category mappings here
+  const categoryMap = {
+    'business-calculators': 'Business Calculators',
+    'food-business-calculators': 'Food Business Calculators', 
+    'lawn-care-calculators': 'Lawn Care Calculators',
+    'personal-finance-calculators': 'Personal Finance Calculators',
+    'contractor-calculators': 'Contractor Calculators'
+  };
+  return categoryMap[slug] || slug.replace(/-/g, ' ');
 }
 
 export async function getStaticPaths() {
- const posts = await getCollectionByName("blog");
- const calculatorPages = await Astro.glob('../../pages/**/*.astro');
- const filteredCalculatorPages = calculatorPages.filter(page => 
-   page.frontmatter && page.frontmatter.category
- );
+  const posts = await getCollectionByName("blog");
+  const calculatorPages = await Astro.glob('../../pages/**/*.astro');
+  const filteredCalculatorPages = calculatorPages.filter(page => 
+    page.frontmatter && page.frontmatter.category
+  );
 
- const categories = new Set([
-   ...posts.map(post => post.data.category),
-   ...filteredCalculatorPages.map(page => page.frontmatter.category)
- ]);
+  const categories = new Set([
+    ...posts.map(post => post.data.category),
+    ...filteredCalculatorPages.map(page => page.frontmatter.category)
+  ]);
 
- return Array.from(categories).map((category) => ({
-   params: { 
-     category: categoryToSlug(category) // Convert to URL-friendly slug
-   },
-   props: { 
-     category // Pass original category name
-   },
- }));
+  return Array.from(categories).map((category) => ({
+    params: { 
+      category: categoryToSlug(category) // Convert to URL-friendly slug
+    },
+    props: { 
+      category // Pass original category name
+    },
+  }));
 }
 
 const { category } = Astro.props;
@@ -52,47 +52,47 @@ const calculatorPages = await Astro.glob('../../pages/**/*.astro');
 // Filter using original category name
 const categoryPosts = posts.filter(post => post.data.category === category);
 const categoryCalculators = calculatorPages.filter(page => 
- page.frontmatter && 
- page.frontmatter.category === category
+  page.frontmatter && 
+  page.frontmatter.category === category
 ).map(page => ({
- title: page.frontmatter.title,
- description: page.frontmatter.description,
- date: page.frontmatter.date,
- slug: page.url || page.file.split('/pages/')[1]?.replace('.astro', '')
+  title: page.frontmatter.title,
+  description: page.frontmatter.description,
+  date: page.frontmatter.date,
+  slug: page.url || page.file.split('/pages/')[1]?.replace('.astro', '')
 }));
 
 const allContent = [...categoryPosts, ...categoryCalculators].sort((a, b) => {
- const dateA = new Date(a.data?.date || a.date || 0);
- const dateB = new Date(b.data?.date || b.date || 0);
- return dateB.getTime() - dateA.getTime();
+  const dateA = new Date(a.data?.date || a.date || 0);
+  const dateB = new Date(a.data?.date || b.date || 0);
+  return dateB.getTime() - dateA.getTime();
 });
 ---
 
 <IndexPage>
- <SearchTitle label={category}/>
- <ul class="text-skin-base">
-   {
-     allContent.map((item) => (
-       <li style="list-style-type: disc;" class="ml-4 my-2">
-         <a href={
-           'data' in item ? 
-           `/${item.collection}/${item.slug}` : 
-           `/${item.slug}`
-         }>
-           <span class="mr-4">
-             {('data' in item ? item.data.date : item.date) && 
-               formatDate('data' in item ? item.data.date : item.date)}
-           </span>
-           <span class="hover:text-skin-active">
-             {'data' in item ? item.data.title : item.title}
-           </span>
-         </a>
-       </li>
-     ))
-   }
- </ul>
+  <SearchTitle label={category}/>
+  <ul class="text-skin-base">
+    {
+      allContent.map((item) => (
+        <li style="list-style-type: disc;" class="ml-4 my-2">
+          <a href={
+            `${Astro.site.origin}${'data' in item 
+              ? `/${item.slug}` 
+              : `/${item.slug.replace(/^\/?/, '')}`}`
+          }>
+            <span class="mr-4">
+              {('data' in item ? item.data.date : item.date) && 
+                formatDate('data' in item ? item.data.date : item.date)}
+            </span>
+            <span class="hover:text-skin-active">
+              {'data' in item ? item.data.title : item.title}
+            </span>
+          </a>
+        </li>
+      ))
+    }
+  </ul>
 
- {allContent.length === 0 && (
-   <p class="text-skin-base">No content available in this category yet.</p>
- )}
+  {allContent.length === 0 && (
+    <p class="text-skin-base">No content available in this category yet.</p>
+  )}
 </IndexPage>

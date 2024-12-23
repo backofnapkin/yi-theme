@@ -1,0 +1,25 @@
+---
+import { infoLinks } from '../consts';
+
+const authorName = "Brett Lindenberg";
+const bio = `
+  Brett Lindenberg is the co-founder of BackofNapkin.co. Brett has interviewed hundreds of entrepreneurs, gathering their stories and extracting the insights behind successful startups big and small. His passion lies in making startup calculations accessible so every dreamer has the numbers they need to take the leap.
+  At home, Brett enjoys life’s best calculations: quality time with his wife and two daughters.
+`;
+const imageUrl = '/images/brett-lindenberg-author.jpg';
+---
+
+<div class="author-box p-4 border rounded-lg bg-skin-card">
+  <div class="flex items-center space-x-4">
+    <img src={imageUrl} alt={authorName} class="author-image w-16 h-16 rounded-full border" />
+    <h2 class="text-lg font-bold">{authorName}</h2>
+  </div>
+  <p class="text-sm text-gray-500 mt-4 whitespace-pre-line">{bio}</p>
+  <div class="social-links flex mt-4 space-x-4">
+    {infoLinks.map((link) => (
+      <a href={link.outlink} class={link.icon + ' text-xl hover:text-skin-active'} target="_blank" rel="noopener noreferrer">
+        <span class="sr-only">{link.name}</span>
+      </a>
+    ))}
+  </div>
+</div>

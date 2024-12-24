@@ -86,7 +86,7 @@ export default function WealthCalculator() {
             Wealth Calculator
           </h2>
           <div className="flex items-center gap-2">
-            <span className="text-sm text-gray-600">Adjust for Inflation</span>
+            <span className="text-sm text-gray-600">Adjust for Current Inflation</span>
             <label className="relative inline-flex items-center cursor-pointer">
               <input
                 type="checkbox"
@@ -94,7 +94,9 @@ export default function WealthCalculator() {
                 onChange={(e) => setUseInflationAdjusted(e.target.checked)}
                 className="sr-only peer"
               />
-              <div className="w-11 h-6 bg-red-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-red-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-red-400 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-red-600"></div>
+              <div className="w-11 h-6 border-2 border-red-600 bg-red-100 peer-focus:ring-4 peer-focus:ring-red-300 rounded-full peer peer-checked:bg-red-600 transition-colors">
+                <div className="absolute top-[2px] left-[2px] h-5 w-5 rounded-full bg-[rgba(var(--color-text),0.8)] transition-transform peer-checked:translate-x-full"></div>
+              </div>
             </label>
           </div>
         </div>

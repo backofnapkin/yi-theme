@@ -144,12 +144,9 @@ export const ResultsSection = () => {
             },
             scales: {
               y: {
-                display: true,
+                display: false, // Hide Y axis
                 grid: {
                   display: false
-                },
-                ticks: {
-                  callback: (value) => formatCurrency(Number(value))
                 }
               },
               x: {
@@ -167,17 +164,45 @@ export const ResultsSection = () => {
             },
             layout: {
               padding: {
-                top: 20,
+                top: 40,
                 right: 20,
                 bottom: 20,
                 left: 20
               }
             }
-          }
+          },
+          plugins: [{
+            id: 'valueLabels',
+            afterDraw: (chart) => {
+              const ctx = chart.ctx;
+              const dataset = chart.data.datasets[0];
+              const meta = chart.getDatasetMeta(0);
+
+              ctx.save();
+              ctx.font = '12px Arial';
+              ctx.fillStyle = 'rgb(80, 73, 69)';
+              ctx.textAlign = 'center';
+              
+              meta.data.forEach((point, index) => {
+                const value = formatCurrency(dataset.data[index] as number);
+                ctx.fillStyle = 'rgba(241, 241, 241, 0.9)'; // Background for text
+                const textWidth = ctx.measureText(value).width;
+                ctx.fillRect(
+                  point.x - (textWidth / 2) - 4,
+                  point.y - 25,
+                  textWidth + 8,
+                  20
+                );
+                ctx.fillStyle = 'rgb(80, 73, 69)'; // Text color
+                ctx.fillText(value, point.x, point.y - 10);
+              });
+              
+              ctx.restore();
+            }
+          }]
         });
       }
     }
-
     if (scenarioChartRef.current && results) {
       const ctx = scenarioChartRef.current.getContext('2d');
       if (ctx) {

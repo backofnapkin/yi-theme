@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Calculator, DollarSign, Info, PlusCircle, MinusCircle, Coins as CoinsIcon } from 'lucide-react';
-import { calculateWealthLevel, calculateCashWealthLevel, formatCurrency } from '../../../utils/calculators/felix-wealth-levels/calculations';
+import { calculateWealthLevel, calculateCashWealthLevel, formatCurrency } from '../../../utils/felix-wealth-levels/calculations';
 import { WealthDescription } from './WealthDescription';
 import { AssetInput } from './AssetInput';
 import type { Asset } from './types';

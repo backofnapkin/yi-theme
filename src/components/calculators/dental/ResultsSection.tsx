@@ -334,14 +334,14 @@ export const ResultsSection = () => {
             <h3 className="text-lg font-semibold text-skin-base">Net Income (Monthly)</h3>
             <p className="text-2xl font-bold text-custom-active">{formatCurrency(results.netIncome)}</p>
           </div>
-          <div className="p-4 bg-skin-secondary rounded-lg">
+        <div className="p-4 bg-skin-secondary rounded-lg">
             <h3 className="text-lg font-semibold text-skin-base">Monthly Overhead</h3>
-            <p className="text-2xl font-bold text-custom-active">{formatCurrency(results.monthlyOverhead)}</p>
-          </div>
-          <div className="p-4 bg-skin-secondary rounded-lg">
+            <p className="text-2xl font-bold text-[#DC2626]">{formatCurrency(results.monthlyOverhead)}</p>
+         </div>
+        <div className="p-4 bg-skin-secondary rounded-lg">
             <h3 className="text-lg font-semibold text-skin-base">Annual Overhead</h3>
-            <p className="text-2xl font-bold text-custom-active">{formatCurrency(results.annualOverhead)}</p>
-          </div>
+            <p className="text-2xl font-bold text-[#DC2626]">{formatCurrency(results.annualOverhead)}</p>
+        </div>
           <div className="p-4 bg-skin-secondary rounded-lg">
             <h3 className="text-lg font-semibold text-skin-base">Profit Margin</h3>
             <p className="text-2xl font-bold text-custom-active">{results.profitMargin.toFixed(1)}%</p>

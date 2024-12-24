@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { Info } from 'lucide-react';
 import { useDentalContext } from './DentalContext';
 import { formatNumber, parseFormattedNumber } from '../../../scripts/dental-calculator/formatters';
 
 export const BasicInfo = () => {
   const { state, updateBasicInfo } = useDentalContext();
   const { basicInfo } = state;
+  const [showInfo, setShowInfo] = useState(false);
 
   const handleNumberInput = (field: keyof typeof basicInfo, value: string) => {
     const numberValue = parseFormattedNumber(value);
@@ -13,7 +15,29 @@ export const BasicInfo = () => {
 
   return (
     <div className="bg-skin-card p-6 rounded-lg shadow-md">
-      <h2 className="text-2xl font-bold text-skin-base mb-6">Basic Information</h2>
+      <div className="flex items-center gap-2 mb-6">
+        <h2 className="text-2xl font-bold text-skin-base">Basic Information</h2>
+        <button
+          onClick={() => setShowInfo(!showInfo)}
+          className="p-1 text-skin-base hover:text-skin-active transition-colors"
+          aria-label="Information about basic practice information"
+        >
+          <Info size={20} />
+        </button>
+      </div>
+
+      {showInfo && (
+        <div className="mb-6 p-4 rounded-lg bg-skin-fill border border-skin-border">
+          <ul className="space-y-2 text-sm text-skin-base">
+            <li><strong>Practice Name:</strong> Enter your dental practice's legal or DBA name.</li>
+            <li><strong>Number of Dental Chairs:</strong> Include all operational chairs/operatories planned for patient care (typical range: 4-12 chairs).</li>
+            <li><strong>Patients per Chair per Day:</strong> Average number of patients you expect to treat per chair daily (typical range: 6-10 patients).</li>
+            <li><strong>Revenue per Patient:</strong> Expected average revenue per patient visit, including all services and procedures (typical range: $300-800).</li>
+            <li><strong>Days Open per Week:</strong> Planned operating days (most practices operate 4-5 days/week).</li>
+            <li><strong>Total Startup Costs:</strong> Include all initial expenses: equipment, renovations, licenses, supplies, and working capital (typical range: $500,000-800,000).</li>
+          </ul>
+        </div>
+      )}
       
       <div className="grid gap-4 md:grid-cols-2">
         <div>
@@ -79,3 +103,5 @@ export const BasicInfo = () => {
     </div>
   );
 };
+
+export default BasicInfo;

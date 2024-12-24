@@ -36,6 +36,22 @@ export const ResultsSection = () => {
     return monthlyRevenue * 0.75; // 25% lower
   };
 
+  // Calculate ROI projections
+  const calculateROIProjections = () => {
+    if (!results) return [];
+    
+    const initialInvestment = basicInfo.startupCosts;
+    const annualOperatingCosts = results.annualOverhead;
+    const annualRevenue = results.annualRevenue;
+    const netProfit = annualRevenue - annualOperatingCosts;
+    
+    return Array.from({ length: 5 }, (_, year) => {
+      const cumulativeProfit = netProfit * (year + 1);
+      const roi = ((cumulativeProfit - initialInvestment) / initialInvestment) * 100;
+      return roi;
+    });
+  };
+
   useEffect(() => {
     let salaryChart: Chart | null = null;
     let roiChart: Chart | null = null;
@@ -94,28 +110,24 @@ export const ResultsSection = () => {
           roiChart.destroy();
         }
 
+        const roiData = calculateROIProjections();
+
         roiChart = new Chart(ctx, {
           type: 'line',
           data: {
             labels: ['Year 1', 'Year 2', 'Year 3', 'Year 4', 'Year 5'],
             datasets: [{
-              label: 'Projected Revenue',
-              data: [
-                results.annualRevenue,
-                results.annualRevenue * 1.1,
-                results.annualRevenue * 1.2,
-                results.annualRevenue * 1.3,
-                results.annualRevenue * 1.4
-              ],
-              borderColor: 'rgb(104, 157, 106)',
-              backgroundColor: 'rgba(104, 157, 106, 0.15)',
+              label: 'Return on Investment (%)',
+              data: roiData,
+              borderColor: 'rgb(79, 70, 229)',
+              backgroundColor: 'rgba(79, 70, 229, 0.15)',
               fill: true,
               tension: 0.3,
               borderWidth: 2,
-              pointBackgroundColor: 'rgb(14, 192, 124)',
-              pointBorderColor: 'rgb(14, 192, 124)',
-              pointHoverBackgroundColor: 'rgb(14, 192, 124)',
-              pointHoverBorderColor: 'rgb(14, 192, 124)',
+              pointBackgroundColor: 'rgb(79, 70, 229)',
+              pointBorderColor: 'rgb(79, 70, 229)',
+              pointHoverBackgroundColor: 'rgb(79, 70, 229)',
+              pointHoverBorderColor: 'rgb(79, 70, 229)',
               pointRadius: 4,
               pointHoverRadius: 6,
             }]
@@ -125,28 +137,33 @@ export const ResultsSection = () => {
             maintainAspectRatio: false,
             plugins: {
               legend: {
-                display: false
+                display: true,
+                position: 'bottom'
               },
               tooltip: {
                 enabled: true,
                 backgroundColor: 'rgba(241, 241, 241, 0.9)',
                 titleColor: 'rgb(80, 73, 69)',
                 bodyColor: 'rgb(80, 73, 69)',
-                borderColor: 'rgb(104, 157, 106)',
+                borderColor: 'rgb(79, 70, 229)',
                 borderWidth: 1,
                 padding: 12,
                 callbacks: {
                   label: function(context) {
-                    return formatCurrency(context.raw as number);
+                    const roi = context.raw as number;
+                    return `ROI: ${roi.toFixed(1)}%`;
                   }
                 }
               }
             },
             scales: {
               y: {
-                display: false, // Hide Y axis
+                display: true,
                 grid: {
-                  display: false
+                  display: true
+                },
+                ticks: {
+                  callback: value => `${value.toFixed(1)}%`
                 }
               },
               x: {
@@ -164,45 +181,17 @@ export const ResultsSection = () => {
             },
             layout: {
               padding: {
-                top: 40,
+                top: 20,
                 right: 20,
                 bottom: 20,
                 left: 20
               }
             }
-          },
-          plugins: [{
-            id: 'valueLabels',
-            afterDraw: (chart) => {
-              const ctx = chart.ctx;
-              const dataset = chart.data.datasets[0];
-              const meta = chart.getDatasetMeta(0);
-
-              ctx.save();
-              ctx.font = '12px Arial';
-              ctx.fillStyle = 'rgb(80, 73, 69)';
-              ctx.textAlign = 'center';
-              
-              meta.data.forEach((point, index) => {
-                const value = formatCurrency(dataset.data[index] as number);
-                ctx.fillStyle = 'rgba(241, 241, 241, 0.9)'; // Background for text
-                const textWidth = ctx.measureText(value).width;
-                ctx.fillRect(
-                  point.x - (textWidth / 2) - 4,
-                  point.y - 25,
-                  textWidth + 8,
-                  20
-                );
-                ctx.fillStyle = 'rgb(80, 73, 69)'; // Text color
-                ctx.fillText(value, point.x, point.y - 10);
-              });
-              
-              ctx.restore();
-            }
-          }]
+          }
         });
       }
     }
+
     if (scenarioChartRef.current && results) {
       const ctx = scenarioChartRef.current.getContext('2d');
       if (ctx) {
@@ -387,7 +376,7 @@ export const ResultsSection = () => {
                   <div className="flex items-center gap-2 mb-2">
                     <div className="w-4 h-4 rounded-full bg-[#4F46E5]"></div>
                     <h5 className="font-semibold">Current Projections</h5>
-                  </div>
+                    </div>
                   <p className="text-sm text-skin-base">
                     Based on {basicInfo.dentalChairs} chairs, {basicInfo.patientsPerChair} patients per chair,
                     {formatCurrency(basicInfo.revenuePerPatient)} per patient, {basicInfo.daysPerWeek} days per week

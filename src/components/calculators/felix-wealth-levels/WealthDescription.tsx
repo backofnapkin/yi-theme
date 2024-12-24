@@ -5,7 +5,7 @@ import {
   calculateCashWealthLevel, 
   formatCurrency, 
   getNextLevelRequirement 
-} from '../../../utils/felix-wealth-levels/calculations';
+} from './utils/calculations';
 
 interface WealthDescriptionProps {
   netWorth: number;

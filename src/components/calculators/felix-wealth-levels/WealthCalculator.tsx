@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import { Calculator, DollarSign, Info, PlusCircle, MinusCircle, Coins as CoinsIcon } from 'lucide-react';
-import { calculateWealthLevel, calculateCashWealthLevel, formatCurrency } from './utils/calculations';
+import { Calculator, PlusCircle, Coins as CoinsIcon } from 'lucide-react';
 import { WealthDescription } from './WealthDescription';
 import { AssetInput } from './AssetInput';
 import type { Asset } from './types';
@@ -28,13 +27,15 @@ export default function WealthCalculator() {
     const newAsset = { id: Date.now().toString(), name: '', value: 0 };
     switch (type) {
       case 'liquid':
-        if (liquidAssets.length < 25) setLiquidAssets([...liquidAssets, newAsset]);
+        setLiquidAssets([...liquidAssets, newAsset]);
         break;
       case 'illiquid':
-        if (illiquidAssets.length < 25) setIlliquidAssets([...illiquidAssets, newAsset]);
+        setIlliquidAssets([...illiquidAssets, newAsset]);
         break;
       case 'liability':
         setLiabilities([...liabilities, newAsset]);
+        break;
+      default:
         break;
     }
   };
@@ -49,6 +50,8 @@ export default function WealthCalculator() {
         break;
       case 'liability':
         setLiabilities(liabilities.filter(asset => asset.id !== id));
+        break;
+      default:
         break;
     }
   };
@@ -69,6 +72,8 @@ export default function WealthCalculator() {
       case 'liability':
         setLiabilities(update(liabilities));
         break;
+      default:
+        break;
     }
   };
 
@@ -87,17 +92,17 @@ export default function WealthCalculator() {
           </h2>
           <div className="flex items-center gap-2">
             <span className="text-sm text-gray-600">Adjust for Current Inflation</span>
-            <label className="relative inline-flex items-center cursor-pointer">
+            <div className="relative inline-flex items-center">
               <input
                 type="checkbox"
                 checked={useInflationAdjusted}
                 onChange={(e) => setUseInflationAdjusted(e.target.checked)}
                 className="sr-only peer"
               />
-              <div className="w-11 h-6 border-2 border-red-600 bg-red-100 peer-focus:ring-4 peer-focus:ring-red-300 rounded-full peer peer-checked:bg-red-600 transition-colors">
+              <div className="w-11 h-6 border-2 border-red-600 bg-red-100 rounded-full peer peer-checked:bg-red-600 transition-colors">
                 <div className="absolute top-[2px] left-[2px] h-5 w-5 rounded-full bg-[rgba(var(--color-text),0.8)] transition-transform peer-checked:translate-x-full"></div>
               </div>
-            </label>
+            </div>
           </div>
         </div>
 

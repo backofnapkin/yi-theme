@@ -321,15 +321,15 @@ export const ResultsSection = () => {
           </div>
         </div>
 
-        <div className="grid gap-6 md:grid-cols-3">
-          <div className="p-4 bg-skin-secondary rounded-lg">
+          <div className="grid gap-6 md:grid-cols-3">
+            <div className="p-4 bg-skin-secondary rounded-lg">
             <h3 className="text-lg font-semibold text-skin-base">Monthly Revenue</h3>
-            <p className="text-2xl font-bold text-custom-active">{formatCurrency(results.monthlyRevenue)}</p>
+            <p className="text-2xl font-bold text-[#0EC07C]">{formatCurrency(results.monthlyRevenue)}</p>
           </div>
-          <div className="p-4 bg-skin-secondary rounded-lg">
-            <h3 className="text-lg font-semibold text-skin-base">Annual Revenue</h3>
-            <p className="text-2xl font-bold text-custom-active">{formatCurrency(results.annualRevenue)}</p>
-          </div>
+        <div className="p-4 bg-skin-secondary rounded-lg">
+          <h3 className="text-lg font-semibold text-skin-base">Annual Revenue</h3>
+           <p className="text-2xl font-bold text-[#0EC07C]">{formatCurrency(results.annualRevenue)}</p>
+         </div>
           <div className="p-4 bg-skin-secondary rounded-lg">
             <h3 className="text-lg font-semibold text-skin-base">Net Income (Monthly)</h3>
             <p className="text-2xl font-bold text-custom-active">{formatCurrency(results.netIncome)}</p>

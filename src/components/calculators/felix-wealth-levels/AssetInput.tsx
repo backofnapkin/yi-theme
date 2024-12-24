@@ -1,6 +1,6 @@
 import React from 'react';
 import { DollarSign, MinusCircle } from 'lucide-react';
-import { formatNumber, parseFormattedNumber } from '../../../utils/calculators/felix-wealth-levels/calculations';
+import { formatNumber, parseFormattedNumber } from '../../../utils/felix-wealth-levels/calculations';
 import type { Asset } from './types';
 
 interface AssetInputProps {

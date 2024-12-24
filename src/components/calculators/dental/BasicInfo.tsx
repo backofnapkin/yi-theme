@@ -32,7 +32,7 @@ export const BasicInfo = () => {
             <li><strong>Practice Name:</strong> Enter your dental practice's legal or DBA name.</li>
             <li><strong>Number of Dental Chairs:</strong> Include all operational chairs/operatories planned for patient care (typical range: 4-12 chairs).</li>
             <li><strong>Patients per Chair per Day:</strong> Average number of patients you expect to treat per chair daily (typical range: 6-10 patients).</li>
-            <li><strong>Average Revenue per Patient:</strong> Expected average revenue per patient visit per year, including all services and procedures (typical range: $300-800).</li>
+            <li><strong>Average Revenue per Patient:</strong> Expected average revenue per patient visit per year, including all services and procedures (typical range: $300-$800).</li>
             <li><strong>Days Open per Week:</strong> Planned operating days (most practices operate 4-5 days/week).</li>
             <li><strong>Total Startup Costs:</strong> Include all initial expenses: equipment, renovations, licenses, supplies, and working capital (typical range: $500,000-$800,000).</li>
           </ul>

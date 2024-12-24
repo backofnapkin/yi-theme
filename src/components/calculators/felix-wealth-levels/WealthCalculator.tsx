@@ -5,7 +5,7 @@ import { AssetInput } from './AssetInput';
 import type { Asset } from './types';
 
 export default function WealthCalculator() {
-  const [useInflationAdjusted, setUseInflationAdjusted] = useState(true);
+  const [useInflationAdjusted, setUseInflationAdjusted] = useState(false); // Default to non-inflation adjusted
   const [liquidAssets, setLiquidAssets] = useState<Asset[]>([
     { id: '1', name: 'Cash & Bank Accounts', value: 250000 },
     { id: '2', name: 'Stocks & ETFs', value: 500000 },
@@ -92,16 +92,17 @@ export default function WealthCalculator() {
           </h2>
           <div className="flex items-center gap-2">
             <span className="text-sm text-gray-600">Adjust for Current Inflation</span>
-            <div className="relative inline-flex items-center">
-              <input
-                type="checkbox"
-                checked={useInflationAdjusted}
-                onChange={(e) => setUseInflationAdjusted(e.target.checked)}
-                className="sr-only peer"
-              />
-              <div className="w-11 h-6 border-2 border-red-600 bg-red-100 rounded-full peer peer-checked:bg-red-600 transition-colors">
-                <div className="absolute top-[2px] left-[2px] h-5 w-5 rounded-full bg-[rgba(var(--color-text),0.8)] transition-transform peer-checked:translate-x-full"></div>
-              </div>
+            <div
+              className={`w-11 h-6 flex items-center rounded-full p-1 cursor-pointer ${
+                useInflationAdjusted ? 'bg-red-600' : 'bg-gray-300'
+              }`}
+              onClick={() => setUseInflationAdjusted((prev) => !prev)}
+            >
+              <div
+                className={`h-5 w-5 rounded-full bg-white shadow-md transform transition-transform ${
+                  useInflationAdjusted ? 'translate-x-5' : ''
+                }`}
+              ></div>
             </div>
           </div>
         </div>
@@ -174,7 +175,7 @@ export default function WealthCalculator() {
                 onClick={() => addAsset('liability')}
                 className="flex items-center gap-2 text-red-600 hover:text-red-800"
               >
-                <PlusCircle className="w-5 h-5" />
+                  <PlusCircle className="w-5 h-5" />
                 Add Liability
               </button>
             </div>

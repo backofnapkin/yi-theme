@@ -40,16 +40,23 @@ export default function WealthCalculator() {
           <div className="flex items-center gap-2">
             <span className="text-sm text-gray-600">Adjust for Current Inflation</span>
             <div
-              className={`w-12 h-6 flex items-center rounded-full p-1 cursor-pointer ${
+              className={`relative w-16 h-8 flex items-center rounded-full cursor-pointer transition-colors ${
                 useInflationAdjusted ? 'bg-red-600' : 'bg-gray-300'
               }`}
               onClick={() => setUseInflationAdjusted((prev) => !prev)}
             >
               <div
-                className={`h-5 w-5 rounded-full bg-white shadow-md transition-transform ${
-                  useInflationAdjusted ? 'translate-x-6' : ''
+                className={`absolute left-1 w-6 h-6 rounded-full shadow-md transition-transform ${
+                  useInflationAdjusted ? 'translate-x-8 bg-red-800' : 'translate-x-0 bg-gray-600'
                 }`}
               ></div>
+              <span
+                className={`absolute text-xs font-semibold text-white w-full text-center ${
+                  useInflationAdjusted ? 'left-0' : 'right-0'
+                }`}
+              >
+                {useInflationAdjusted ? 'On' : 'Off'}
+              </span>
             </div>
           </div>
         </div>

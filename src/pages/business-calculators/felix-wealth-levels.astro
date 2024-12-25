@@ -74,61 +74,54 @@ const schema = {
     </div>
   </div>
      
-  <div class="prose prose-lg max-w-none mt-12 text-skin-base">
-    <h2 class="text-2xl font-bold mb-4">Understanding Felix Dennis's Wealth Categories</h2>
-    <p>
-      This calculator is based on Felix Dennis's wealth categories from his book "How to Get Rich." 
-      Dennis, who built a publishing empire worth hundreds of millions, created these categories 
-      based on his real-world experience with wealth accumulation.
-    </p>
-
-    <p class="font-semibold mt-4">The calculator considers three main components:</p>
-    <ul class="list-disc pl-6 space-y-2">
-      <li>Liquid Assets (cash, stocks, bonds, etc.)</li>
-      <li>Illiquid Assets (real estate, business ownership, etc.)</li>
-      <li>Liabilities (mortgages, loans, etc.)</li>
-    </ul>
-
-    <h3 class="text-xl font-bold mt-8">Wealth Categories Explained</h3>
-    <p>The calculator uses these wealth categories (adjusted for inflation from 2006 to 2024):</p>
-    <ul class="list-disc pl-6 space-y-2">
-      <li><strong>The Comfortable Poor:</strong> $2-4 million net worth</li>
-      <li><strong>The Comfortably Off:</strong> $4-10 million</li>
-      <li><strong>The Comfortably Wealthy:</strong> $10-30 million</li>
-      <li><strong>The Lesser Rich:</strong> $30-80 million</li>
-      <li><strong>The Comfortably Rich:</strong> $80-150 million</li>
-      <li><strong>The Rich:</strong> $150-200 million</li>
-      <li><strong>The Seriously Rich:</strong> $200-400 million</li>
-      <li><strong>The Truly Rich:</strong> $400-800 million</li>
-      <li><strong>The Filthy Rich:</strong> $800 million - $2 billion</li>
-      <li><strong>The Super Rich:</strong> Over $2 billion</li>
-    </ul>
-
-    <ImageEmbed
-      src="/images/felix-dennis.jpg"
-      alt="Felix Dennis"
-      description="Felix Dennis, author of 'How to Get Rich' and creator of the wealth categories used in this calculator."
-    />
-
-    <h2 class="text-2xl font-bold mt-12 mb-4">How the Calculator Works</h2>
-    <div class="space-y-8">
-      <div>
-        <p class="font-bold mb-2">Net Worth Calculation:</p>
+      <section class="prose prose-lg max-w-none mt-12 text-skin-base">
+        <h2 class="text-2xl font-bold mb-4">How this calculator works</h2>
+        <p>
+          This calculator helps you determine your wealth level using two key measurements established by Felix Dennis: 
+        </p>
+        <ul class="list-disc pl-6 space-y-2">
+          <li><strong>Total Net Worth:</strong> Your total assets minus liabilities.</li>
+          <li><strong>Liquid Wealth:</strong> Readily available cash and easily convertible assets.</li>
+        </ul>
+      </section>
+      <!-- Wealth Categories Section -->
+      <section class="prose prose-lg max-w-none mt-12 text-skin-base">
+        <h2 class="text-2xl font-bold mb-4">Wealth Categories and Their Meanings</h2>
+        <p>
+          Felix Dennis’s wealth categories, originally published in 2006, provide a snapshot of financial standing, adjusted here for inflation. Using data from the <a href="https://www.bls.gov/news.release/cpi.nr0.htm" class="hover:underline">U.S. Bureau of Labor Statistics</a>, the categories have been updated to reflect a 70% increase in value due to inflation over the past two decades.
+        </p>
         <pre class="bg-skin-card p-4 rounded-lg overflow-x-auto">
           <code>
-Net Worth = (Total Liquid Assets + Total Illiquid Assets) - Total Liabilities
-Adjusted Net Worth = Net Worth ÷ Inflation Multiplier (when using 2006 values)</code>
+The comfortable poor: $2M-$4M | $3.4M-$6.8M
+The comfortably off: $4M-$10M | $6.8M-$17M
+The comfortably wealthy: $10M-$30M | $17M-$51M
+The lesser rich: $30M-$80M | $51M-$136M
+The comfortably rich: $80M-$150M | $136M-$255M
+The rich: $150M-$200M | $255M-$340M
+The seriously rich: $200M-$400M | $340M-$681M
+The truly rich: $400M-$800M | $681M-$1.36B
+The filthy rich: $800M-$1.998B | $1.36B-$3.4B
+The super rich: Over $1.998B | Over $3.4B
+          </code>
         </pre>
-      </div>
+      </section>
+      <!-- Related Tools Section -->
+      <section class="prose prose-lg max-w-none mt-12 text-skin-base">
+        <h2 class="text-2xl font-bold mb-4">Related Tools</h2>
+        <ul class="list-disc pl-6 space-y-2">
+          <li>
+            <a href="https://backofnapkin.co/how-long-will-it-take-to-make-1-million-at-my-job-calculator/" class="hover:underline font-semibold">
+              How Long Will it Take to Make $1 Million at My Job?
+            </a>: This calculator estimates the time required to reach $1 million based on your earnings.
+          </li>
+          <li>
+            <a href="https://backofnapkin.co/1-million-sales-goal-calculator-for-founders-small-business/" class="hover:underline font-semibold">
+              $1 Million Dollar Earnings / Revenue Calculator for Founders
+            </a>: Build a roadmap to achieve your first $1 million in business revenue.
+          </li>
+        </ul>
+      </section>
     </div>
-
-    <h2 class="text-2xl font-bold mt-12 mb-4">Related tools:</h2>
-    <p>
-      <strong>
-        <a href="/business-calculators/market-demand">Market Demand Calculator</a>
-      </strong>: Analyze market potential for your business ideas.
-    </p>
-
     <main>
       <article>
         <slot />

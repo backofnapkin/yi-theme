@@ -76,14 +76,49 @@ const schema = {
      
       <!-- Instructions Section -->
       <section class="prose prose-lg max-w-none mt-12 text-skin-base">
-        <h2 class="text-2xl font-bold mb-4">How this calculator works</h2>
+        <h2 class="text-2xl font-bold mb-4">How This Calculator Works</h2>
         <p>
-          This calculator helps you determine your wealth level using two key measurements established by Felix Dennis: 
+          This calculator helps you determine your wealth level using two key measurements established by Felix Dennis, the late multi-millionaire founder of Dennis Publishing, co-founder of Maxim magazine, and author of the book <em>How to Get Rich</em>.
         </p>
         <ul class="list-disc pl-6 space-y-2">
           <li><strong>Total Net Worth:</strong> Your total assets minus liabilities.</li>
-          <li><strong>Liquid Wealth:</strong> Readily available cash and easily convertible assets.</li>
+          <li><strong>Liquid Wealth:</strong> Readily available cash and easily convertible assets. Note: This is the cash you’ve already paid taxes on.</li>
         </ul>
+        <p>
+          This dual approach provides a more nuanced understanding of one’s true financial position, as high net worth doesn’t always correlate with high liquidity.
+        </p>
+      </section>
+      <!-- Assets and Liabilities Section -->
+      <section class="prose prose-lg max-w-none mt-12 text-skin-base">
+        <h2 class="text-2xl font-bold mb-4">What to Include in Your Calculations</h2>
+        <h3 class="text-xl font-semibold mb-2">Liquid Assets</h3>
+        <p>These are assets that can be quickly and easily converted into cash without losing much value:</p>
+        <ul class="list-disc pl-6 space-y-2">
+          <li>Cash in bank accounts</li>
+          <li>Stocks and ETFs</li>
+          <li>Retirement accounts</li>
+          <li>Cryptocurrency</li>
+          <li>Gold, silver, and precious metals</li>
+          <li>Jewelry</li>
+          <li>Paid-off vehicles</li>
+        </ul>
+        <h3 class="text-xl font-semibold mb-2">Illiquid Assets</h3>
+        <p>These are assets that are valuable but can’t be quickly converted to cash. Selling them often takes time and may require finding the right buyer:</p>
+        <ul class="list-disc pl-6 space-y-2">
+          <li>Real estate</li>
+          <li>Raw land</li>
+          <li>Farm land</li>
+          <li>Fine art</li>
+          <li>Privately held business value</li>
+          <li>Royalties</li>
+          <li>Pensions</li>
+          <li>Family trusts</li>
+          <li>Structured notes</li>
+        </ul>
+        <h3 class="text-xl font-semibold mb-2">Liabilities</h3>
+        <p>
+          Liabilities are the debts and financial obligations you owe. This includes mortgages, student loans, credit card debt, and any other outstanding loans. Subtracting liabilities from your total assets gives a clearer picture of your net worth.
+        </p>
       </section>
       <!-- Wealth Categories Section -->
       <section class="prose prose-lg max-w-none mt-12 text-skin-base">
@@ -122,6 +157,7 @@ The super rich: Over $1.998B | Over $3.4B
           </li>
         </ul>
       </section>
+    </div>
     <main>
       <article>
         <slot />

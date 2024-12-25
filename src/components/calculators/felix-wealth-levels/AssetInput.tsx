@@ -14,21 +14,19 @@ export function AssetInput({ asset, onUpdate, onRemove }: AssetInputProps) {
     onUpdate(asset.id, 'value', value);
   };
 
+  // Determine styles and icons based on asset type
+  const isIlliquid = asset.name.toLowerCase().includes('illiquid');
+  const isLiability = asset.name.toLowerCase().includes('liability');
+  const borderColor = isLiability ? 'border-red-500' : 'border-green-500';
+  const backgroundColor = isLiability ? 'bg-red-50' : isIlliquid ? 'bg-green-50' : 'bg-blue-50';
+
   return (
     <div
-      className={`flex flex-col sm:flex-row gap-2 items-center mb-2 ${
-        asset.name.toLowerCase().includes('liability')
-          ? 'border-2 border-red-500 bg-red-50'
-          : asset.name.toLowerCase().includes('illiquid')
-          ? 'border-2 border-green-500 bg-green-50'
-          : 'border-2 border-green-500 bg-blue-50'
-      } p-4 rounded-lg`}
+      className={`flex flex-col sm:flex-row gap-2 items-center mb-2 p-4 rounded-lg border-2 ${borderColor} ${backgroundColor}`}
     >
-      {/* Name Input */}
-      <div className="flex items-center gap-2">
-        {asset.name.toLowerCase().includes('illiquid') && (
-          <Home className="w-5 h-5 text-green-600" />
-        )}
+      {/* Name Input with Conditional Icon */}
+      <div className="flex items-center gap-2 w-full sm:w-auto">
+        {isIlliquid && <Home className="w-5 h-5 text-green-600" />}
         <input
           type="text"
           value={asset.name}

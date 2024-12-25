@@ -1,5 +1,5 @@
 import React from 'react';
-import { DollarSign, MinusCircle } from 'lucide-react';
+import { DollarSign, MinusCircle, Home } from 'lucide-react';
 import type { Asset } from './types';
 
 interface AssetInputProps {
@@ -15,15 +15,28 @@ export function AssetInput({ asset, onUpdate, onRemove }: AssetInputProps) {
   };
 
   return (
-    <div className="flex flex-col sm:flex-row gap-2 items-center mb-2">
+    <div
+      className={`flex flex-col sm:flex-row gap-2 items-center mb-2 ${
+        asset.name.toLowerCase().includes('liability')
+          ? 'border-2 border-red-500 bg-red-50'
+          : asset.name.toLowerCase().includes('illiquid')
+          ? 'border-2 border-green-500 bg-green-50'
+          : 'border-2 border-green-500 bg-blue-50'
+      } p-4 rounded-lg`}
+    >
       {/* Name Input */}
-      <input
-        type="text"
-        value={asset.name}
-        onChange={(e) => onUpdate(asset.id, 'name', e.target.value)}
-        placeholder="Asset name"
-        className="flex-1 p-2 text-sm sm:text-base border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
-      />
+      <div className="flex items-center gap-2">
+        {asset.name.toLowerCase().includes('illiquid') && (
+          <Home className="w-5 h-5 text-green-600" />
+        )}
+        <input
+          type="text"
+          value={asset.name}
+          onChange={(e) => onUpdate(asset.id, 'name', e.target.value)}
+          placeholder="Asset name"
+          className="flex-1 p-2 text-sm sm:text-base border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
+      </div>
 
       {/* Dollar Input */}
       <div className="relative flex-1 w-full">

@@ -1,0 +1,192 @@
+---
+import IndexPage from "../../layouts/IndexPage.astro";
+import { SideFireCalculator } from "../../components/calculators/side-fire/SideFireCalculator";
+import { Calculator } from 'lucide-react';
+import YouTubeEmbed from '../../components/YouTubeEmbed.astro';
+import ImageEmbed from '../../components/ImageEmbed.astro';
+import AuthorBox from '../../components/AuthorBox.astro';
+
+export const frontmatter = {
+comment: false,
+donate: false,
+title: "Side Hustle FIRE Calculator",
+description: "See how much faster you can reach FIRE with a side hustle.",
+author: "Brett Lindenberg",
+category: "Personal Finance Calculators",
+date: "2025-1-04",
+tags: [""],
+image: {
+url: "/blog-placeholder-1.jpg",
+alt: ""
+}
+};
+
+const schema = { "@context": "https://schema.org", "@type": "SoftwareApplication", "name": frontmatter.title, "description": frontmatter.description, "applicationCategory": "BusinessApplication", "operatingSystem": "Web Browser", "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }, "featureList": [ "Side Hustle FIRE Calculator", "FIRE Goal analysis", "Time saved with side hustle", "Yearly financial details", "Scenario planning", "FIRE planning" ] };
+---
+
+<IndexPage
+title={frontmatter.title}
+description={frontmatter.description}
+author={frontmatter.author}
+date={frontmatter.date}
+comment={frontmatter.comment}
+donate={frontmatter.donate}
+image={frontmatter.image}
+category={frontmatter.category}
+tags={frontmatter.tags}>
+
+<script type="application/ld+json" set:html={JSON.stringify(schema)} />
+<div class="min-h-screen bg-skin-fill py-8 px-4 sm:px-6 lg:px-8">
+<div class="max-w-7xl mx-auto">
+      <div class="not-prose my-8">
+        <SideFireCalculator client:load />
+      </div>
+</div>
+<div class="prose prose-lg max-w-none mt-12 text-skin-base">
+    <h2 class="text-2xl font-bold mb-4">How to use this calculator</h2>
+    <p>
+        This Side Hustle FIRE calculator helps you understand how supplemental income can accelerate your path to financial independence. The calculator uses realistic default values to provide a starting point for calculations.
+    </p>
+    
+    <p class="font-semibold mt-4">Start by entering your income information:</p>
+    <ul class="list-disc pl-6 space-y-2">
+        <li>Annual side hustle income (default: $24,000) This is your pretax number.</li>
+        <li>Side hustle savings rate (default: 50%) Make sure to consider business expenses and taxes.</li>
+        <li>Annual main job income (default: $80,000)</li>
+        <li>Main job savings rate (default: 10%)</li>
+    </ul>
+
+    <h3 class="text-xl font-bold mt-8">Investment Details</h3>
+    <p>Configure your investment settings with these options:</p>
+    <ul class="list-disc pl-6 space-y-2">
+        <li><strong>Annual Return Rate</strong> (adjustable from 0-20%, default: 7%). According to NerdWallet, the <a href="https://www.nerdwallet.com/article/investing/average-stock-market-return">average annual return of the S&P500</a> is 10% over the past century. I chose to be more conversative in my default settings to account for down years.</li>
+        <li><strong>Multiple Asset Types</strong> (add up to 6 different investment categories)</li>
+        <li><strong>Custom Asset Names</strong> (specify investment types like stocks, bonds, etc.)</li>
+        <li><strong>Individual Return Rates</strong> (set specific returns for each asset class)</li>
+    </ul>
+
+<ImageEmbed src="/images/side-hustle-brainstorm.jpg" alt="brainstorming side hustle ideas" description="Brainstorm practical side hustle ideas that could help you net an addition $1,000 per month to reinvest." />
+
+<h3 class="text-xl font-bold mt-8">What You'll Learn</h3>
+    <h3 class="text-xl font-bold mt-8">Spending & Goals</h3>
+    <p>Set your financial targets and assumptions:</p>
+    <ul class="list-disc pl-6 space-y-2">
+        <li>Current annual spending (default: $40,000)</li>
+        <li>Retirement annual spending (default: $40,000)</li>
+        <li>Current age (default: 30)</li>
+        <li>FIRE goal retirement age (default: 65)</li>
+        <li>End age for calculations is 90 years of age.</li>
+        <li>Inflation rate (adjustable from 0-12%, default: 3%) The Federal Reserves aims for a <a href="https://www.clevelandfed.org/center-for-inflation-research/inflation-101/why-does-the-fed-care-start">2% average annual rate of inflation</a>.</li>
+    </ul>
+
+    <h2 class="text-2xl font-bold mt-12 mb-4">Understanding the calculations</h2>
+    <div class="space-y-8">
+        <div>
+            <p class="font-bold mb-2">Investment Growth Calculations:</p>
+            <pre class="bg-skin-card p-4 rounded-lg overflow-x-auto">
+<code>Future Value = Present Value × (1 + return_rate)^years
+Inflation Adjusted Value = Future Value ÷ (1 + inflation_rate)^years</code>
+            </pre>
+        </div>
+        <div>
+            <p class="font-bold mb-2">Annual Savings Calculations:</p>
+            <pre class="bg-skin-card p-4 rounded-lg overflow-x-auto">
+<code>Main Job Savings = Annual Main Job Income × Main Job Savings Rate
+Side Hustle Savings = Annual Side Hustle Income × Side Hustle Savings Rate
+Total Annual Savings = Main Job Savings + Side Hustle Savings</code>
+            </pre>
+        </div>
+        <div>
+            <p class="font-bold mb-2">Investment Return Calculations:</p>
+            <pre class="bg-skin-card p-4 rounded-lg overflow-x-auto">
+<code>Annual Return = Total Invested Assets × Annual Return Rate
+Total Assets = Previous Year Assets + Annual Savings + Annual Return - Annual Retirement Spend</code>
+            </pre>
+        </div>
+    </div>
+
+    <div class="prose prose-lg max-w-none mt-12 text-skin-base">
+    <h2 class="text-2xl font-bold mb-4">How the calculator handles multiple investment types and returns</h2>
+    <p>
+        Let me explain how the calculator handles multiple investments with different return rates using an example:
+    </p>
+    
+    <p class="mt-4">Let's say you enter:</p>
+    <ul class="list-disc pl-6 space-y-2">
+        <li>Investment 1: $75,000 in Stocks with 8% return</li>
+        <li>Investment 2: $25,000 in Bonds with 4% return</li>
+    </ul>
+
+    <p class="font-semibold mt-6">Here's how the calculation works:</p>
+    <p class="mt-2">First, it calculates the weighted return:</p>
+    
+    <pre class="bg-skin-card p-4 rounded-lg overflow-x-auto mt-4">
+<code>// Total assets = $75,000 + $25,000 = $100,000
+
+// Stock weight = $75,000 / $100,000 = 0.75 (75%)
+// Bond weight = $25,000 / $100,000 = 0.25 (25%)
+
+// Weighted return = (0.75 × 8%) + (0.25 × 4%)
+//                 = 6% + 1%
+//                 = 7% weighted average return</code>
+    </pre>
+
+    <p class="mt-6">Then for each year:</p>
+    
+    <pre class="bg-skin-card p-4 rounded-lg overflow-x-auto mt-4">
+<code>// Year 1 example with $20,000 annual savings:
+const annualReturn = $100,000 × 0.07 = $7,000
+totalAssets += $7,000 + $20,000 = $127,000</code>
+    </pre>
+
+    <p class="font-semibold mt-6">Important notes:</p>
+    <ul class="list-disc pl-6 space-y-2">
+        <li>The tool assumes the weighted return remains constant. This tool also assumes you reinvest your saved side-hustle and job income at the first of the year.</li>
+        <li>New investment totals added each year will yield the overall weighted return of your investments.</li>
+        <li>In reality, you'd want to periodically rebalance the portfolio as you age.</li>
+    </ul>
+</div>
+
+<ImageEmbed src="/images/save-time-to-FIRE.png" alt="save time to FIRE" description="A side-hustle has the potential to shave a decade off your FIRE timeline." />
+
+    <h2 class="text-2xl font-bold mt-12 mb-4">Analyzing Your Results</h2>
+    <p>
+        The calculator provides comprehensive insights through various outputs:
+    </p>
+    <ul class="list-disc pl-6 space-y-2">
+        <li>FIRE achievement timeline with and without side hustle</li>
+        <li>Visual chart showing investment growth versus FIRE goal</li>
+        <li>Detailed yearly financial breakdown</li>
+        <li>Time saved through side hustle contributions</li>
+        <li>Inflation-adjusted projections</li>
+    </ul>
+
+    <p class="mt-4">
+        Remember that while this calculator provides valuable projections, market returns will vary significantly over time. Consider running multiple scenarios with different return rates and savings assumptions to better understand potential outcomes.
+    </p>
+
+    <p class="mt-4">
+        Use the CSV export feature to save your calculations and track how changes in your income, savings rate, or investment returns might affect your FIRE timeline.
+    </p>
+    
+    <h2 class="text-2xl font-bold mt-12 mb-4">How to Think About a Side Hustle</h2>
+<p class="mt-4">
+    I'm a big believer in using a side-hustle to improve your finances and it's been the primary wealth creator in my own life. I view a side-hustle as a nearly risk free venture. You get to keep your current job, learn some new skills, and get a shot at major financial upside depending on the business you want to start.
+    </p>
+    <p class="mt-4">
+    By default in this calculator, you are essentially netting $1,000 per month with your side hustle. If you hit it hard, you might be able to accomplish this through driving for Uber on weekends, waiting tables on the side, or starting a service business.
+    </p>
+    <p class="mt-4">
+    If you follow this process for a few years, you start to see how a side-hustle can shave years off your financial goals in the chart. 
+    </p>
+
+</div>
+
+<main>
+<article>
+<slot />
+</article>
+<AuthorBox />
+</main>
+</div>
+</IndexPage>

@@ -11,12 +11,30 @@
     const menuButton = document.getElementById("menu-icon");
     const closeButton = document.getElementById("menu-icon-close");
     const mobileMenu = document.getElementById("mobile-menu");
+
+    // Check if all required elements exist
+    if (!menuButton || !closeButton || !mobileMenu) {
+      console.log('Missing elements:', {
+        menuButton: !!menuButton,
+        closeButton: !!closeButton,
+        mobileMenu: !!mobileMenu
+      });
+      return;
+    }
+
     function toggleMenu() {
       menuButton.classList.toggle("hidden");
       closeButton.classList.toggle("hidden");
       mobileMenu.classList.toggle("hidden");
     }
-    menuButton.addEventListener("click", toggleMenu);
-    closeButton.addEventListener("click", toggleMenu);
+
+    // Only add event listeners if elements exist
+    if (menuButton) {
+      menuButton.addEventListener("click", toggleMenu);
+    }
+    
+    if (closeButton) {
+      closeButton.addEventListener("click", toggleMenu);
+    }
   });
 </script>

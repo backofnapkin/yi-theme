@@ -16,7 +16,7 @@ import { lazyLoadImage } from "./src/plugins/lazy-load-image.js";
 
 export default defineConfig({
   site: 'https://backofnapkin.netlify.app/',
-  trailingSlash: "always",
+  trailingSlash: "never",
   build: {
     format: 'directory'
   },

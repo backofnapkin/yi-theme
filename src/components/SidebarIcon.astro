@@ -1,49 +1,38 @@
 ---
+
 ---
 <button type="button" id="aside-btn" class="header-btn" title="Open Aside Bar" aria-label="auto" aria-live="polite">
-  <i class="ri-user-line"></i>
+  <i class="ri-user-line"/>
 </button>
 <button type="button" id="aside-close-btn" class="header-btn hidden" title="Close Aside Bar" aria-label="auto" aria-live="polite">
-  <i class="ri-close-fill"></i>
+  <i class="ri-close-fill"/>
 </button>
+
 <div id="blog-aside" class="absolute top-16 bg-skin-fill right-0 blog-aside hidden">
+
 </div>
 
-<script is:inline>
-  const showAsideBtn = document.querySelector("#aside-btn");
-  if (showAsideBtn) {
-    showAsideBtn.onclick = function() {
-      const closeAsideBtn = document.querySelector("#aside-close-btn");
-      const menuIcon = document.querySelector("#menu-icon");
-      const menuCloseIcon = document.querySelector("#menu-icon-close");
-      const menu = document.querySelector("#mobile-menu");
-      const personalInfo = document.querySelector("#personal-info");
-      
-      if (menuIcon && menuIcon.classList.contains('hidden')) {
-        menuIcon.classList.remove('hidden');
-        if (menuCloseIcon) menuCloseIcon.classList.add("hidden");
-        if (menu) menu.classList.add("hidden");
-      }
-      
-      if (closeAsideBtn && personalInfo) {
-        showAsideBtn.classList.add("hidden");
-        closeAsideBtn.classList.remove("hidden");
-        personalInfo.classList.remove("hidden");
-      }
-    }
-  }
+<script>
+  let showAsideBtn = document.getElementById("aside-btn");
+  let closeAsideBtn = document.getElementById("aside-close-btn");
+  let menuIcon = document.getElementById("menu-icon");
+  let menuCloseIcon = document.getElementById("menu-icon-close");
+  let menu = document.getElementById("mobile-menu");
 
-  const closeAsideBtn = document.querySelector("#aside-close-btn");
-  if (closeAsideBtn) {
-    closeAsideBtn.onclick = function() {
-      const showAsideBtn = document.querySelector("#aside-btn");
-      const personalInfo = document.querySelector("#personal-info");
-      
-      if (showAsideBtn && personalInfo) {
-        closeAsideBtn.classList.add("hidden");
-        personalInfo.classList.add("hidden");
-        showAsideBtn.classList.remove("hidden");
-      }
+  let personalInfo = document.getElementById("personal-info");
+  showAsideBtn.addEventListener("click", () => {
+    if(menuIcon && menuIcon.classList.contains('hidden')){
+      menuIcon.classList.toggle('hidden')
+      menuCloseIcon.classList.toggle("hidden");
+      menu.classList.toggle("hidden");
     }
-  }
+    showAsideBtn.classList.toggle("hidden");
+    closeAsideBtn.classList.toggle("hidden");
+    personalInfo.classList.toggle("hidden");
+  });
+  closeAsideBtn.addEventListener("click", () => {
+    closeAsideBtn.classList.toggle("hidden");
+    personalInfo.classList.toggle("hidden");
+    showAsideBtn.classList.toggle("hidden");
+  });
 </script>

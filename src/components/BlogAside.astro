@@ -19,9 +19,9 @@ let resultPosts = sortPosts.splice(0, site.recentBlogSize);
 function getPostUrl(post: any) {
   if (post.collection === 'astro-pages') {
     // For calculator pages, strip '/src/pages' and '.astro' from the path
-    return post.id.replace('/src/pages', '').replace('.astro', '');
+    return post.id.replace('/src/pages', '').replace('.astro', '') + '/';
   }
-  return `/blog/${post.slug}`;
+  return `/blog/${post.slug}/`;
 }
 
 // Helper function to format category URLs

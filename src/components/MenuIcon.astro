@@ -7,28 +7,40 @@
   <i class="ri-close-fill"></i>
 </button>
 
-
 <script>
-  let menuIcon = document.getElementById("menu-icon");
-  let menuCloseIcon = document.getElementById("menu-icon-close");
-  let menu = document.getElementById("mobile-menu");
-  let showAsideBtn = document.getElementById("aside-btn");
-  let closeAsideBtn = document.getElementById("aside-close-btn");
-  let personalInfo = document.getElementById("personal-info");
-  menuIcon.addEventListener("click", () => {
-    if(showAsideBtn && showAsideBtn.classList.contains('hidden')){
-      showAsideBtn.classList.toggle("hidden");
-      closeAsideBtn.classList.toggle("hidden");
-      personalInfo.classList.toggle("hidden");
+  // Get all necessary elements
+  const menuIcon = document.getElementById("menu-icon");
+  const menuCloseIcon = document.getElementById("menu-icon-close");
+  const mobileMenu = document.getElementById("mobile-menu");
+  const showAsideBtn = document.getElementById("aside-btn");
+  const closeAsideBtn = document.getElementById("aside-close-btn");
+  const personalInfo = document.getElementById("personal-info");
+
+  // Function to toggle menu visibility
+  function toggleMenu() {
+    if (!menuIcon || !menuCloseIcon || !mobileMenu) return;
+
+    // Toggle menu icons
+    menuIcon.classList.toggle("hidden");
+    menuCloseIcon.classList.toggle("hidden");
+    mobileMenu.classList.toggle("hidden");
+
+    // Handle aside button if it exists
+    if (showAsideBtn && closeAsideBtn && personalInfo) {
+      if (showAsideBtn.classList.contains('hidden')) {
+        showAsideBtn.classList.remove("hidden");
+        closeAsideBtn.classList.add("hidden");
+        personalInfo.classList.add("hidden");
+      }
     }
-    menuIcon.classList.toggle("hidden");
-    menuCloseIcon.classList.toggle("hidden");
-    menu.classList.toggle("hidden");
-    // 给背景添加蒙版
-  });
-  menuCloseIcon.addEventListener("click", () => {
-    menuCloseIcon.classList.toggle("hidden");
-    menu.classList.toggle("hidden");
-    menuIcon.classList.toggle("hidden");
-  });
+  }
+
+  // Add click event listeners
+  if (menuIcon) {
+    menuIcon.addEventListener("click", toggleMenu);
+  }
+
+  if (menuCloseIcon) {
+    menuCloseIcon.addEventListener("click", toggleMenu);
+  }
 </script>

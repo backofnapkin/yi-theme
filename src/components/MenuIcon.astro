@@ -7,34 +7,36 @@
   <i class="ri-close-fill"></i>
 </button>
 <script>
-  document.addEventListener('DOMContentLoaded', function() {
-    const menuButton = document.getElementById("menu-icon");
-    const closeButton = document.getElementById("menu-icon-close");
-    const mobileMenu = document.getElementById("mobile-menu");
-
-    // Check if all required elements exist
-    if (!menuButton || !closeButton || !mobileMenu) {
-      console.log('Missing elements:', {
-        menuButton: !!menuButton,
-        closeButton: !!closeButton,
-        mobileMenu: !!mobileMenu
+  window.onload = function() {
+    try {
+      console.log('Script starting...');
+      
+      const menuButton = document.querySelector("#menu-icon");
+      const closeButton = document.querySelector("#menu-icon-close");
+      const mobileMenu = document.querySelector("#mobile-menu");
+      
+      console.log('Elements found:', {
+        menuButton: menuButton ? 'found' : 'missing',
+        closeButton: closeButton ? 'found' : 'missing',
+        mobileMenu: mobileMenu ? 'found' : 'missing'
       });
-      return;
-    }
 
-    function toggleMenu() {
-      menuButton.classList.toggle("hidden");
-      closeButton.classList.toggle("hidden");
-      mobileMenu.classList.toggle("hidden");
-    }
+      if (menuButton && closeButton && mobileMenu) {
+        const toggleMenu = () => {
+          menuButton.classList.toggle("hidden");
+          closeButton.classList.toggle("hidden");
+          mobileMenu.classList.toggle("hidden");
+          console.log('Menu toggled');
+        };
 
-    // Only add event listeners if elements exist
-    if (menuButton) {
-      menuButton.addEventListener("click", toggleMenu);
+        menuButton.addEventListener("click", toggleMenu, false);
+        closeButton.addEventListener("click", toggleMenu, false);
+        console.log('Event listeners added');
+      } else {
+        console.log('Some elements are missing');
+      }
+    } catch (error) {
+      console.log('Error in menu script:', error);
     }
-    
-    if (closeButton) {
-      closeButton.addEventListener("click", toggleMenu);
-    }
-  });
+  };
 </script>

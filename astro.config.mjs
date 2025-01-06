@@ -15,7 +15,7 @@ import { remarkGithubCard } from './src/plugins/remark-github-card.js';
 import { lazyLoadImage } from "./src/plugins/lazy-load-image.js";
 
 export default defineConfig({
-  site: 'https://backofnapkin.netlify.app/',
+  site: 'https://backofnapkin.netlify.app',
   trailingSlash: "never",
   build: {
     format: 'directory'

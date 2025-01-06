@@ -6,37 +6,30 @@
 <button type="button" id="menu-icon-close" class="header-btn hidden" title="Menu">
   <i class="ri-close-fill"></i>
 </button>
-<script>
-  window.onload = function() {
-    try {
-      console.log('Script starting...');
-      
-      const menuButton = document.querySelector("#menu-icon");
-      const closeButton = document.querySelector("#menu-icon-close");
+<script is:inline>
+  const menuBtn = document.querySelector("#menu-icon");
+  if (menuBtn) {
+    menuBtn.onclick = function() {
+      const closeBtn = document.querySelector("#menu-icon-close");
       const mobileMenu = document.querySelector("#mobile-menu");
-      
-      console.log('Elements found:', {
-        menuButton: menuButton ? 'found' : 'missing',
-        closeButton: closeButton ? 'found' : 'missing',
-        mobileMenu: mobileMenu ? 'found' : 'missing'
-      });
-
-      if (menuButton && closeButton && mobileMenu) {
-        const toggleMenu = () => {
-          menuButton.classList.toggle("hidden");
-          closeButton.classList.toggle("hidden");
-          mobileMenu.classList.toggle("hidden");
-          console.log('Menu toggled');
-        };
-
-        menuButton.addEventListener("click", toggleMenu, false);
-        closeButton.addEventListener("click", toggleMenu, false);
-        console.log('Event listeners added');
-      } else {
-        console.log('Some elements are missing');
+      if (closeBtn && mobileMenu) {
+        menuBtn.classList.add("hidden");
+        closeBtn.classList.remove("hidden");
+        mobileMenu.classList.remove("hidden");
       }
-    } catch (error) {
-      console.log('Error in menu script:', error);
     }
-  };
+  }
+
+  const closeBtn = document.querySelector("#menu-icon-close");
+  if (closeBtn) {
+    closeBtn.onclick = function() {
+      const menuBtn = document.querySelector("#menu-icon");
+      const mobileMenu = document.querySelector("#mobile-menu");
+      if (menuBtn && mobileMenu) {
+        closeBtn.classList.add("hidden");
+        menuBtn.classList.remove("hidden");
+        mobileMenu.classList.add("hidden");
+      }
+    }
+  }
 </script>

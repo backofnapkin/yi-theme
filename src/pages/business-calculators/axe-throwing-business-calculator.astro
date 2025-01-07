@@ -1,0 +1,175 @@
+---
+import IndexPage from "../../layouts/IndexPage.astro";
+import { AxeThrowingBusinessCalculator } from "../../components/calculators/axe-throwing/AxeThrowingBusinessCalculator";
+import { Calculator } from 'lucide-react';
+import YouTubeEmbed from '../../components/YouTubeEmbed.astro';
+import ImageEmbed from '../../components/ImageEmbed.astro';
+import AuthorBox from '../../components/AuthorBox.astro';
+
+export const frontmatter = {
+  comment: false,
+  donate: false,
+  title: "Axe Throwing Business Calculator: Revenue & Profit Projections",
+  description: "Plan your axe throwing business with our comprehensive financial calculator. Get detailed revenue projections, startup costs, and profitability analysis.",
+  author: "Brett Lindenberg",
+  category: "Business Calculators",
+  date: "2025-01-6",
+  tags: [""],
+  image: {
+    url: "",
+    alt: ""
+  }
+};
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": frontmatter.title,
+  "description": frontmatter.description,
+  "applicationCategory": "BusinessApplication",
+  "operatingSystem": "Web Browser",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "featureList": [
+    "Axe throwing business revenue calculator",
+    "Startup cost analysis",
+    "Lane utilization tracking",
+    "Profit margin calculation",
+    "Break-even analysis",
+    "Financial reporting"
+  ]
+};
+---
+
+<IndexPage 
+  title={frontmatter.title}
+  description={frontmatter.description}
+  author={frontmatter.author}
+  date={frontmatter.date}
+  comment={frontmatter.comment}
+  donate={frontmatter.donate}
+  image={frontmatter.image}
+  category={frontmatter.category}
+  tags={frontmatter.tags}>
+  <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+  
+  <div class="min-h-screen bg-skin-fill py-8 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-7xl mx-auto">
+        <p class="text-base text-skin-base">
+          Thinking about starting an axe throwing business? This calculator cuts through the guesswork giving you everything from startup costs to monthly profits.
+        </p>
+      </div>
+
+      <AxeThrowingBusinessCalculator client:load />
+    </div>
+  </div>
+     
+  <div class="prose prose-lg max-w-none mt-12 text-skin-base">
+    <h2 class="text-2xl font-bold mb-4">How to Use This Calculator</h2>
+    <p>Start by entering these key details:</p>
+
+    <h3 class="text-xl font-bold mt-6">1. Business Information</h3>
+    <p>Enter your business name in the designated field. While "Abe's Axe to Grind" serves as the default name, you can customize this to match your brand identity.</p>
+
+    <h3 class="text-xl font-bold mt-6">2. Facility Setup & Initial Investment</h3>
+    <p>Your startup costs include several key components:</p>
+    <ul class="list-disc pl-6 space-y-2">
+      <li><strong>Leasehold Improvements:</strong> Default $200,000 - covers essential renovations, build-out costs, safety features, seating, tables, and decor</li>
+      <li><strong>Lane Configuration:</strong> Default $7,500 per lane for standard setup (source: <a href="https://axcitement.com/2020/09/27/what-does-it-cost-to-build-an-axe-throwing-business/">Axcitement.com</a>)</li>
+      <li>Standard layout: 8 lanes (6 feet width, 24 feet depth per lane)</li>
+      <li>Equipment Investment: $150 per axe by default</li>
+    </ul>
+
+    <ImageEmbed
+      src="/images/mobile-axe-throwing.png"
+      alt="mobile axe throwing"
+      description="Add a mobile axe throwing trailer to further increase revenue with this business model."
+    />
+
+    <h3 class="text-xl font-bold mt-8">3. Revenue Calculations</h3>
+    <div class="space-y-4">
+      <div>
+        <p class="font-bold mb-2">Peak Hours (Friday-Sunday):</p>
+        <pre class="bg-skin-card p-4 rounded-lg overflow-x-auto">
+Peak Revenue = (Hourly Rate × Number of Lanes × Peak Utilization × Peak Hours × 4.3 weeks) × Average Group Size</pre>
+      </div>
+
+      <div>
+        <p class="font-bold mb-2">Off-Peak Hours:</p>
+        <pre class="bg-skin-card p-4 rounded-lg overflow-x-auto">
+Off-Peak Revenue = (Hourly Rate × Number of Lanes × Off-Peak Utilization × Off-Peak Hours × 4.3 weeks) × Average Group Size</pre>
+      </div>
+
+      <div>
+        <p class="font-bold mb-2">Corporate Events:</p>
+        <pre class="bg-skin-card p-4 rounded-lg overflow-x-auto">
+Corporate Revenue = Event Price × Number of Monthly Events</pre>
+      </div>
+    </div>
+
+    <ImageEmbed
+      src="/images/golden-axe-throwing-and-bar.png"
+      alt="axe throwing bar"
+      description="Inside Golden Axe Throwing and Bar in SLC."
+    />
+
+    <h3 class="text-xl font-bold mt-8">4. Monthly Operating Costs</h3>
+    <p>Default monthly costs based on industry averages:</p>
+    <ul class="list-disc pl-6 space-y-2">
+      <li><strong>Rent:</strong> $5,000 default monthly rate</li>
+      <li><strong>Insurance:</strong> $500 monthly ($5,000-$7,500 annually per <a href="https://axcitement.com/2022/02/06/how-much-is-axe-throwing-insurance/">Axcitement Insurance Guide</a>)</li>
+      <li><strong>Utilities:</strong> $800 default monthly rate</li>
+      <li><strong>Staff wages:</strong> $5,000 default monthly rate</li>
+      <li><strong>Marketing:</strong> $2,000 default monthly allocation</li>
+      <li><strong>Maintenance:</strong> $100 per lane monthly default</li>
+    </ul>
+
+    <h2 class="text-2xl font-bold mt-12 mb-4">Understanding The Results</h2>
+    <p>
+      The calculator provides a comprehensive breakdown of your investment and potential returns:
+    </p>
+    <ul class="list-disc pl-6 space-y-2">
+      <li>Total initial investment required</li>
+      <li>Revenue streams breakdown (peak hours, off-peak, corporate events)</li>
+      <li>Monthly profit projections</li>
+      <li>Break-even timeline</li>
+      <li>5-year growth projections (conservative and optimistic scenarios)</li>
+    </ul>
+
+    <h2 class="text-2xl font-bold mt-12 mb-4">Industry Research & Case Studies</h2>
+    <p>
+      My research draws heavily from industry leaders like Axcitement.com, which provides comprehensive data on startup costs and operations. A standout case study comes from <a href="https://www.forgedaxe.ca/">Forged Axe Throwing</a> in Whistler and Victoria, British Columbia, which generates $60,000 in monthly revenue.
+    </p>
+
+    <h3 class="text-xl font-bold mt-6">Marketing Strategies from Successful Venues</h3>
+    <ul class="list-disc pl-6 space-y-2">
+      <li><strong>Grand Opening Strategy:</strong> Forged Axe Throwing's successful launch included strategic banner placement near breweries, distributing 500 flyers to local businesses, and targeted social media advertising.</li>
+      <li><strong>Traditional Marketing:</strong> Tourist rack brochures and local newspaper ads proved surprisingly effective.</li>
+      <li><strong>Mobile Extensions:</strong> Adding a mobile axe throwing trailer created additional revenue streams and marketing opportunities.</li>
+      <li><strong>Multi-Channel Approach:</strong> Combining digital marketing with traditional methods for maximum reach.</li>
+    </ul>
+
+    <YouTubeEmbed 
+      id="T80F1-3NWFU"
+      title="How to Start a $60K per Month Axe Throwing Business"
+      className="mb-8"
+    />
+
+    <h2 class="text-2xl font-bold mt-12 mb-4">Related Tools:</h2>
+    <p>
+      <strong>
+        <a href="/business-calculators/hole-in-one-challenge-revenue-and-prize-calculator/">Hole-in-One Challenge Revenue and Prize Calculator</a>
+      </strong>: Much like an axe-throwing venue, a Hole-in-One Challenge requires building awareness, generating excitement, and a marketing machine to get regular paying customers. Both ideas lean heavily on the experience factor: offering something fun, memorable, and a little outside the box.
+    </p>
+
+    <main>
+      <article>
+        <slot />
+      </article>
+      <AuthorBox />
+    </main>
+  </div>
+</IndexPage>

@@ -44,6 +44,12 @@ menu {
     --color-border: 104, 157, 106;
     --color-border-active: 14, 192, 124;
     --color-modal: 52, 58, 64;
+    --color-red-bg: 254, 242, 242;
+    --color-red-border: 239, 68, 68;
+    --color-red-text: 185, 28, 28;
+    --color-success: 22, 163, 74;
+    --color-warning: 234, 179, 8;
+    --color-danger: 220, 38, 38;
   }
 
   html[data-theme="dark"] {

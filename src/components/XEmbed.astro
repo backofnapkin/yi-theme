@@ -1,0 +1,40 @@
+---
+interface Props {
+  url: string;
+  className?: string;
+}
+
+const { url, className = "" } = Astro.props;
+
+// Extract post ID from X URL
+const getPostId = (url: string) => {
+  const matches = url.match(/status\/(\d+)/);
+  return matches ? matches[1] : '';
+};
+
+const postId = getPostId(url);
+---
+
+<div class={`max-w-3xl mx-auto ${className}`}>
+  <div class="x-embed-container rounded-lg overflow-hidden">
+    <blockquote
+      class="twitter-tweet"
+      data-theme="light"
+      data-dnt="true"
+    >
+      <a href={url}></a>
+    </blockquote>
+    <script async src="https://platform.twitter.com/widgets.js"></script>
+  </div>
+</div>
+
+<style>
+  .x-embed-container {
+    position: relative;
+    min-height: 400px;
+  }
+
+  .twitter-tweet {
+    margin: 0 !important;
+  }
+</style>

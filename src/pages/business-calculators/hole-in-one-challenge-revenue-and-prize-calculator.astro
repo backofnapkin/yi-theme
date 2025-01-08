@@ -1,0 +1,169 @@
+---
+import IndexPage from "../../layouts/IndexPage.astro";
+import { HoleInOneChallengeCalculator } from "../../components/calculators/hole-in-one-challenge/HoleInOneChallengeCalculator";
+import { Calculator } from 'lucide-react';
+import YouTubeEmbed from '../../components/YouTubeEmbed.astro';
+import ImageEmbed from '../../components/ImageEmbed.astro';
+import AuthorBox from '../../components/AuthorBox.astro';
+import XEmbed from '../../components/XEmbed.astro';
+
+export const frontmatter = {
+  comment: false,
+  donate: false,
+  title: "Hole-in-One Challenge Calculator: Revenue & Prize Projections",
+  description: "Plan your hole-in-one challenge business with our comprehensive calculator. Get detailed revenue projections, prize payout analysis, and profitability estimates.",
+  author: "Brett Lindenberg",
+  category: "Business Calculators",
+  date: "2024-11-11",
+  tags: [""],
+  image: {
+    url: "",
+    alt: ""
+  }
+};
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": frontmatter.title,
+  "description": frontmatter.description,
+  "applicationCategory": "BusinessApplication",
+  "operatingSystem": "Web Browser",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "featureList": [
+    "Hole-in-one challenge revenue calculator",
+    "Prize payout projections",
+    "Win probability analysis",
+    "Revenue split calculations",
+    "Monthly and annual projections",
+    "Financial reporting"
+  ]
+};
+---
+
+<IndexPage 
+  title={frontmatter.title}
+  description={frontmatter.description}
+  author={frontmatter.author}
+  date={frontmatter.date}
+  comment={frontmatter.comment}
+  donate={frontmatter.donate}
+  image={frontmatter.image}
+  category={frontmatter.category}
+  tags={frontmatter.tags}>
+  <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+  
+  <div class="min-h-screen bg-skin-fill py-8 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-7xl mx-auto">
+      <p class="text-base text-skin-base">
+        Planning to run a hole-in-one challenge? This calculator helps you estimate everything from prize payouts to revenue potential, based on real industry data and probability calculations.
+      </p>
+    </div>
+
+    <HoleInOneChallengeCalculator client:load />
+
+<div class="prose prose-lg max-w-none mt-12 text-skin-base">
+  <h2 class="text-2xl font-bold mb-4">How does the Hole in One Challenge Calculator Work?</h2>
+
+  <p>This calculator helps golf event organizers estimate revenue and potential prize payouts for hole-in-one challenges. I was inspired to build this tool after watching this business idea video from <a href="https://x.com/mhp_guy/">Chris Koerner</a> of The Koerner Office.</p>
+
+  <p class="mt-4">I love business ideas almost anyone could pull off regardless of startup funds, assuming you don't mind hustling and getting hands-on in the early days. I also like the opportunity to create win-win situations between you and other business owners or charities.</p>
+
+  <p class="mt-4">Let’s break down how it works and explain the math behind each calculation. But I encourage you to play around with the numbers in this tool and explore how different pricing, customer numbers, and skill levels can all impact your bottom line.</p>
+
+  <h3 class="text-xl font-bold mt-6">Individual Shot Probability</h3>
+  <p>The calculator starts with established odds for different skill levels on a par 3 hole at about 111 yards:</p>
+  <ul class="list-disc pl-6 space-y-2">
+    <li><strong>Pro Golfers:</strong> 1 in 5,000 shots (0.02%)</li>
+    <li><strong>Good Golfers:</strong> 1 in 10,000 shots (0.01%)</li>
+    <li><strong>Amateur Golfers:</strong> 1 in 12,000 shots (0.0083%)</li>
+    <li><strong>Casual Golfers:</strong> 1 in 20,000 shots (0.005%)</li>
+    <li><strong>Terrible Golfers:</strong> 1 in 25,000 shots (0.004%)</li>
+  </ul>
+
+  <h3 class="text-xl font-bold mt-6">Multiple Shots Probability</h3>
+  <p>When a customer gets multiple balls, their chance of success increases. By default, each customer gets 20 balls based on Koerner's video. The calculator uses probability theory to determine the likelihood of at least one success in multiple attempts:</p>
+
+  <pre class="bg-skin-card p-4 rounded-lg overflow-x-auto">
+P(at least one success) = 1 - P(no successes)
+P(no successes) = (1 - P(single shot success))^number of balls
+  </pre>
+
+  <p><strong>For example, an amateur golfer with 20 balls:</strong></p>
+  <ol class="list-decimal pl-6 space-y-2">
+    <li>Single shot probability = 1/12000 = 0.000083333</li>
+    <li>Probability of no successes = (1 - 0.000083333)^20 = 0.998333^20</li>
+    <li>Probability of at least one success = 1 - 0.998333^20 ≈ 0.00166 or 0.166%</li>
+  </ol>
+
+  <h3 class="text-xl font-bold mt-6">Annual Top-Line Revenue</h3>
+  <pre class="bg-skin-card p-4 rounded-lg overflow-x-auto">
+Monthly Revenue = Monthly Customers × Price per Game
+Annual Revenue = Monthly Revenue × 12
+  </pre>
+
+  <p>For example, with 1,000 monthly customers paying $20 each:</p>
+  <ul class="list-disc pl-6 space-y-2">
+    <li>Monthly Revenue = 1,000 × $20 = $20,000</li>
+    <li>Annual Revenue = $20,000 × 12 = $240,000</li>
+  </ul>
+
+  <h3 class="text-xl font-bold mt-6">Expected Prize Payouts</h3>
+  <p>The calculator determines expected prize payouts by multiplying:</p>
+  <pre class="bg-skin-card p-4 rounded-lg overflow-x-auto">
+Annual Prize Payouts = Annual Customers × Success Probability × Prize Amount
+  </pre>
+
+  <h3 class="text-xl font-bold mt-6">Net Revenue Calculations</h3>
+  <p><strong>This is Revenue After Prize Payouts:</strong></p>
+  <code>
+Net Revenue = Annual Revenue - Expected Prize Payouts
+  </code>
+
+  <p><strong>Revenue Split (if enabled):</strong> If you're sharing revenue with a partner or charity, the split is calculated after prize payouts:</p>
+  <code>
+Split Amount = (Annual Revenue - Prize Payouts) × Split Percentage
+  </code>
+
+  <h2 class="text-2xl font-bold mt-12 mb-4">Things to Consider with Hole in One Business Challenges</h2>
+  <p>Running a hole-in-one challenge business is all about playing the odds. While the numbers are ultimately in your favor, you need to be prepared for unpredictable days. The odds say that only 1 in 12,000 shots will be a hole-in-one, but the reality is, luck can run hot. Sometimes multiple players will beat the odds in a short span of time.</p>
+
+  <p class="mt-4">Think about it like a blackjack table at a casino. Experienced dealers know that some days, players win big, and the casino takes a hit, even though they know the house always wins in the long run.</p>
+
+  <XEmbed url="https://twitter.com/mhp_guy/status/1853085107709505849" />
+
+  <p class="mt-4">This all makes sense on paper, but as a small business owner, seeing $40,000 in prize payouts go out over one weekend of a golf challenge can test your determination. One way to reduce financial risk is by taking out insurance policies for hole-in-one prizes. This helps smooth out the payouts in case of an unexpected losing streak.</p>
+
+  <p class="mt-4"><strong>Key takeaway:</strong> Significant cash reserves and mental preparation for short-term ups and downs are crucial for success. Make sure you have funds ready for big prize payouts because crazy things will happen despite favorable odds.</p>
+
+  <h2 class="text-2xl font-bold mt-12 mb-4">Creating Win-Win Situations</h2>
+  <p>To turn the hole-in-one challenge into a business, you’ll need to create win-win scenarios for your partners. This could include offering a revenue split or a flat fee for hosting the event.</p>
+
+  <div class="bg-gray-100 p-4 rounded-md my-4">
+    <p><em>Hi [Business Owner Name],</em></p>
+    <p><em>I’d love to bring an exciting event to your business—a <strong>Hole-in-One Golf Challenge</strong> with a $10,000 prize for winners. It’s a unique attraction that draws in golfers and thrill-seekers alike.</em></p>
+    <p><em>We can either do a <strong>revenue split</strong> or I can offer a <strong>flat fee of $2,000</strong> for hosting the week-long event.</em></p>
+    <p><em>Let me know if you are interested, and we can discuss the details.</em></p>
+  </div>
+
+   <p class="mt-4">Make sure to track participant win rates over time. This helps refine projections, adjust pricing, and manage risk effectively.</p>
+
+  <h2 class="text-2xl font-bold mt-12 mb-4">Resources:</h2>
+  <p><strong><a href="https://www.golfpass.com/travel-advisor/articles/hole-in-one-stats-odds-more">The Hole in One: Stats, Odds and More</a></strong>: This article provides nuanced estimates and insights into the rarity of hole-in-ones, useful for your business calculations.</p>
+
+  <p class="mt-4"><strong>Some key insights:</strong> Odds of making two holes-in-one in the same round: 67 million to 1. Brian Harman achieved this rare feat during the 2015 Barclays.</p>
+
+  <h2 class="text-2xl font-bold mt-12 mb-4">Related Tools:</h2>
+  <p><a href="/business-calculators/market-demand-calculator-business/"><strong>Market Demand Calculator</strong></a>: Evaluate your product or service idea across 12 key factors using a weighted scoring system to understand market potential.</p>
+
+  <div class="mt-12">
+    <slot />
+  </div>
+  <AuthorBox />
+</div>
+  </div>
+</IndexPage>

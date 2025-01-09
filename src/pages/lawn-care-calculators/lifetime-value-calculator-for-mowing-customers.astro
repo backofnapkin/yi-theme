@@ -1,0 +1,197 @@
+---
+import IndexPage from "../../layouts/IndexPage.astro";
+import { LawnMowingCustomerValueCalculator } from "../../components/calculators/lawn-mowing-customer-value/LawnMowingCustomerValueCalculator";
+import { Calculator } from 'lucide-react';
+import ImageEmbed from '../../components/ImageEmbed.astro';
+import AuthorBox from '../../components/AuthorBox.astro';
+import XEmbed from '../../components/XEmbed.astro';
+
+export const frontmatter = {
+  comment: false,
+  donate: false,
+  title: "Lawn Mowing Lifetime Customer Value Calculator: LTV & CAC",
+  description: "Calculate the lifetime value and optimal acquisition costs for your lawn mowing customers. Get detailed insights into revenue potential of mowing lawns.",
+  author: "Brett Lindenberg",
+  category: "Lawn Care Calculators",
+  date: "2024-11-23",
+  tags: [""],
+  image: {
+    url: "",
+    alt: ""
+  }
+};
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": frontmatter.title,
+  "description": frontmatter.description,
+  "applicationCategory": "BusinessApplication",
+  "operatingSystem": "Web Browser",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "featureList": [
+    "Customer lifetime value calculator",
+    "Revenue projections",
+    "Gross and net profit analysis",
+    "Customer acquisition cost optimization",
+    "Retention period impact analysis",
+    "Goal-based financial planning"
+  ]
+};
+---
+
+<IndexPage 
+  title={frontmatter.title}
+  description={frontmatter.description}
+  author={frontmatter.author}
+  date={frontmatter.date}
+  comment={frontmatter.comment}
+  donate={frontmatter.donate}
+  image={frontmatter.image}
+  category={frontmatter.category}
+  tags={frontmatter.tags}>
+  <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+
+  <div class="min-h-screen bg-skin-fill py-8 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-7xl mx-auto">
+      <p class="text-base text-skin-base">
+        This calculator will help you understand the true lifetime value (LTV) of lawn mowing customers and determine customer acquisition costs (CAC) you could anticipate in this business. 
+      </p>
+    </div>
+
+    <LawnMowingCustomerValueCalculator client:load />
+
+    <div class="prose prose-lg max-w-none mt-12 text-skin-base">
+      <h2 class="text-2xl font-bold mb-4">How this Calculator Works</h2>
+      <p>
+        The default settings on this calculator were built with real-world numbers provided by <a href="https://x.com/LeadershipAcad1">Nolan Gore</a> on X, who owns <a href="https://www.topchoiceaustin.com/">Top Choice Lawn Care</a> in Austin, Texas. Nolan’s business does more than $6 million in annual revenue, so he knows what he’s talking about when it comes to running a successful landscaping business.
+      </p>
+
+      <h3 class="text-xl font-bold mt-6">Understanding the Inputs</h3>
+      <ul class="list-decimal pl-6 space-y-2">
+        <li><strong>Average Mow Price ($):</strong> This is how much you charge for a typical mow. The default is $75, but enter your actual average price.</li>
+        <li><strong>Gross Margin (%):</strong> This is the percentage of your mowing revenue left after direct costs (labor, fuel, equipment costs). The default is 50%.</li>
+        <li><strong>Average Number of Mows per Year:</strong> How many times you mow each customer’s lawn in a typical year. The default is 25, assuming a typical mowing season.</li>
+        <li><strong>Average Retention (months):</strong> How long customers typically stay with your service. The default is 36 months (3 years).</li>
+        <li><strong>Desired Customer Acquisition Cost (CAC) (%):</strong> The percentage of your customer’s lifetime net value you’re willing to spend to acquire them. The default is 25%.</li>
+      </ul>
+      <p class="mt-4">
+        I set the default at 25% based on input from Jon Matzer, who suggested using 20%–30% customer acquisition costs for any risks or indirect costs.
+      </p>
+
+  <XEmbed url="https://twitter.com/MatznerJon/status/1859944842299933099" />
+
+      <h3 class="text-xl font-bold mt-6">Understanding the Calculations</h3>
+      <p>Here’s how the calculations work in this tool:</p>
+      <ol class="list-decimal pl-6 space-y-2">
+        <li>
+          <strong>Yearly Value Calculations:</strong>
+          <ul class="list-disc pl-6 space-y-2">
+            <li>Yearly Gross = Mow Price × Mows per Year</li>
+            <li>Yearly Net = Yearly Gross × (Gross Margin ÷ 100)</li>
+          </ul>
+        </li>
+        <li>
+          <strong>Lifetime Value Calculations:</strong>
+          <ul class="list-disc pl-6 space-y-2">
+            <li>Lifetime Years = Retention Months ÷ 12</li>
+            <li>Lifetime Gross = Yearly Gross × Lifetime Years</li>
+            <li>Lifetime Net = Yearly Net × Lifetime Years</li>
+          </ul>
+        </li>
+        <li>
+          <strong>Target Customer Acquisition Cost (CAC):</strong>
+          <ul class="list-disc pl-6 space-y-2">
+            <li>Lifetime CAC = Lifetime Net × (Desired CAC % ÷ 100)</li>
+            <li>Yearly CAC = Yearly Net × (Desired CAC % ÷ 100)</li>
+          </ul>
+        </li>
+      </ol>
+      <p class="mt-4">
+        I added yearly and lifetime desired CAC outputs to this tool. If you want to be super conservative with your marketing budget, you could use the yearly CAC number to hit return on ad spend numbers in just 12 months.
+      </p>
+
+    <ImageEmbed
+      src="/images/top-choice-lawn-care.png"
+      alt="Top Choice Lawn Care Staff"
+      description="Top Choice Lawn Care serving Austin, Texas."
+    />
+
+      <h2 class="text-2xl font-bold mt-12 mb-4">What’s the True Potential Value?</h2>
+      <p>
+        Credit to Nolan Gore for starting an eye-opening conversation about the real value of lawn care customers. At first glance, the math looks straightforward with the average lifetime value of a mowing customer sitting at $2,812.50.
+      </p>
+      <p class="mt-4">
+        But when you dig in, you realize mowing could just be the foot in the door. The real money? It’s in the extras like:
+      </p>
+      <ul class="list-disc pl-6 space-y-2">
+        <li>Fertilization plans: <strong>$200–$600/year</strong></li>
+        <li>Weed control plans: <strong>$300–$500/year</strong></li>
+        <li>Seasonal cleanup: <strong>$200–$400/year</strong></li>
+      </ul>
+      <p class="mt-4">
+        Keep in mind that a single upsell can transform a customer’s lifetime value from "not bad" to "pretty sweet." Keep this in mind when planning this business. 
+      </p>
+    </div>
+
+<div class="prose prose-lg max-w-none mt-12 text-skin-base">
+  <h2 class="text-2xl font-bold mb-4">The True Value of a Customer</h2>
+  <p>Here’s how the math changes when you factor in realistic upsells and repeat business using a hypothetical example:</p>
+  
+  <h3 class="text-xl font-bold mt-6">Year 1:</h3>
+  <ul class="list-disc pl-6 space-y-2">
+    <li>Mowing: <strong>$937.50</strong></li>
+    <li>Fertilization: <strong>$400</strong></li>
+    <li>Fall cleanup: <strong>$300</strong></li>
+    <li><strong>Total:</strong> <strong>$1,637.50</strong></li>
+  </ul>
+  
+  <h3 class="text-xl font-bold mt-6">Year 2:</h3>
+  <ul class="list-disc pl-6 space-y-2">
+    <li>Mowing: <strong>$937.50</strong></li>
+    <li>Fertilization: <strong>$400</strong></li>
+    <li>Fall cleanup: <strong>$300</strong></li>
+    <li>Irrigation repair: <strong>$500</strong></li>
+    <li><strong>Total:</strong> <strong>$2,137.50</strong></li>
+  </ul>
+  
+  <h3 class="text-xl font-bold mt-6">Year 3:</h3>
+  <ul class="list-disc pl-6 space-y-2">
+    <li>Mowing: <strong>$937.50</strong></li>
+    <li>Fertilization: <strong>$400</strong></li>
+    <li>Fall cleanup: <strong>$300</strong></li>
+    <li>Landscape redesign: <strong>$3,000</strong></li>
+    <li><strong>Total:</strong> <strong>$4,637.50</strong></li>
+  </ul>
+  
+  <p class="mt-4"><strong>Example Customer Value with Add-on Services:</strong> <strong>$8,412.50</strong></p>
+
+  <h2 class="text-2xl font-bold mt-12 mb-4">Running a Lawn Care Business Ain't Easy!</h2>
+  <p>
+    Running a lawn mowing business is a proven business model, and there’s nothing like turning neatly trimmed grass into cold, hard cash.
+  </p>
+  <p class="mt-4">
+    But let’s keep it real… This is not an easy business to scale. Profit margins are often <a href="https://www.dynascape.com/blog/landscaping-profit-margins-how-to-double-your-profits/">5%–20% per job</a>, employees are expensive and take time to train and manage, and mastering services like landscaping and irrigation takes more than a YouTube crash course.
+  </p>
+
+    <ImageEmbed
+      src="/images/landscaping-vehicle.png"
+      alt="branded landscaping vehicle"
+      description="Landscaping vehicles like this don’t come cheap. They require real investment for every new piece of equipment you add to the business."
+    />
+
+  <p class="mt-4">
+    Add to that the cost of equipment that breaks down at the worst possible moment, and it’s clear this gig isn’t all sunshine and freshly cut lawns.
+  </p>
+  <p class="mt-4">
+    So, as you plug numbers into this calculator, keep in mind you’re not just building a business—you’re signing up for a juggling act of skills, expenses, and maybe a few headaches. But hey, if you’ve got the grit (and a good sense of humor), this business just might grow into something amazing.
+  </p>
+</div>
+
+    <AuthorBox />
+  </div>
+</IndexPage>

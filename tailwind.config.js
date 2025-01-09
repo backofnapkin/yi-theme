@@ -19,10 +19,19 @@ export default {
   theme: {
     screens: {
       'sm': '600px',
+      // => @media (min-width: 640px) { ... }
+
       'md': '720px',
+      // => @media (min-width: 768px) { ... }
+
       'lg': '840px',
+      // => @media (min-width: 1024px) { ... }
+
       'xl': '960px',
+      // => @media (min-width: 1280px) { ... }
+
       '2xl': '1080px',
+      // => @media (min-width: 1536px) { ... }
     },
     container: {
       center: true,
@@ -33,6 +42,7 @@ export default {
         active: withOpacity("--color-text-active")
       },
     },
+
     backgroundColor: {
       skin: {
         fill: withOpacity("--color-fill"),

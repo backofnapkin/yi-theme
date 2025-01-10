@@ -60,20 +60,20 @@ export const config = {
  */
 export const categories = [
   {
-    name: "Blog",
+    name: "Home",
+    iconClass: "ri-home-line",  // Using Remix icon for home
+    href: "/",
+  },
+  {
+    name: "Sign Up",
     iconClass: "ri-draft-line",
-    href: "/blog/1",
+    href: "/sign-up/",
   },
   {
     name: "About",
     iconClass: "ri-lightbulb-flash-line",
     href: "/about/",
   },
-  // {
-  //   name: "Join Us",
-  //   iconClass: "ri-quill-pen-line",
-  //   href: "/join-us/",
-  // },
   {
     name: "Contact",
     iconClass: "ri-archive-line",

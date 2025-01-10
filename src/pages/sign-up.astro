@@ -1,0 +1,139 @@
+---
+import IndexPage from '../layouts/IndexPage.astro';
+import { CheckCircle } from 'lucide-react';
+
+const frontmatter = {
+  title: "Join the Newsletter and Get Free Stuff",
+  description: "Sign up and I'll give you unlimited access to my 5 favorite business tools.",
+  author: "Brett Lindenberg",
+  date: "2025-01-09",
+  comment: false,
+  donate: false,
+  hideHeader: true
+};
+
+const benefits = [
+  "Million-Dollar Calculator: See exactly how to reach $1M with custom growth scenarios.",
+  "100K Roadmap Builder: Plot your first major milestone with proven revenue strategies.",
+  "Business Ideas: I'll occasionally send vetted business ideas I think are promising."
+];
+---
+
+<IndexPage {...frontmatter}>
+  <div class="col-span-4 xl:col-span-3">
+    <div class="max-w-3xl mx-auto">
+      {/* Hero Section */}
+      <div class="calc-panel p-8 mb-8 text-center">
+        <h1 class="text-4xl font-bold mb-6 text-skin-base">
+          Sign Up for My Newsletter and I'll Send You the Top 5 Tools I Built.
+        </h1>
+        <p class="text-lg mb-6 text-skin-muted">
+          Make a plan and project growth from your first $100K to $1M and beyond with unlimited access to my most popular toolset.
+        </p>
+      </div>
+
+      {/* AWeber Form - Moved up and styled */}
+      <div class="bg-skin-fill p-8 rounded-lg border border-[rgb(var(--color-border))] mb-8">
+        <style is:inline>
+          #af-form-158860040 .af-body {
+            font-family: inherit;
+          }
+          /* Enhanced input fields */
+          #af-form-158860040 .af-body input.text {
+            padding: 12px 16px !important;
+            font-size: 1.1rem !important;
+            margin-bottom: 16px !important;
+            border-radius: 6px !important;
+            width: 100% !important;
+          }
+          /* Add space before button */
+          #af-form-158860040 .buttonContainer {
+            margin-top: 24px !important;
+          }
+          /* Enhanced submit button styling */
+          #af-form-158860040 .buttonContainer input.submit {
+            background-color: rgb(134, 174, 151) !important;
+            color: white !important;
+            padding: 12px 32px !important;
+            font-size: 1.2rem !important;
+            border-radius: 6px !important;
+            transition: all 0.3s ease !important;
+            cursor: pointer !important;
+            border: none !important;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+          }
+          #af-form-158860040 .buttonContainer input.submit:hover {
+            opacity: 0.9 !important;
+            transform: translateY(-1px) !important;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15) !important;
+          }
+        </style>
+        <form method="post" class="af-form-wrapper" accept-charset="UTF-8" action="https://www.aweber.com/scripts/addlead.pl"  >
+        <div style="display: none;">
+        <input type="hidden" name="meta_web_form_id" value="158860040" />
+        <input type="hidden" name="meta_split_id" value="" />
+        <input type="hidden" name="listname" value="awlist6829598" />
+        <input type="hidden" name="redirect" value="https://backofnapkin.co/thanks-for-registering-theres-one-more-step/" id="redirect_ef1a7adf3d9efa3dcb25e3806bdcac3b" />
+        <input type="hidden" name="meta_adtracking" value="My_Web_Form" />
+        <input type="hidden" name="meta_message" value="1" />
+        <input type="hidden" name="meta_required" value="name,email" />
+        <input type="hidden" name="meta_tooltip" value="" />
+        </div>
+        <div id="af-form-158860040" class="af-form">
+          <div id="af-header-158860040" class="af-header">
+            <div class="bodyText">
+            </div>
+          </div>
+          <div id="af-body-158860040" class="af-body af-standards">
+            <div class="af-element">
+              <label class="previewLabel" for="awf_field-117696706">Name:</label>
+              <div class="af-textWrap">
+                <input id="awf_field-117696706" type="text" name="name" class="text" value="" onfocus=" if (this.value == '') { this.value = ''; }" onblur="if (this.value == '') { this.value='';} " tabindex="500" />
+              </div>
+              <div class="af-clear"></div>
+            </div>
+            <div class="af-element">
+              <label class="previewLabel" for="awf_field-117696707">Email:</label>
+              <div class="af-textWrap">
+                <input class="text" id="awf_field-117696707" type="email" name="email" value="" tabindex="501" onfocus=" if (this.value == '') { this.value = ''; }" onblur="if (this.value == '') { this.value='';}" />
+              </div>
+              <div class="af-clear"></div>
+            </div>
+            <div class="af-element buttonContainer">
+              <input name="submit" class="submit" type="submit" value="Get Instant Access" tabindex="502" />
+              <div class="af-clear"></div>
+            </div>
+          </div>
+        </div>
+        <div style="display: none;"><img src="https://forms.aweber.com/form/displays.htm?id=jKwcHGwMDCwM" alt="" /></div>
+        </form>
+      </div>
+
+      {/* Benefits Section */}
+      <div class="mb-8">
+        <div class="grid gap-4">
+          {benefits.map((benefit) => (
+            <div class="flex items-start gap-3 bg-skin-fill p-4 rounded-lg">
+              <CheckCircle className="w-6 h-6 text-[rgb(var(--color-calc-accent-sage))] mt-1 flex-shrink-0" />
+              <p class="text-skin-base">{benefit}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Bonus Callout */}
+      <div class="calc-panel p-6 mb-8 text-center">
+        <p class="text-lg font-semibold text-[rgb(var(--color-text-active))]">
+          Super Bonus: I'll also be sending the occasional businesss update or stock purchase I'm making. (That's gotta be worth $297 right?)
+        </p>
+      </div>
+
+      {/* Social Proof */}
+      <div class="mt-8 text-center text-skin-muted">
+        <p class="italic">
+          Unsubscribe at any time. I only send emails when I have something valuable to share. 
+        </p>
+      </div>
+    </div>
+  </div>
+</IndexPage>

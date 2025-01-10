@@ -1,0 +1,228 @@
+---
+import IndexPage from "../../layouts/IndexPage.astro";
+import { RestaurantSeatingCapacityCalculator } from "../../components/calculators/restaurant-seating-capacity/RestaurantSeatingCapacityCalculator";
+import { Calculator } from 'lucide-react';
+import YouTubeEmbed from '../../components/YouTubeEmbed.astro';
+import ImageEmbed from '../../components/ImageEmbed.astro';
+import AuthorBox from '../../components/AuthorBox.astro';
+
+export const frontmatter = {
+    comment: false,
+    donate: false,
+    title: "Restaurant Seating Capacity and Table Space Calculator",
+    description: "Calculate optimal seating arrangements and capacity for your restaurant space.",
+    author: "Brett Lindenberg",
+    category: "Restaurant Calculators",
+    date: "2024-11-14",
+    tags: [""],
+    image: {
+        url: "",
+        alt: ""
+    }
+};
+
+const schema = {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": frontmatter.title,
+    "description": frontmatter.description,
+    "applicationCategory": "BusinessApplication",
+    "operatingSystem": "Web Browser",
+    "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+    },
+    "featureList": [
+        "Restaurant Seating Calculator",
+        "Space optimization",
+        "Table arrangement planning",
+        "Capacity analysis",
+        "Safety compliance guidelines"
+    ]
+};
+---
+
+<IndexPage
+    title={frontmatter.title}
+    description={frontmatter.description}
+    author={frontmatter.author}
+    date={frontmatter.date}
+    comment={frontmatter.comment}
+    donate={frontmatter.donate}
+    image={frontmatter.image}
+    category={frontmatter.category}
+    tags={frontmatter.tags}>
+
+<script type="application/ld+json" set:html={JSON.stringify(schema)} />
+
+<div class="min-h-screen bg-skin-fill py-2 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-7xl mx-auto">
+        <div class="not-prose my-2">
+            <RestaurantSeatingCapacityCalculator client:load />
+        </div>
+    </div>
+    
+    <div class="prose prose-lg max-w-none mt-12 text-skin-base">
+        <h2 class="text-2xl font-bold mb-4">How to use this calculator</h2>
+        
+        <h3 class="text-xl font-bold mt-8">Step 1: Enter Dining Room Area</h3>
+        <p class="mt-4">
+            Measure your total dining area in square feet. The default setting is 3,000 sq feet. Exclude non-dining areas like kitchen, restrooms, storage, service stations, and bar areas (unless including bar seating).
+        </p>
+
+        <h3 class="text-xl font-bold mt-8">Step 2: Choose Table Types</h3>
+        <p class="mt-4">
+            The calculator includes standard table dimensions and chair space. This chair space ensures that guests can comfortably sit down, pull out their chairs, and move around without feeling cramped.
+        </p>
+        <p class="mt-4">
+            For example, a small 2-person table might only be 24″ x 24″, but once you add room for the chairs and enough space for guests to sit comfortably, it actually requires a 60″ x 60″ area. This helps avoid overcrowded tables and makes sure there's plenty of room for staff to navigate the dining area.
+        </p>
+
+<ImageEmbed src="/images/sample-restaurant-seating-blueprint.png" alt="restaurant seating blueprint" description="Sample restaurant seating layout." />
+
+        <div class="mt-8">
+            <h4 class="text-lg font-bold mb-4">Tables</h4>
+            
+            <h5 class="font-bold mt-4">2-Person Tables</h5>
+            <ul class="list-disc pl-6 space-y-2">
+                <li>Square: 24″ x 24″ (requires 60″ x 60″ with chair space)</li>
+                <li>Round: 24″ diameter (requires 60″ x 60″ with chair space)</li>
+            </ul>
+
+            <h5 class="font-bold mt-4">4-Person Tables</h5>
+            <ul class="list-disc pl-6 space-y-2">
+                <li>Square: 36″ x 36″ (requires 72″ x 72″ with chair space)</li>
+                <li>Round: 36″ diameter (requires 72″ x 72″ with chair space)</li>
+            </ul>
+
+            <h5 class="font-bold mt-4">6-Person Tables</h5>
+            <ul class="list-disc pl-6 space-y-2">
+                <li>Rectangle: 36″ x 60″ (requires 72″ x 96″ with chair space)</li>
+                <li>Round: 48″ diameter (requires 72″ x 96″ with chair space)</li>
+            </ul>
+
+            <h5 class="font-bold mt-4">8-Person Tables</h5>
+            <ul class="list-disc pl-6 space-y-2">
+                <li>Rectangle: 36″ x 72″ (requires 96″ x 96″ with chair space)</li>
+                <li>Round: 60″ diameter (requires 96″ x 96″ with chair space)</li>
+            </ul>
+
+            <h5 class="font-bold mt-4">Booths</h5>
+            <ul class="list-disc pl-6 space-y-2">
+                <li>2-Person: 48″ width x 24″ depth</li>
+                <li>4-Person: 48″ width x 48″ depth</li>
+                <li>6-Person: 72″ width x 48″ depth</li>
+                <li>8-Person: 96″ width x 48″ depth</li>
+                <li>All booths include required 36″ aisle space</li>
+            </ul>
+        </div>
+
+<ImageEmbed src="/images/ancho-honey-restaurant.png" alt="Ancho Honey restaurant" description="Malcolm Bedell (who helped with this calculator) had to maximize available space in his restaurant featured above." />
+
+        <h3 class="text-xl font-bold mt-8">Step 3: Review Results</h3>
+        <p class="mt-4">
+            The calculator provides: Total seating capacity, space utilized, remaining available space, suggested additional seating options. You'll also get a warning message when you exceed the amount of square feet.
+        </p>
+
+        <h2 class="text-2xl font-bold mt-12 mb-4">Understanding the Calculations</h2>
+        
+        <div class="space-y-8">
+            <div>
+                <p class="font-bold mb-2">Space Calculation Formula:</p>
+                <pre class="bg-skin-card p-4 rounded-lg overflow-x-auto">
+<code>Total Space Required = Table Space + Chair Space + Aisle Space
+Where:
+- Table Space = Table Width × Table Length
+- Chair Space = 18" per side
+- Aisle Space = 36" (minimum)</code>
+                </pre>
+            </div>
+
+            <div>
+                <p class="font-bold mb-2">Seating Density Formula:</p>
+                <pre class="bg-skin-card p-4 rounded-lg overflow-x-auto">
+<code>Seating Density = Total Square Footage ÷ Number of Seats
+Recommended Ranges:
+- Fine Dining: 18-20 sq ft per person
+- Casual Dining: 15-18 sq ft per person
+- Fast Casual: 12-15 sq ft per person</code>
+                </pre>
+            </div>
+        </div>
+
+<ImageEmbed src="/images/malcolm-bedell.png" alt="Malcom Bedell" description="Malcolm Bedell helped me with the foundation of this tool." />
+
+        <h2 class="text-2xl font-bold mt-12 mb-4">About this tool</h2>
+        <p class="mt-4">
+            To build the Restaurant Seating Capacity and Table Space Calculator, I combined real-world expertise from seasoned restaurateurs like Malcolm Bedell who launched two restaurants and a food truck and combined it with industry research from trusted sources.
+        </p>
+        <p class="mt-4">
+            Malcolm's experience making small, quirky spaces work in his converted sub-2,000 sq foot house / restaurant was invaluable, but I also wanted to ground the tool in data-backed best practices.
+        </p>
+        <p class="mt-4">
+            Malcolm's approach to seating is rooted in his real-world experience. As Malcolm puts it, "The trick isn't just about cramming in as many tables as you can. You've got to think about the vibe you're creating. Too many seats and your restaurant feels like a cafeteria. Too few and you're leaving money on the table."
+        </p>
+        <p class="mt-4">
+            One of Malcolm's key tips when using this tool is to test different table dimensions and arrangements before committing: "It's amazing what a difference it makes just swapping a couple of two-tops for a communal table. You can handle the same crowd, but suddenly you've got flexibility for larger groups without needing to expand your space."
+        </p>
+
+        <h3 class="text-xl font-bold mt-8">Research Sources</h3>
+        <p class="mt-4">
+            In addition to Malcolm's practical insights, I consulted several key sources to create a well-rounded tool:
+        </p>
+        <p class="mt-4">
+            <strong><a href="https://www.dimensions.com/collection/restaurant-layouts">Dimensions.com</a>:</strong> This resource provided average space recommendations per guest type, ranging from 18-20 square feet per person for fine dining to 12-15 square feet per person for full-service restaurants. They also recommend a minimum of 18 inches of space between occupied chairs, ensuring guests have enough room to dine comfortably.
+        </p>
+        <p class="mt-4">
+            <strong><a href="https://totalfood.com/how-to-create-a-restaurant-floor-plan/">TotalFood.com</a>:</strong> Their guidelines further refined the seating recommendations, noting specific space needs based on service style:
+        </p>
+        <ul class="list-disc pl-6 space-y-2 mt-4">
+            <li>Fine Dining: 18–20 square feet per seat</li>
+            <li>Full Service: 12–15 square feet per seat</li>
+            <li>Counter Service: 18–20 square feet per seat</li>
+            <li>Fast Food Minimum: 11–14 square feet per seat</li>
+            <li>Banquet Seating: 10–11 square feet per seat</li>
+        </ul>
+        <p class="mt-4">
+            Malcolm's real-world wisdom ties it all together. As he puts it, "You can't just apply a cookie-cutter approach. In a converted house like mine, you've got tight corners and narrow walkways. Sometimes, shifting a few chairs or swapping a two-top for a bar counter can free up just enough space to make the whole room flow better."
+        </p>
+
+        <h2 class="text-2xl font-bold mt-12 mb-4">Safety compliance</h2>
+        <p class="mt-4">
+            While this tool can help you estimate the seating for your space, safety compliance is a critical factor that must not be overlooked. This tool is for educational purposes so it's crucial to consult with local experts to make sure your design is up to code.
+        </p>
+
+        <h3 class="text-xl font-bold mt-8">Key Safety Considerations</h3>
+        
+        <h4 class="text-lg font-bold mt-6">1. Check Local Regulations</h4>
+        <ul class="list-disc pl-6 space-y-2 mt-4">
+            <li><strong>Fire Safety:</strong> Contact your local fire marshal to understand specific fire safety requirements, such as minimum aisle widths and the number of exits needed based on your occupancy.</li>
+            <li><strong>Occupancy Limits:</strong> Verify your restaurant's occupancy limit, which is determined by your local building and fire codes. Exceeding this limit can lead to safety hazards and potential fines.</li>
+            <li><strong>ADA Compliance:</strong> Ensure your layout meets guidelines set by the <a href="https://www.access-board.gov/files/ada/ADA-Standards.pdf">Americans with Disabilities Act</a> (ADA). This includes having accessible seating options and maintaining at least 36 inches of clearance for walkways to accommodate wheelchair access.</li>
+        </ul>
+
+        <h4 class="text-lg font-bold mt-6">2. Emergency Access and Egress</h4>
+        <ul class="list-disc pl-6 space-y-2 mt-4">
+            <li><strong>Clear Aisles and Exits:</strong> Keep aisles at a minimum of 36 inches wide to ensure safe and easy passage for customers and staff. Never block exits — they must remain clear and visible at all times.</li>
+            <li><strong>Occupancy Signage:</strong> Post your maximum occupancy limit clearly where staff and guests can see it. This is not only a safety requirement but also helps your team manage crowd control during busy periods.</li>
+        </ul>
+        
+        <p class="mt-4">
+            By working closely with local safety and accessibility departments, you can create a seating plan that maximizes capacity without compromising on safety. Always cross-check your layout and calculations with local fire, health, and building code officials.
+        </p>
+
+        <h2 class="text-2xl font-bold mt-12 mb-4">Related tools</h2>
+        <p class="mt-4">
+            <a href="#" class="text-skin-accent hover:underline">Multi-Segment Restaurant Revenue Calculator:</a> Use this tool to project restaurant revenue for dine-in, drive-thru, catering, and delivery.
+        </p>
+    </div>
+
+    <main>
+        <article>
+            <slot />
+        </article>
+        <AuthorBox />
+    </main>
+</div>
+</IndexPage>

@@ -199,20 +199,19 @@ export const RestaurantSeatingCapacityCalculator: React.FC = () => {
             remainingSpace={results.remainingSpace}
             utilizationPercentage={results.utilizationPercentage}
           />
-
-          <div className="bg-[rgb(251,251,251)] p-6 rounded-lg border border-[rgb(104,157,106)] shadow-md">
-            <h3 className="text-xl font-semibold mb-4 text-[rgb(80,73,69)]">Seating Capacity</h3>
-            <div className="grid md:grid-cols-2 gap-4">
-              <div className="p-4 bg-[rgb(241,241,241)] rounded-lg">
-                <p className="text-sm text-[rgb(80,73,69)]">Total Possible Capacity</p>
-                <p className="text-2xl font-bold text-[rgb(181,118,20)]">{results.totalSeatingCapacity} seats</p>
-              </div>
-              <div className="p-4 bg-[rgb(241,241,241)] rounded-lg">
-                <p className="text-sm text-[rgb(80,73,69)]">Remaining Capacity</p>
-                <p className="text-2xl font-bold text-[rgb(181,118,20)]">{results.remainingSeatingCapacity} seats</p>
-              </div>
-            </div>
-          </div>
+<div className="calc-panel p-6 rounded-lg border border-[rgb(var(--color-border))] shadow-md">
+  <h3 className="text-xl font-semibold mb-4 text-[rgb(var(--color-text))]">Seating Capacity</h3>
+  <div className="grid md:grid-cols-2 gap-4">
+    <div className="p-4 calc-panel-secondary rounded-lg">
+      <p className="text-sm text-[rgb(var(--color-text))]">Total Possible Capacity</p>
+      <p className="text-2xl font-bold text-[rgb(var(--color-text-active))]">{results.totalSeatingCapacity} seats</p>
+    </div>
+    <div className="p-4 calc-panel-secondary rounded-lg">
+      <p className="text-sm text-[rgb(var(--color-text))]">Remaining Capacity</p>
+      <p className="text-2xl font-bold text-[rgb(var(--color-text-active))]">{results.remainingSeatingCapacity} seats</p>
+    </div>
+  </div>
+</div>
 
           {results.utilizationPercentage > 100 && (
             <div className="bg-[rgb(254,242,242)] border-l-4 border-[rgb(239,68,68)] p-4">

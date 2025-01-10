@@ -1,34 +1,100 @@
 ---
-import PostView from '../components/PostView.astro'
-import IndexPage from '../layouts/IndexPage.astro'
-import {getCollectionByName} from "../utils/getCollectionByName";
-import {orderBySticky} from "../utils/orderBySticky";
-import {site} from '../consts'
-import Pagination from "../components/Pagination.astro";
-import _ from 'lodash'
+import IndexPage from '../layouts/IndexPage.astro';
+import { Calculator, TrendingUp, Utensils, TreePine, Wallet } from 'lucide-react';
+import { site, config } from "../consts";
+import _ from 'lodash';
 
-let currentPage = 1
-let blogs = await getCollectionByName("blog");
-let totalPage = _.ceil(_.divide(blogs.length, site.postPageSize))
+const frontmatter = {
+  title: "BackofNapkin.co | Business & Financial Calculators",
+  description: "Explore our collection of business, food service, lawn care, and financial calculators to make data-driven decisions for your venture.",
+  author: "Brett Lindenberg",
+  date: "2025-01-09",
+  comment: false,
+  donate: false,
+  hideHeader: true
+};
 
-let sortedPosts = await orderBySticky(blogs);
-if (sortedPosts.length > site.postPageSize) {
-  sortedPosts = sortedPosts.splice(0, site.postPageSize);
-}
+// Category data
+const categories = [
+  {
+    title: "Business Calculators",
+    path: "/category/business-calculators/",
+    description: "Project revenues, estimate costs, and analyze business metrics to make informed decisions for your venture.",
+    Icon: Calculator
+  },
+  {
+    title: "Food Business Calculators",
+    path: "/category/food-business-calculators/",
+    description: "Specialized tools for restaurants, food trucks, and catering businesses to calculate food costs, pricing, and operations.",
+    Icon: Utensils
+  },
+  {
+    title: "Lawn Care Calculators",
+    path: "/category/lawn-care-calculators/",
+    description: "Essential calculators for lawn care professionals to estimate jobs, materials, and pricing for landscaping services.",
+    Icon: TreePine
+  },
+  {
+    title: "Personal Finance Calculators",
+    path: "/category/personal-finance-calculators/",
+    description: "Plan your financial future with FIRE calculators and wealth-building tools for personal financial independence.",
+    Icon: Wallet
+  }
+];
 ---
 
-<IndexPage>
-  {
-    sortedPosts.map(blog =>
-      <PostView blog={blog}></PostView>)
-  }
-  {
-    totalPage > 1 ?
-      <Pagination
-        currentPage={currentPage}
-        totalPage={totalPage}
-        url={{prev: '', next: '/blog/2'}}
-      /> : ''
-  }
-</IndexPage>
+<IndexPage {...frontmatter}>
+  <div class="col-span-4 xl:col-span-3">
+    {/* Hero Section */}
+    <div class="calc-panel p-8 text-center mb-8">
+      <h1 class="text-4xl font-bold mb-4 text-skin-base">
+        Crunch the Numbers on Your Next Idea
+      </h1>
+      <p class="text-xl mb-6 text-skin-base">
+        Explore our Online Calculators + Business Tools
+      </p>
+      <p class="text-lg max-w-2xl mx-auto text-skin-muted">
+        Make data-driven decisions for your business with our specialized calculators 
+        for revenue projections, cost analysis, and financial planning.
+      </p>
+    </div>
 
+    {/* Categories Grid */}
+    <div class="grid gap-6 sm:grid-cols-1 md:grid-cols-2">
+      {categories.map(({ title, path, description, Icon }) => (
+        <a href={path} 
+           class="group bg-skin-fill p-6 rounded-lg border border-[rgb(var(--color-border))] hover:border-[rgb(var(--color-border-active))] transition-all duration-300 hover:shadow-md">
+          <div class="flex items-center mb-4">
+            <Icon class="w-6 h-6 text-[rgb(var(--color-calc-accent-sage))] group-hover:text-[rgb(var(--color-text-active))] transition-colors duration-300" />
+            <h2 class="text-2xl font-semibold text-skin-base group-hover:text-[rgb(var(--color-text-active))] ml-3">
+              {title}
+            </h2>
+          </div>
+          <p class="text-skin-muted mb-8">
+            {description}
+          </p>
+          <span class="text-[rgb(var(--color-text-active))] opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-sm">
+            Explore {title} →
+          </span>
+        </a>
+      ))}
+    </div>
+
+    {/* Value Proposition */}
+    <div class="mt-8 calc-panel p-8">
+      <h2 class="text-2xl font-semibold mb-4 text-skin-base">
+        Make Better Business Decisions
+      </h2>
+      <p class="text-skin-muted mb-4">
+        BackofNapkin.co helps entrepreneurs and business owners make smarter financial decisions. 
+        Our calculators help you:
+      </p>
+      <ul class="space-y-2 text-skin-muted list-disc pl-6">
+        <li>Project revenues and costs for new business ventures</li>
+        <li>Calculate pricing strategies for services and products</li>
+        <li>Estimate operational costs and profit margins</li>
+        <li>Plan your path to financial independence</li>
+      </ul>
+    </div>
+  </div>
+</IndexPage>

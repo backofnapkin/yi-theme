@@ -15,6 +15,14 @@ export default {
     './src/components/**/*.{js,ts,jsx,tsx}',
     './src/pages/**/*.{js,ts,jsx,tsx,astro}'
   ],
+  safelist: [
+    // Specific Card styles
+    'bg-gradient-to-br',
+    'from-amber-100',
+    'to-amber-50',
+    '!border-amber-200', // Tailwind will respect the important modifier
+    '!bg-opacity-100',
+  ],
   darkmode: "class",
   theme: {
     screens: {

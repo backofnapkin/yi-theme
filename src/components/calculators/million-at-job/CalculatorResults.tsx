@@ -106,7 +106,7 @@ export const CalculatorResults: React.FC<Props> = ({
         />
       </div>
 
-      <Card className="bg-gradient-to-br from-amber-100 to-amber-50 !border-amber-200 !bg-opacity-100">
+      <Card className="bg-gradient-to-br from-amber-100 to-amber-50 border-amber-200 !bg-opacity-100">
         <h3 className="text-xl font-bold mb-4 text-gray-900">Annual Summary</h3>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
           <div className="space-y-2">

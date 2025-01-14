@@ -15,8 +15,12 @@ export default {
     './src/pages/**/*.{js,ts,jsx,tsx,astro}'
   ],
   safelist: [
-    // Explicitly include the classes we're using
+    // Base utility classes
     'bg-gradient-to-br',
+    'bg-gradient-to-r',
+    'border',
+    'border-solid',
+    // Explicit color classes
     'from-green-50',
     'from-green-100',
     'from-emerald-50',
@@ -33,13 +37,9 @@ export default {
     'border-emerald-200',
     'border-amber-100',
     'border-amber-200',
-    // Use patterns for dynamic classes
+    // Patterns for dynamic classes
     {
-      pattern: /bg-(emerald|amber|green|orange)-(50|100|200)/,
-      variants: ['hover', 'focus']
-    },
-    {
-      pattern: /border-(emerald|amber|green|orange)-(50|100|200)/,
+      pattern: /(border|bg|from|to)-(emerald|amber|green|orange)-(50|100|200)/,
       variants: ['hover', 'focus']
     }
   ],

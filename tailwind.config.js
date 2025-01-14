@@ -20,7 +20,7 @@ export default {
     'bg-gradient-to-br',
     'from-amber-100',
     'to-amber-50',
-    '!border-amber-200', // Tailwind will respect the important modifier
+    'border-amber-200', // Tailwind will respect the important modifier
     '!bg-opacity-100',
   ],
   darkmode: "class",

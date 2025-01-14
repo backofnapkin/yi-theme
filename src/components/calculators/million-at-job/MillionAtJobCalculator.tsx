@@ -4,6 +4,8 @@ import type { CalculatorInputs, CalculationResults } from './types';
 import { CalculatorInputsForm } from './CalculatorInputs';
 import { ResultsChart } from './ResultsChart';
 import { calculateTaxRate, calculateTimeToMillion, formatYearsAndMonths, formatCurrency } from './utils';
+import { Card } from './ui/Card';
+
 
 const defaultInputs: CalculatorInputs = {
   incomeType: 'annual',
@@ -99,7 +101,7 @@ export const MillionAtJobCalculator: React.FC = () => {
 
           {results && (
             <div className="space-y-8">
-              <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl p-6 shadow-sm border border-emerald-100">
+              <div className="bg-gradient-to-br from-green-50 to-emerald-50 border-emerald-100">
                 <div className="flex justify-between items-center mb-6">
                   <h2 className="text-2xl font-bold text-gray-900">Your Time to $1 Million Dollars</h2>
                   <button
@@ -181,7 +183,7 @@ export const MillionAtJobCalculator: React.FC = () => {
                 />
               </div>
 
-              <div className="bg-white rounded-lg border border-gray-200 p-6">
+              <div className="bg-gradient-to-br from-orange-100 to-amber-100 border-amber-200">
                 <h3 className="text-xl font-bold mb-4 text-gray-900">Annual Summary</h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                   <div className="space-y-2">

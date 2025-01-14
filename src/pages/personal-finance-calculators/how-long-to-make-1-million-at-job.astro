@@ -1,0 +1,151 @@
+---
+import IndexPage from "../../layouts/IndexPage.astro";
+import { MillionAtJobCalculator } from "../../components/calculators/million-at-job/MillionAtJobCalculator";
+import { Calculator } from 'lucide-react';
+import YouTubeEmbed from '../../components/YouTubeEmbed.astro';
+import ImageEmbed from '../../components/ImageEmbed.astro';
+import AuthorBox from '../../components/AuthorBox.astro';
+
+export const frontmatter = {
+  comment: false,
+  donate: false,
+  title: "How Long to Make $1 Million at Your Job Calculator",
+  description: "Calculate how long it will take to reach $1 million through your job income, considering taxes, expenses, and investments.",
+  author: "Brett Lindenberg",
+  category: "Personal Finance Calculators",
+  date: "2025-01-05",
+  tags: ["personal finance", "salary calculator", "investment planning", "wealth building"],
+  image: {
+    url: "",
+    alt: ""
+  }
+};
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": frontmatter.title,
+  "description": frontmatter.description,
+  "applicationCategory": "BusinessApplication",
+  "operatingSystem": "Web Browser",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "featureList": [
+    "Million Dollar Calculator",
+    "Tax Impact Analysis",
+    "Investment Return Projections",
+    "Expense Planning",
+    "Timeline Visualization",
+    "Financial Goal Setting"
+  ]
+};
+---
+
+<IndexPage
+  title={frontmatter.title}
+  description={frontmatter.description}
+  author={frontmatter.author}
+  date={frontmatter.date}
+  comment={frontmatter.comment}
+  donate={frontmatter.donate}
+  image={frontmatter.image}
+  category={frontmatter.category}
+  tags={frontmatter.tags}>
+
+<script type="application/ld+json" set:html={JSON.stringify(schema)} />
+<div class="min-h-screen bg-skin-fill pt-4 px-4 sm:px-6 lg:px-8">
+  <div class="max-w-7xl mx-auto">
+    <div class="not-prose mt-2">
+      <MillionAtJobCalculator client:load />
+    </div>
+  </div>
+  <div class="prose prose-lg max-w-none mt-12 text-skin-base">
+    <h2 class="text-2xl font-bold mb-4">How to Use This Calculator</h2>
+    <p>
+      This calculator helps you understand how long it will take to accumulate $1 million through your job income, considering various factors like taxes, expenses, and investment returns. It provides realistic projections based on your specific financial situation.
+    </p>
+    
+    <p class="font-semibold mt-4">Start by entering your income details:</p>
+    <ul class="list-disc pl-6 space-y-2">
+      <li><strong>Income Type:</strong> Choose between annual salary or hourly wage</li>
+      <li><strong>Income Amount:</strong> Enter your pre-tax income (default: $75,000 annually or $17/hour)</li>
+      <li><strong>Tax Filing Status:</strong> Select single or married to calculate tax impact</li>
+      <li><strong>Monthly Expenses:</strong> Include all regular monthly costs (default: $4,641)</li>
+    </ul>
+
+    <h3 class="text-xl font-bold mt-8">Investment Settings</h3>
+    <p>Configure your investment parameters:</p>
+    <ul class="list-disc pl-6 space-y-2">
+      <li><strong>Investment Returns:</strong> Set expected annual return rate (0-14%, default: 7%)</li>
+      <li><strong>Current Age:</strong> Enter your age to track timeline progress (5-99 years)</li>
+    </ul>
+
+    <h2 class="text-2xl font-bold mt-12 mb-4">Understanding Your Results</h2>
+    <p>The calculator provides four different scenarios to reach $1 million:</p>
+    <ul class="list-disc pl-6 space-y-2">
+      <li><strong>Gross Income:</strong> Time needed based on total income before taxes</li>
+      <li><strong>After Tax Income:</strong> Timeline adjusted for tax impact</li>
+      <li><strong>After Taxes + Expenses:</strong> Realistic timeline considering living costs</li>
+      <li><strong>Invested Amount:</strong> Accelerated timeline with compound investment returns</li>
+    </ul>
+
+    <h3 class="text-xl font-bold mt-8">Tax Rate Calculations</h3>
+    <p>The calculator uses 2024 tax brackets to estimate your effective tax rate:</p>
+    <pre class="bg-skin-card p-4 rounded-lg overflow-x-auto">
+<code>Single Tax Brackets:
+37% for income over $578,126
+35% for income over $231,251
+32% for income over $182,101
+24% for income over $95,376
+22% for income over $44,726
+12% for income over $11,001
+10% for income up to $11,000
+
+Married Tax Brackets:
+37% for income over $693,751
+35% for income over $462,501
+32% for income over $364,201
+24% for income over $190,751
+22% for income over $89,451
+12% for income over $22,001
+10% for income up to $22,000</code>
+    </pre>
+
+    <h3 class="text-xl font-bold mt-8">Investment Return Calculations</h3>
+    <p>For invested amounts, the calculator uses compound interest:</p>
+    <pre class="bg-skin-card p-4 rounded-lg overflow-x-auto">
+<code>// Compound Interest Formula
+Future Value = Present Value × (1 + return_rate)^years
+
+// Example with 7% return
+$10,000 × (1 + 0.07)^10 = $19,671.51</code>
+    </pre>
+
+    <h2 class="text-2xl font-bold mt-12 mb-4">Strategies to Reach $1 Million Faster</h2>
+    <ul class="list-disc pl-6 space-y-2">
+      <li><strong>Increase Savings Rate:</strong> Reduce monthly expenses to invest more</li>
+      <li><strong>Optimize Tax Strategy:</strong> Consider tax-advantaged accounts like 401(k)s and IRAs</li>
+      <li><strong>Boost Income:</strong> Pursue promotions, job changes, or additional education</li>
+      <li><strong>Diversify Investments:</strong> Balance risk and return for long-term growth</li>
+    </ul>
+
+    <p class="mt-4">
+      Remember that while this calculator provides valuable insights, market returns can vary significantly. Consider running multiple scenarios with different assumptions to better understand potential outcomes.
+    </p>
+
+    <p class="mt-4">
+      Use the print feature to save your calculations and track how changes in your income, expenses, or investment returns might affect your timeline to $1 million.
+    </p>
+  </div>
+
+  <main>
+    <article>
+      <slot />
+    </article>
+    <AuthorBox />
+  </main>
+</div>
+</IndexPage>

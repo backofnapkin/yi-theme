@@ -6,18 +6,11 @@ interface CardProps {
 }
 
 export const Card: React.FC<CardProps> = ({ children, className = '' }) => {
+  console.log('Card rendering with className:', className); // Add this line
   return (
     <div 
-      className={`
-        relative 
-        rounded-xl 
-        shadow-sm 
-        p-6 
-        bg-skin-fill
-        border
-        border-skin-base
-        ${className}
-      `}
+      className={`rounded-xl shadow-sm p-6 ${className}`}
+      style={{border: '2px solid red'}} // Add this temporary test style
     >
       {children}
     </div>

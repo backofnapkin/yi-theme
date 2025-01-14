@@ -1,5 +1,4 @@
 /** @type {import('tailwindcss').Config} */
-
 function withOpacity(variableName) {
   return ({ opacityValue }) => {
     if (opacityValue !== undefined) {
@@ -16,30 +15,42 @@ export default {
     './src/pages/**/*.{js,ts,jsx,tsx,astro}'
   ],
   safelist: [
-    // Specific Card styles
+    // Explicitly include the classes we're using
     'bg-gradient-to-br',
+    'from-green-50',
+    'from-green-100',
+    'from-emerald-50',
+    'from-emerald-100',
+    'from-orange-50',
+    'from-orange-100',
+    'from-amber-50',
     'from-amber-100',
+    'to-emerald-50',
+    'to-emerald-100',
     'to-amber-50',
-    'border-amber-200', // Tailwind will respect the important modifier
-    '!bg-opacity-100',
+    'to-amber-100',
+    'border-emerald-100',
+    'border-emerald-200',
+    'border-amber-100',
+    'border-amber-200',
+    // Use patterns for dynamic classes
+    {
+      pattern: /bg-(emerald|amber|green|orange)-(50|100|200)/,
+      variants: ['hover', 'focus']
+    },
+    {
+      pattern: /border-(emerald|amber|green|orange)-(50|100|200)/,
+      variants: ['hover', 'focus']
+    }
   ],
   darkmode: "class",
   theme: {
     screens: {
       'sm': '600px',
-      // => @media (min-width: 640px) { ... }
-
       'md': '720px',
-      // => @media (min-width: 768px) { ... }
-
       'lg': '840px',
-      // => @media (min-width: 1024px) { ... }
-
       'xl': '960px',
-      // => @media (min-width: 1280px) { ... }
-
       '2xl': '1080px',
-      // => @media (min-width: 1536px) { ... }
     },
     container: {
       center: true,
@@ -50,7 +61,6 @@ export default {
         active: withOpacity("--color-text-active")
       },
     },
-
     backgroundColor: {
       skin: {
         fill: withOpacity("--color-fill"),

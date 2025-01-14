@@ -23,7 +23,13 @@ export default defineConfig({
   outDir: './dist',
   integrations: [
     sitemap(),
-    tailwind(),
+    tailwind({
+      // Add Tailwind configuration here
+      config: {
+        applyBaseStyles: false,
+        jit: true
+      }
+    }),
     react(),
     expressiveCode({
       plugins: [pluginLineNumbers(), pluginCollapsibleSections()],
@@ -54,13 +60,14 @@ export default defineConfig({
     build: {
       rollupOptions: {
         external: ['chartjs-plugin-datalabels']
-      }
+      },
+      cssCodeSplit: false
     },
     ssr: {
       noExternal: ['chartjs-plugin-datalabels']
     },
     optimizeDeps: {
-      include: ['chartjs-plugin-datalabels']
+      include: ['chartjs-plugin-datalabels', 'tailwindcss']
     }
   }
 });

@@ -24,7 +24,7 @@ export const CalculatorResults: React.FC<Props> = ({
 
   return (
     <div className="space-y-8">
-      <Card className="bg-custom-primary border-custom-second">
+      <Card className="!bg-gradient-to-br !from-green-100 !to-emerald-100 !border !border-emerald-200">
         <div className="flex justify-between items-center mb-6">
           <h2 className="text-2xl font-bold text-gray-900">Your Time to $1 Million Dollars</h2>
           <button
@@ -106,7 +106,7 @@ export const CalculatorResults: React.FC<Props> = ({
         />
       </div>
 
-      <Card className="bg-gradient-to-br from-orange-100 to-amber-100 !border !border-solid !border-amber-200">
+      <Card className="!bg-gradient-to-br !from-orange-100 !to-amber-100 !border !border-amber-200">
         <h3 className="text-xl font-bold mb-4 text-gray-900">Annual Summary</h3>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
           <div className="space-y-2">

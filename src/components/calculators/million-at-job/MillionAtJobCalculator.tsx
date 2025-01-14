@@ -88,7 +88,7 @@ export const MillionAtJobCalculator: React.FC = () => {
               <h1 className="text-3xl font-bold text-gray-900">$1 Million Dollars from Work Calculator</h1>
               <p className="mt-2 text-gray-600">Calculate your path to $1 million based on your income and expenses</p>
             </div>
-
+            <div className="border border-gray-200 rounded-xl shadow-sm p-6 bg-white">
             <CalculatorInputsForm
               inputs={inputs}
               onChange={(newInputs) => setInputs({ ...inputs, ...newInputs })}
@@ -98,10 +98,11 @@ export const MillionAtJobCalculator: React.FC = () => {
                 setResults(null);
               }}
             />
+          </div>
 
             {results && (
               <div className="space-y-8">
-                <div className="bg-gradient-to-br from-green-50 to-emerald-50 border-emerald-100">
+                <div className="bg-gradient-to-br from-green-50 to-emerald-50 border border-gray-200 rounded-xl shadow-sm p-6">
                   <div className="flex justify-between items-center mb-6">
                     <h2 className="text-2xl font-bold text-gray-900">Your Time to $1 Million Dollars</h2>
                     <button
@@ -183,7 +184,7 @@ export const MillionAtJobCalculator: React.FC = () => {
                   />
                 </div>
 
-                <div className="bg-gradient-to-br from-orange-100 to-amber-100 border-amber-200">
+                <div className="bg-gradient-to-br from-orange-100 to-amber-100 border border-gray-200 rounded-xl shadow-sm p-6">
                   <h3 className="text-xl font-bold mb-4 text-gray-900">Annual Summary</h3>
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                     <div className="space-y-2">

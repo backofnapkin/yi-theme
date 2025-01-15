@@ -37,9 +37,21 @@ export default {
     'border-emerald-200',
     'border-amber-100',
     'border-amber-200',
+    // Data visualization colors
+    'from-slate-200',  // Soft blue-grey for charts
+    'from-stone-200',  // Warm grey for charts
+    'from-zinc-200',   // Cool grey for charts
+    'from-slate-300',  // Deeper blue-grey for charts
+    'from-emerald-600', // For line charts - positive trends
+    'from-red-600',     // For line charts - negative trends
+    // Theme red colors
+    'bg-skin-red-light',
+    'bg-skin-red-bg',
+    'border-skin-red-border',
+    'text-skin-red-text',
     // Patterns for dynamic classes
     {
-      pattern: /(border|bg|from|to)-(emerald|amber|green|orange)-(50|100|200)/,
+      pattern: /(border|bg|from|to)-(emerald|amber|green|orange|slate|stone|zinc)-(50|100|200|300|400|500|600)/,
       variants: ['hover', 'focus']
     }
   ],
@@ -58,7 +70,8 @@ export default {
     textColor: {
       skin: {
         base: withOpacity("--color-text"),
-        active: withOpacity("--color-text-active")
+        active: withOpacity("--color-text-active"),
+        'red-text': withOpacity("--color-red-text")  // Added theme red
       },
     },
     backgroundColor: {
@@ -67,6 +80,8 @@ export default {
         secondary: withOpacity("--color-fill-secondary"),
         card: withOpacity("--color-card"),
         modal: withOpacity("--color-modal"),
+        'red-light': withOpacity("--color-red-light"), // Added theme red
+        'red-bg': withOpacity("--color-red-bg"),       // Added theme red
       },
     },
     textDecorationColor: {
@@ -79,6 +94,7 @@ export default {
       skin: {
         normal: withOpacity('--color-text'),
         base: withOpacity('--color-border'),
+        'red-border': withOpacity('--color-red-border'), // Added theme red
       },
     },
     extend: {

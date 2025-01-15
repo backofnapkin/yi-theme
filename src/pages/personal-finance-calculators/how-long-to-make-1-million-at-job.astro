@@ -9,12 +9,12 @@ import AuthorBox from '../../components/AuthorBox.astro';
 export const frontmatter = {
   comment: false,
   donate: false,
-  title: "How Long to Make $1 Million at Your Job Calculator",
+  title: "How Long to Make $1 Million at Your Job? (Calculator)",
   description: "Calculate how long it will take to reach $1 million through your job income, considering taxes, expenses, and investments.",
   author: "Brett Lindenberg",
   category: "Personal Finance Calculators",
   date: "2025-01-05",
-  tags: ["personal finance", "salary calculator", "investment planning", "wealth building"],
+  tags: [""],
   image: {
     url: "",
     alt: ""
@@ -56,25 +56,27 @@ const schema = {
   tags={frontmatter.tags}>
 
 <script type="application/ld+json" set:html={JSON.stringify(schema)} />
-<div class="min-h-screen bg-skin-fill pt-4 px-4 sm:px-6 lg:px-8">
+<div class="min-h-screen bg-skin-fill pt-2 px-4 sm:px-6 lg:px-8">
   <div class="max-w-7xl mx-auto">
     <div class="not-prose mt-2">
       <MillionAtJobCalculator client:load />
     </div>
   </div>
-  <div class="prose prose-lg max-w-none mt-12 text-skin-base">
+  <div class="prose prose-lg max-w-none mt-2 text-skin-base">
     <h2 class="text-2xl font-bold mb-4">How to Use This Calculator</h2>
     <p>
       This calculator helps you understand how long it will take to accumulate $1 million through your job income, considering various factors like taxes, expenses, and investment returns. It provides realistic projections based on your specific financial situation.
     </p>
     
-    <p class="font-semibold mt-4">Start by entering your income details:</p>
+    <p class="font-semibold mt-3">Start by entering your income details:</p>
     <ul class="list-disc pl-6 space-y-2">
       <li><strong>Income Type:</strong> Choose between annual salary or hourly wage</li>
       <li><strong>Income Amount:</strong> Enter your pre-tax income (default: $75,000 annually or $17/hour)</li>
       <li><strong>Tax Filing Status:</strong> Select single or married to calculate tax impact</li>
       <li><strong>Monthly Expenses:</strong> Include all regular monthly costs (default: $4,641)</li>
     </ul>
+
+<ImageEmbed src="/images/average-monthly-expenses.jpg" alt="average monthly expenses" description="Write down all your monthly expenses to get the most accurate results from this tool." />
 
     <h3 class="text-xl font-bold mt-8">Investment Settings</h3>
     <p>Configure your investment parameters:</p>
@@ -93,7 +95,7 @@ const schema = {
     </ul>
 
     <h3 class="text-xl font-bold mt-8">Tax Rate Calculations</h3>
-    <p>The calculator uses 2024 tax brackets to estimate your effective tax rate:</p>
+    <p>The calculator uses <a href="https://taxfoundation.org/data/all/federal/2023-tax-brackets/">2023 tax brackets</a> to estimate your effective tax rate. Keep in mind that tax rates change every year. This is just an estimate.</p>
     <pre class="bg-skin-card p-4 rounded-lg overflow-x-auto">
 <code>Single Tax Brackets:
 37% for income over $578,126
@@ -114,32 +116,57 @@ Married Tax Brackets:
 10% for income up to $22,000</code>
     </pre>
 
-    <h3 class="text-xl font-bold mt-8">Investment Return Calculations</h3>
-    <p>For invested amounts, the calculator uses compound interest:</p>
-    <pre class="bg-skin-card p-4 rounded-lg overflow-x-auto">
-<code>// Compound Interest Formula
-Future Value = Present Value × (1 + return_rate)^years
+<h2 class="text-2xl font-bold mt-6 mb-4">Average Monthly Expenses</h2>
 
-// Example with 7% return
-$10,000 × (1 + 0.07)^10 = $19,671.51</code>
-    </pre>
+<p>
+  Figuring out your average monthly expenses is essential for the accuracy of this report. To get the best results, take the time to write down what you spend money on every month including groceries, utilities, phone, internet, insurance, transportation, rent, and entertainment. The more detailed list of monthly expenses you can account for the more accurate your calculations.
+</p>
 
-    <h2 class="text-2xl font-bold mt-12 mb-4">Strategies to Reach $1 Million Faster</h2>
-    <ul class="list-disc pl-6 space-y-2">
-      <li><strong>Increase Savings Rate:</strong> Reduce monthly expenses to invest more</li>
-      <li><strong>Optimize Tax Strategy:</strong> Consider tax-advantaged accounts like 401(k)s and IRAs</li>
-      <li><strong>Boost Income:</strong> Pursue promotions, job changes, or additional education</li>
-      <li><strong>Diversify Investments:</strong> Balance risk and return for long-term growth</li>
-    </ul>
+<p class="mt-4">
+  By default, I entered $4,163 in average monthly expenses as the default based on the average <a href="https://www.ramseysolutions.com/budgeting/american-average-monthly-expenses">monthly expenses by household size</a> provided by Ramsey Solutions. Based on the same article married couples without kids can expect $7,390 in monthly expenses. A family of four can expect to spend $8,450 per month.
+</p>
 
-    <p class="mt-4">
-      Remember that while this calculator provides valuable insights, market returns can vary significantly. Consider running multiple scenarios with different assumptions to better understand potential outcomes.
-    </p>
+<h2 class="text-2xl font-bold mt-6 mb-4">How much can you save from your paycheck?</h2>
 
-    <p class="mt-4">
-      Use the print feature to save your calculations and track how changes in your income, expenses, or investment returns might affect your timeline to $1 million.
-    </p>
-  </div>
+<p>
+  There's an old saying that goes something like: <em>"It doesn't matter how much you make. It's the amount of money you're able to save that's important."</em> I happen to agree with the overall sentiment of this proverb.
+</p>
+
+<p class="mt-4">
+  The reality is it's hard to hold onto money in today's society. We are taxed a lot and there's a certain amount of overhead each of needs to cover just to live including food, electricity, transportation rent or a mortgage. What's even crazier is this calculator only takes into consideration your federal tax. When you consider <a href="https://www.nerdwallet.com/article/taxes/state-income-tax-rates">state income tax</a> and sales tax rates that average <a href="https://www.rocketmoney.com/learn/personal-finance/sales-tax-by-state">5% – 7%</a>, it's not easy to reach $1 million dollars in personal savings by way of a bi-weekly paycheck.
+</p>
+
+<h2 class="text-2xl font-bold mt-6 mb-4">What can you do to save a million dollars faster?</h2>
+
+<p>
+  If you're feeling discouraged by the results in this calculator, I have some good news for you. Everyone can make $1 million dollars even on a low income. I entered the average salary of an employee of <a href="https://www.sofi.com/learn/content/average-salary-in-us/">$63,795 per year</a> into income field and the calculator estimates it will take 15 years and 9 months to gross a million.
+</p>
+
+<ImageEmbed src="/images/entering-the-workforce.png" alt="working at a computer" description="Joining the workforce early in life and reinvesting can shave years off your time to $1 million." />
+
+<p class="mt-4">
+  But it's not all doom and gloom! I have some good news for you too. Here are some actionable strategies that can help speed up your journey without having to switch jobs entirely:
+</p>
+
+<ul class="list-disc pl-6 space-y-2">
+  <li>
+    <strong>Ask for an Annual Raise:</strong> Don't underestimate the power of consistent, small raises. Even a 3% annual raise compounded over time can add up significantly. If you can demonstrate your value, aim higher. A raise not only boosts your income but can increase your 401K contributions or any employer matches, pushing you closer to the million-dollar mark.
+  </li>
+  <li>
+    <strong>Put in Extra Hours or Work Overtime:</strong> While working overtime isn't sustainable for everyone, it can be a great short-term boost to your income. Just a few extra hours each week can translate to thousands of dollars a year. If your workplace offers overtime pay, this can be a strategic way to increase your savings without making drastic changes.
+  </li>
+  <li>
+    <strong>Maximize Your 401K or IRA Contributions:</strong> Investing in a tax-deferred plan like a 401K not only reduces your taxable income today, but it also sets you up for significant growth over time. The average stock market appreciation is about 7-8% annually, which can lead to substantial wealth over a long time horizon. Plus, many employers offer a 401K match—free money that accelerates your path to $1 million.
+  </li>
+  <li>
+    <strong>Start a Side Hustle or Small Business:</strong> While your day job covers your main expenses, a <a href="/personal-finance-calculators/side-hustle-fire-calculator/">side hustle</a> can be the difference-maker that propels you toward your financial goals faster. Whether it's freelancing, selling products online, or mowing a few lawns on during your weekends, a small monthly side income can shave years off the time it takes to reach $1 million.
+  </li>
+</ul>
+
+<h3 class="text-xl font-bold mt-8">A Little Hope</h3>
+<p>
+  Hitting $1 million might seem out of reach, but you have more options than you think. By making small adjustments, staying consistent, and leveraging these strategies, you'll be surprised how much faster you can get there. It's all about stacking incremental gains and making your money work for you.
+</p>
 
   <main>
     <article>

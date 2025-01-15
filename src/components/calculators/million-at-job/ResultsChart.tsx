@@ -11,6 +11,7 @@ import {
 import type { CalculationResults } from './types';
 
 type ViewType = 'gross' | 'afterTax' | 'afterExpenses' | 'invested';
+type ConsolidatedViewType = 'income' | 'savings';
 
 interface Props {
   results: CalculationResults;
@@ -19,6 +20,14 @@ interface Props {
 }
 
 export const ResultsChart: React.FC<Props> = ({ results, selectedView, onViewChange }) => {
+  // Map consolidated view to original view types
+  const getConsolidatedView = (view: ViewType): ConsolidatedViewType => {
+    return ['gross', 'afterTax'].includes(view) ? 'income' : 'savings';
+  };
+
+  // Get the currently selected consolidated view
+  const currentConsolidatedView = getConsolidatedView(selectedView);
+
   const generateChartData = () => {
     const data = [];
     const years = {
@@ -28,8 +37,17 @@ export const ResultsChart: React.FC<Props> = ({ results, selectedView, onViewCha
       invested: results.investedAmount.impossible ? 0 : results.investedAmount.years + results.investedAmount.months / 12
     };
 
-    // Get the relevant timeline based on the selected view
-    let timelineYears = years[selectedView];
+    // Get the relevant timeline based on the consolidated view
+    let timelineYears: number;
+    if (currentConsolidatedView === 'income') {
+      timelineYears = Math.max(years.gross, years.afterTax);
+    } else {
+      timelineYears = Math.max(
+        years.afterExpenses || 0,
+        years.invested || 0
+      );
+    }
+
     if (timelineYears === 0 || !isFinite(timelineYears)) {
       timelineYears = Math.min(...Object.values(years).filter(y => y > 0 && isFinite(y)));
     }
@@ -48,18 +66,20 @@ export const ResultsChart: React.FC<Props> = ({ results, selectedView, onViewCha
       const annualAfterExpenses = annualAfterTaxIncome - annualExpenses;
       const annualInvestable = results.annualSummary.investableAmount;
 
-      if (selectedView === 'gross') {
+      if (currentConsolidatedView === 'income') {
         dataPoint.gross = year * annualGrossIncome;
-      } else if (selectedView === 'afterTax') {
         dataPoint.afterTax = year * annualAfterTaxIncome;
-      } else if (selectedView === 'afterExpenses' && !results.afterTaxAndExpenses.impossible) {
-        dataPoint.afterExpenses = year * annualAfterExpenses;
-      } else if (selectedView === 'invested' && !results.investedAmount.impossible) {
-        // For invested amount, use compound interest formula: FV = PMT * ((1 + r)^t - 1) / r
-        const r = (results.annualSummary.investmentReturns ?? 0) / 100;
-        dataPoint.invested = r === 0 
-          ? year * annualInvestable
-          : annualInvestable * ((Math.pow(1 + r, year) - 1) / r);
+      } else {
+        if (!results.afterTaxAndExpenses.impossible) {
+          dataPoint.afterExpenses = year * annualAfterExpenses;
+        }
+        if (!results.investedAmount.impossible) {
+          // For invested amount, use compound interest formula: FV = PMT * ((1 + r)^t - 1) / r
+          const r = (results.annualSummary.investmentReturns ?? 0) / 100;
+          dataPoint.invested = r === 0 
+            ? year * annualInvestable
+            : annualInvestable * ((Math.pow(1 + r, year) - 1) / r);
+        }
       }
 
       data.push(dataPoint);
@@ -79,14 +99,17 @@ export const ResultsChart: React.FC<Props> = ({ results, selectedView, onViewCha
   `;
 
   const getAvailableViews = () => {
-    const views: ViewType[] = ['gross', 'afterTax'];
-    if (!results.afterTaxAndExpenses.impossible) {
-      views.push('afterExpenses');
-    }
-    if (!results.investedAmount.impossible) {
-      views.push('invested');
+    const views: ConsolidatedViewType[] = ['income'];
+    if (!results.afterTaxAndExpenses.impossible || !results.investedAmount.impossible) {
+      views.push('savings');
     }
     return views;
+  };
+
+  const handleViewChange = (consolidatedView: ConsolidatedViewType) => {
+    // Map consolidated view back to original ViewType
+    const newView: ViewType = consolidatedView === 'income' ? 'gross' : 'afterExpenses';
+    onViewChange(newView);
   };
 
   return (
@@ -95,13 +118,11 @@ export const ResultsChart: React.FC<Props> = ({ results, selectedView, onViewCha
         {getAvailableViews().map((view) => (
           <button
             key={view}
-            onClick={() => onViewChange(view)}
-            className={buttonClass(selectedView === view)}
+            onClick={() => handleViewChange(view)}
+            className={buttonClass(currentConsolidatedView === view)}
           >
-            {view === 'gross' && 'Gross Income'}
-            {view === 'afterTax' && 'After Tax'}
-            {view === 'afterExpenses' && 'After Expenses'}
-            {view === 'invested' && 'Invested'}
+            {view === 'income' && 'Gross & After Tax'}
+            {view === 'savings' && 'After Expenses / Invested'}
           </button>
         ))}
       </div>
@@ -120,41 +141,49 @@ export const ResultsChart: React.FC<Props> = ({ results, selectedView, onViewCha
             <YAxis
               hide={true}
             />
-            {selectedView === 'gross' && (
-              <Line
-                type="monotone"
-                dataKey="gross"
-                stroke="#2563eb"
-                name="Gross Income"
-                dot={false}
-              />
+            {currentConsolidatedView === 'income' && (
+              <>
+                <Line
+                  type="monotone"
+                  dataKey="gross"
+                  stroke="#4ade80"
+                  strokeWidth={2.5}
+                  name="Gross Income"
+                  dot={false}
+                />
+                <Line
+                  type="monotone"
+                  dataKey="afterTax"
+                  stroke="#ef4444"
+                  strokeWidth={2.5}
+                  name="After Tax"
+                  dot={false}
+                />
+              </>
             )}
-            {selectedView === 'afterTax' && (
-              <Line
-                type="monotone"
-                dataKey="afterTax"
-                stroke="#16a34a"
-                name="After Tax"
-                dot={false}
-              />
-            )}
-            {selectedView === 'afterExpenses' && !results.afterTaxAndExpenses.impossible && (
-              <Line
-                type="monotone"
-                dataKey="afterExpenses"
-                stroke="#d97706"
-                name="After Expenses"
-                dot={false}
-              />
-            )}
-            {selectedView === 'invested' && !results.investedAmount.impossible && (
-              <Line
-                type="monotone"
-                dataKey="invested"
-                stroke="#7c3aed"
-                name="Invested"
-                dot={false}
-              />
+            {currentConsolidatedView === 'savings' && (
+              <>
+                {!results.afterTaxAndExpenses.impossible && (
+                  <Line
+                    type="monotone"
+                    dataKey="afterExpenses"
+                    stroke="#16a34a"
+                    strokeWidth={2.5}
+                    name="After Expenses"
+                    dot={false}
+                  />
+                )}
+                {!results.investedAmount.impossible && (
+                  <Line
+                    type="monotone"
+                    dataKey="invested"
+                    stroke="#ff7f50"
+                    strokeWidth={2.5}
+                    name="Invested"
+                    dot={false}
+                  />
+                )}
+              </>
             )}
             <Tooltip
               formatter={(value: number): [string] => [

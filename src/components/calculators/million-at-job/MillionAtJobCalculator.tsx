@@ -80,13 +80,13 @@ export const MillionAtJobCalculator: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 py-8">
+    <div className="min-h-screen bg-gray-100 py-2">
       <div className="max-w-4xl mx-auto px-4">
         <div className="border border-gray-200 rounded-xl shadow-sm p-8 bg-white">
           <div className="space-y-8">
             <div className="text-center">
               <h1 className="text-3xl font-bold text-gray-900">$1 Million Dollars from Work Calculator</h1>
-              <p className="mt-2 text-gray-600">Calculate your path to $1 million based on your income and expenses</p>
+              <p className="mt-2 text-gray-600">Calculate your path to $1 million based on your income and expenses.</p>
             </div>
             <div className="border border-gray-200 rounded-xl shadow-sm p-6 bg-white">
             <CalculatorInputsForm

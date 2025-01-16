@@ -1,0 +1,187 @@
+---
+import IndexPage from "../../layouts/IndexPage.astro";
+import { ThousandTrueFansCalculator } from "../../components/calculators/1000-true-fans/ThousandTrueFansCalculator";
+import { Users } from 'lucide-react';
+import YouTubeEmbed from '../../components/YouTubeEmbed.astro';
+import ImageEmbed from '../../components/ImageEmbed.astro';
+import AuthorBox from '../../components/AuthorBox.astro';
+
+export const frontmatter = {
+  comment: false,
+  donate: false,
+  title: "1,000 True Fans Revenue Calculator Inspired by Kevin Kelly",
+  description: "Calculate your potential annual revenue with the 1,000 True Fans business model. Plan your creator economy business with different revenue streams and fan spending levels.",
+  author: "Brett Lindenberg",
+  category: "Business Calculators",
+  date: "2025-01-15",
+  tags: [""],
+  image: {
+    url: "",
+    alt: ""
+  }
+};
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": frontmatter.title,
+  "description": frontmatter.description,
+  "applicationCategory": "BusinessApplication",
+  "operatingSystem": "Web Browser",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "featureList": [
+    "True Fans Revenue Calculator",
+    "Super Fan Revenue Streams",
+    "Annual Revenue Projections",
+    "Revenue Stream Management",
+    "Visual Revenue Breakdown",
+    "Business Model Planning"
+  ]
+};
+---
+
+<IndexPage
+  title={frontmatter.title}
+  description={frontmatter.description}
+  author={frontmatter.author}
+  date={frontmatter.date}
+  comment={frontmatter.comment}
+  donate={frontmatter.donate}
+  image={frontmatter.image}
+  category={frontmatter.category}
+  tags={frontmatter.tags}>
+
+<script type="application/ld+json" set:html={JSON.stringify(schema)} />
+<div class="min-h-screen bg-skin-fill pt-2 px-4 sm:px-6 lg:px-8">
+  <div class="max-w-7xl mx-auto">
+    <div class="not-prose mt-2">
+    <ThousandTrueFansCalculator client:load />
+    </div>
+  </div>
+  <div class="prose prose-lg max-w-none mt-2 text-skin-base">
+    <h2 class="text-2xl font-bold mb-4">What is the 1,000 True Fans Theory?</h2>
+    <p>
+      The concept of <a href="https://kk.org/thetechnium/1000-true-fans/">1,000 True Fans</a>, popularized by Kevin Kelly, teaches that to make a living as a creator, you don't need millions of casual followers. Instead, you need about 1,000 true fans who will buy anything you produce. These dedicated supporters form the foundation of a sustainable creative business.
+    </p>
+
+    <ImageEmbed 
+      src="/images/1000-true-fans-essay.png" 
+      alt="Original 1,000 True Fans Essay" 
+      description="Here’s pretty much what Kevin Kelly’s original essay looked like back in 2008." 
+    />
+
+    <h2 class="text-2xl font-bold mb-4">How to Use This Calculator</h2>
+
+<ul class="list-disc pl-6 space-y-2">
+  <li>
+    <strong>1. Enter the Base True Fan Revenue</strong>
+    <ul class="list-disc pl-6 space-y-2">
+      <li>Formula: Number of True Fans × Yearly Spend per Fan</li>
+      <li>Example: 1,000 fans × $100 per year = $100,000 base revenue</li>
+    </ul>
+  </li>
+  <li>
+    <strong>2. Super Fan Revenue Streams</strong>
+    <ul class="list-disc pl-6 space-y-2">
+      <li>Additional high-ticket offerings for your most engaged fans or "whales" as some people call them.</li>
+      <li>Example:
+        <ul class="list-disc pl-6 space-y-2">
+          <li>Consulting Package: $2,000 × 10 clients = $20,000</li>
+          <li>Premium Course: $497 × 50 students = $24,850</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<p class="mt-6">
+  Of course there are many paths to reach $100,000 (or more) in annual revenue. This calculator provides you with a range of offerings tailored to different segments of your fan base. Some fans may buy a $100 product, while others might be willing to spend $1,000 for an exclusive experience like 1 on 1 consulting.
+</p>
+
+    <h2 class="text-2xl font-bold mt-6 mb-4">Building Your True Fan Base</h2>
+    <p>
+      Building a base of true fans requires consistent value delivery and authentic engagement. Here are key strategies to develop your true fan community:
+    </p>
+
+    <ul class="list-disc pl-6 space-y-2">
+      <li>
+        <strong>Create Consistent, Quality Content:</strong> Regular content creation helps maintain engagement and provides ongoing value to your fans.
+      </li>
+      <li>
+        <strong>Develop Multiple Revenue Streams:</strong> Offer various ways for fans to support you, from digital products to exclusive experiences.
+      </li>
+      <li>
+        <strong>Engage Authentically:</strong> Build real relationships with your audience through genuine interaction and community building.
+      </li>
+      <li>
+        <strong>Provide Exclusive Value:</strong> Create special offerings that make your true fans feel valued and give them unique access to your work.
+      </li>
+    </ul>
+
+    <ImageEmbed 
+      src="/images/1000-true-fan-projections.jpg" 
+      alt="Creator course projections" 
+      description="Consider This: It only takes 337 True Fans to reach $100K+ in annual revenue with a $297 course." 
+    />
+
+    <h2 class="text-2xl font-bold mt-6 mb-4">Revenue Stream Ideas</h2>
+    <p>
+      Consider these potential revenue streams to diversify your income and provide value to your true fans:
+    </p>
+
+    <ul class="list-disc pl-6 space-y-2">
+      <li>
+        <strong>Digital Products:</strong> Online courses, ebooks, templates, or downloadable resources.
+      </li>
+      <li>
+        <strong>Coaching/Consulting:</strong> One-on-one or group sessions in your area of expertise.
+      </li>
+      <li>
+        <strong>Membership Programs:</strong> Exclusive content, community access, or regular live sessions.
+      </li>
+      <li>
+        <strong>Physical Products:</strong> Merchandise, limited edition items, or branded products.
+      </li>
+      <li>
+        <strong>Live Events:</strong> Workshops, retreats, or exclusive gatherings.
+      </li>
+    </ul>
+
+  <h2 class="text-2xl font-bold mt-6 mb-4">The great 1,000 true fan debate</h2>
+<p>
+  Since 2008, countless people have offered their perspective and criticisms alike of the 1,000 True Fans business model. And in a recent interview with Tim Ferris, Kelly reflects on why the concept continues to resonate and spark debate: "Most people kind of come to associate large scale with success… The idea that success could look differently — that you could have a more modest size and still be successful — was not spoken before."
+</p>
+
+<p class="mt-4">
+  Kelly acknowledges that many people equate success with large numbers and big hits, but the "1,000 True Fans" idea presents an alternative, emphasizing smaller, loyal audiences. This suggests that not everyone needs to aim for massive reach to achieve success.
+</p>
+
+<p class="mt-4">
+  Of course even Kelly recognizes this path isn't for everyone. In the interview, Kelly says "Tending the fans and interacting with them is almost like a halftime job at least, maybe even more, and not everybody's suited to do that." For some artists who prefer focusing solely on their craft, this level of engagement can lead to burnout, suggesting the need for intermediaries or different business models.
+</p>
+
+    <YouTubeEmbed 
+      id="py43k-mSG7s"
+      title="1,000 True Fans | Kevin Kelly | The Tim Ferris Show"
+      className="mb-8"
+    />
+<p class="mt-4">
+  Kelly's reflections offer a balanced view of the "1,000 True Fans" concept, acknowledging both its strengths and limitations. He recognizes the challenges of direct fan engagement, the need for intermediaries, and the importance of growth over time. 
+</p>
+
+<p class="mt-4">
+  At the end of the day, I still find Kevin Kelly's core message inspiring: you don't need millions of followers to succeed. Instead, focus on building deep connections with true fans who value your work enough to support it financially. I hope you use this calculator to plan a sustainable creator business, one true fan at a time.
+</p>
+
+  <main>
+    <article>
+      <slot />
+    </article>
+    <AuthorBox />
+  </main>
+</div>
+</IndexPage>

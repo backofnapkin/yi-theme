@@ -1,0 +1,249 @@
+---
+import IndexPage from "../../layouts/IndexPage.astro";
+import { SelfStorageDealCalculator } from "../../components/calculators/self-storage/SelfStorageDealCalculator";
+import { Warehouse } from 'lucide-react';
+import YouTubeEmbed from '../../components/YouTubeEmbed.astro';
+import ImageEmbed from '../../components/ImageEmbed.astro';
+import AuthorBox from '../../components/AuthorBox.astro';
+import XEmbed from '../../components/XEmbed.astro';
+
+export const frontmatter = {
+  comment: false,
+  donate: false,
+  title: "Self-Storage Facility Deal Evaluation Calculator",
+  description: "Evaluate self-storage facility investments with this calculator. Analyze unit configurations, financial metrics, and potential returns.",
+  author: "Brett Lindenberg",
+  category: "Business Calculators",
+  date: "2025-01-16",
+  tags: [""],
+  image: {
+    url: "",
+    alt: ""
+  }
+};
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": frontmatter.title,
+  "description": frontmatter.description,
+  "applicationCategory": "BusinessApplication",
+  "operatingSystem": "Web Browser",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "featureList": [
+    "Unit Configuration Analysis",
+    "Financial Metrics Calculator",
+    "ROI Projections",
+    "Cash Flow Analysis",
+    "Visual Revenue Breakdown",
+    "Investment Planning Tools"
+  ]
+};
+---
+
+<IndexPage
+  title={frontmatter.title}
+  description={frontmatter.description}
+  author={frontmatter.author}
+  date={frontmatter.date}
+  comment={frontmatter.comment}
+  donate={frontmatter.donate}
+  image={frontmatter.image}
+  category={frontmatter.category}
+  tags={frontmatter.tags}>
+
+<script type="application/ld+json" set:html={JSON.stringify(schema)} />
+<div class="min-h-screen bg-skin-fill pt-2 px-4 sm:px-6 lg:px-8">
+  <div class="max-w-7xl mx-auto">
+    <div class="not-prose mt-2">
+      <SelfStorageDealCalculator client:load />
+    </div>
+  </div>
+  <div class="prose prose-lg max-w-none mt-8 text-skin-base">
+    <h2 class="text-2xl font-bold mb-4">How to Use This Calculator</h2>
+    <p class="mb-4">This calculator helps you determine whether or not a self-storage facility is a good investment. To use this tool, start by entering these property details to the best of your knowledge:</p>
+    
+    <ul class="list-disc pl-6 space-y-2">
+      <li><strong>Facility Name:</strong> Name or identifier for the property.</li>
+      <li><strong>Asking Price:</strong> Total purchase price of the facility.</li>
+      <li><strong>Money Down:</strong> Your planned down payment amount in dollars.</li>
+      <li><strong>Loan Amount:</strong> Total amount to be financed (Asking Price – Money Down).</li>
+      <li><strong>Interest Rate:</strong> Annual interest rate for the loan (expressed as a percentage).</li>
+      <li><strong>Square Footage:</strong> Total facility square footage according to the listing.</li>
+      <li><strong>Vacancy Rate:</strong> Expected vacancy rate (industry standard is between <a href="https://www.statista.com/statistics/914689/self-storage-vacancy-rate-usa/">8% – 10%</a> based on data from Statista).</li>
+      <li><strong>Monthly Expenses:</strong> Operating expenses excluding loan payments. This could include:
+        <ul class="list-disc pl-6 mt-2">
+          <li>Property Taxes</li>
+          <li>Insurance</li>
+          <li>Utilities</li>
+          <li>Staffing / Payroll</li>
+          <li>Repairs and Maintenance</li>
+          <li>Marketing and Advertising</li>
+          <li>Security Costs</li>
+          <li>Administrative and Office Expenses</li>
+          <li>Other miscellaneous items</li>
+        </ul>
+      </li>
+    </ul>
+
+    <ImageEmbed 
+      src="/images/storage-facility.png" 
+      alt="outside self storage facility" 
+      description="Outside a self-storage facility." 
+    />
+
+    <h2 class="text-2xl font-bold mt-8 mb-4">Storage Unit Configurations</h2>
+    <p class="mb-4">For each storage unit type in a prospective storage center, enter the following:</p>
+    
+    <ul class="list-disc pl-6 space-y-2 mb-6">
+      <li><strong>Width:</strong> Unit width in feet.</li>
+      <li><strong>Depth:</strong> Unit depth in feet.</li>
+      <li><strong>Number of Units:</strong> Quantity of this unit type.</li>
+      <li><strong>Rent per Unit:</strong> Monthly rental rate for this unit type.</li>
+    </ul>
+    
+    <p class="mb-4">Use the + Configuration button to add more unit types or click on the garbage can icon to remove them.</p>
+
+    <div class="bg-gray-50 p-6 rounded-lg mb-8">
+      <h3 class="text-xl font-semibold mb-4">Standard Self-Storage Unit Sizes</h3>
+      <ul class="list-none grid grid-cols-1 md:grid-cols-2 gap-4">
+        <li class="flex items-center space-x-2">
+          <span class="font-medium">5×5 (25 sq ft)</span>
+          <span class="text-gray-600">Small closet size</span>
+        </li>
+        <li class="flex items-center space-x-2">
+          <span class="font-medium">5×10 (50 sq ft)</span>
+          <span class="text-gray-600">Walk-in closet size</span>
+        </li>
+        <li class="flex items-center space-x-2">
+          <span class="font-medium">10×10 (100 sq ft)</span>
+          <span class="text-gray-600">Half of a standard one-car garage</span>
+        </li>
+        <li class="flex items-center space-x-2">
+          <span class="font-medium">10×15 (150 sq ft)</span>
+          <span class="text-gray-600">Two-thirds of a one-car garage</span>
+        </li>
+        <li class="flex items-center space-x-2">
+          <span class="font-medium">10×20 (200 sq ft)</span>
+          <span class="text-gray-600">Standard one-car garage size</span>
+        </li>
+        <li class="flex items-center space-x-2">
+          <span class="font-medium">10×25 (250 sq ft)</span>
+          <span class="text-gray-600">Larger garage or small vehicle storage</span>
+        </li>
+        <li class="flex items-center space-x-2">
+          <span class="font-medium">10×30 (300 sq ft)</span>
+          <span class="text-gray-600">Standard two-car garage size</span>
+        </li>
+        <li class="flex items-center space-x-2">
+          <span class="font-medium">15×20 (300 sq ft)</span>
+          <span class="text-gray-600">Large storage for multiple vehicles or RVs</span>
+        </li>
+      </ul>
+      <p class="text-sm text-gray-600 mt-4">Unit sizes can vary slightly based on the facility and location.</p>
+    </div>
+
+    <h2 class="text-2xl font-bold mb-4">Key Calculations Explained</h2>
+    
+    <h3 class="text-xl font-semibold mb-3">1. Loan Payment Calculation</h3>
+    <p class="mb-4">The calculator uses the standard amortization formula for a 30-year loan:</p>
+    
+    <div class="bg-gray-50 p-6 rounded-lg mb-6">
+      <p class="font-mono">Monthly Payment = L × (r(1 + r)^n) ÷ ((1 + r)^n – 1)</p>
+      <p class="text-sm text-gray-600 mt-2">
+        Key: L = Loan Amount | r = Monthly Interest Rate | (Annual Rate ÷ 12) | n = Total Number of Payments (360 for 30-year loan)
+      </p>
+    </div>
+
+    <h3 class="text-xl font-semibold mb-3">2. Vacancy Impact</h3>
+    <p class="mb-4">The calculator adjusts gross income based on expected vacancy:</p>
+    <div class="bg-gray-50 p-4 rounded-lg mb-6">
+      <p class="font-mono">Effective Gross Income = Potential Gross Income × (1 – Vacancy Rate)</p>
+    </div>
+
+    <ImageEmbed 
+      src="/images/storage-hutch.png" 
+      alt="the storage hutch" 
+      description="Outside the Storage Hutch." 
+    />
+
+    <h3 class="text-xl font-semibold mb-3">3. Unit-Level Analysis</h3>
+    <p class="mb-2">For each unit type, the calculator provides:</p>
+    <ul class="list-disc pl-6 space-y-2 mb-6">
+      <li><strong>Total Rent:</strong> Number of units × Rent per unit</li>
+      <li><strong>Rent per Sq.Ft:</strong> Rent per unit ÷ (Width × Depth)</li>
+      <li><strong>Monthly Rent:</strong> Total monthly revenue for this unit type</li>
+    </ul>
+
+    <h3 class="text-xl font-semibold mb-3">4. Break-Even Analysis</h3>
+    <p class="mb-4">The calculator determines required monthly revenue to cover all expenses and required occupancy rate to break even.</p>
+    
+    <div class="bg-gray-50 p-4 rounded-lg mb-8">
+      <p class="font-mono">Break-Even Occupancy = (Monthly Overhead ÷ Potential Gross Income) × 100</p>
+    </div>
+
+  <XEmbed url="https://twitter.com/kevinasrx/status/1829866025313321313" />
+
+    <h2 class="text-2xl font-bold mb-4">Real-world Insights from Kevin</h2>
+    <p class="mb-4">When using the deal evaluator, there are a few real-world considerations that can make evaluating deals more nuanced. Kevin Bell, an experienced storage unit owner, shares some of his insights to keep in mind:</p>
+
+    <h3 class="text-xl font-semibold mb-3">1. Missing Unit Mix Data</h3>
+    <p class="mb-4">Especially with off-market deals, you might not have a detailed unit mix breakdown. Often, the owner will just provide a total monthly or annual revenue figure. For on-market deals, you can usually get the full unit mix, but off-market ones might be less specific. Remember to be a little bit flexible with people or you might pass on a great deal.</p>
+
+    <h3 class="text-xl font-semibold mb-3">2. Quick Expense Estimates</h3>
+    <p class="mb-4">When working on the fly, expenses are often estimated using a standard percentage. Kevin typically uses an expense ratio between 35-40% for quick evaluations. This rough estimate helps when you need to do the math quickly without every expense line item. Including this shortcut in the calculator helps streamline the evaluation process, especially when speed is key.</p>
+
+    <h2 class="text-2xl font-bold mb-4">About this Calculator</h2>
+    <p class="mb-4">I had the extreme pleasure of collaborating with <a href="https://kevinbellco.com/">Kevin Bell</a>, the owner of <a href="https://www.storagehutch.com/">Storage Hutch</a> in South Hutchinson, Kansas, to create this Self-Storage Deal Evaluation Calculator.</p>
+    
+    <p class="mb-4">Kevin's expertise in the storage industry was key in shaping the tool's formulas, focusing on essential metrics like occupancy rates, maintenance costs, and revenue potential. This calculator is based on the same fundamental analysis Kevin uses when scouting new storage facilities, providing a strong starting point for your own evaluations.</p>
+
+    <ImageEmbed 
+      src="/images/kevin-bell.png" 
+      alt="Kevin Bell" 
+      description="Meet Kevin Bell." 
+    />
+
+    <p class="mb-4">Keep in mind, this tool is only the beginning. Before Kevin invests, he digs much deeper, assessing upside potential, downside risks, market data, and other critical factors that go beyond this simplified version this the evaluation process. If you're serious about diving into self-storage investing, reach out to Kevin for insights on his comprehensive process.</p>
+
+    <p class="mb-8">Outside of investing, Kevin is a full-time police officer and runs "<a href="https://kevinbell.kit.com/6d3d490240">Sunday Doughnuts</a>," a straightforward weekly newsletter packed with real-world advice on building businesses through both startups and acquisitions.</p>
+
+    <h2 class="text-2xl font-bold mb-4">Things to Think About Before Investing in Self Storage</h2>
+    <p class="mb-4">When you're considering a self-storage investment, the real opportunity often lies in finding a property with untapped potential. I had a great conversation with Kevin Ball, who shared some of his go-to strategies for turning an underperforming facility into a profitable venture. Kevin's approach is refreshingly practical: he's all about making smart, simple changes that deliver a big impact without overcomplicating things.</p>
+
+    <ImageEmbed 
+      src="/images/book-storage-unit.png" 
+      alt="book a storage unit online" 
+      description="Cut admin costs by allowing customers to book storage online." 
+    />
+
+    <h3 class="text-xl font-semibold mb-3">Start With the Basics</h3>
+    <p class="mb-4">Kevin always advises looking for what he calls "the low-hanging fruit" first. In his words: "If a facility isn't full, don't overthink it—look at the basics. Are they even listed on Google? Can customers book online? Fixing these small issues can make a big difference, often without much cost." It's surprising how many facilities lack basic online visibility or a simple way for customers to book a unit. These quick wins can help fill up vacant units faster and boost occupancy rates.</p>
+
+    <h3 class="text-xl font-semibold mb-3">Pricing and Expansion</h3>
+    <p class="mb-4">Another area Kevin likes to evaluate is the current rental rates. Are they in line with the local market? Many owners set their prices and forget about them, missing out on easy revenue gains. Kevin's tip: "Don't be afraid to raise rates, but do it gradually. Even a small increase spread across all units can make a noticeable impact on your bottom line without scaring off tenants." If the facility has room for expansion, adding a few more units or even specialty options like climate-controlled storage can generate additional income.</p>
+
+    <h3 class="text-xl font-semibold mb-3">Automate and Optimize</h3>
+    <p class="mb-4">Kevin believes strongly in running an efficient operation, especially if you're managing multiple investments or balancing a full-time job. He's a big advocate for automation, from online payments to digital access controls. This not only reduces staffing needs but also improves the customer experience. According to Kevin, "If you don't automate, you're just adding more work for yourself. Free up your time to focus on scaling, not handling day-to-day headaches."</p>
+
+    <h3 class="text-xl font-semibold mb-3">Think About the Downside</h3>
+    <p class="mb-4">Kevin is also careful to assess the risks before getting too excited about the upside potential. He looks at what could go wrong—market downturns, increasing competition, or unexpected repairs. His advice: don't just plan for the best-case scenario; make sure you're prepared for the worst as well. It's this level of due diligence that sets a solid foundation for any investment decision.</p>
+
+    <h3 class="text-xl font-semibold mb-3">Playing the Long Game</h3>
+    <p class="mb-4">At the end of the day, Kevin isn't looking for a quick flip. He's focused on steady, incremental improvements that add up over time. It's about consistent management and making smart choices that increase the value of the facility year after year.</p>
+
+    <p class="mb-8">So if you're eyeing a self-storage deal, take a page out of Kevin's playbook. Look for simple ways to boost occupancy, optimize pricing, and automate operations. And remember, this calculator is only the starting point! Consult with an experienced professional to get feedback for your personal situation.</p>
+  </div>
+</div>
+
+ <div class="mt-12">
+    <slot />
+  </div>
+  <AuthorBox />
+</div>
+  </div>
+</IndexPage>

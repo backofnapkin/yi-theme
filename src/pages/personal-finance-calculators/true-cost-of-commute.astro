@@ -1,0 +1,204 @@
+---
+import IndexPage from "../../layouts/IndexPage.astro";
+import TrueCostCommuteCalculator from "../../components/calculators/true-cost-commute/TrueCostCommuteCalculator";
+import { Car } from 'lucide-react';
+import YouTubeEmbed from '../../components/YouTubeEmbed.astro';
+import ImageEmbed from '../../components/ImageEmbed.astro';
+import AuthorBox from '../../components/AuthorBox.astro';
+
+export const frontmatter = {
+  comment: false,
+  donate: false,
+  title: "True Cost of Commuting Calculator",
+  description: "Calculate the real financial and time impact of your daily commute, including hidden costs and long-term implications.",
+  author: "Brett Lindenberg",
+  category: "Personal Finance Calculators",
+  date: "2025-01-18",
+  tags: [""],
+  image: {
+    url: "",
+    alt: ""
+  }
+};
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": frontmatter.title,
+  "description": frontmatter.description,
+  "applicationCategory": "BusinessApplication",
+  "operatingSystem": "Web Browser",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "featureList": [
+    "True Cost of Commuting Calculator",
+    "Time investment analysis",
+    "Long-term financial impact",
+    "Investment opportunity costs",
+    "Quality of life considerations",
+    "Commute optimization planning"
+  ]
+};
+---
+
+<IndexPage
+  title={frontmatter.title}
+  description={frontmatter.description}
+  author={frontmatter.author}
+  date={frontmatter.date}
+  comment={frontmatter.comment}
+  donate={frontmatter.donate}
+  image={frontmatter.image}
+  category={frontmatter.category}
+  tags={frontmatter.tags}>
+
+<script type="application/ld+json" set:html={JSON.stringify(schema)} />
+<div class="min-h-screen bg-skin-fill pt-4 px-4 sm:px-6 lg:px-8">
+  <div class="max-w-7xl mx-auto">
+    <div class="not-prose mt-2">
+      <TrueCostCommuteCalculator client:load />
+    </div>
+  </div>
+<div class="prose prose-lg max-w-none mt-12 text-skin-base">
+    <h2 class="text-2xl font-bold mb-4">How to use the calculator</h2>
+    <p>
+        Drawing inspiration from Mr. Money Mustache's timeless article titled "<a href="https://www.mrmoneymustache.com/2011/10/06/the-true-cost-of-commuting/">The True Cost of Commuting</a>", this guide explains how the calculator works, breaks down the math behind the results, and empowers you to make informed decisions about your work, home, and lifestyle choices.
+    </p>
+
+    <h3 class="text-xl font-bold mt-8">1. Enter Your Round Trip Distance</h3>
+    <p class="mt-4">
+        Input the total miles you travel both to and from work each day. For example, if you live 15 miles from work, enter 30 miles for your round trip.
+    </p>
+
+    <h3 class="text-xl font-bold mt-8">2. Enter Your Daily Commute Time</h3>
+    <p class="mt-4">
+        Based on recent Census Bureau data from 2023, the <a href="https://www.census.gov/topics/employment/commuting/guidance/acs-1yr.html">average one-way commute time</a> in the United States is 26.8 minutes. I set the calculator default to 53 minutes that would be pretty close to the average. Enter your actual total daily commute time in hours and minutes for more accurate projections.
+    </p>
+
+    <ImageEmbed src="/images/cars-ride.JPG" alt="Car's ride" description="What do you drive to get to work?" />
+
+    <h3 class="text-xl font-bold mt-8">3. Cost per Mile</h3>
+    <p class="mt-4">
+        The calculator uses <a href="https://finance.yahoo.com/news/much-car-costing-per-mile-110042500.html">$0.58 per mile</a> as the default, based on U.S. Department of Energy data. This figure estimates the total cost of vehicle ownership and takes into consideration:
+    </p>
+    <ul class="list-disc pl-6 space-y-2">
+        <li>Vehicle depreciation</li>
+        <li>Maintenance and repairs</li>
+        <li>Insurance</li>
+        <li>Registration and taxes</li>
+    </ul>
+
+    <h3 class="text-xl font-bold mt-8">4. Hourly Wage</h3>
+    <p class="mt-4">
+        The default value of <a href="https://www.indeed.com/career-advice/pay-salary/average-hourly-wage-in-us">$29.81 reflects the average hourly wage</a> in the United States, according to the U.S. Bureau of Labor Statistics. Enter your actual hourly wage for more accurate results. If you're salaried, divide your annual salary by 2,080 (40 hours × 52 weeks) to get your hourly rate.
+    </p>
+
+    <h3 class="text-xl font-bold mt-8">5. Workdays per Week</h3>
+    <p class="mt-4">
+        Enter how many days per week you commute to work. The default is 5 days, but adjust this if you have a different schedule or a flex work situation.
+    </p>
+
+    <h3 class="text-xl font-bold mt-8 mb-2">6. Gas Price and Fuel Economy</h3>
+    <ul class="list-disc pl-6 space-y-2">
+        <li>Enter your local gas price per gallon.</li>
+        <li>The default fuel economy is 25.4 MPG based on 2021 data.</li>
+        <li>Adjust these values based on your vehicle's actual performance.</li>
+    </ul>
+
+        <h3 class="text-xl font-bold mt-8 mb-2">7. Monthly Car Payment</h3>
+    <ul class="list-disc pl-6 space-y-2">
+        <li>The average monthly payment for a new vehicle is an eye-popping <a href="https://www.lendingtree.com/auto/debt-statistics/">$737 per month</a>.</li>
+        <li>If you're vehicle is paid off, you can enter $0 for this input. And congrats on the payoff!</li>
+    </ul>
+    
+    <p class="mt-4">
+        When you click the "Calculate True Cost of Commuting" button, the calculator takes your input values (like distance, time, wage, and vehicle costs) and runs them through a series of formulas to determine both the financial impact (including direct driving costs, gas costs, and the opportunity cost of your time) and time investment of your commute. Give it a try now!
+    </p>
+
+    <h2 class="text-2xl font-bold mt-12 mb-4">Understanding the formulas</h2>
+    
+    <div class="space-y-8">
+        <div>
+            <p class="font-bold mb-2">Direct Driving Costs:</p>
+            <pre class="bg-skin-card p-4 rounded-lg overflow-x-auto">
+<code>Annual Direct Cost = (Daily Round Trip Miles × Days per Week × 52 weeks) × Cost per Mile</code>
+            </pre>
+        </div>
+        
+        <div>
+            <p class="font-bold mb-2">Time Opportunity Costs:</p>
+            <pre class="bg-skin-card p-4 rounded-lg overflow-x-auto">
+<code>Annual Time Cost = (Daily Commute Hours × Days per Week × 52 weeks) × Hourly Wage</code>
+            </pre>
+        </div>
+        
+        <div>
+            <p class="font-bold mb-2">Gas Costs:</p>
+            <pre class="bg-skin-card p-4 rounded-lg overflow-x-auto">
+<code>Annual Gas Cost = (Annual Miles / MPG) × Gas Price per Gallon</code>
+            </pre>
+        </div>
+    </div>
+    <h3 class="text-xl font-bold mt-8">The Rule of 172</h3>
+    <p class="mt-4">
+        I emailed Pete Adeney about this tool for feedback and guess what? Pete got back to me the same day (so cool!) and suggested I add the Rule of 172 to these calculations so people can see the difference in their wealth over time. Here's a direct quote from Pete's email:
+    </p>
+    
+    <blockquote class="border-l-4 border-gray-300 pl-4 italic mt-4">
+        "For example, when I talk about the effect of monthly savings over a decade, I project it out using a "Rule of 172″ calculation. With no compounding it would just be 12 x 10 = 120 times the monthly expense over the course of ten years, but with the effects of compounding it becomes an even larger 172 times."
+    </blockquote>
+
+    <p class="font-bold mt-6 mb-2">Here's the exact formula I applied to the calculator for you home gamers:</p>
+    <pre class="bg-skin-card p-4 rounded-lg overflow-x-auto">
+<code>Future Value = Principal × (1 + r)^t
+
+Where:
+- Principal = Your total annual commuting cost
+- r = 7% (0.07) annual return
+- t = Time in years (10 or 20 years)
+- ^ means "to the power of"</code>
+    </pre>
+
+    <h2 class="text-2xl font-bold mt-4 mb-4">About this calculator</h2>
+    <p class="mt-4">
+        Back in the late 2000s and early 2010s, blogs were sort of like the Wild West of ideas. During this time period, I always loved stumbling upon a writer you'd never heard of and going down the rabbit hole of their archives, devouring post after post. This might be like finding a new favorite author, Youtuber or maybe someone on X today.
+    </p>
+
+    <ImageEmbed src="/images/mr-money-mustache.png" alt="Mr. Money Mustache Blog" description="The golden age of personal finance blogging." />
+
+    <p class="mt-4">
+        For me, one of those writers was Pete Adeney, better known as <strong>Mr. Money Mustache</strong>. Pete isn't your typical finance blogger. He's a retired software engineer who became a beacon for the FIRE movement or <strong>Financial Independence, Retire Early</strong>.
+    </p>
+    
+    <p class="mt-4">
+        After retiring in his 30s, Pete began sharing his unconventional insights about money on his blog. His posts weren't about dollar cost averaging into a stock index, but how to live a rich life on far less than society says you need.
+    </p>
+
+    <YouTubeEmbed 
+      id="hkw62wLxkh0"
+      title="Mr. Money Mustache on Being Retired 19 Years and Turning 50"
+      className="mb-8"
+    />
+
+    <p class="mt-4">
+        One of Pete' ideas that hit home for me was the concept of commute time. Funny enough, I was living that exact reality when I discovered the post: driving about an hour each way to a cubicle job, five days a week.
+    </p>
+    
+    <p class="mt-4">
+        The more MMM I read, the more I realized how much of my time was being wasted. I knew I had to make a change. And I'm happy to report that I eventually did find a new job with more pay and a better work / life balance.
+    </p>
+    
+    <p class="mt-4">
+        Inspired by Pete's teachings, I built the True Cost of Commuting to Work Calculator. I hope this tool will help you see what I saw back then: that those miles and minutes add up to something bigger than we realize. It's a way to put Pete's insights into practice and maybe even take one step closer to designing a life that works for you: financially, personally, and purposefully.
+    </p>
+</div>
+
+<main>
+<article>
+<slot />
+</article>
+<AuthorBox />
+</main>

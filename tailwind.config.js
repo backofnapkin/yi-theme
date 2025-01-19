@@ -49,6 +49,7 @@ export default {
     'bg-skin-red-bg',
     'border-skin-red-border',
     'text-skin-red-text',
+    'text-skin-emerald-text', 
     // Patterns for dynamic classes
     {
       pattern: /(border|bg|from|to)-(emerald|amber|green|orange|slate|stone|zinc)-(50|100|200|300|400|500|600)/,
@@ -71,7 +72,8 @@ export default {
       skin: {
         base: withOpacity("--color-text"),
         active: withOpacity("--color-text-active"),
-        'red-text': withOpacity("--color-red-text")  // Added theme red
+        'red-text': withOpacity("--color-red-text"),  // Added theme red
+        'emerald-text': withOpacity("--color-emerald-text")
       },
     },
     backgroundColor: {

@@ -1,0 +1,153 @@
+---
+import IndexPage from "../../layouts/IndexPage.astro";
+import OpportunityCostInvestingCalculator from "../../components/calculators/opportunity-cost-investing/OpportunityCostInvestingCalculator";
+import { Calculator } from 'lucide-react';
+import ImageEmbed from '../../components/ImageEmbed.astro';
+import AuthorBox from '../../components/AuthorBox.astro';
+
+export const frontmatter = {
+  comment: false,
+  donate: false,
+  title: "Opportunity Cost Calculator for Investing Decisions",
+  description: "Calculate the true opportunity cost of your investment decisions, including tax implications and inflation.",
+  author: "Brett Lindenberg",
+  category: "Personal Finance Calculators",
+  date: "2025-01-19",
+  tags: [""],
+  image: {
+    url: "",
+    alt: ""
+  }
+};
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": frontmatter.title,
+  "description": frontmatter.description,
+  "applicationCategory": "FinanceApplication",
+  "operatingSystem": "Web Browser",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "featureList": [
+    "Investment opportunity cost analysis",
+    "Tax impact calculations",
+    "Inflation adjustments",
+    "Debt service comparison",
+    "Goal tracking visualization",
+    "What-if scenario planning"
+  ]
+};
+---
+
+<IndexPage
+  title={frontmatter.title}
+  description={frontmatter.description}
+  author={frontmatter.author}
+  date={frontmatter.date}
+  comment={frontmatter.comment}
+  donate={frontmatter.donate}
+  image={frontmatter.image}
+  category={frontmatter.category}
+  tags={frontmatter.tags}>
+
+<script type="application/ld+json" set:html={JSON.stringify(schema)} />
+<div class="min-h-screen bg-skin-fill pt-4 px-4 sm:px-6 lg:px-8">
+<div class="max-w-7xl mx-auto">
+      <div class="not-prose mt-2">
+        <OpportunityCostInvestingCalculator client:load />
+      </div>
+</div>
+<div class="prose prose-lg max-w-none mt-2 text-skin-base">
+    <h2 class="text-2xl font-bold mb-4">How to Use the Calculator</h2>
+    
+    <h3 class="text-xl font-bold mt-4">Basic Inputs</h3>
+    <ul class="list-disc pl-6 space-y-2">
+        <li><strong>Initial Investment:</strong> Enter the amount you plan to invest or use to pay down debt.</li>
+        <li><strong>Annual Return:</strong> Input the expected annual return rate of the investment you're evaluating.</li>
+        <li><strong>Time Horizon:</strong> Specify the investment period in years and months that you would like money to be invested. A <a href="https://www.westernsouthern.com/investments/long-term-investments-vs-short-term-investments">long term investment</a> is considered more than 10 years and short-term is less than 3 years.</li>
+        <li><strong>Tax Rate:</strong> Enter your tax rate (for qualified dividends, <a href="https://www.nerdwallet.com/article/taxes/dividend-tax-rate">tax rates</a> are typically 0%, 15%, or 20% depending on your income).</li>
+        <li><strong>Inflation Rate:</strong> The calculator defaults to <a href="https://www.investopedia.com/inflation-rate-by-year-7253832">4.1% based on 2023 data</a>. Keep in mind the rate of inflation changes every year so this number will never be exactly the same on a year over year basis.</li>
+        <li><strong>Goal Amount:</strong> Set a target amount you'd like to reach if you have a specific goal like paying for college or saving a down-payment on a home.</li>
+    </ul>
+
+    <ImageEmbed src="/images/coins-in-jar.png" alt="coins in a jar" description="My available investing capital." />
+
+    <h2 class="text-2xl font-bold mt-12 mb-2">Advanced Features</h2>
+    
+    <h3 class="text-xl font-bold mt-4">Debt Comparison</h3>
+    <p>Toggle this option to compare investing versus paying down debt. The calculator uses current <a href="https://www.bankrate.com/credit-cards/advice/current-interest-rates/">credit card interest rates that are close to 20%</a> as a default.</p>
+    
+    <p class="mt-4">In my opinion, if you're paying high-interest consumer debt at this rate, it almost always makes more sense to pay off the credit cards instead of investing. It will be extremely tough to beat a 20% rate of return on your money and get a better return than simply paying off debt. It's boring, but that's how the numbers work out.</p>
+
+    <h2 class="text-2xl font-bold mt-4 mb-4">Interpreting the Results</h2>
+    
+    <h3 class="text-xl font-bold mt-4">Future Value Section</h3>
+    <ul class="list-disc pl-6 space-y-2">
+        <li>Shows your total projected investment value based on your inputs.</li>
+        <li>Displays returns after accounting for taxes.</li>
+        <li>Provides the real value adjusted for inflation while you had the cash invested.</li>
+    </ul>
+
+    <h3 class="text-xl font-bold mt-4">Goal Progress</h3>
+    <p>The calculator compares your results to your goal amount, helping you determine if your investment strategy aligns with your objectives.</p>
+
+    <ImageEmbed src="/images/series-EE.png" alt="Series EE bonds" description="Two savings bonds I personally held through maturity for 30 years!" />
+
+    <h2 class="text-2xl font-bold mt-6 mb-4">What If Scenarios</h2>
+    <p>The calculator compares your strategy with historical returns from different investment types, <a href="https://www.bankrate.com/investing/good-return-on-investment/#key-roi-stats">based on 10-year performance data</a> from BankRate:</p>
+    <ul class="list-disc pl-6 space-y-2">
+        <li>Stocks (12.8% annual return)</li>
+        <li>Real Estate (4.2% annual return)</li>
+        <li>Bonds (1.5% annual return)</li>
+    </ul>
+
+    <p class="font-semibold mt-3"><strong>Important Note:</strong> While historical returns are helpful for perspective, past performance does not guarantee future results. Use this as a guide, but remember that investment outcomes can and will vary.</p>
+
+    <h2 class="text-2xl font-bold mt-4 mb-4">Understanding the Calculations</h2>
+    
+    <h3 class="text-xl font-bold mt-4">Future Value Calculation:</h3>
+    <p>The calculator uses the following compound interest formula:</p>
+    <pre class="bg-skin-card p-4 rounded-lg overflow-x-auto">
+<code>Future Value = Initial Investment × (1 + Monthly Rate)^(Number of Months)</code>
+    </pre>
+
+    <h3 class="text-xl font-bold mt-4">Real Value Adjustment:</h3>
+    <p>This is to account for inflation and the reduced purchasing power of dollars over time.</p>
+    <pre class="bg-skin-card p-4 rounded-lg overflow-x-auto">
+<code>Real Value = Post-Tax Value ÷ (1 + Monthly Inflation)^(Number of Months)</code>
+    </pre>
+
+    <h3 class="text-xl font-bold mt-4">Investment Return:</h3>
+    <pre class="bg-skin-card p-4 rounded-lg overflow-x-auto">
+<code>Investment Return = Future Value - Initial Investment
+Tax Amount = Investment Return × (Tax Rate ÷ 100)
+Post-Tax Value = Future Value - Tax Amount</code>
+    </pre>
+
+    <h2 class="text-2xl font-bold mt-2 mb-4">Should You Pay off High-Interest Debt or Invest?</h2>
+    <p>If you have high-interest credit card debt, it acts as a heavy financial anchor, draining your money faster than most investments can grow. Paying it down first is like earning a <strong>guaranteed 20% return at the current credit card interest rates.</strong> This something even the best investments can rarely match.</p>
+
+    <p class="mt-4">According to CBS, the average <a href="https://www.cbsnews.com/news/credit-card-interest-rates-surging-how-to-lower-yours-now/">credit card interest rate in October, 2024</a> was a staggering 23.37%. If this is your situation, it makes even more financial sense to pay off debt instead of investing.</p>
+
+    <ImageEmbed src="/images/payoff-debt-or-invest.jpg" alt="payoff debt or invest" description="It almost always makes sense to payoff high-interest debt versus invest." />
+
+    <p class="mt-4">Using the opportunity cost calculator, you can easily see the difference:</p>
+    <ul class="list-disc pl-6 space-y-2">
+        <li><strong>Debt Service Savings:</strong> Enter $20,000 at 20% interest, and the calculator will show you the <strong>$8,000 saved in avoided interest.</strong></li>
+        <li><strong>Savings Option:</strong> Enter the same amount in a savings account with 4% interest, and you'll see a projected return of just <strong>$1,632.</strong></li>
+    </ul>
+
+    <p class="mt-4">This stark difference demonstrates why paying off high-interest debt is the best financial move in most cases.</p>
+</div>
+<main>
+<article>
+<slot />
+</article>
+<AuthorBox />
+</main>
+</div>
+</IndexPage>

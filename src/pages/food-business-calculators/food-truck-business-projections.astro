@@ -1,0 +1,179 @@
+---
+import IndexPage from "../../layouts/IndexPage.astro";
+import FoodTruckBusinessCalculator from "../../components/calculators/food-truck-business/FoodTruckBusinessCalculator";
+import { Calculator } from 'lucide-react';
+import YouTubeEmbed from '../../components/YouTubeEmbed.astro';
+import ImageEmbed from '../../components/ImageEmbed.astro';
+import AuthorBox from '../../components/AuthorBox.astro';
+
+export const frontmatter = {
+  comment: false,
+  donate: false,
+  title: "Food Truck Business Revenue / Profit Projections Calculator",
+  description: "Plan your food truck business finances with our comprehensive revenue and profit calculator.",
+  author: "Brett Lindenberg",
+  category: "Business Calculators",
+  date: "2025-01-21",
+  tags: [""],
+  image: {
+    url: "",
+    alt: ""
+  }
+};
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": frontmatter.title,
+  "description": frontmatter.description,
+  "applicationCategory": "BusinessApplication",
+  "operatingSystem": "Web Browser",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "featureList": [
+    "Food Truck Revenue Calculator",
+    "Break Even Analysis",
+    "Daily Sales Projections",
+    "Labor Cost Analysis",
+    "24-Month Financial Projections",
+    "Business Insights"
+  ]
+};
+---
+
+<IndexPage
+  title={frontmatter.title}
+  description={frontmatter.description}
+  author={frontmatter.author}
+  date={frontmatter.date}
+  comment={frontmatter.comment}
+  donate={frontmatter.donate}
+  image={frontmatter.image}
+  category={frontmatter.category}
+  tags={frontmatter.tags}>
+
+<script type="application/ld+json" set:html={JSON.stringify(schema)} />
+<div class="min-h-screen bg-skin-fill pt-4 px-4 sm:px-6 lg:px-8">
+  <div class="max-w-7xl mx-auto">
+    <div class="not-prose mt-2">
+      <FoodTruckBusinessCalculator client:load />
+    </div>
+  </div>
+<div class="prose prose-lg max-w-none mt-4 text-skin-base">
+  <h2 class="text-2xl font-bold mb-4">How to Use Projections in Your Food Truck Business</h2>
+  <p class="mt-4">
+    The calculations provided by the <strong>Food Truck Revenue & Profit Calculator</strong> offer valuable insights into the financial health of a food truck business. Here's a general breakdown of what these numbers mean and how they can be used to improve your business planning.
+  </p>
+
+  <h3 class="text-xl font-bold mt-8">Break-Even Point</h3>
+  <p class="mt-4">
+    The break-even point is the amount of revenue you need to cover all of your expenses (ingredients, labor, rent, fuel) without losing money each month.
+  </p>
+  <pre class="bg-skin-card p-4 rounded-lg overflow-x-auto">
+    <code>Break-Even Point = Total Fixed Costs / (1 – (Variable Costs / Revenue))</code>
+  </pre>
+
+  <h3 class="text-xl font-bold mt-8">Weekly, Monthly, and Annual Revenue</h3>
+  <p class="mt-4">
+    These projections estimate the amount of money your food truck can generate based on factors like the number of customers, average ticket spend, and the number of days you're operating.
+  </p>
+  <p>
+    These projections help you gauge the overall earning potential of your food truck. They give you a sense of the cash flow coming in regularly, which is key for planning everything from inventory to staffing.
+  </p>
+  <pre class="bg-skin-card p-4 rounded-lg overflow-x-auto">
+    <code>Weekly Revenue = Average Customers per Day × Average Spend per Customer × Operating Days per Week
+Monthly Revenue = Weekly Revenue × 4
+Annual Revenue = Weekly Revenue × 52</code>
+  </pre>
+
+<ImageEmbed src="/images/food-truck-event.png" alt="food truck event" description="Take the time to know your numbers and write a business plan before starting a food truck." />
+
+  <h3 class="text-xl font-bold mt-8">Monthly Overhead</h3>
+  <p class="mt-4">
+    Overhead includes the fixed and recurring costs that your food truck incurs on a monthly basis, such as rent, utilities, insurance, fuel, and other general operating expenses.
+  </p>
+  <p class="mt-4">
+    Knowing your overhead helps you manage cash flow. Even when sales fluctuate, these costs are relatively fixed so it's critical to make sure revenue covers overhead.
+  </p>
+  <pre class="bg-skin-card p-4 rounded-lg overflow-x-auto">
+    <code>Monthly Overhead = Sum of all fixed monthly costs</code>
+  </pre>
+
+  <h3 class="text-xl font-bold mt-2">Monthly & Annual Net Profit</h3>
+  <p class="mt-4">
+    The net profit is the money left over after all operating costs have been subtracted from your revenue. This includes things like labor, food costs, fuel, rent, and any other expenses.
+  </p>
+  <p class="mt-4">
+    This is the money you keep after paying all your bills. High net profits mean you're operating efficiently, while low or negative profits could signal that adjustments are needed like cutting costs, raising prices, or creating high-profit upsells.
+  </p>
+  <pre class="bg-skin-card p-4 rounded-lg overflow-x-auto">
+    <code>Monthly Net Profit = Monthly Revenue – (COGS + Monthly Overhead)
+Annual Net Profit = Monthly Net Profit × 12</code>
+  </pre>
+  <p>
+    <strong>Pro Tip:</strong> Don't forget to calculate your wages with this calculate. You can also estimate what it will cost to pay yourself by selecting "Include Labor Costs" in this calculator. Longterm you will need to make sure you're paying yourself to ensure you've got a viable business.
+  </p>
+
+  <h2 class="text-2xl font-bold mt-12 mb-4">How to Use these Food Truck Projections</h2>
+  <p class="mt-4">
+    If you want to get value from your business planning, the key is not just to get the numbers but to take action based on what you find. Here's how you can use these calculator results and make adjustments to improve your business.
+  </p>
+
+  <ImageEmbed src="/images/food-truck-handbook.JPG" alt="food truck book" description="Research the food truck industry before you start." />
+
+  <h3 class="text-xl font-bold mt-8">Adjust Pricing for Higher Profitability</h3>
+  <p class="mt-4">
+    If the calculator shows that your <strong>profit margins are low</strong>, it could be a sign that you're under-charging your customers. For example, if your <strong>Cost of Goods Sold (COGS)</strong>—the amount you spend on ingredients—is more than 33% of your revenue, you might not be charging enough. This is a problem because high food costs will eat into your profits. Let's say you're selling gourmet tacos for $8 each, but the ingredients cost you $3.50 per taco. This is close to a 44% COGS, which is above the recommended level and will make it tough to grow and operate the business longterm.
+  </p>
+  <p>
+    <strong>Action</strong>: In this example, consider raising your menu prices. For example, you might increase the taco from $8 to $9. A small increase can boost your profit margins without scaring off customers.
+  </p>
+
+  <h3 class="text-xl font-bold mt-8">Add Upsells to Increase Customer Spending</h3>
+  <p class="mt-4">
+    Another way to improve profitability is by <strong>increasing the average spend per customer</strong>. If your calculator shows that your customers are only spending $10 per visit, you can encourage them to spend more by offering <strong>upsells</strong> like drinks, sides, or desserts.
+  </p>
+  <p class="mt-4">
+    <strong>Example</strong>: If someone orders a sandwich, you could offer fries and a drink for an extra $3, which increases total spend. Upselling can boost your revenue without the need for more customers.
+  </p>
+
+  <h3 class="text-xl font-bold mt-8">Rethink Your Menu for Higher Profit Margins</h3>
+  <p class="mt-4">
+    If your profitability is still too low, it may be time to rethink your menu. Some food items naturally have <strong>higher profit margins</strong>, meaning they cost less to make but can be sold at a premium. Examples include:
+  </p>
+  <ul class="list-disc pl-6 space-y-2">
+    <li>Kettle Corn</li>
+    <li>Hot Dogs</li>
+    <li>Corn Dogs</li>
+    <li>Churros</li>
+  </ul>
+  <p class="mt-4">
+    These items have low ingredient costs but can be priced well above the 33% COGS rule, allowing you to maximize profit. If your menu includes items that are too expensive to produce, consider swapping them for higher-margin alternatives.
+  </p>
+
+<ImageEmbed src="/images/average-profit-margin-concession-stand-items.png" alt="concession stand item profit margin line chart" description="Concession stand items like churros can often have a profit margin well over 50%." />
+
+  <p class="mt-4">
+    <strong>Example</strong>: If you're currently offering seafood dishes, which have a high COGS, you might want to consider adding lower-cost, high-margin items like churros or corn dogs to your menu. Of course, only you as the business owner can make this type of decision to change menus.
+  </p>
+
+  <h3 class="text-xl font-bold mt-8">Do Competitive Research</h3>
+  <p class="mt-4">
+    To ensure your pricing is on point, I suggest conducting competitive research. Look at other food trucks in your area and see what they are charging for similar items. If you're charging $10 for a burrito but other trucks are getting away with $12, you could be leaving money on the table. Use the information from competitors to <strong>adjust your prices</strong> and make sure the menu prices are competitive and profitable.
+  </p>
+
+  <h3 class="text-xl font-bold mt-8">Take Action, Adjust, and Test</h3>
+  <p class="mt-4">
+    The value of using this calculator comes from <strong>taking action</strong> based on the results. Whether it's adjusting your pricing, adding upsells, or reworking your menu for higher-margin items, these steps can have a big impact on your profitability. By understanding your overhead, you'll be better prepared to make your food truck a financial success.
+  </p>
+</div>
+
+<main>
+  <article>
+    <slot />
+  </article>
+  <AuthorBox />
+</main>

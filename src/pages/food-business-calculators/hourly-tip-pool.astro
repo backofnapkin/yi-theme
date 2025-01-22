@@ -1,0 +1,165 @@
+---
+import IndexPage from "../../layouts/IndexPage.astro";
+import { HourlyTipPoolCalculator } from "../../components/calculators/hourly-tip-pool/HourlyTipPoolCalculator";
+import { Calculator } from 'lucide-react';
+import YouTubeEmbed from '../../components/YouTubeEmbed.astro';
+import ImageEmbed from '../../components/ImageEmbed.astro';
+import AuthorBox from '../../components/AuthorBox.astro';
+
+export const frontmatter = {
+  comment: false,
+  donate: false,
+  title: "Hourly Tip Pool Calculator for Restaurants & Bars",
+  description: "Calculate and distribute tips fairly among employees based on hours worked or custom percentages.",
+  author: "Brett Lindenberg",
+  category: "Food Business Calculators",
+  date: "2025-01-21",
+  tags: [""],
+  image: {
+    url: "",
+    alt: ""
+  }
+};
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": frontmatter.title,
+  "description": frontmatter.description,
+  "applicationCategory": "BusinessApplication",
+  "operatingSystem": "Web Browser",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "featureList": [
+    "Hourly tip pool distribution",
+    "Custom percentage allocation",
+    "Multiple employee management",
+    "Deduction handling",
+    "CSV export",
+    "Detailed results breakdown"
+  ]
+};
+---
+
+<IndexPage
+  title={frontmatter.title}
+  description={frontmatter.description}
+  author={frontmatter.author}
+  date={frontmatter.date}
+  comment={frontmatter.comment}
+  donate={frontmatter.donate}
+  image={frontmatter.image}
+  category={frontmatter.category}
+  tags={frontmatter.tags}>
+
+<script type="application/ld+json" set:html={JSON.stringify(schema)} />
+<div class="min-h-screen bg-skin-fill pt-4 px-4 sm:px-6 lg:px-8">
+  <div class="max-w-7xl mx-auto">
+    <div class="not-prose mt-2">
+      <HourlyTipPoolCalculator client:load />
+    </div>
+  </div>
+  <div class="prose prose-lg max-w-none mt-4 text-skin-base">
+    <h2 class="text-2xl font-bold mb-4">How to Use This Calculator</h2>
+    <p>
+      The Hourly Tip Pool Calculator helps restaurant managers and staff distribute tips fairly among employees. Whether you're using hours worked or custom percentages, this calculator ensures accurate and transparent tip distribution.
+    </p>
+    
+    <p class="font-semibold mt-4">Start by entering the tip pool information:</p>
+    <ul class="list-disc pl-6 space-y-2">
+      <li>Total tip pool amount to be distributed</li>
+      <li>Optional deduction percentage (for credit card fees, house fees, etc.)</li>
+      <li>Choose between hours-based or custom percentage distribution</li>
+    </ul>
+
+    <h3 class="text-xl font-bold mt-8">Employee Management</h3>
+    <p>For each employee, you can specify:</p>
+    <ul class="list-disc pl-6 space-y-2">
+      <li>Employee name</li>
+      <li>Job role (Server, Bartender, Cook, etc.)</li>
+      <li>Hours worked during the shift</li>
+      <li>Custom tip percentage (when not using hours-based distribution)</li>
+    </ul>
+
+    <ImageEmbed src="/images/average-distribution-of-tips-by-method.png" alt="graph of tip distribution" description="More customers are tipping on a card instead of using cash." />
+
+    <h3 class="text-xl font-bold mt-8">Distribution Methods</h3>
+    <p>The calculator offers two distribution methods:</p>
+    <ul class="list-disc pl-6 space-y-2">
+      <li><strong>Hours-Based Distribution:</strong> Tips are distributed proportionally based on hours worked. For example, if an employee works 8 hours out of a total of 24 hours, they receive 33.3% of the tip pool.</li>
+      <li><strong>Custom Percentage:</strong> Manually set specific percentages for each employee based on role, seniority, or other factors.</li>
+    </ul>
+
+    <h2 class="text-2xl font-bold mt-4 mb-4">Understanding the Results</h2>
+    <div class="space-y-2">
+      <div>
+        <p class="font-bold mb-2">Hours-Based Distribution Formula:</p>
+        <pre class="bg-skin-card p-4 rounded-lg overflow-x-auto">
+<code>Employee Share = Total Tip Pool × (Employee Hours ÷ Total Hours)
+Percentage = (Employee Hours ÷ Total Hours) × 100</code>
+        </pre>
+      </div>
+      <div>
+        <p class="font-bold mb-2">Custom Percentage Distribution:</p>
+        <pre class="bg-skin-card p-4 rounded-lg overflow-x-auto">
+<code>Employee Share = Total Tip Pool × (Custom Percentage ÷ 100)
+Note: Total of all custom percentages must not exceed 100%</code>
+        </pre>
+      </div>
+      <div>
+        <p class="font-bold mb-2">Deduction Calculation:</p>
+        <pre class="bg-skin-card p-4 rounded-lg overflow-x-auto">
+<code>Deduction Amount = Total Tip Pool × (Deduction Percentage ÷ 100)
+Available Tip Pool = Total Tip Pool - Deduction Amount</code>
+        </pre>
+      </div>
+    </div>
+
+    <h2 class="text-2xl font-bold mt-4 mb-4">Is it fair to distribute tips?</h2>
+
+    <p class="mt-4">
+    As a former server myself, I always wanted to keep my tips… especially if I had a good night. But I also understand that this isn’t always practical if you have a team around you helping to support tables. In these situations, finding a fair way to distribute tips is important.
+    </p>
+
+    <p class="mt-4">This calculator offers a fair and flexible approach to distributing tips, depending on your preferences and the needs of your restaurant or bar. Here’s why it can be a good approach in a restaurant or bar.</p>
+
+    <ImageEmbed src="/images/cash-tips.png" alt="cash tips after a shift" description="Counting cash tips after a long shift." />
+
+   <h2 class="text-2xl font-bold mt-4 mb-4">Fairness in Distribution?</h2>
+
+    <p class="mt-4">
+    <strong>Hours-Based Distribution</strong>: If you want to ensure that each employee is compensated fairly for their time, the hours-based method is a very equitable approach. It means that those who work longer hours will get a proportionate share of the tips. This makes sense when everyone on the team is contributing equally in terms of effort and customer service like bussers, hosts, and dishwashers who play important roles behind the scenes.
+    </p>
+
+    <p class="mt-4"><strong>Custom Percentages</strong>: The custom percentage option allows for adjustments based on roles, which is important in many restaurant environments. Servers and bartenders, who often interact directly with customers, may receive a larger share of tips compared to cooks or dishwashers. This method helps ensure that people are compensated based on their responsibilities and the value they bring, making the system fair for everyone involved.</p>
+
+    <p class="mt-4">To ensure that the tip distribution process remains fair, transparency is crucial. Everyone should clearly understand how tips are collected and distributed, whether you’re using an hours-based approach or custom percentages. This openness helps build trust within the team and ensures everyone feels valued for their contributions.</p>
+
+    <h2 class="text-2xl font-bold mt-4 mb-4">Legal Considerations</h2>
+    <p class="mt-4">
+      When managing tip pools, be aware of these important legal considerations:
+    </p>
+    <ul class="list-disc pl-6 space-y-2">
+      <li>Ensure compliance with local and federal tip pooling laws</li>
+      <li>Verify which employees are eligible to participate in tip pools</li>
+      <li>Maintain accurate records of tip distribution</li>
+      <li>Consider minimum wage requirements when distributing tips</li>
+      <li>Be transparent about any deductions from the tip pool</li>
+    </ul>
+
+    <p class="mt-4">
+      Note: This calculator is designed to help with tip calculations but should not be considered legal advice. Always consult with appropriate legal professionals regarding your specific situation and local regulations.
+    </p>
+  </div>
+
+  <main>
+    <article>
+      <slot />
+    </article>
+    <AuthorBox />
+  </main>
+</div>
+</IndexPage>

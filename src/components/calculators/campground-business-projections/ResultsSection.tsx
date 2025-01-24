@@ -94,25 +94,25 @@ export const ResultsDisplay: React.FC<ResultsDisplayProps> = ({
           <div className="space-y-2 mt-4">
             <p className="text-sm text-gray-600">
               Monthly Gross Revenue:{' '}
-              <span className="font-semibold">
+              <span className="font-semibold text-skin-emerald-text">
                 {formatCurrency(results.monthlyGrossRevenue)}
               </span>
             </p>
             <p className="text-sm text-gray-600">
               Annual Gross Revenue:{' '}
-              <span className="font-semibold">
+              <span className="font-semibold text-skin-emerald-text">
                 {formatCurrency(results.annualGrossRevenue)}
               </span>
             </p>
             <p className="text-sm text-gray-600">
               Monthly Total Expenses:{' '}
-              <span className="font-semibold">
+              <span className="font-semibold text-skin-red-text">
                 {formatCurrency(results.monthlyTotalExpenses)}
               </span>
             </p>
             <p className="text-sm text-gray-600">
               Annual Total Expenses:{' '}
-              <span className="font-semibold">
+              <span className="font-semibold text-skin-red-text">
                 {formatCurrency(results.annualTotalExpenses)}
               </span>
             </p>

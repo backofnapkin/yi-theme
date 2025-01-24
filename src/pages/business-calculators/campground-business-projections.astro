@@ -1,0 +1,290 @@
+---
+import IndexPage from "../../layouts/IndexPage.astro";
+import { CampgroundBusinessCalculator } from "../../components/calculators/campground-business-projections/CampgroundBusinessCalculator";
+import { Calculator } from 'lucide-react';
+import YouTubeEmbed from '../../components/YouTubeEmbed.astro';
+import ImageEmbed from '../../components/ImageEmbed.astro';
+import AuthorBox from '../../components/AuthorBox.astro';
+
+export const frontmatter = {
+  comment: false,
+  donate: false,
+  title: "Campground Revenue & Financial Projections Calculator",
+  description: "Calculate potential returns and financial projections for a campground business investment.",
+  author: "Brett Lindenberg",
+  category: "Business Calculators",
+  date: "2025-01-23",
+  tags: [""],
+  image: {
+    url: "",
+    alt: ""
+  }
+};
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": frontmatter.title,
+  "description": frontmatter.description,
+  "applicationCategory": "BusinessApplication",
+  "operatingSystem": "Web Browser",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "featureList": [
+    "Campground Business Calculator",
+    "Investment analysis",
+    "Cash flow projections",
+    "Break-even calculations",
+    "Property value appreciation",
+    "ROI calculations"
+  ]
+};
+---
+
+<IndexPage
+  title={frontmatter.title}
+  description={frontmatter.description}
+  author={frontmatter.author}
+  date={frontmatter.date}
+  comment={frontmatter.comment}
+  donate={frontmatter.donate}
+  image={frontmatter.image}
+  category={frontmatter.category}
+  tags={frontmatter.tags}>
+
+<script type="application/ld+json" set:html={JSON.stringify(schema)} />
+<div class="min-h-screen bg-skin-fill pt-2 px-4 sm:px-6 lg:px-8">
+  <div class="max-w-7xl mx-auto">
+    <div class="not-prose mt-2">
+      <CampgroundBusinessCalculator client:load />
+    </div>
+  </div>
+<div class="prose prose-lg max-w-none mt-4 text-skin-base">
+    <h2 class="text-2xl font-bold mb-4">How to Use the Calculator</h2>
+    <p>
+      Here's how to use this calculator. For the default settings, I looked for industry data from trusted sources to make the benchmarks more realistic.
+    </p>
+
+    <h3 class="text-xl font-bold mt-4">Loan Information</h3>
+    <ul class="list-disc pl-6 space-y-2">
+      <li>
+        <strong>Initial Purchase Price ($):</strong> Enter the total cost of the campground (Default: $1,000,000). The KOA website says the average cost to buy a campground will range from $100,000 – $2,000,000. (<em>Data Source: <a href="https://ownakoa.com/2023/04/06/how-much-does-it-cost-to-start-a-campground/">https://ownakoa.com/2023/04/06/how-much-does-it-cost-to-start-a-campground/</a></em>)
+      </li>
+      <li>
+        <strong>Down Payment (%):</strong> Specify the percentage you'll pay upfront (Default: 10%). This is a common industry standard for commercial loans, but you may need to put down 20% – 25% if you don't have experience managing a campground business or depending on your specific loan type.
+      </li>
+      <li>
+        <strong>Loan Interest Rate (%):</strong> Enter the annual interest rate on your loan (Default: 6%). These rates will vary on a variety of factors including your credit score and current rates.
+      </li>
+      <li>
+        <strong>Loan Term (Years):</strong> Define the loan repayment period (Default: 20 years).
+      </li>
+      <li>
+        <strong>Annual Appreciation Projections (%):</strong> Estimate the annual increase in property value (Default: 3%).
+      </li>
+    </ul>
+
+    <ImageEmbed src="/images/campground-map.png" alt="campground map" description="True story: My brother recently purchased this 14-site RV park in North Dakota." />
+
+    <h3 class="text-xl font-bold mt-4">Campground Details</h3>
+    <ul class="list-disc pl-6 space-y-2">
+      <li>
+        <strong>Number of Campground Sites:</strong> Total number of rentable sites (Default: 80). KOA recommends <strong>75 to 90 sites</strong> for profitability so I went with a default number in the middle of that range. (<em>Data Source: <a href="https://ownakoa.com/2023/04/06/how-much-does-it-cost-to-start-a-campground/">https://ownakoa.com/2023/04/06/how-much-does-it-cost-to-start-a-campground/</a></em>)
+      </li>
+      <li>
+        <strong>Monthly Rent Per Site ($):</strong> Average monthly fee per site (Default: $350).
+      </li>
+      <li>
+        <strong>Additional Services Revenue Per Site ($/month):</strong> Revenue from premium amenities like cable tv, Wi-Fi, laundry services, snacks, vending machines or firewood delivery could all be additional services. I set the default to $100 per month based on this interview with <a href="https://www.youtube.com/watch?v=N-Ysu9Qepgg">the owner of an RV park</a> conducted by Codie Sanchez.
+      </li>
+      <li>
+        <strong>Occupancy Rate (%):</strong> Expected percentage of sites rented (Default: 70%). The average RV park occupancy rate of <strong>60% to 70%</strong> providing a realistic benchmark for revenue potential. (<em>Data Source: <a href="https://www.roverpass.com/blog/rv-park-industry-statistics/">https://www.roverpass.com/blog/rv-park-industry-statistics/</a></em>)
+      </li>
+      <li>
+        <strong>Campground Open Months Per Year:</strong> Number of months the campground operates (Default: 9).
+      </li>
+    </ul>
+
+    <ImageEmbed src="/images/driftwood-rv-park.png" alt="driftwood campground and rv park" description="This is Kyle Grimm’s campground." />
+
+    <h3 class="text-xl font-bold mt-4">Monthly Costs</h3>
+    <ul class="list-disc pl-6 space-y-2">
+      <li>
+        <strong>Monthly Property Management Fee ($):</strong> Costs for onsite staff or management (Default: $10,000). You could also enter your estimated expense of paying all onsite staff in this section.
+      </li>
+      <li>
+        <strong>Monthly Maintenance Costs ($):</strong> Average maintenance expenses (Default: $1,000).
+      </li>
+      <li>
+        <strong>Other Monthly Operating Costs ($):</strong> Miscellaneous operating expenses (Default: $1,000).
+      </li>
+    </ul>
+
+    <p class="font-semibold mt-4">
+      Once all inputs are set, click the <strong>"Calculate"</strong> button to see results.
+    </p>
+
+    <p class="mt-4">
+      <strong>Important:</strong> This tool should not be considered financial or investment advice. Please seek out the guidance of professionally trained and licensed individuals before making any investing decisions.
+    </p>
+
+    <h2 class="text-2xl font-bold mt-4 mb-4">Understanding the Formulas</h2>
+    <p>
+      Here's how to understand the formulas behind all the calculations and outputs in this tool.
+    </p>
+
+    <div class="space-y-2">
+      <div>
+        <p class="font-bold mb-2">Total Initial Investment:</p>
+        <pre class="bg-skin-card p-4 rounded-lg overflow-x-auto">
+<code>Initial Investment = Purchase Price × (Down Payment / 100)</code>
+        </pre>
+      </div>
+
+      <div>
+        <p class="font-bold mb-2">Monthly Loan Payment:</p>
+        <pre class="bg-skin-card p-4 rounded-lg overflow-x-auto">
+<code>M = P × [r(1+r)^n / ((1+r)^n - 1)]</code>
+        </pre>
+        <p class="mt-2">Where:</p>
+        <ul class="list-disc pl-6 space-y-2">
+          <li>M = Monthly payment</li>
+          <li>P = Principal (Purchase Price – Down Payment)</li>
+          <li>r = Monthly interest rate (Annual rate ÷ 12)</li>
+          <li>n = Total number of months (Years × 12)</li>
+        </ul>
+      </div>
+
+      <div>
+        <p class="font-bold mb-2">Example Calculation:</p>
+        <p>$800,000 loan, 5% annual interest, 30 years</p>
+        <ul class="list-disc pl-6 space-y-2">
+          <li>P = $800,000</li>
+          <li>r = 0.05/12 = 0.00417</li>
+          <li>n = 30 × 12 = 360 = $4,294.57 monthly payment</li>
+        </ul>
+      </div>
+
+      <h3 class="text-xl font-bold mt-2">Revenue Calculations</h3>
+      
+      <div>
+        <p class="font-bold mb-2">Monthly Gross Revenue:</p>
+        <pre class="bg-skin-card p-2 rounded-lg overflow-x-auto">
+<code>Monthly Revenue = (Site Rent + Additional Services) × Sites × (Occupancy Rate / 100)</code>
+        </pre>
+      </div>
+
+      <div>
+        <p class="font-bold mb-2">Annual Gross Revenue:</p>
+        <pre class="bg-skin-card p-2 rounded-lg overflow-x-auto">
+<code>Annual Revenue = Monthly Revenue × Operating Months</code>
+        </pre>
+      </div>
+
+      <div>
+        <p class="font-bold mb-2">Monthly Total Expenses:</p>
+        <pre class="bg-skin-card p-2 rounded-lg overflow-x-auto">
+<code>Monthly Expenses = Management Fee + Maintenance + Operating Costs</code>
+        </pre>
+      </div>
+
+      <div>
+        <p class="font-bold mb-2">Total Annual Expenses:</p>
+        <pre class="bg-skin-card p-2 rounded-lg overflow-x-auto">
+<code>Annual Expenses = Monthly Expenses × Operating Months</code>
+        </pre>
+      </div>
+
+      <div>
+        <p class="font-bold mb-2">Net Operating Income (NOI):</p>
+        <p class="mb-2">This is a simple way to measure how much money a property earns after covering its regular operating expenses, but before paying for things like loans or taxes.</p>
+        <pre class="bg-skin-card p-2 rounded-lg overflow-x-auto">
+<code>NOI = Annual Revenue - Annual Expenses</code>
+        </pre>
+      </div>
+
+      <div>
+        <p class="font-bold mb-2">Cash-on-Cash Return (CoC Return):</p>
+        <p class="mb-2">This is a way to measure how much money you're making from your initial cash investment in a property. It shows the percentage of your cash investment that you're earning back each year as profit.</p>
+        <pre class="bg-skin-card p-2 rounded-lg overflow-x-auto">
+<code>Cash Return = [(NOI - Annual Loan Payments) / Initial Investment] × 100</code>
+        </pre>
+      </div>
+
+      <div>
+        <p class="font-bold mb-2">Projected Property Value:</p>
+        <p class="mb-2">This is an estimate of how much your campground or RV park will be worth in the future, based on how much its value is expected to grow each year. Keep in mind that while real estate typically does appreciate in value, there are time periods were value could remain flat or even depreciate.</p>
+        <pre class="bg-skin-card p-2 rounded-lg overflow-x-auto">
+<code>Future Value = Purchase Price × (1 + Appreciation Rate / 100)</code>
+        </pre>
+      </div>
+
+      <div>
+        <p class="font-bold mb-2">Break-even Occupancy Rate:</p>
+        <p class="mb-2">This is the minimum percentage of your sites that need to be rented out for you to cover all your expenses, including loan payments.</p>
+        <pre class="bg-skin-card p-4 rounded-lg overflow-x-auto">
+<code>Monthly Revenue at X% Occupancy = Monthly Expenses + Monthly Loan Payment</code>
+        </pre>
+      </div>
+    </div>
+
+    <h2 class="text-2xl font-bold mt-4 mb-4">What You Need to Know About Campground Revenue</h2>
+    <p>
+      <a href="https://www.youtube.com/@kylegrimm">Kyle Grimm</a>, owner of <a href="https://driftwoodquincy.com/">Driftwood Campground and RV Park</a>, a 50-site campground in Quincy, IL, provides real-world insights into maximizing campground profitability. Here are three key lessons that I built into the Campground Revenue Calculator based on Kyle's direct experience. This information can help a lot with the accuracy of your inputs for this tool so don't overlook it.
+    </p>
+
+    <h3 class="text-xl font-bold mt-4">1. Understand the Expense Ratio</h3>
+    <p class="mt-4">
+      Kyle emphasizes the importance of knowing your expense ratio to manage costs effectively: <em>"If we make $100,000 a year gross… you can plan on a campground like ours to operate at somewhere between a 50 and 60 percent expense ratio."</em>
+    </p>
+    <p class="mt-4">
+      This means that for every dollar earned, $0.50 to $0.60 is spent on operating costs like utilities, lawn care, taxes, and insurance. This insight directly ties to the <strong>"Monthly Total Expenses"</strong> and <strong>"Annual Total Expenses"</strong> fields in the calculator, helping you accurately project costs.
+    </p>
+  <p class="mt-4">
+<strong>Example:</strong> If you project $200,000 in annual gross revenue, the calculator can factor in a 50-60% expense ratio to show you the remaining income available for debt payments and profit.
+</p>
+
+   <YouTubeEmbed 
+      id="AiiOv1jAyzE"
+      title="Owning a Campground | How much do they make?"
+      className="mb-8"
+    />
+
+    <h3 class="text-xl font-bold mt-4">2. Account for Seasonal Revenue Fluctuations</h3>
+    <p class="mt-4">
+      Campgrounds often experience seasonal highs and lows. Kyle shares: <em>"Our campground is seasonal… in the winter, it's obviously way slower. But during peak season, we can generate on the low end $15,000 a month and on the high end $30,000 or a little more."</em>
+    </p>
+    <p class="mt-4">
+      The <strong>"Campground Open Months Per Year"</strong> field in the calculator allows users to account for these seasonal variations. For example, entering "9 months" instead of a full year will adjust the revenue projections to reflect a realistic operating schedule if you're in the upper Midwest.
+    </p>
+  
+    <p class="mt-4">
+    <strong>Example:</strong> If you rent sites for $40 per night during peak months and $20 per night during slower months, the calculator can estimate your <strong>Monthly Gross Revenue</strong> and <strong>Annual Gross Revenue</strong> based on these variable rates.
+    </p>
+
+    <ImageEmbed src="/images/campground-birdseye.png" alt="birdseye view of campground" description="Bird's eye view of a campground." />
+
+    <h3 class="text-xl font-bold mt-8">3. Leverage Diverse Revenue Streams</h3>
+    <p class="mt-4">
+      Kyle highlights the value of adding amenities and services to boost income: <em>"The beautiful thing about a campground is there is so much opportunity for add-ons… golf cart rentals, a little camp store, or even a restaurant."</em>
+    </p>
+    <p class="mt-4">
+      This directly relates to the <strong>"Additional Services Revenue Per Site"</strong> field in the calculator. By entering potential revenue from extras like Wi-Fi, golf cart rentals, or firewood sales, users can project how these income streams impact their overall profitability.
+    </p>
+    <ul class="list-disc pl-6 space-y-2">
+      <li>
+        <strong>Example:</strong> If each site generates $100 per month from additional services, the calculator shows how this boosts your <strong>Annual Gross Revenue</strong> and ultimately improves metrics like <strong>Cash-on-Cash Return</strong>.
+      </li>
+    </ul>
+  </div>
+<main>
+  <article>
+    <slot />
+  </article>
+  <AuthorBox />
+</main>
+  </div>
+</IndexPage>

@@ -52,6 +52,8 @@ menu {
     --color-success: 22, 163, 74;
     --color-warning: 234, 179, 8;
     --color-danger: 220, 38, 38;
+    --color-progress-bar-expense: 185, 28, 28;  /* Same as --color-red-text */
+    --color-progress-bar-profit: 22, 163, 74;   /* Same as --color-emerald-text */
   }
 
   html[data-theme="dark"] {

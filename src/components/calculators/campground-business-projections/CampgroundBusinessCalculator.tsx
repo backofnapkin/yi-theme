@@ -34,26 +34,37 @@ export const CampgroundBusinessCalculator: React.FC = () => {
   };
 
   const calculateResults = () => {
+    // Calculate loan-related values
     const loanAmount = data.initialPurchasePrice * (1 - data.downPaymentPercentage / 100);
     const monthlyLoanPayment = calculateLoanPayment(loanAmount, data.interestRate, data.loanTerm);
     const annualLoanPayments = monthlyLoanPayment * 12;
 
+    // Calculate revenue
     const monthlyGrossRevenue =
       (data.monthlyRentPerSite + data.additionalServicesRevenue) *
       data.numberOfSites *
       (data.occupancyRate / 100);
-
     const annualGrossRevenue = monthlyGrossRevenue * data.openMonthsPerYear;
-    const monthlyTotalExpenses =
-      data.monthlyManagementFee + data.monthlyMaintenanceCosts + data.monthlyOperatingCosts;
-    const annualTotalExpenses = monthlyTotalExpenses * data.openMonthsPerYear;
-    const annualNOI = annualGrossRevenue - annualTotalExpenses;
 
+    // Calculate operating expenses (excluding loan payment)
+    const monthlyOperatingExpenses =
+      data.monthlyManagementFee + data.monthlyMaintenanceCosts + data.monthlyOperatingCosts;
+    const annualOperatingExpenses = monthlyOperatingExpenses * data.openMonthsPerYear;
+
+    // Calculate total expenses (including loan payments)
+    const monthlyTotalExpenses = monthlyOperatingExpenses + monthlyLoanPayment;
+    const annualTotalExpenses = annualOperatingExpenses + annualLoanPayments;
+
+    // Calculate NOI (before debt service)
+    const annualNOI = annualGrossRevenue - annualOperatingExpenses;
+
+    // Calculate investment metrics
     const totalInitialInvestment = data.initialPurchasePrice * (data.downPaymentPercentage / 100);
     const cashOnCashReturn = ((annualNOI - annualLoanPayments) / totalInitialInvestment) * 100;
 
+    // Calculate break-even occupancy
     const breakEvenOccupancy =
-      ((monthlyTotalExpenses + monthlyLoanPayment) /
+      ((monthlyOperatingExpenses + monthlyLoanPayment) /
         ((data.monthlyRentPerSite + data.additionalServicesRevenue) * data.numberOfSites)) *
       100;
 

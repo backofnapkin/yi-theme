@@ -84,6 +84,8 @@ export default {
         modal: withOpacity("--color-modal"),
         'red-light': withOpacity("--color-red-light"), // Added theme red
         'red-bg': withOpacity("--color-red-bg"),       // Added theme red
+        'progress-expense': withOpacity("--color-progress-bar-expense"), // Added for progress bar
+        'progress-profit': withOpacity("--color-progress-bar-profit"), // Added for progress bar
       },
     },
     textDecorationColor: {

@@ -1,0 +1,272 @@
+---
+import IndexPage from "../../layouts/IndexPage.astro";
+import { OkBoomerFinancialCalculator } from "../../components/calculators/ok-boomer-financial-calculator/OkBoomerFinancialCalculator";
+import { Calculator } from 'lucide-react';
+import YouTubeEmbed from '../../components/YouTubeEmbed.astro';
+import ImageEmbed from '../../components/ImageEmbed.astro';
+import AuthorBox from '../../components/AuthorBox.astro';
+
+export const frontmatter = {
+  comment: false,
+  donate: false,
+  title: "OK Boomer Financial Calculator: Compare Your Finances to Golden Era Growth",
+  description: "What would your portfolio look like if markets and assets prices performed like the Boomer era? Compare purchasing power, investment returns, and wealth-building opportunities across decades.",
+  author: "Brett Lindenberg",
+  category: "Personal Finance Calculators",
+  date: "2025-01-27",
+  tags: [""],
+  image: {
+    url: "",
+    alt: ""
+  }
+};
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": frontmatter.title,
+  "description": frontmatter.description,
+  "applicationCategory": "FinanceApplication",
+  "operatingSystem": "Web Browser",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "featureList": [
+    "Historical Financial Comparison",
+    "Wage Growth Projections",
+    "Investment Return Analysis",
+    "Home Value Appreciation",
+    "Purchasing Power Comparison",
+    "Retirement Planning",
+    "Savings Growth Calculator",
+    "Historical Context Insights"
+  ]
+};
+---
+
+<IndexPage
+  title={frontmatter.title}
+  description={frontmatter.description}
+  author={frontmatter.author}
+  date={frontmatter.date}
+  comment={frontmatter.comment}
+  donate={frontmatter.donate}
+  image={frontmatter.image}
+  category={frontmatter.category}
+  tags={frontmatter.tags}>
+
+<script type="application/ld+json" set:html={JSON.stringify(schema)} />
+<div class="min-h-screen bg-skin-fill pt-2 px-4 sm:px-6 lg:px-8">
+  <div class="max-w-7xl mx-auto">
+    <div class="not-prose mt-2">
+      <OkBoomerFinancialCalculator client:load />
+    </div>
+  </div>
+  <div class="prose prose-lg max-w-none mt-2 text-skin-base">
+    <h2 class="text-2xl font-bold mb-4">How to Use This Calculator</h2>
+    <p>
+      The debate over generational economic advantages often lacks concrete numbers. This calculator helps bridge that gap by showing you exactly how your current income would translate to the Baby Boomer era and how your investments would grow under similar conditions. 
+    </p>
+
+    <p class="mt-4">
+    Input your current salary, and watch as the calculator converts it to its historical equivalent, factoring in the economic conditions Boomers experienced: savings accounts earning 5-12% interest, houses costing 2-3 times annual income, and careers that saw consistent wage growth.
+    </p>
+
+   <p class="mt-4">
+You can even see how your investment portfolio would perform if it matched the returns Boomers enjoyed during their prime wealth-building years. Choose between Early Boomers (1970-2000), Core Boomers (1977-2007), or Late Boomers (1988-2018) to compare how your financial journey might have looked in each era.
+   </p>
+    
+    <p class="font-semibold mt-3">The next time a Boomer tells you how much harder life was back in their day, send them here. Start by entering your current financial details:</p>
+    <ul class="list-disc pl-6 space-y-2">
+      <li><strong>Income:</strong> Choose between annual salary or hourly wage</li>
+      <li><strong>Retirement Savings:</strong> Your current retirement account balances</li>
+      <li><strong>Monthly Savings:</strong> How much you save each month</li>
+      <li><strong>Investment Allocation:</strong> How your money is distributed across different investments</li>
+      <li><strong>Home Value:</strong> Current market value if you own a home</li>
+    </ul>
+
+    <h3 class="text-xl font-bold mt-8">Understanding the Eras</h3>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
+      <div class="bg-blue-50 p-4 rounded-lg">
+        <h4 class="font-bold text-blue-900">Early Boomer (Entered Workforce: 1970)</h4>
+        <ul class="list-disc pl-4 text-sm space-y-1">
+          <li>Born 1946 - 1954</li>
+          <li>Strong wage growth</li>
+          <li>Affordable housing market</li>
+          <li>Low education costs</li>
+        </ul>
+      </div>
+      <div class="bg-purple-50 p-4 rounded-lg">
+        <h4 class="font-bold text-purple-900">Core Boomer (Entered Workforce: 1977)</h4>
+        <ul class="list-disc pl-4 text-sm space-y-1">
+          <li>Born 1955 - 1956</li>
+          <li>High interest rates on savings</li>
+          <li>Strong middle-class growth</li>
+          <li>Pension plan era</li>
+        </ul>
+      </div>
+      <div class="bg-green-50 p-4 rounded-lg">
+        <h4 class="font-bold text-green-900">Late Boomer (Entered Workforce: 1988)</h4>
+        <ul class="list-disc pl-4 text-sm space-y-1">
+          <li>Born 1960 - 1964</li>
+          <li>Stable economic growth</li>
+          <li>Rising stock market & pre-tech boom</li>
+          <li>401k emergence</li>
+        </ul>
+      </div>
+    </div>
+
+<ImageEmbed src="/images/boomer-financials.jpg" alt="sketch of boomer financials" description="Me sketching out the Baby Boomer financial calculator." />
+
+<div class="prose prose-lg max-w-none mt-12 text-skin-base">
+   <h2 class="text-2xl font-bold mb-4">Understanding Your Results</h2>
+   
+   <p>
+       The calculator analyzes how your current financial situation would translate across three different Boomer periods, comparing key metrics that defined their wealth-building journey. While past performance doesn't guarantee future results, this tool helps illustrate how similar economic conditions might impact wealth accumulation over a 30-year period.
+   </p>
+
+   <h3 class="text-xl font-bold mt-8">1. Income Comparison</h3>
+   <p>
+       Your current salary of $62,027 is converted to its historical equivalent using verified economic data. For example, in 1977 (Core Boomer era), this would be equivalent to about $11,278, but that salary went remarkably far. The calculator uses Bureau of Labor Statistics data to model career progression, with early-career growth rates of 6-8% annually, moderating to 2-4% in later years. Historical tax rates, which were often higher but had more deductions available, are factored into take-home pay calculations.
+   </p>
+
+   <h3 class="text-xl font-bold mt-8">2. Investment Returns</h3>
+   <p>
+       The calculator models three primary investment vehicles common during the Boomer era:
+   </p>
+   
+   <ul class="list-disc pl-6 space-y-2 mt-2">
+       <li><strong>Savings Accounts:</strong> Using Federal Reserve historical data, returns ranged from 5.5% to 12% APY, with Early Boomers seeing the highest rates (1970s-1980s) and Late Boomers experiencing declining rates</li>
+       <li><strong>Stock Market:</strong> S&P 500 total returns (including dividends) averaged 10.53% annually for Early Boomers (1970-2000), 12.67% for Core Boomers (1977-2007), and 11.07% for Late Boomers (1988-2018)</li>
+       <li><strong>Savings Bonds:</strong> Series EE bonds yielded 6.78% average for Early Boomers, 6.27% for Core Boomers, and 3.15% for Late Boomers</li>
+   </ul>
+
+   <ImageEmbed src="/images/buy-house-invest-in-stocks.jpg" alt="Buy house and stock investments returns" description="Buy house. Invest in stock market. Watch wealth grow decade after decade." />
+
+   <h3 class="text-xl font-bold mt-8">3. Housing Market Analysis</h3>
+   <p>
+       Housing calculations reflect one of the most significant advantages Boomers enjoyed. Using Federal Reserve data on historical home values:
+   </p>
+
+   <ul class="list-disc pl-6 space-y-2 mt-2">
+       <li><strong>Early Boomers (1970):</strong> Median home price was $23,450 (average appreciation 7.53% annually)</li>
+       <li><strong>Core Boomers (1977):</strong> Median home price was $48,000 (average appreciation 6.71% annually)</li>
+       <li><strong>Late Boomers (1988):</strong> Median home price was $100,000 (average appreciation 5.3% annually)</li>
+   </ul>
+
+   <p class="mt-4">
+       The calculator uses these historical metrics to show how long it would take to save a 20% down payment, assuming the same savings rate and income ratio as Boomers experienced. For example, a Core Boomer in 1977 saving 20% of their income could typically accumulate a down payment in 2 years and 8 months, compared to nearly 5 years today.
+   </p>
+
+   <p class="mt-4">
+      The tool aims to provide realistic comparisons while acknowledging that individual experiences varied significantly based on location, education, and career choices.
+   </p>
+</div>
+
+<div class="prose prose-lg max-w-none mt-6 text-skin-base">
+   <h2 class="text-2xl font-bold mb-4">A Note About Market Challenges</h2>
+   
+   <p>
+       While this calculator shows the impressive long-term growth potential during the Boomer era, it's important for us to acknowledge the path wasn't always smooth. Like any generation, Boomers faced their share of economic challenges and market crashes. The dot-com bubble of 2000 saw the NASDAQ plummet by 76.8% from its peak, <a href="https://www.goldmansachs.com/our-firm/history/moments/2000-dot-com-bubble">wiping out nearly $8 trillion in market value</a>. Later, the 2008 financial crisis devastated many families' wealth, with U.S. households losing about $16.4 trillion in net worth according to the <a href="https://www.federalreservehistory.org/essays/great-recession-and-its-aftermath">Federal Reserve</a>. 
+   </p>
+
+<ImageEmbed src="/images/boomer-struggles.png" alt="homeless boomer" description="Not all Boomers were able to accumulate wealth." />
+
+   <p class="mt-4">
+       The averages and long-term returns shown in this calculator mask the real human impact of these crises. Many Boomers lost jobs during critical earning years, were forced to sell investments at market bottoms, or faced foreclosure on their homes. Those who needed to tap retirement accounts during these downturns or couldn't make mortgage payments didn't get to fully participate in the subsequent recoveries. Some never recovered their previous financial position.
+   </p>
+
+   <p class="mt-4">
+       These historical challenges remind us that while comparing generational advantages is interesting, economic security is never guaranteed. Today's workers face their own set of challenges, from inflation concerns to AI wiping out jobs. The key lesson from the Boomer experience isn't just about the advantages they enjoyed, but also about the importance of building financial resilience for the rough patches every generation faces.
+   </p>
+</div>
+
+<div class="prose prose-lg max-w-none mt-6 text-skin-base">
+   <h2 class="text-2xl font-bold mb-4">Making the Most of Your Opportunity</h2>
+   
+   <p>
+       While the calculator highlights some enviable economic conditions Boomers experienced, today's generations have unique advantages that weren't available 40-50 years ago. The rise of remote work, democratized investing through apps like Robinhood, and the ability to start a global business from your laptop have created new paths to wealth building that Boomers couldn't imagine.
+   </p>
+
+   <p class="mt-4">
+       According to <a href="https://www.cnbc.com/2024/06/07/us-millionaire-population.html">CNBC</a>, more millionaires are being created now than at any point in history, often through technology and digital entrepreneurship. The gig economy, while not perfect, offers flexibility and side-hustle opportunities that can accelerate wealth building. And unlike the Boomer era where staying at one company for 30 years was the norm, modern workplaces increasingly emphasize work-life balance, mental health, and personal development.
+   </p>
+
+   <h3 class="text-xl font-bold mt-8">Adapting Your Financial Strategy</h3>
+   
+   <p>
+       Rather than lamenting the loss of Boomer-era conditions, focus on maximizing today's advantages:
+   </p>
+
+   <ul class="list-disc pl-6 space-y-2 mt-2">
+       <li><strong>Investment Accessibility:</strong> While savings accounts no longer yield 12%, commission-free trading and fractional shares make diversified investing easier than ever</li>
+       <li><strong>Career Flexibility:</strong> Remote work opportunities eliminate geographic limitations on salary potential</li>
+       <li><strong>Alternative Income:</strong> Digital platforms enable multiple income streams through content creation, online businesses, or freelance work</li>
+       <li><strong>Education Options:</strong> Online learning and bootcamps offer faster, cheaper paths to high-paying skills than traditional college</li>
+   </ul>
+
+   <p class="mt-4">
+       The path to financial independence might look different than it did for Boomers, but it's still achievable. Instead of a single company pension, you might build wealth through a combination of index funds and side hustles. Rather than 30 years at one company, you might job hop to increase earnings and build your network. 
+   </p>
+
+   <p class="mt-4">
+       Yes, housing costs more and savings accounts pay less. But you also have tools, information, and opportunities that previous generations never had. Let's play the hand we're dealt to the best of our abilities.
+   </p>
+</div>
+
+    <h2 class="text-2xl font-bold mt-8">Historical Data and Sources</h2>
+<div class="prose prose-lg max-w-none mt-6 text-skin-base">   
+   <p>
+       While building this Baby Boomer calculator, I wanted to be both accurate and conservative in representing the economic advantages Baby Boomers experienced. The calculator uses modern financial benchmarks for comparison, including the current average U.S. salary of <a href="https://www.knitpeople.com/blog/average-salary-us">$62,027</a>, average home value of <a href="https://www.fool.com/money/research/average-house-price-state/">$420,400</a>, and typical savings metrics for 35-year-olds (average 401(k) balance of <a href="https://www.nerdwallet.com/article/investing/the-average-401k-balance-by-age">$35,537</a> and savings account balance of <a href="https://www.sofi.com/learn/content/average-savings-by-age/">$27,900</a>).
+   </p>
+
+   <p class="mt-4">
+       For historical wage patterns and career progression, I relied heavily on the Social Security Administration's research on <a href="https://www.ssa.gov/policy/docs/ssb/v65n3/v65n3p1.html">lifetime earnings patterns</a>. This data was particularly valuable for understanding how Boomer careers evolved over time. The Bureau of Labor Statistics provided crucial historical data about education premiums and wage growth, which helped inform how the calculator handles college education's impact on earnings.
+   </p>
+
+   <ImageEmbed src="/images/boomer-wealth-triangle.jpg" alt="boomer wealth triangle" description="The Boomer wealth triangle consists of a home, steady job, and stocks / retirement plan." />
+
+   <h3 class="text-xl font-bold mt-6">Breaking Down the Boomer Eras</h3>
+
+   <p class="mt-4">
+       The calculator divides Baby Boomers into three distinct groups to better reflect their different economic experiences. Early Boomers (1946-1954) entered the workforce around 1970, benefiting from strong union membership, affordable housing, and high interest rates on savings. The <a href="https://www.bls.gov/opub/mlr/2016/article/labor-force-participation-what-has-happened-since-the-peak.htm">Bureau of Labor Statistics historical data</a> shows union membership peaked during this period, contributing to stronger wage growth.
+   </p>
+
+   <p class="mt-4">
+       Core Boomers (1955-1959) began their careers around 1977, catching both the high inflation of the late 1970s and the stock market boom of the 1980s and 1990s. According to Federal Reserve Economic Data (FRED), this group experienced significant real wage growth as inflation moderated and the economy expanded. The <a href="https://www.federalreservehistory.org/essays/great-inflation">Federal Reserve's analysis of the Great Inflation</a> period helps explain how Core Boomers' fixed-rate mortgages became easier to pay off as their incomes rose with inflation.
+   </p>
+
+   <p class="mt-4">
+       Late Boomers (1960-1964) entered the workforce around 1988, just in time for the long bull market of the 1990s. Data from <a href="https://www.federalreserve.gov/releases/z1/default.htm">Federal Reserve Flow of Funds reports</a> shows this group benefited from strong stock market returns but faced higher housing costs than their older counterparts.
+   </p>
+
+   <h3 class="text-xl font-bold mt-6">Key Economic Factors</h3>
+
+   <p class="mt-4">
+       Each Boomer group experienced different savings rates on their investments. Early Boomers saw average savings account rates of 7.14% (1970-2024), Core Boomers averaged 4.89% (1977-2024), and Late Boomers averaged 3.12% (1988-2024), according to Federal Reserve historical data. These rates significantly impacted wealth accumulation, especially when combined with the power of compound interest over 30+ year careers.
+   </p>
+
+   <p class="mt-4">
+       College education premiums also varied by era. Of course, your major you pick often corrolates with the market rate for labor. Using Bureau of Labor Statistics data, Early Boomers with college degrees earned about 45% more at career start, Core Boomers saw a 50% premium, and Late Boomers experienced a 55% premium. The <a href="https://www.bls.gov/opub/ted/2015/more-education-still-means-more-pay-in-2014.htm">BLS education earnings data</a> shows how this premium grew over time, though college costs also increased significantly.
+   </p>
+
+   <p class="mt-4">
+       Through these various data sources and conservative calculations, the calculator aims to provide realistic comparisons between Boomer economic conditions and today's financial environment. While it can't capture every nuance of the Boomer experience, it offers valuable insight into how economic conditions have changed over the generations.
+   </p>
+</div>
+
+    <p class="text-sm text-gray-600 mt-4">
+      Note: All calculations are adjusted for inflation and represent approximate historical conditions. Individual experiences may have varied based on location, industry, and other factors.
+    </p>
+  </div>
+
+  <main>
+    <article>
+      <slot />
+    </article>
+    <AuthorBox />
+  </main>
+</div>
+</IndexPage>

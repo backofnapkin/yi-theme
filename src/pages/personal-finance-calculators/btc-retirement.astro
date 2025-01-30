@@ -1,0 +1,187 @@
+---
+import IndexPage from "../../layouts/IndexPage.astro";
+import { BTCCalculator } from "../../components/calculators/btc-retirement/BTCCalculator";
+import { Calculator } from 'lucide-react';
+import YouTubeEmbed from '../../components/YouTubeEmbed.astro';
+import ImageEmbed from '../../components/ImageEmbed.astro';
+import AuthorBox from '../../components/AuthorBox.astro';
+
+export const frontmatter = {
+  comment: false,
+  donate: false,
+  title: "Bitcoin Retirement Calculator & Market Risk Tool",
+  description: "Calculate how much Bitcoin you need for retirement. Model different growth scenarios, account for volatility, and plan your BTC accumulation strategy.",
+  author: "Brett Lindenberg",
+  category: "Personal Finance Calculators",
+  date: "2025-01-29",
+  tags: [""],
+  image: {
+    url: "",
+    alt: ""
+  }
+};
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": frontmatter.title,
+  "description": frontmatter.description,
+  "applicationCategory": "FinanceApplication",
+  "operatingSystem": "Web Browser",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "featureList": [
+    "Bitcoin Price Projections",
+    "Retirement Goal Planning",
+    "BTC Accumulation Strategy",
+    "Volatility Modeling",
+    "Risk Analysis",
+    "Network Metrics Integration",
+    "Historical Performance Data",
+    "Interactive Charts"
+  ]
+};
+---
+
+<IndexPage
+  title={frontmatter.title}
+  description={frontmatter.description}
+  author={frontmatter.author}
+  date={frontmatter.date}
+  comment={frontmatter.comment}
+  donate={frontmatter.donate}
+  image={frontmatter.image}
+  category={frontmatter.category}
+  tags={frontmatter.tags}>
+
+<script type="application/ld+json" set:html={JSON.stringify(schema)} />
+<div class="min-h-screen bg-skin-fill pt-2 px-4 sm:px-6 lg:px-8">
+  <div class="max-w-7xl mx-auto">
+    <div class="not-prose mt-2">
+      <BTCCalculator client:load />
+    </div>
+  </div>
+  <div class="prose prose-lg max-w-none mt-2 text-skin-base">
+    <h2 class="text-2xl font-bold mb-4">How to Use This Calculator</h2>
+    <p>
+      Is HOLDling part of your retirement strategy? This calculator helps you model different scenarios and determine how much BTC you might need to achieve your retirement goals.
+    </p>
+
+    <p class="mt-4">
+      Start by entering your current age and life expectancy to establish your time horizon. Then, input your current Bitcoin holdings and planned annual purchases. The calculator will help you understand if your current strategy aligns with your retirement goals.
+    </p>
+
+    <p class="font-semibold mt-3">Follow these steps to get the most accurate projections:</p>
+    <ul class="list-disc pl-6 space-y-2">
+      <li><strong>Personal Information:</strong> Enter your current age and expected life span.</li>
+      <li><strong>Bitcoin Holdings:</strong> Input your current BTC amount and planned annual purchases until retirement. Contributions stop at your retirement goal year.</li>
+      <li><strong>Retirement Goals:</strong> Set your target retirement age and desired annual spend. </li>
+      <li><strong>Market Projections:</strong> Adjust the expected annual growth rate based on your outlook. Test different projections to see what happens if BTC declines in value or goes to the moon!</li>
+    </ul>
+
+   <h2 class="text-2xl font-bold mt-6 mb-4">Download Your Detailed Projections</h2>
+    <p>
+      For those who love diving into the numbers (like me!), I've added the ability to download a detailed CSV file containing your year-by-year projections. Each row represents one year, tracking metrics like your age, BTC price growth, amount of BTC purchased, and your total portfolio value in BTC and USD.
+    </p>
+    
+    <p class="mt-4">
+      Why did I include this feature? Because when I was planning my own investment strategy, I found that having access to the raw data helped me spot patterns and make better decisions. You can import this CSV into your favorite spreadsheet software to create custom charts, run additional calculations, or integrate it with your other financial planning tools. 
+    </p>
+
+        <ImageEmbed src="/images/btc-prices-estimates.png" alt="BTC price projections" description="Longterm: I don't think anyone can make accurate BTC price projections." />
+
+
+    <h3 class="text-xl font-bold mt-8">Understanding the Results</h3>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+      <div class="bg-blue-50 p-4 rounded-lg">
+        <h4 class="font-bold text-blue-900">Target BTC</h4>
+        <p class="text-sm">
+          The amount of Bitcoin needed to sustain your desired retirement lifestyle. This tool assumes you will convert BTC into USD each year in retirement to fund your living expenses. As a result, your amount of BTC declines each year in retirement with this tool, but the overall portfolio value may continue to increase depending on appreciation. 
+        </p>
+      </div>
+      <div class="bg-green-50 p-4 rounded-lg">
+        <h4 class="font-bold text-green-900">Annual BTC Needed</h4>
+        <p class="text-sm">
+          This is how much Bitcoin you need to accumulate each year to reach your retirement goal if the inputs you enter work out exactly as projected. These projections are based on annaul apprecation of BTC, your current holdings, and time horizon until retirement. 
+        </p>
+      </div>
+    </div>
+
+    <ImageEmbed src="/images/hodl-retirement.png" alt="HODL retirement" description="Do you want a HODL retirement or rely on social security benefits?" />
+
+<div class="prose prose-lg max-w-none mt-2 text-skin-base">
+    <h2 class="text-2xl font-bold mb-4">Risk Analysis Behind This Calculator</h2>
+    <p>
+      When I first started building investment calculators, I noticed something that bothered me - most calculators don't factor risk and assume prices will go straight up. This is pretty crazy since we're talking about an asset that's been around for less than one generation unlike gold, silver, real estate or stocks.
+    </p>
+
+    <p class="mt-4">
+      To help you think about risk I developed a multi-layered approach that considers four key components: network effects, macroeconomic factors, historical volatility patterns, and individual risk tolerance. Each of these components plays a crucial role in providing more realistic projections.
+    </p>
+
+    <p class="font-semibold mt-3">Here's how I break down the risk components in the tool:</p>
+    <ul class="list-disc pl-6 space-y-2">
+      <li><strong>Network Effect Analysis:</strong> I weight network security (40%) and adoption metrics (40%) more heavily than transaction volume (20%). Why? Because I've found that security and real user adoption are better predictors of long-term stability than pure transaction numbers.</li>
+      <li><strong>Macroeconomic Integration:</strong> I give special attention to inflation (30%) and stock market correlation (35%) because these factors have historically shown the strongest influence on investment outcomes in my analysis.</li>
+
+   <h3 class="text-xl font-bold mt-8">Understanding Market Cycles</h3>
+    <p>
+     Markets move in cycles, and each phase of these cycles behaves quite differently. Stuff goes up for awhile, then back down, then up again. The markets aren't a straight line. This led me to develop a three-phase model that better reflects real-world market behavior to demonstrate volatility: 
+    </p>
+
+    <ul class="list-disc pl-6 space-y-2">
+      <li><strong>Bull Markets (25% of the time):</strong> These explosive growth periods typically last about 18 months and can see returns averaging 180%. While these returns might sound extreme, they're based on historical patterns I've observed where accumulation phases lead to significant price discovery.</li>
+      <li><strong>Bear Markets (25% of the time):</strong> These challenging periods usually last about 12 months and can see declines averaging 60%. I've found that including realistic drawdown scenarios helps prevent overconfidence in planning.</li>
+      <li><strong>Consolidation Periods (50% of the time):</strong> These quieter phases typically last 2 years and see modest gains averaging 20%. In my analysis, these periods are crucial for building strong price floors and setting up the next market cycle.</li>
+    </ul>
+
+    <p class="mt-4">
+      Why did I choose these specific numbers? They're based on my understanding of historical cycles since 2013. While past performance doesn't guarantee future results, I've found these patterns remarkably consistent across multiple market cycles. The frequencies (25%/25%/50% split) reflect how markets spend most of their time in consolidation with shorter periods of extreme movement in either direction.
+    </p>
+
+        <ImageEmbed src="/images/btc-drawing.png" alt="BTC drawing" description="BTC is officially mainstream." />
+
+
+    <h3 class="text-xl font-bold mt-8">Limitations to Keep in Mind</h3>
+    <p>
+      I believe in being transparent about what this calculator can and cannot do. While I've worked to make it as comprehensive as possible, there are some inherent limitations you should know about:
+    </p>
+
+    <ul class="list-disc pl-6 space-y-2">
+      <li><strong>Simplified Risk Tolerance:</strong> The calculator uses three basic risk profiles (conservative, moderate, aggressive). While this works for most users, your personal risk tolerance might be more nuanced.</li>
+      <li><strong>Historical Patterns:</strong> My volatility model assumes that historical patterns will generally repeat. While this has been reliable so far, past performance doesn't guarantee future results.</li>
+      <li><strong>Government Regulations:</strong> Regulatory changes could significantly impact Bitcoin's value and accessibility. Governments might send prices higher or lower depending where you live. 
+      <li><strong>Black Swan Events:</strong> Like any model, this calculator can't predict unprecedented events that could dramatically impact markets.</li>
+    </ul>
+
+    <ImageEmbed src="/images/btc-retirement-planning.png" alt="Bitcoin retirement planning" description="Combining traditional retirement planning with Bitcoin investment strategy." />
+
+<h2 class="text-2xl font-bold mt-6 mb-4">Predicting BTC Prices Long-term</h2>
+<p>
+  If there's one thing I've learned from studying cryptocurrency markets, it's that even the experts struggle to agree on price predictions. A recent <a href="https://www.cnbc.com/2024/12/31/bitcoin-btc-price-predictions-for-2025.html">CNBC article</a> highlighting various expert predictions for 2025 shows just how wide the range of expectations is among industry experts.
+</p>
+
+<p class="mt-4">
+  On the conservative end, James Butterfill from CoinShares suggests a range of $80,000 to $150,000 (pretty wide range if you ask me), noting that disappointment in regulatory policies could trigger significant corrections. Meanwhile, more bullish predictions come from experts like Elitsa Taskova of Nexo, who sees BTC "more than doubling to $250,000 within a year." Standard Chartered's Geoffrey Kendrick lands in the middle, projecting $200,000 by the end of 2025.
+</p>
+
+<p class="mt-4">
+  What fascinates me about these predictions is how they highlight the importance of the risk analysis we discussed above. For instance, Carol Alexander, a finance professor who correctly predicted Bitcoin's 2024 rise to $100,000, expects prices around "$150,000 plus or minus $50,000" by summer 2025, a range that acknowledges major volatility in the market. Bottom line, I don't think we really know where BTC is headed longterm and that keeps things interesting. 
+</p>
+
+    <p class="text-sm text-gray-600 mt-8">
+      Note: This calculator is for educational purposes only. All projections are hypothetical and do not guarantee future results. Always consult with qualified financial professionals before making investment decisions.
+    </p>
+  </div>
+
+  <main>
+    <article>
+      <slot />
+    </article>
+    <AuthorBox />
+  </main>
+</div>
+</IndexPage>

@@ -8,6 +8,89 @@ interface RetirementGoalsProps {
   onChange: (retirementAge: number, annualSpend: number) => void;
 }
 
+// Enhanced currency input with improved interaction
+const CurrencyInput: React.FC<{
+  value: number;
+  onChange: (value: number) => void;
+  min?: number;
+  max?: number;
+}> = ({ value, onChange, min = 0, max }) => {
+  const [localValue, setLocalValue] = React.useState(value.toString());
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const input = e.target.value;
+    
+    // Allow empty input during typing
+    if (input === '') {
+      setLocalValue(input);
+      return;
+    }
+
+    // Only allow whole numbers
+    if (!/^\d*$/.test(input)) {
+      return;
+    }
+
+    setLocalValue(input);
+    
+    const numValue = parseInt(input, 10);
+    if (!isNaN(numValue)) {
+      if (max !== undefined && numValue > max) {
+        onChange(max);
+        setLocalValue(max.toString());
+      } else if (min !== undefined && numValue < min) {
+        onChange(min);
+        setLocalValue(min.toString());
+      } else {
+        onChange(numValue);
+      }
+    }
+  };
+
+  const handleBlur = () => {
+    if (localValue === '') {
+      onChange(0);
+      setLocalValue('0');
+    } else {
+      const numValue = parseInt(localValue, 10);
+      if (!isNaN(numValue)) {
+        if (numValue < min) {
+          onChange(min);
+          setLocalValue(min.toString());
+        } else if (max !== undefined && numValue > max) {
+          onChange(max);
+          setLocalValue(max.toString());
+        } else {
+          setLocalValue(numValue.toString());
+          onChange(numValue);
+        }
+      }
+    }
+  };
+
+  return (
+    <div className="relative rounded-md shadow-sm">
+      <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+        <span className="text-gray-500 sm:text-sm">$</span>
+      </div>
+      <input
+        type="text"
+        value={localValue}
+        onChange={handleChange}
+        onBlur={handleBlur}
+        className="block w-full px-4 py-2 pl-7 pr-12
+                 border rounded-lg 
+                 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 
+                 outline-none
+                 transition-shadow"
+      />
+      <div className="absolute inset-y-0 right-0 flex items-center pr-3">
+        <span className="text-gray-500 sm:text-sm">USD</span>
+      </div>
+    </div>
+  );
+};
+
 const RetirementGoals: React.FC<RetirementGoalsProps> = ({
   retirementAge,
   annualSpend,
@@ -92,25 +175,13 @@ const RetirementGoals: React.FC<RetirementGoalsProps> = ({
             Desired Annual Retirement Spend
             <Tooltip content="Enter your desired yearly retirement spending" />
           </label>
-          <div className="mt-1 relative rounded-md shadow-sm">
-            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-              <span className="text-gray-500 sm:text-sm">$</span>
-            </div>
-            <input
-              type="number"
-              min="0"
-              max="99000000"
+          <div className="mt-1">
+            <CurrencyInput
               value={annualSpend}
-              onChange={(e) => onChange(retirementAge, parseFloat(e.target.value) || 0)}
-              className="block w-full px-4 py-2 pl-7 pr-12
-                       border rounded-lg 
-                       focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 
-                       outline-none
-                       transition-shadow"
+              onChange={(value) => onChange(retirementAge, value)}
+              min={0}
+              max={99000000}
             />
-            <div className="absolute inset-y-0 right-0 flex items-center pr-3">
-              <span className="text-gray-500 sm:text-sm">USD</span>
-            </div>
           </div>
         </div>
       </div>

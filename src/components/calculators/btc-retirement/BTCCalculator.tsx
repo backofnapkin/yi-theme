@@ -23,6 +23,175 @@ interface CalculatorState {
   growthRate: number;
 }
 
+// BTC specific input that preserves decimal precision
+const BitcoinAmountInput: React.FC<{
+  value: number;
+  onChange: (value: number) => void;
+  min?: number;
+  max?: number;
+  className?: string;
+  placeholder?: string;
+}> = ({ value, onChange, min, max, className = '', placeholder }) => {
+  const [localValue, setLocalValue] = useState(value.toString());
+  
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const input = e.target.value;
+    
+    // Allow empty input and single decimal point during typing
+    if (input === '' || input === '.') {
+      setLocalValue(input);
+      return;
+    }
+
+    // Allow numbers and one decimal point
+    if (!/^\d*\.?\d*$/.test(input)) {
+      return;
+    }
+
+    setLocalValue(input);
+    
+    const numValue = parseFloat(input);
+    if (!isNaN(numValue)) {
+      if (max !== undefined && numValue > max) {
+        onChange(max);
+        setLocalValue(max.toString());
+      } else if (min !== undefined && numValue < min) {
+        onChange(min);
+        setLocalValue(min.toString());
+      } else {
+        onChange(numValue);
+      }
+    }
+  };
+
+  const handleBlur = () => {
+    if (localValue === '' || localValue === '.') {
+      onChange(0);
+      setLocalValue('0');
+    } else {
+      const numValue = parseFloat(localValue);
+      if (!isNaN(numValue)) {
+        // Preserve up to 8 decimal places for BTC
+        const formattedValue = numValue.toFixed(8);
+        setLocalValue(formattedValue);
+        onChange(parseFloat(formattedValue));
+      }
+    }
+  };
+
+  return (
+    <div className="relative rounded-md w-full">
+      <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+        <span className="text-gray-500 sm:text-sm">₿</span>
+      </div>
+      <input
+        type="text"
+        value={localValue}
+        onChange={handleChange}
+        onBlur={handleBlur}
+        className={`block w-full px-4 py-2 pl-7
+          border rounded-lg 
+          focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 
+          outline-none
+          transition-shadow
+          ${className}`}
+        placeholder={placeholder}
+        min={min}
+        max={max}
+      />
+    </div>
+  );
+};
+
+// Regular number input component with improved interaction
+const EnhancedNumberInput: React.FC<{
+  value: number;
+  onChange: (value: number) => void;
+  min?: number;
+  max?: number;
+  className?: string;
+  prefix?: string;
+  suffix?: string;
+  placeholder?: string;
+}> = ({ value, onChange, min, max, className = '', prefix, suffix, placeholder }) => {
+  const [localValue, setLocalValue] = useState(value.toString());
+  
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const input = e.target.value;
+    
+    // Allow empty input during typing
+    if (input === '') {
+      setLocalValue(input);
+      return;
+    }
+
+    // Only allow numbers
+    if (!/^\d*$/.test(input)) {
+      return;
+    }
+
+    setLocalValue(input);
+    
+    const numValue = parseInt(input, 10);
+    if (!isNaN(numValue)) {
+      if (max !== undefined && numValue > max) {
+        onChange(max);
+        setLocalValue(max.toString());
+      } else if (min !== undefined && numValue < min) {
+        onChange(min);
+        setLocalValue(min.toString());
+      } else {
+        onChange(numValue);
+      }
+    }
+  };
+
+  const handleBlur = () => {
+    if (localValue === '') {
+      onChange(0);
+      setLocalValue('0');
+    } else {
+      const numValue = parseInt(localValue, 10);
+      if (!isNaN(numValue)) {
+        setLocalValue(numValue.toString());
+        onChange(numValue);
+      }
+    }
+  };
+
+  return (
+    <div className="relative rounded-md w-full">
+      {prefix && (
+        <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+          <span className="text-gray-500 sm:text-sm">{prefix}</span>
+        </div>
+      )}
+      <input
+        type="text"
+        value={localValue}
+        onChange={handleChange}
+        onBlur={handleBlur}
+        className={`block w-full px-4 py-2 
+          ${prefix ? 'pl-7' : ''} 
+          ${suffix ? 'pr-12' : ''} 
+          border rounded-lg 
+          focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 
+          outline-none
+          transition-shadow
+          ${className}`}
+        placeholder={placeholder}
+        min={min}
+        max={max}
+      />
+      {suffix && (
+        <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+          <span className="text-gray-500 sm:text-sm">{suffix}</span>
+        </div>
+      )}
+    </div>
+  );
+};
+
 export const BTCCalculator = () => {
   const { price: btcPrice, loading, error } = useBitcoinPrice();
   const [useCustomPrice, setUseCustomPrice] = useState(false);
@@ -60,12 +229,6 @@ export const BTCCalculator = () => {
 
   // Get the effective BTC price (either custom or live)
   const effectiveBtcPrice = useCustomPrice ? customBtcPrice : (btcPrice || 0);
-
-  // Handle custom price change
-  const handleCustomPriceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const price = parseFloat(e.target.value);
-    setCustomBtcPrice(isNaN(price) ? 0 : price);
-  };
 
   // Update functions for each input
   const updatePersonalInfo = (age: number, expectancy: number) => {
@@ -123,34 +286,6 @@ export const BTCCalculator = () => {
               </div>
               <div className="flex items-center space-x-4">
                 <label className="flex items-center space-x-2">
-                  <style>
-                    {`
-                      input[type="checkbox"] {
-                        -webkit-appearance: none;
-                        appearance: none;
-                        width: 16px;
-                        height: 16px;
-                        border: 2px solid rgb(229, 231, 235); /* gray-200 */
-                        border-radius: 4px;
-                        outline: none;
-                        cursor: pointer;
-                        position: relative;
-                        margin-right: 8px;
-                      }
-
-                      input[type="checkbox"]:checked {
-                        border-color: rgb(5, 150, 105); /* emerald-600 */
-                        background-color: rgb(5, 150, 105); /* emerald-600 */
-                        background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='white' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M12.207 4.793a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0l-2-2a1 1 0 011.414-1.414L6.5 9.086l4.293-4.293a1 1 0 011.414 0z'/%3e%3c/svg%3e");
-                      }
-
-                      input[type="checkbox"]:focus {
-                        outline: none;
-                        border-color: rgb(5, 150, 105); /* emerald-600 */
-                        box-shadow: 0 0 0 2px rgba(5, 150, 105, 0.2);
-                      }
-                    `}
-                  </style>
                   <input
                     type="checkbox"
                     checked={useCustomPrice}
@@ -174,26 +309,15 @@ export const BTCCalculator = () => {
                   )}
                 </div>
               ) : (
-                <div className="relative rounded-md w-full max-w-xs">
-                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                    <span className="text-gray-500 sm:text-sm">$</span>
-                  </div>
-                  <input
-                    type="number"
-                    value={customBtcPrice || ''}
-                    onChange={handleCustomPriceChange}
-                    className="block w-full px-4 py-2 pl-7 pr-12 
-                              border rounded-lg 
-                              focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 
-                              outline-none
-                              transition-shadow"
-                    placeholder="Enter BTC price"
-                    min="0"
-                  />
-                  <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
-                    <span className="text-gray-500 sm:text-sm">USD</span>
-                  </div>
-                </div>
+                <EnhancedNumberInput
+                  value={customBtcPrice}
+                  onChange={setCustomBtcPrice}
+                  min={0}
+                  prefix="$"
+                  suffix="USD"
+                  placeholder="Enter BTC price"
+                  className="max-w-xs"
+                />
               )}
             </div>
           </div>
@@ -233,34 +357,6 @@ export const BTCCalculator = () => {
         {/* Chart Toggles */}
         <div className="flex items-center space-x-6">
           <label className="flex items-center space-x-2">
-            <style>
-              {`
-                input[type="checkbox"] {
-                  -webkit-appearance: none;
-                  appearance: none;
-                  width: 16px;
-                  height: 16px;
-                  border: 2px solid rgb(229, 231, 235); /* gray-200 */
-                  border-radius: 4px;
-                  outline: none;
-                  cursor: pointer;
-                  position: relative;
-                  margin-right: 8px;
-                }
-
-                input[type="checkbox"]:checked {
-                  border-color: rgb(5, 150, 105); /* emerald-600 */
-                  background-color: rgb(5, 150, 105); /* emerald-600 */
-                  background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='white' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M12.207 4.793a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0l-2-2a1 1 0 011.414-1.414L6.5 9.086l4.293-4.293a1 1 0 011.414 0z'/%3e%3c/svg%3e");
-                }
-
-                input[type="checkbox"]:focus {
-                  outline: none;
-                  border-color: rgb(5, 150, 105); /* emerald-600 */
-                  box-shadow: 0 0 0 2px rgba(5, 150, 105, 0.2);
-                }
-              `}
-            </style>
             <input
               type="checkbox"
               checked={showVolatility}

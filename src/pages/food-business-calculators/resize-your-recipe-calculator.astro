@@ -1,0 +1,194 @@
+---
+import IndexPage from "../../layouts/IndexPage.astro";
+import { ResizeRecipeCalculator } from "../../components/calculators/resize-recipe/ResizeRecipeCalculator";
+import { Calculator } from 'lucide-react';
+import YouTubeEmbed from '../../components/YouTubeEmbed.astro';
+import ImageEmbed from '../../components/ImageEmbed.astro';
+import AuthorBox from '../../components/AuthorBox.astro';
+
+export const frontmatter = {
+    comment: false,
+    donate: false,
+    title: "Resize Your Recipe Calculator & Shopping List Tool",
+    description: "Scale your recipes up or down while maintaining proportions and calculating costs. Get an update shopping list based on input.",
+    author: "Brett Lindenberg",
+    category: "Food Business Calculators",
+    date: "2025-2-01",
+    tags: [""],
+    image: {
+        url: "",
+        alt: ""
+    }
+};
+
+const schema = {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": frontmatter.title,
+    "description": frontmatter.description,
+    "applicationCategory": "BusinessApplication",
+    "operatingSystem": "Web Browser",
+    "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+    },
+    "featureList": [
+        "Recipe scaling calculator",
+        "Ingredient cost calculation",
+        "Measurement conversion",
+        "Cost per serving analysis",
+        "Bulk recipe adjustment"
+    ]
+};
+---
+
+<IndexPage
+    title={frontmatter.title}
+    description={frontmatter.description}
+    author={frontmatter.author}
+    date={frontmatter.date}
+    comment={frontmatter.comment}
+    donate={frontmatter.donate}
+    image={frontmatter.image}
+    category={frontmatter.category}
+    tags={frontmatter.tags}>
+
+<script type="application/ld+json" set:html={JSON.stringify(schema)} />
+
+<div class="min-h-screen bg-skin-fill py-2 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-7xl mx-auto">
+        <div class="not-prose my-2">
+            <ResizeRecipeCalculator client:load />
+        </div>
+    </div>
+    
+    <div class="prose prose-lg max-w-none mt-4 text-skin-base">
+        <h2 class="text-2xl font-bold mb-4">How to use this calculator</h2>
+        
+        <p class="mt-4">This yield calculator makes scaling recipes easy. Whether you need to multiply a family recipe for a large event or resize a dish for a smaller gathering the tool helps you adjust ingredient quantities. Modify servings, calculate exact costs and price per serving below. 
+        </p>
+
+
+        <h3 class="text-xl font-bold mt-8">Step 1: Enter Recipe Details</h3>
+        <p class="mt-4">
+            Start by entering your recipe name and any notes or special instructions. This helps you keep track of different recipe variations and important preparation details.
+        </p>
+
+        <h3 class="text-xl font-bold mt-8">Step 2: Set Serving Sizes</h3>
+        <p class="mt-4">
+            Input the original number of servings your recipe makes and the desired number of servings you want to scale to. The calculator will automatically adjust all ingredients proportionally.
+        </p>
+
+        <h3 class="text-xl font-bold mt-8">Step 3: Add Ingredients</h3>
+        <p class="mt-4">
+            List all ingredients with their quantities in ounces. For each ingredient, you can optionally add the bulk cost to calculate total recipe costs and cost per serving.
+        </p>
+
+    <ImageEmbed src="/images/scaling-tomatoe-soup.png" alt="scaling tomatoe soup" description="This tool can help you scale tomatoe soup recipes and more." />
+
+        <h2 class="text-2xl font-bold mt-6 mb-4">Understanding Measurements</h2>
+
+    <p>
+      Let me pull back the curtain and show you how this calculator handles all those tricky measurement conversions. As someone who's spent countless hours in both professional and home kitchens, I know firsthand how confusing recipe scaling can be. That's exactly why I built this tool to do the heavy lifting for you.
+    </p>
+    <p class="mt-4">
+      At its heart, the calculator uses a straightforward approach. Say you want to scale a recipe from 4 servings to 20 servings - the calculator multiplies everything by 5. Simple, right? But here's where it gets interesting: I've built in a whole system of measurement conversions to make sure you get answers that actually make sense in the kitchen.
+    </p>
+
+    <p class="mt-4">
+      Think about it. Nobody wants to see "0.167 cups of vanilla extract" in a recipe. That's why I created a conversion system that automatically adjusts to give you measurements that work in real life. The calculator might show that same amount as "2 tablespoons plus 2 teaspoons" instead.
+    </p>
+
+    <h3 class="text-xl font-bold mt-8">Getting the Conversions Right</h3>
+    <p>
+      After working with Malcom on this calculator, I learned some ingredients need special attention. Take flour, for instance. A cup of flour weighs about 4.25 ounces - way different from a cup of sugar, which weighs around 7 ounces. I've built these conversions right into the calculator:
+    </p>
+
+    <ul class="list-disc pl-6 space-y-2">
+      <li><strong>For Liquids:</strong> The calculator knows when to switch between teaspoons, tablespoons, cups, and quarts. Nobody wants to measure 32 tablespoons when 2 cups will do just fine.</li>
+      <li><strong>For Butter:</strong> I made sure it displays in sticks when possible (each stick is 4 ounces) because that's how most of us buy it.</li>
+      <li><strong>For Dry Goods:</strong> The calculator automatically converts between weight and volume measurements, considering the density of common ingredients like flour and sugar.</li>
+    </ul>
+
+    <p class="mt-4">
+      Behind the scenes, everything gets converted to ounces first. This gives us a standard unit to work with, ensuring accuracy when scaling up or down. Then, the calculator converts those ounces back into whatever measurement makes the most sense for that particular ingredient and quantity.
+    </p>
+
+    <h3 class="text-xl font-bold mt-8">A Note on Precision</h3>
+    <p>
+      While the calculator handles all these conversions automatically, remember what I mentioned earlier about tasting as you go. These measurements are mathematically precise, but cooking is still an art. Use these calculations as a guide, but trust your instincts especially when it comes to seasonings and spices. More on that below. 
+    </p>
+</div>
+        <div class="space-y-8">
+            <div>
+                <p class="font-bold mb-2">Common Conversions:</p>
+                <ul class="list-disc pl-6 space-y-2">
+                    <li>1 cup = 8 fluid ounces</li>
+                    <li>1 tablespoon = 0.5 fluid ounces</li>
+                    <li>1 teaspoon = 0.17 fluid ounces</li>
+                    <li>1 pound = 16 ounces</li>
+                    <li>1 kilogram = 35.27 ounces</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2 class="text-2xl font-bold mt-6 mb-4">Cost Analysis</h2>
+        <p class="mt-4">
+            The calculator provides two important cost metrics:
+        </p>
+        <ul class="list-disc pl-6 space-y-2 mt-4">
+            <li><strong>Total Recipe Cost:</strong> The sum of all ingredient costs scaled to your desired serving size.</li>
+            <li><strong>Cost Per Serving:</strong> The total cost divided by the number of servings, helping you price your dishes appropriately.</li>
+        </ul>
+
+<div class="prose prose-lg max-w-none mt-2 text-skin-base">
+    <h2 class="text-2xl font-bold mb-4">Things to Remember When Scaling Your Recipes</h2>
+    <p>
+      Like everything, scaling up recipes to larger portions takes a little bit of practice. My friend / food entrepreneur Malcolm Bedell shared a story about catering an appreciation event for about 40 local teachers. They wanted something comforting, and nothing says comfort quite like a hearty tomato soup. But scaling that simple recipe from a small batch to one big enough is where things got interesting.
+    </p>
+    
+    <p class="mt-4">
+      First thing, you need to remember was the importance of weight versus volume measurements. Standing there in the kitchen, staring at all those tomatoes, Malcolm knew relying on cups just wouldn't cut it. A cup of diced tomatoes can vary too much depending on how tightly you pack it. Instead, I went by weight—about 15 pounds of tomatoes. It was the only way to make sure I was getting the flavor just right without the risk of under or overdoing the key ingredient.
+    </p>
+
+    <ImageEmbed src="/images/resize-recipe.png" alt="resize recipe" description="This recipe yield calculator makes ingredient conversion amounts much simpler." />
+
+    <h3 class="text-xl font-bold mt-8">The Challenge of Scaling Spices</h3>
+    <p>
+      Another challenge you'll face is dealing with small quantities like spices. I remember standing in front of that big pot, teaspoon in hand, thinking, "Ten teaspoons of salt can't be right, can it?" And it wasn't. Spices don't scale up evenly. A teaspoon of salt for four people doesn't simply become ten teaspoons for forty… that would be a salty disaster. I scaled carefully and tasted as I went, especially with things like thyme and chili flakes. A little too much of either can overwhelm a pot of soup this size. I learned to start small and build up gradually. You can always add more. Removing seasonings is the problem.
+    </p>
+
+    <p class="mt-4">
+      Know that when it comes to scaling recipes it's usually alright to round to practical numbers. Don't make things harder than they have to be.
+    </p>
+
+    <p class="mt-4">
+      And finally, save your notes with this tool. What worked, what didn't. Save this information. Because when you get it right for forty people, you want to be able to do it again without starting from scratch.
+    </p>
+
+    <h2 class="text-2xl font-bold mt-6 mb-4">About this Calculator</h2>
+    <p>
+      As mentioned earlier, I worked closely with chef and restaurateur <strong>Malcolm Bedell</strong> to develop the formulas and structure of the recipe yield calculator. The past decade, Malcolm has launched multiple food truck and restaurant concepts like <a href="https://www.facebook.com/anchohoney/">Ancho Honey</a> and his latest venture, <a href="https://www.gethoneys.com/">The Original Honey's Fried Chicken Palace</a>.
+    </p>
+
+    <ImageEmbed src="/images/malcolm-bedell.png" alt="Malcolm Bedell" description="Chef Malcolm Bedell helped me with the formulas used in this calculator." />
+
+    <p class="mt-4">
+      Malcolm's hands-on experience was crucial in refining how to scale portion sizes and some of the ingredient nuances you need to know about when cooking for 30 people or more.
+    </p>
+
+    <h2 class="text-2xl font-bold mt-6 mb-2">Related Tools</h2>
+    <p class="font-semibold">
+      <a href="/menu-recipe-scaling-calculator" class="text-skin-accent hover:text-skin-accent-hover">Menu Recipe Scaling & Food Cost Calculator</a>: This tool makes it easy to adjust your recipes for any number of servings and accurately calculate ingredient costs and retail prices.
+    </p>
+</div>
+
+    <main>
+        <article>
+            <slot />
+        </article>
+        <AuthorBox />
+    </main>
+</div>
+</IndexPage>

@@ -1,0 +1,315 @@
+---
+import IndexPage from "../../layouts/IndexPage.astro";
+import { LaundromatBusinessCalculator } from "../../components/calculators/laundromat-business/LaundromatBusinessCalculator";
+import { Calculator } from 'lucide-react';
+import YouTubeEmbed from '../../components/YouTubeEmbed.astro';
+import ImageEmbed from '../../components/ImageEmbed.astro';
+import AuthorBox from '../../components/AuthorBox.astro';
+
+export const frontmatter = {
+  comment: false,
+  donate: false,
+  title: "Laundromat Business Calculator: Revenue & Profit Projections",
+  description: "Calculate potential returns and financial projections for a laundromat business investment. Includes startup costs, revenue forecasting, and break-even analysis.",
+  author: "Brett Lindenberg",
+  category: "Business Calculators",
+  date: "2025-01-29",
+  tags: [""],
+  image: {
+    url: "",
+    alt: ""
+  }
+};
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": frontmatter.title,
+  "description": frontmatter.description,
+  "applicationCategory": "BusinessApplication",
+  "operatingSystem": "Web Browser",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "featureList": [
+    "Laundromat Business Calculator",
+    "Investment analysis",
+    "Cash flow projections",
+    "Break-even calculations",
+    "Revenue stream analysis",
+    "Operating cost breakdown",
+    "Utilization rate optimization",
+    "Profit margin calculations"
+  ]
+};
+---
+
+<IndexPage
+  title={frontmatter.title}
+  description={frontmatter.description}
+  author={frontmatter.author}
+  date={frontmatter.date}
+  comment={frontmatter.comment}
+  donate={frontmatter.donate}
+  image={frontmatter.image}
+  category={frontmatter.category}
+  tags={frontmatter.tags}>
+  <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+  <div class="min-h-screen bg-skin-fill pt-2 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-7xl mx-auto">
+      <div class="not-prose mt-2">
+        <LaundromatBusinessCalculator client:load />
+      </div>
+    </div>
+    <div class="prose prose-lg max-w-none mt-4 text-skin-base">
+      <h2 class="text-2xl font-bold mb-4">How to Use the Calculator</h2>
+      <p>
+        This calculator helps you analyze the financial potential of a laundromat business. The default values are based on current market research and industry standards to provide realistic starting points for your calculations. Let's take a look. 
+      </p>
+
+      <h3 class="text-xl font-bold mt-4">Initial Investment</h3>
+      <p class="mt-4">
+        Starting a laundromat requires significant upfront capital for equipment and renovations. According to <a href="https://www.laundrylux.com/start-a-laundromat/">industry experts</a>, a new laundromat can cost anywhere from $200,000 to $500,000 depending on your location and scale.
+      </p>
+
+      <ul class="list-disc pl-6 space-y-2">
+        <li>
+          <strong>Location Cost:</strong> Enter your expected purchase or lease cost. Location is crucial - high-traffic areas with dense populations typically perform better.
+        </li>
+        <li>
+          <strong>Washing Machine Investment:</strong> Input your total cost for washers (Default: $150,000). Modern, efficient machines typically cost $2,000-$5,000 each.
+        </li>
+        <li>
+          <strong>Dryer Investment:</strong> Set your total dryer costs (Default: $75,000). Commercial dryers range from $1,500-$3,000 per unit.
+        </li>
+        <li>
+          <strong>Renovation Costs:</strong> Include any necessary building improvements (Default: $50,000). This covers plumbing, electrical, and cosmetic updates.
+        </li>
+      </ul>
+
+      <ImageEmbed src="/images/clean-modern-laundromat.png" alt="clean and modern laundromat interior" description="A well-designed laundromat layout can improve customer experience and machine utilization." />
+
+      <h3 class="text-xl font-bold mt-4">Operating Costs</h3>
+      <ul class="list-disc pl-6 space-y-2">
+        <li>
+          <strong>Utilities:</strong> Monthly costs for water, electricity, and gas (Default: $3,000). This varies significantly by location and machine efficiency.
+        </li>
+        <li>
+          <strong>Staff Costs:</strong> Monthly wages for attendants if needed (Default: $2,500).
+        </li>
+        <li>
+          <strong>Maintenance:</strong> Monthly equipment repair and upkeep (Default: $1,000).
+        </li>
+        <li>
+          <strong>Insurance:</strong> Monthly coverage costs (Default: $500).
+        </li>
+        <li>
+          <strong>Marketing:</strong> Monthly advertising budget (Default: $300).
+        </li>
+      </ul>
+
+<h3 class="text-xl font-bold mt-4">Revenue Potential</h3>
+      <p>
+        According to <a href="https://thelaundryboss.com/laundromat-industry-data-statistics/">industry data</a>, a typical laundromat operates between 20 to 100 machines. Your revenue potential varies significantly based on your location and size:
+      </p>
+
+      <ul class="list-disc pl-6 space-y-2">
+        <li>
+          <strong>Small Neighborhood Laundromat:</strong> In residential areas, expect $200-$500 daily revenue with limited machines (<a href="https://www.turnsapp.com/blog/how-much-does-the-average-laundromat-make-in-a-day">source</a>).
+        </li>
+        <li>
+          <strong>Medium-Sized Urban Location:</strong> Urban settings typically generate $500-$1,500 daily.
+        </li>
+        <li>
+          <strong>Large High-Traffic Operation:</strong> Premium locations with full services can exceed $1,500-$2,000 daily.
+        </li>
+      </ul>
+
+      <p class="mt-4">
+        Monthly revenue typically ranges from $5,000 to $25,000 according to <a href="https://www.trycents.com/our-2-cents/how-much-money-can-a-laundromat-make">industry analysis</a>, though some sources report <a href="https://www.biz2credit.com/blog/how-much-does-it-cost-to-open-a-laundromat/">monthly earnings</a> between $2,000 to $6,000 for smaller operations.
+      </p>
+
+      <h3 class="text-xl font-bold mt-4">Revenue Streams</h3>
+      <ul class="list-disc pl-6 space-y-2">
+        <li>
+          <strong>Washer Prices:</strong> Set your per-load prices (Default range: $2.50-$8.00 depending on machine size).
+        </li>
+        <li>
+          <strong>Dryer Prices:</strong> Input your dryer rates (Default: $0.25 per 8 minutes).
+        </li>
+        <li>
+          <strong>Additional Services:</strong> Include revenue from vending machines, folding services, or wash-and-fold service to maximize your earning potential.
+        </li>
+      </ul>
+
+      <ImageEmbed src="/images/folding-laundry-services.png" alt="laundry folding services" description="Adding service options like laundry pickup and folding can increase your revenue opportunity." />
+
+ <div class="prose prose-lg max-w-none mt-4 text-skin-base">
+    <h2 class="text-2xl font-bold mb-4">Understanding Your Results: A Simple Guide</h2>
+    <p>
+      Let me break down what all these numbers mean in plain English. When you input your numbers, the calculator crunches them in several ways to give you a clear picture of your laundromat's potential performance.
+    </p>
+
+    <h3 class="text-xl font-bold mt-4">Monthly Performance</h3>
+    <p>
+      The calculator takes your revenue from three sources:
+    </p>
+    <ul class="list-disc pl-6 space-y-2">
+      <li>Machine income (based on your utilization rate)</li>
+      <li>Additional services like wash-and-fold</li>
+      <li>Any supplementary revenue streams</li>
+    </ul>
+
+    <p class="mt-4">
+      Then it subtracts your monthly costs:
+    </p>
+    <ul class="list-disc pl-6 space-y-2">
+      <li>Utilities and rent</li>
+      <li>Staff wages</li>
+      <li>Maintenance and loan payments</li>
+      <li>Any other expenses you've added</li>
+    </ul>
+
+    <h3 class="text-xl font-bold mt-4">Break-Even Timeline</h3>
+    <p>
+      To figure out when you'll recover your investment, I divide your total startup cost by your monthly profit. For example, if you invested $200,000 and make $5,000 profit monthly, you'll break even in about 40 months.
+    </p>
+
+    <div class="bg-skin-card p-2 rounded-lg mt-4">
+      <p class="font-semibold">Quick Example:</p>
+      <p>
+        If your laundromat has 60 machines earning $600 each monthly at 70% utilization:
+      </p>
+      <ul class="list-disc pl-6 mt-2">
+        <li>Potential yearly revenue: $432,000</li>
+        <li>Actual yearly revenue: $302,400</li>
+        <li>Annual expenses: $159,864</li>
+        <li>Yearly profit: $142,536</li>
+      </ul>
+    </div>
+
+      <YouTubeEmbed 
+        id="ZHueuQWmwI4"
+        title="How to Start a $252K Laundromat Business (Real Numbers)"
+        className="mb-8"
+      />
+
+<div class="prose prose-lg max-w-none mt-4 text-skin-base">
+    <h2 class="text-2xl font-bold mb-4">Behind the Charts: How I Calculate Your Numbers</h2>
+    <p>
+      Let me walk you through how I built the calculations that power the two main charts in this calculator. I wanted to make sure you can see exactly where your money is going and what kind of returns you might expect.
+    </p>
+
+    <h3 class="text-xl font-bold mt-8">Monthly Operating Costs Chart</h3>
+    <p>
+      First, I create a pie chart that breaks down your monthly expenses. Here's a real-world example using typical numbers:
+    </p>
+
+    <ul class="list-disc pl-6 space-y-2">
+      <li>Monthly utilities: $3,000 (think water, electricity, gas)</li>
+      <li>Rent payment: $3,500</li>
+      <li>Staff costs: $4,000</li>
+      <li>Maintenance: $500</li>
+      <li>Loan payment: $2,322 (based on a $200,000 loan at 7% for 10 years)</li>
+    </ul>
+
+    <p class="mt-4">
+      To figure out what percentage each expense represents in the pie chart, I divide each cost by the total monthly expenses ($13,322 in this example). So utilities would be $3,000 ÷ $13,322 × 100 = 22.5% of your monthly costs.
+    </p>
+
+    <div class="bg-skin-card p-4 rounded-lg mt-4">
+      <p class="font-semibold">How the Math Works:</p>
+      <pre class="text-sm overflow-x-auto">
+Total Monthly Costs = Utilities + Rent + Labor + Maintenance + Loan Payment
+$13,322 = $3,000 + $3,500 + $4,000 + $500 + $2,322
+
+Percentages:
+Utilities: 22.5%
+Rent: 26.3%
+Labor: 30.0%
+Maintenance: 3.8%
+Loan Payment: 17.4%</pre>
+    </div>
+
+    <h3 class="text-xl font-bold mt-8">Annual Performance Chart</h3>
+    <p>
+      The bar chart gives you four critical numbers that show how your laundromat might perform over a year. Here's how I calculate each one:
+    </p>
+
+    <ul class="list-disc pl-6 space-y-2">
+      <li>
+        <strong>Potential Revenue (Green Bar):</strong> I multiply your number of machines by average revenue per machine by 12 months. For example, with 60 machines earning $600 each per month: 60 × $600 × 12 = $432,000
+      </li>
+      <li>
+        <strong>Actual Revenue (Light Green Bar):</strong> This is your potential revenue adjusted for real-world usage. If your machines are used 70% of the time: $432,000 × 70% = $302,400
+      </li>
+      <li>
+        <strong>Total Expenses (Red Bar):</strong> Monthly costs multiplied by 12 months. Using our example above: $13,322 × 12 = $159,864
+      </li>
+      <li>
+        <strong>Annual Profit (Blue Bar):</strong> Actual revenue minus expenses: $302,400 - $159,864 = $142,536
+      </li>
+    </ul>
+
+    <p class="mt-4">
+      The gap between your potential and actual revenue bars shows you exactly how much money you're leaving on the table due to unused machines. In this example, that's about $129,600 annually - which might help you decide if investing in marketing to increase utilization makes sense.
+    </p>
+</div>
+
+            <YouTubeEmbed 
+        id="5I88Zn2SRm0"
+        title="How to Create Financial Projections for a Laundromat Chain"
+        className="mb-8"
+      />
+
+<div class="prose prose-lg max-w-none mt-4 text-skin-base">
+    <h2 class="text-2xl font-bold mb-4">Next Steps: Due Diligence Insights</h2>
+    <p>
+      If your initial estimates from the back of napkin calculator pass the sniff test, it's time to take your next step in the due diligence process. Here are three key insights from Adam Hoeksema, co-founder of <a href="https://www.projectionhub.com/financial-projection-template/laundromat">ProjectionHub</a> to complete more in-depth laundromat financial projections.
+    </p>
+
+    <h3 class="text-xl font-bold mt-8">1. Make 5-Year Cash-Flow Projections</h3>
+    <p>
+      "You're also going to get a 5-year income statement, a 5-year cash-flow statement, and a 5-year balance sheet projection as well as an income statement, cash flow, and balance sheet all broken down by month for each of the five years," Hoeksema explains.
+    </p>
+    
+    <p class="font-semibold mt-4">
+      Next Step: Use these projections to gain insight into long-term profitability and cash flow. This is especially valuable if you're seeking funding or planning for growth.
+    </p>
+
+    <h3 class="text-xl font-bold mt-8">2. Plan for Expansion</h3>
+    <p>
+      "This will work really well for just an individual laundromat or if you're looking to either start or acquire many laundromats over a period of time and want to model your laundromat empire," says Hoeksema.
+    </p>
+
+    <p class="font-semibold mt-4">
+      Next Step: If initial projections look good, create a model that includes multiple locations to assess scalability and the financial impact of growth.
+    </p>
+
+    <h3 class="text-xl font-bold mt-8">3. Integrate More Service Offerings</h3>
+    <p>
+      "If you do offer a wash and fold service at your laundromat, you can build that into the model here as well," Hoeksema advises.
+    </p>
+
+    <p class="font-semibold mt-4">
+      Next Step: Consider adding revenue streams like wash and fold or pickup and delivery services to boost profitability.
+    </p>
+
+    <p class="mt-4">
+      These add-on services will help you determine the financial viability of your laundromat and provide a path for growth.
+    </p>
+
+    <p class="mt-4">
+      <strong>Disclaimer:</strong> I always remind people to use these defaults as a starting point, not a guarantee. This tool is based on real data, but every laundromat and market is unique. The true power of this calculator comes from plugging in your own local research numbers and adjusting based on your specific situation.
+    </p>
+    </div>
+    <main>
+      <article>
+        <slot />
+      </article>
+      <AuthorBox />
+    </main>
+  </div>
+</IndexPage>

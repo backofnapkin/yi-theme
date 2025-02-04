@@ -1,0 +1,220 @@
+---
+import IndexPage from "../../layouts/IndexPage.astro";
+import LawnMowTimeCalculator from "../../components/calculators/lawn-mow-time/LawnMowTimeCalculator";
+import { Calculator } from 'lucide-react';
+import ImageEmbed from '../../components/ImageEmbed.astro';
+import AuthorBox from '../../components/AuthorBox.astro';
+
+export const frontmatter = {
+  comment: false,
+  donate: false,
+  title: "Lawn Mowing Time Calculator: How Long to Mow & Trim a Yard?",
+  description: "Calculate accurate time estimates and pricing for lawn mowing services. Get detailed breakdowns of mowing time, cleanup, and crew costs for professional lawn care.",
+  author: "Brett Lindenberg",
+  category: "Lawn Care Calculators",
+  date: "2025-02-03",
+  tags: [""],
+  image: {
+    url: "",
+    alt: ""
+  }
+};
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": frontmatter.title,
+  "description": frontmatter.description,
+  "applicationCategory": "BusinessApplication",
+  "operatingSystem": "Web Browser",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "featureList": [
+    "Mowing time calculator",
+    "Crew size efficiency analysis",
+    "Equipment selection optimization",
+    "Condition-based time adjustments",
+    "Cleanup time estimation",
+    "Professional pricing calculator"
+  ]
+};
+---
+
+<IndexPage 
+  title={frontmatter.title}
+  description={frontmatter.description}
+  author={frontmatter.author}
+  date={frontmatter.date}
+  comment={frontmatter.comment}
+  donate={frontmatter.donate}
+  image={frontmatter.image}
+  category={frontmatter.category}
+  tags={frontmatter.tags}>
+  <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+
+  <div class="min-h-screen bg-skin-fill py-2 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-7xl mx-auto">
+    </div>
+
+    <LawnMowTimeCalculator client:load />
+
+    <div class="prose prose-lg max-w-none mt-4 text-skin-base">
+      <h2 class="text-2xl font-bold mb-4">How this Calculator Works</h2>
+      <p>
+        This calculator uses real-world data and professional lawn care insights to provide accurate time estimates for lawn mowing services. It considers multiple factors that affect job duration to make this as accurate as possible. If you're brand new to mowing lawns this is going to help out a lot.
+      </p>
+
+      <h3 class="text-xl font-bold mt-6">Understanding the Inputs</h3>
+      <ul class="list-decimal pl-6 space-y-2">
+        <li><strong>Mower Settings:</strong> Choose your equipment type and cutting width. Wider decks cover more area but may be less maneuverable in tight spaces.</li>
+        <li><strong>Lawn Size:</strong> Enter the total square footage of the area to be mowed.</li>
+        <li><strong>Lawn Conditions:</strong> Account for obstacles and conditions that affect mowing time:
+          <ul class="list-disc pl-6 mt-2">
+            <li>Trees and landscaping features</li>
+            <li>Parkways and curved edges</li>
+            <li>Slopes and terrain challenges</li>
+            <li>Wet conditions or overgrowth</li>
+          </ul>
+        </li>
+        <li><strong>Cleanup Method:</strong> Select your preferred cleanup approach, from efficient backpack blowers to manual raking.</li>
+        <li><strong>Crew Settings:</strong> Specify crew size and hourly rates to calculate labor costs and efficiency gains.</li>
+      </ul>
+
+    <ImageEmbed
+      src="/images/wide-deck-mower.png"
+      alt="wide deck mower"
+      description="Wider decks will reduce average mowing time even if you use a push mower."
+    />
+
+<div class="prose prose-lg max-w-none mt-4 text-skin-base">
+    <h2 class="text-2xl font-bold mb-4">How I Calculate Mowing Times in this Tool</h2>
+    <p class="mt-4">
+      Let me share how I developed the mowing time calculations for this tool. As the owner of a small lawn care company, I've had the unique opportunity to test these timings firsthand with my own equipment, starting with my trusty 21-inch push mower. I've also spent countless hours observing my crew and other pros in action, stopwatch (okay, my phone timer) in hand, taking detailed notes. What I discovered through this hands-on research was fascinating. There's a pretty consistent baseline for how quickly pros can mow with the right equipment and some experience.
+    </p>
+
+    <h3 class="text-xl font-bold mt-8">Finding the Base Speed</h3>
+    <p>
+      I started with what I call the "baseline mower" - your standard 21-inch push mower, just like the one I use. After timing my mowing sessions last summer, I found that pros consistently cut about 1,000 square feet in 15 minutes with these mowers. That works out to about 66.67 square feet per minute. This became my golden number for all other calculations.
+    </p>
+
+    <h3 class="text-xl font-bold mt-4">Different Mowers, Different Speeds</h3>
+    <p class="mt-4">
+      Through extensive testing with my own lawn care company's equipment and talking to other local mowers who use different equipment, I've documented specific cutting speeds for each type of mower. Here's exactly what I found:
+    </p>
+
+    <ul class="list-disc pl-6 space-y-2">
+      <li>
+        <strong>Push Mowers (30% slower than baseline):</strong> With a standard 21-inch push mower, we consistently cut about 47 square feet per minute. This factors in operator fatigue and the need for more frequent turns. Even the fittest crew members slow down after pushing these machines for several hours.
+      </li>
+      <li>
+        <strong>Riding Mowers (Baseline speed):</strong> A typical 42-inch riding mower covers about 133 square feet per minute. The wider deck and consistent pace make up for its slower ground speed compared to zero-turns. The operator stays fresh longer, maintaining steady progress throughout the day.
+      </li>
+      <li>
+        <strong>Residential Zero-Turns (30% faster):</strong> Moving up to a 48-inch residential zero-turn, we hit speeds of around 173 square feet per minute. The quick turning ability and faster ground speed really shine on open lawns, though they do slow down more than riding mowers in tight spaces.
+      </li>
+      <li>
+        <strong>Commercial Zero-Turns (50% faster):</strong> Our 60-inch commercial zero-turns are the real workhorses, covering about 286 square feet per minute. These machines have the power to maintain high speeds even in thick grass, plus their superior handling lets operators work efficiently around obstacles.
+      </li>
+    </ul>
+
+        <ImageEmbed
+      src="/images/nerdy-lawn.png"
+      alt="Nerdy Lawn"
+      description="The logo for my little mowing business."
+    />
+
+    <h3 class="text-xl font-bold mt-4">Real-World Adjustments</h3>
+    <p class="mt-4">
+      These speeds assume ideal conditions - flat ground, dry grass at 3-4 inches height, and minimal obstacles. In the real world, I've found you need to adjust for:
+    </p>
+
+    <ul class="list-disc pl-6 space-y-2">
+      <li>
+        <strong>Grass Height:</strong> For every inch over 4 inches, speeds drop by about 20% as the mower has to work harder
+      </li>
+      <li>
+        <strong>Slopes:</strong> Hills steeper than 15 degrees can slow mowing speeds by 25-40% depending on the mower type
+      </li>
+      <li>
+        <strong>Obstacles:</strong> Each tree, flower bed, or other obstacle in the lawn adds about 1-2 minutes for careful maneuvering
+      </li>
+      <li>
+        <strong>Wet Conditions:</strong> Damp grass reduces speeds by roughly 30% due to more frequent deck cleaning and slower cutting</strong>
+      </li>
+    </ul>
+
+            <ImageEmbed
+      src="/images/surface-blow.png"
+      alt="blowing and cleaning surfaces"
+      description="Don't overlook the time it takes to cleanup a property after mowing. Include this in your time estimates."
+    />
+
+
+    <h3 class="text-xl font-bold mt-4">The Width Factor</h3>
+    <p class="mt-4">
+      Here's where it gets interesting. A wider cutting deck means covering more ground with each pass. I built in a width adjustment that compares your mower's deck size to my 21-inch baseline. For example, if you're running a beefy 60-inch commercial zero-turn, you're covering almost three times as much ground with each pass compared to our baseline mower.
+    </p>
+
+    <div class="bg-skin-card p-4 rounded-lg mt-6">
+      <p class="font-semibold">Real-World Example:</p>
+      <p>
+        Let's say you're mowing a 10,000 square foot lawn with a 60-inch commercial zero-turn. The calculator takes our baseline speed (66.67 sq ft/min), multiplies it by the width factor (60/21 = 2.86), and then applies the commercial zero-turn efficiency multiplier (1.5). This gives us a blazing speed of about 286 square feet per minute, meaning you can mow that lawn in about 35 minutes under ideal conditions.
+      </p>
+    </div>
+
+    <h3 class="text-xl font-bold mt-4">Beyond Basic Math</h3>
+    <p class="mt-4">
+      But here's the thing - lawns aren't perfect rectangles on flat ground. That's why I built in additional adjustments for real-world conditions. The calculator considers things like slopes, obstacles (those pesky trees and flower beds), and the essential finishing work that many estimating tools overlook.
+ </p>
+  <p class="mt-4">
+      Running my own lawn care business taught me that actual job time isn't just about the mowing. You've got to factor in the trimming around obstacles, edging along walkways, and cleanup time like blowing grass clippings off driveways, sidewalks, and patios. I made sure this calculator accounts for all of that. After all, a job isn't done until everything's cleaned up and you're leaving the property.
+
+      These real-world factors help transform the theoretical math into practical time estimates that newbies and pros alike can actually use for job quotes.
+    </p>
+
+</div>
+
+    <ImageEmbed
+      src="/images/backyard.png"
+      alt="backyard mowing customer"
+      description="I personally mow this lawn. The trees in the backyard and incline takes extra time to complete."
+    />
+
+<div class="prose prose-lg max-w-none mt-4 text-skin-base">
+    <h2 class="text-2xl font-bold mt-12 mb-4">Maximizing Efficiency: When to Upgrade Your Equipment</h2>
+    
+    <p>
+      Running a lawn care business is all about managing time. I learned this lesson early on when I was still pushing that 21-inch mower around, watching my profits tick away with every hour spent on a job. This calculator isn't just about estimating job times - it's a powerful tool for making smart decisions about equipment upgrades.
+    </p>
+
+    <p class="mt-4">
+      Let's say you're servicing 10 yards a week with a standard riding mower. Plug those properties into the calculator twice: once with your current setup, and again with a commercial zero-turn. The time difference might seem small for a single property - maybe 15 or 20 minutes. But multiply that across 10 properties, 52 weeks a year, and suddenly you're looking at hundreds of hours saved annually. That time savings could let you add several more properties to your route without extending your work day.
+    </p>
+
+    <p class="mt-4">
+      When you hit 20 or 30 weekly accounts, equipment efficiency becomes even more critical. I've found this is often the breaking point where investing in better equipment isn't just nice to have - it's essential for growth. Using this calculator, you can demonstrate exactly how much time (and therefore money) you're leaving on the table with slower equipment. For instance, upgrading from a 48-inch residential zero-turn to a 60-inch commercial model could save you 1-2 minutes per thousand square feet. Across 30 properties, that could free up enough time to add 3-4 more customers to your route.
+    </p>
+
+    <div class="bg-skin-card p-2 rounded-lg mt-2">
+      <p class="font-semibold">Quick Tip:</p>
+      <p>
+        Don't just look at the equipment cost - look at the opportunity cost of not upgrading. If a $12,000 commercial zero-turn saves you enough time to add five $200 monthly accounts, it could pay for itself in under 18 months while reducing your daily workload.
+      </p>
+    </div>
+
+    <h3 class="text-xl font-bold mt-4">Beyond Equipment: Other Time-Saving Strategies</h3>
+    <p class="mt-4">
+      While better equipment makes a huge difference, I've learned it's just one piece of the efficiency puzzle. The real pros combine upgraded equipment with smart routing and operational practices. Try grouping properties by location and size - you'll save time on transport and reduce the need to swap equipment. Train your crews on efficient mowing patterns that minimize turns and maximize straight runs. And never underestimate the importance of regular maintenance - a well-maintained mower running at peak performance can easily save you 5-10% on mowing times.
+    </p>
+
+    <p class="mt-4">
+      Remember, in the lawn care business, time really is money. Every minute saved on one property is a minute you can spend growing your business. Use this calculator to run different scenarios, understand your bottlenecks, and make data-driven decisions about when to upgrade. The most successful lawn care operators I know are constantly looking for ways to shave time off each job while maintaining quality - whether that's through better equipment, smarter routing, or more efficient processes.
+    </p>
+</div>
+
+    <AuthorBox />
+  </div>
+</IndexPage>

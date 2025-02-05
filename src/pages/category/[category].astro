@@ -75,7 +75,7 @@ const allContent = [...categoryPosts, ...categoryCalculators].sort((a, b) => {
       allContent.map((item) => (
         <li style="list-style-type: disc;" class="ml-4 my-2">
           <a href={
-            `${Astro.site.origin}${'data' in item 
+            `${'data' in item 
               ? `/${item.slug}` 
               : `/${item.slug.replace(/^\/?/, '')}`}`
           }>

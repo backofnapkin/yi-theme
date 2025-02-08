@@ -1,0 +1,173 @@
+---
+import IndexPage from "../../layouts/IndexPage.astro";
+import { FrugalCheapCalculator } from "../../components/calculators/frugal-vs-cheap/FrugalCheapCalculator";
+import { Calculator } from 'lucide-react';
+import YouTubeEmbed from '../../components/YouTubeEmbed.astro';
+import ImageEmbed from '../../components/ImageEmbed.astro';
+import AuthorBox from '../../components/AuthorBox.astro';
+
+export const frontmatter = {
+  comment: false,
+  donate: false,
+  title: "Are You Frugal or Cheap? Take the Quiz to Find Out",
+  description: "Find out if you're money-smart or a just plain cheap. This calculator analyzes your spending habits and adjusts for income.",
+  author: "Brett Lindenberg",
+  category: "Personal Finance Calculators",
+  date: "2025-02-06",
+  tags: [""],
+  image: {
+    url: "",
+    alt: ""
+  }
+};
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": frontmatter.title,
+  "description": frontmatter.description,
+  "applicationCategory": "FinanceApplication",
+  "operatingSystem": "Web Browser",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "featureList": [
+    "Income-Adjusted Spending Analysis",
+    "Behavioral Pattern Recognition",
+    "Financial Habit Assessment",
+    "Personalized Results",
+    "Context-Aware Scoring",
+    "Detailed Feedback",
+    "Income Factor Adjustment",
+    "Spending Pattern Insights"
+  ]
+};
+---
+
+<IndexPage
+  title={frontmatter.title}
+  description={frontmatter.description}
+  author={frontmatter.author}
+  date={frontmatter.date}
+  comment={frontmatter.comment}
+  donate={frontmatter.donate}
+  image={frontmatter.image}
+  category={frontmatter.category}
+  tags={frontmatter.tags}>
+
+<script type="application/ld+json" set:html={JSON.stringify(schema)} />
+<div class="min-h-screen bg-skin-fill pt-2 px-4 sm:px-6 lg:px-8">
+  <div class="max-w-7xl mx-auto">
+    <div class="not-prose mt-2">
+      <FrugalCheapCalculator client:load />
+    </div>
+  </div>
+  <div class="prose prose-lg max-w-none mt-2 text-skin-base">
+    <h2 class="text-2xl font-bold mb-4">How to use this tool</h2>
+    <p class="mt-4">
+      Friends think you're cheap? Prove them wrong (or right?) by completing this survey honestly. Being mindful of your spending is smart, but there's a fine line between being frugal and cheapo that people hate to be around. Frugal people make intentional choices about where to spend and save, while cheap people can feel like a leach.
+    </p>
+    <p class="mt-4">
+      Getting started is simple. First, select your annual income bracket from the options provided. You'll then answer nine questions about your spending habits, each with four possible responses ranging from most generous to cheap.
+
+    <p class="mt-4">
+      Once you complete all questions, you'll receive your personalized results displaying if your spending habits are Free Spending, Balanced, Frugal, or Cheap for your income level. The calculator takes into account both your behaviors and income bracket.
+    </p>
+
+        <ImageEmbed src="/images/coupon-clipping.png" alt="coupon clipping" description="The family that coupons together, saves together." />
+
+    <h3 class="text-xl font-bold mt-4">Understanding the Scoring System</h3>
+    <p class="mt-4">
+      The scoring system in this tool considers both your answers and income level. Each question awards 1-4 points with 1 point for the most generous spending choice and 4 points for the most restrictive option. After tallying your raw score from all nine questions, I applied an income-based multiplier to ensure the results are meaningful to you.
+    </p>
+
+    <div class="bg-blue-50 p-4 rounded-lg mt-4">
+      <h4 class="font-bold text-blue-900">Income Multipliers</h4>
+      <ul class="mt-2 space-y-1">
+        <li>• Under $30,000: 0.8x (most lenient)</li>
+        <li>• $30,000-$59,999: 0.9x</li>
+        <li>• $60,000-$99,999: 1.0x (baseline)</li>
+        <li>• $100,000-$149,999: 1.2x</li>
+        <li>• $150,000+: 1.5x (strictest)</li>
+      </ul>
+    </div>
+
+    <p class="mt-4">
+      These multipliers reflect a key principle: what counts as "frugal" varies significantly based on your income. For example, a raw score of 20 points means different things at different income levels. At under $30,000, it adjusts to 16 (20 × 0.8), indicating appropriately frugal behavior. After all, you can't give away money you don't have! However, the same raw score at $150,000+ becomes 30 (20 × 1.5), suggesting you could safely loosen the purse strings at this income level.
+    </p>
+
+    <div class="bg-yellow-50 p-4 rounded-lg mt-4">
+      <h4 class="font-bold text-yellow-900">Score Ranges</h4>
+      <p class="text-sm mt-2">
+        Your final score will place you in one of four categories based on your income bracket. For example, at $60,000-$99,999:
+        <br>• Free Spending: 9-14 points
+        <br>• Balanced: 15-18 points
+        <br>• Frugal: 19-27 points
+        <br>• Cheap: 28-36 points
+      </p>
+    </div>
+
+    <p class="mt-4">
+      Remember, this calculator isn't only about proving to friends whether or not someone is cheap – it's about understanding if your spending habits align well with your income level.
+    </p>
+
+  <h2 class="text-2xl font-bold mt-4 mb-2">The Fine Line: Can You Tell the Difference?</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-2">
+      <div class="bg-emerald-50 p-6 rounded-lg">
+        <h3 class="text-xl font-bold text-emerald-900 mb-3">Signs of Being Frugal</h3>
+        <ul class="list-disc pl-6 space-y-2">
+          <li>Researching before major purchases.</li>
+          <li>Buying quality items that last longer.</li>
+          <li>Using coupons and deals strategically.</li>
+          <li>Saving on non-priorities to spend on what matters.</li>
+          <li>Considering long-term value of purchases.</li>
+        </ul>
+      </div>
+      <div class="bg-red-50 p-6 rounded-lg">
+        <h3 class="text-xl font-bold text-red-900 mb-3">Signs of Being Cheap</h3>
+        <ul class="list-disc pl-6 space-y-2">
+          <li>Choosing lowest price regardless of quality.</li>
+          <li>Being stingy with tips and shared expenses.</li>
+          <li>Compromising relationships to save money.</li>
+          <li>Heading to the bathroom when the bill arrives.</li>
+        </ul>
+      </div>
+    </div>
+
+    <ImageEmbed src="/images/meal-prep.png" alt="meal prep lunch" description="Do you consider bringing lunch to work 5-days a week smart or cheap?" />
+
+    <div class="prose prose-lg max-w-none mt-2 text-skin-base">
+    <h2 class="text-2xl font-bold mb-4">The Story Behind This Calculator</h2>
+<p>
+  The inspiration for this calculator came after reading Kelechi Iwuaba's insightful blog post <a href="https://kelechiwuaba.substack.com/p/money-rules-for-a-rich-life" target="_blank">"Money Rules for a Rich Life"</a>. His perspective on financial independence and the balance between saving and living resonated with me, particularly around the nuanced discussion of being cheap versus frugal.
+</p>
+
+<p class="mt-4">
+  After reading his post, I reached out to Kelechi via email to discuss this concept further. During our conversation, we identified a significant gap in the personal finance space: while there's plenty of discussion about being cheap versus frugal, there's rarely any concrete data or numbers to back up these classifications. It's often presented as a black-and-white issue, when in reality, income levels dramatically change what constitutes "cheap" behavior.
+</p>
+
+    <YouTubeEmbed 
+      id="B7IoZEe0E1U"
+      title="How I tricked myself to be more disciplined and productive"
+      className="mb-8"
+    />
+
+<p class="mt-4">
+  We discussed how someone making $36,000 a year who splits the bill precisely or orders a side salad as their main course might be labeled as "cheap" by their peers. But in reality, these could be necessary financial decisions given their income level. Meanwhile, someone earning $200,000 annually might be praised for being generous when buying coffee for a friend even though it represents a tiny portion of their disposable income. This tool attempts to solve this problem by factor in ones means through annual earned income. It's not perfect, but it's better than nothing.
+</p>
+
+    <p class="text-sm text-gray-600 mt-4">
+      Note: No tool can truly identify if you're cheap or frugal. But I hope it gets you thinking. Individual circumstances vary, and you should look inward to determine if you are in fact a cheap skate or not. 
+    </p>
+  </div>
+
+  <main>
+    <article>
+      <slot />
+    </article>
+    <AuthorBox />
+  </main>
+</div>
+</IndexPage>

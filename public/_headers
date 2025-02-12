@@ -1,0 +1,3 @@
+/*
+  X-Frame-Options: ALLOW-FROM https://coastficouple.com/ 
+  Content-Security-Policy: frame-ancestors 'self' https://coastficouple.com/

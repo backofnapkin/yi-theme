@@ -1,0 +1,206 @@
+---
+import IndexPage from "../../layouts/IndexPage.astro";
+import { CoastFireCalculator } from "../../components/calculators/coast-fire/CoastFireCalculator";
+import { Calculator } from 'lucide-react';
+import YouTubeEmbed from '../../components/YouTubeEmbed.astro';
+import ImageEmbed from '../../components/ImageEmbed.astro';
+import AuthorBox from '../../components/AuthorBox.astro';
+
+export const frontmatter = {
+  comment: false,
+  donate: false,
+  title: "Coast FIRE Calculator: When Can You Stop Saving for Retirement?",
+  description: "Calculate when you can stop saving for retirement and let compound interest do the rest with this Coast FIRE calculator.",
+  author: "Brett Lindenberg",
+  category: "Personal Finance Calculators",
+  date: "2025-02-11",
+  tags: [""],
+  image: {
+    url: "",
+    alt: ""
+  }
+};
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": frontmatter.title,
+  "description": frontmatter.description,
+  "applicationCategory": "BusinessApplication",
+  "operatingSystem": "Web Browser",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "featureList": [
+    "Coast FIRE Calculator",
+    "Retirement planning",
+    "Investment growth projections",
+    "Social Security integration",
+    "Inflation adjustment",
+    "Interactive timeline chart"
+  ]
+};
+---
+
+<IndexPage
+  title={frontmatter.title}
+  description={frontmatter.description}
+  author={frontmatter.author}
+  date={frontmatter.date}
+  comment={frontmatter.comment}
+  donate={frontmatter.donate}
+  image={frontmatter.image}
+  category={frontmatter.category}
+  tags={frontmatter.tags}>
+
+<script type="application/ld+json" set:html={JSON.stringify(schema)} />
+<div class="min-h-screen bg-skin-fill pt-4 px-4 sm:px-6 lg:px-8">
+  <div class="max-w-7xl mx-auto">
+    <div class="not-prose mt-2">
+      <CoastFireCalculator client:load />
+    </div>
+  </div>
+  <div class="prose prose-lg max-w-none mt-6 text-skin-base">
+    <h2 class="text-2xl font-bold mb-4">What is Coast FIRE?</h2>
+    <p>
+      Coast FIRE (Financial Independence Retire Early) is a milestone where you've saved enough money that, even if you never contribute another dollar to your retirement accounts, your existing investments will grow to support spending at your target retirement age. This means you can "coast" to retirement by only covering your current expenses, letting compound interest and investing returns do the heavy lifting to build wealth.
+    </p>
+
+    <p class="mt-4">
+      I collaborated with Matt and Yana from <a href="https://coastficouple.com/">CoastFI Couple</a> and I like how they think of Coast FIRE as the first step on the "FIRE staircase," offering a way to "take the foot off the gas" while still ensuring a comfortable retirement. They emphasize that while some people use Coast FIRE as an opportunity to reduce their savings rate and relieve financial pressure, others in the FIRE community recognize it as a milestone but choose to continue saving and look ahead to persue their next financial goal. 
+    </p>
+
+    <h2 class="text-2xl font-bold mt-8 mb-4">How to Use This Calculator</h2>
+    <p>
+      This Coast FIRE calculator helps you determine when you can stop actively saving for retirement. The calculator uses defaults based on historical performance but can be customized for different scenerios.
+    </p>
+    
+    <p class="font-semibold mt-4">Start by entering your basic information:</p>
+    <ul class="list-disc pl-6 space-y-2">
+      <li>Current age</li>
+      <li>Target retirement age</li>
+      <li>Annual spending in retirement</li>
+      <li>Current invested assets</li>
+      <li>Monthly contributions to investments</li>
+    </ul>
+
+    <h3 class="text-xl font-bold mt-8">Investment Assumptions</h3>
+    <p>Configure your investment settings with these options:</p>
+    <ul class="list-disc pl-6 space-y-2">
+      <li><strong>Investment Growth Rate</strong> (adjustable from 0-20%, default: 10%). The <a href="https://www.investopedia.com/ask/answers/042415/what-average-annual-return-sp-500.asp">S&P 500's historical average return</a> is about 10% before inflation.</li>
+      <li><strong>Inflation Rate</strong> (adjustable from 0-10%, default: 3%). The Federal Reserve <a href="https://www.federalreserve.gov/economy-at-a-glance-inflation-pce.htm">targets 2% average inflation</a> over time, but entering a higher rate will ensure you're prepared if we go through years with higher inflation than expected.</li>
+      <li><strong>Safe Withdrawal Rate</strong> (adjustable from 1-9%, default: 4%). Based on the <a href="https://en.wikipedia.org/wiki/Trinity_study">Trinity Study's 4% rule</a> for retirement withdrawals.</li>
+    </ul>
+
+<p class="mt-4">
+  The core formula I applied in the calculator is straightforward: your target FIRE number equals your annual spending multiplied by 100, then divided by your chosen safe withdrawal rate. In practical terms, if you plan to spend $40,000 annually in retirement and use the standard 4% withdrawal rate, your target FIRE number would be $1,000,000 (calculated as ($40,000 * 100) / 4).
+</p>
+
+<h3 class="text-xl font-bold mt-8">Customizing Your Withdrawal Rate</h3>
+
+<p class="mt-4">
+  While 4% serves as a reliable baseline, your specific situation might call for a different rate. A more conservative 3% withdrawal rate could extend your portfolio's life indefinitely - potentially 35 years or more - making it ideal for those seeking extra security or planning for a longer retirement. This lower rate requires a larger nest egg but provides more peace of mind.
+</p>
+
+<ImageEmbed src="/images/Coast-FIRE-Calculation.jpg" alt="working out Coast FIRE" description="I'll need investment returns to remain at 10% annually over the longterm now that I'm in my 40s." />
+
+
+<p class="mt-4">
+  On the flip side, some might choose a more aggressive 5% withdrawal rate, understanding it might only support 20 years of retirement. Even more ambitious rates of 6% or higher could work for shorter retirement horizons of 10 - 15 years, though they carry an increased risk of depleting your funds.
+</p>
+
+    <h3 class="text-xl font-bold mt-4">Advanced Options</h3>
+    <p class="mt-4">Fine-tune your calculations with additional social security inputs. Many people expect to keep work after 62 years of age. This option allows you to see how social security payments could help you reach Coast FIRE if you plan to generate income later in life.</p>
+    <ul class="list-disc pl-6 space-y-2">
+      <li>Monthly Social Security benefits: Monthly benefit amount.</li>
+      <li>Social Security start age. 62 - 70 years old.</li>
+    </ul>
+
+    <h2 class="text-2xl font-bold mt-4 mb-4">Understanding the Results</h2>
+    <div class="space-y-8">
+      <div>
+        <p class="font-bold mb-2">Key Numbers Explained:</p>
+        <ul class="list-disc pl-6 space-y-2">
+          <li><strong>Target FIRE Number:</strong> The total FIRE amount you need saved for retirement <a href="https://www.bankrate.com/retirement/rule-of-25/">(Annual Spending × 25 for a 4% withdrawal rate)</a>. Your Target FIRE number will change based the Annual Spend in Retirment and Safe Withdrawal Rate you enter.</li>
+          <li><strong>Coast FIRE Number:</strong> The amount needed today that will grow to your target by retirement without any additional contributions. This is heavily influenced by the Annual Investment Growth Rate % you select and Retirement Age.</li>
+          <li><strong>Future Value of Current Investments:</strong> Projected value of your current portfolio at retirement based on your inputs.</li>
+          <li><strong>Additional Amount Needed:</strong> How much more you need to save to reach your Coast FIRE number that will allow your investments to do the heavy lifting for retirement.</li>
+        </ul>
+      </div>
+
+      <div>
+        <p class="font-bold mb-2">The Math Behind Coast FIRE:</p>
+        <pre class="bg-skin-card p-4 rounded-lg overflow-x-auto">
+<code>Target FIRE Number = Annual Retirement Spending × (100 ÷ Safe Withdrawal Rate)
+Coast FIRE Number = Target FIRE Number ÷ (1 + Growth Rate)^Years to Retirement</code>
+        </pre>
+      </div>
+    </div>
+
+    <h2 class="text-2xl font-bold mt-6 mb-4">Important Considerations</h2>
+    <ul class="list-disc pl-6 space-y-2">
+      <li>Coast FIRE assumes you can cover your living expenses without dipping into investments until you reach retirement age.</li>
+      <li>Market returns are not guaranteed and will fluctuate. Not everything moves up in a straight line in the real world.</li>
+      <li>Inflation can significantly impact your purchasing power. We just went through a few years of above average inflation rates and this could happen again.</li>
+      <li>Social Security benefits will change over time. Benefits may increase or descrease in value considering inflation or program changes.</li>
+      <li>Make sure to maintain an emergency fund separate from your Coast FIRE investments in case you fall on hard times so you don't need to tap into this if you experience job loss.</li>
+    </ul>
+
+<ImageEmbed src="/images/emergency-fund.png" alt="saving for emergency fund" description="Make sure you continue to save for an emergency fund in case of job loss or other unexpected event so you aren't forced to tap into your Coast FIRE investments." />
+
+    <h2 class="text-2xl font-bold mt-6 mb-4">Using the Interactive Chart</h2>
+    <p>
+      The calculator provides an interactive chart showing multiple scenarios:
+    </p>
+    <ul class="list-disc pl-6 space-y-2">
+      <li><strong>With Contributions (Blue Line):</strong> Shows portfolio growth if you continue making your monthly contributions after reaching Coast Fire.</li>
+      <li><strong>No Contributions (Green Line):</strong> Shows how your current investments would grow without any additional contributions. This is the "Coast FIRE" path - relying solely on compound interest of existing investments.</li>
+      <li><strong>Coast FIRE Number (Purple Line):</strong> The target amount needed today that would grow to support your retirement. Represents the minimum amount needed to "coast" to retirement without further saving.</li>
+      <li><strong>FIRE Number (Red Line):</strong> Your final retirement target (annual spending × 25 for 4% withdrawal rate). This is the amount needed to support your desired retirement spending.</li>
+      <li><strong>With Social Security (Purple Line, Optional):</strong> Shows how Social Security benefits impact your total retirement income. Adds your expected monthly Social Security benefit to your investment portfolio.</li>
+    </ul>
+
+    <p class="mt-4">
+      Toggle different scenarios on/off to visualize how they affect your retirement timeline. I also encourage you to test out the inflation adjustment toggle to see values in today's dollars or future dollars.
+    </p>
+
+    <h2 class="text-2xl font-bold mt-4 mb-4">Next Steps After Reaching Coast FIRE</h2>
+
+    <YouTubeEmbed 
+      id="gNNPbl4AthY"
+      title="The Staircase to Financial Independence"
+      className="mb-8"
+    />
+
+   <p class="mt-4">
+  Once you've reached your Coast FIRE number, you enter a new phase of your financial journey. This milestone opens up opportunities to reassess your work-life balance and long-term planning. Here's how to make the most of this achievement based on the teachings of the CoastFI Couple Matt and Yana:
+</p>
+
+<p class="mt-4">
+  First, consider your work choices strategically. While aggressive saving is no longer necessary, you might choose to maintain your current savings rate if you enjoy your work and aren't experiencing burnout. Additional savings could potentially accelerate your full retirement timeline, giving you more options in the future.
+</p>
+
+<p class="mt-4">
+  Building financial buffers becomes crucial at this stage. Consider maintaining a healthy balance in a brokerage account separate from your retirement funds. This buffer provides flexibility during market downturns, ensuring you won't need to withdraw from investments when conditions are unfavorable.
+</p>
+
+<p class="mt-4">
+  With the pressure of aggressive saving lifted, you can focus on optimizing your lifestyle. Many find this the perfect time to "take the foot off the gas" while keeping expenses manageable. It's about finding that sweet spot where you're maintaining a high quality of life without unnecessary spending.
+</p>
+
+<p class="mt-4">
+  Remember that Coast FIRE is just one step on what many call the "FIRE staircase." You might move between different approaches as your circumstances change. Some people shift from Coast to Barista FIRE, while others aim for traditional FIRE. Staying flexible in your planning allows you to adapt to life's changes.
+</p>
+
+  </div>
+
+  <main>
+    <article>
+      <slot />
+    </article>
+    <AuthorBox />
+  </main>
+</div>
+</IndexPage>

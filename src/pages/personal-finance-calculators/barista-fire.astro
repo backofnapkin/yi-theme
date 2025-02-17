@@ -1,0 +1,230 @@
+---
+import IndexPage from "../../layouts/IndexPage.astro";
+import { BaristaFireCalculator } from "../../components/calculators/barista-fire/BaristaFireCalculator";
+import { Coffee } from 'lucide-react';
+import YouTubeEmbed from '../../components/YouTubeEmbed.astro';
+import ImageEmbed from '../../components/ImageEmbed.astro';
+import AuthorBox from '../../components/AuthorBox.astro';
+import XEmbed from '../../components/XEmbed.astro';
+
+export const frontmatter = {
+  comment: false,
+  donate: false,
+  title: "Barista FIRE Calculator: Plan Your Part-Time Retirement Strategy",
+  description: "Calculate when you can transition to part-time work while letting your investments grow to support your retirement with this Barista FIRE calculator.",
+  author: "Brett Lindenberg",
+  category: "Personal Finance Calculators",
+  date: "2025-02-16",
+  tags: [""],
+  image: {
+    url: "",
+    alt: ""
+  }
+};
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": frontmatter.title,
+  "description": frontmatter.description,
+  "applicationCategory": "BusinessApplication",
+  "operatingSystem": "Web Browser",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "featureList": [
+    "Barista FIRE Calculator",
+    "Part-time retirement planning",
+    "Investment growth projections",
+    "Social Security integration",
+    "Inflation adjustment",
+    "Interactive timeline chart"
+  ]
+};
+---
+
+<IndexPage
+  title={frontmatter.title}
+  description={frontmatter.description}
+  author={frontmatter.author}
+  date={frontmatter.date}
+  comment={frontmatter.comment}
+  donate={frontmatter.donate}
+  image={frontmatter.image}
+  category={frontmatter.category}
+  tags={frontmatter.tags}>
+
+<script type="application/ld+json" set:html={JSON.stringify(schema)} />
+<div class="min-h-screen bg-skin-fill pt-4 px-4 sm:px-6 lg:px-8">
+  <div class="max-w-7xl mx-auto">
+    <div class="not-prose mt-2">
+      <BaristaFireCalculator client:load />
+    </div>
+  </div>
+  <div class="prose prose-lg max-w-none mt-4 text-skin-base">
+    <h2 class="text-2xl font-bold mb-4">What is Barista FIRE?</h2>
+    <p>
+      Barista FIRE (Financial Independence Retire Early) is a flexible retirement strategy where you have enough invested that you can switch to part-time or lower-paying work while your investments continue growing to support full retirement. The name comes from the idea of working as a barista at Starbucks (or similar part-time job) to cover current expenses and receive benefits, while your investment portfolio grows untouched.
+    </p>
+
+    <p class="mt-4">
+      This approach offers a middle ground between full-time work and traditional retirement, allowing you to:
+    </p>
+    <ul class="list-disc pl-6 space-y-2">
+      <li>Reduce work stress and burnout by transitioning to part-time work.</li>
+      <li>Maintain health insurance and other benefits through part-time employment.</li>
+      <li>Cover living expenses without depleting retirement savings.</li>
+      <li>Let your investment portfolio grow until traditional retirement age.</li>
+    </ul>
+
+        <ImageEmbed src="/images/coffee-cup.jpg" alt="coffee cup" description="Personally, I'd rather be drinking the coffee vs serving it during Barista FIRE and keep a fulltime job." />
+
+
+    <h2 class="text-2xl font-bold mt-8 mb-4">How to Use This Calculator</h2>
+    <p>
+      This Barista FIRE calculator helps you determine when you can transition to part-time work while ensuring your retirement goals stay on track. The calculator uses reasonable defaults based on historical market performance but can be customized for your specific situation.
+    </p>
+    
+    <p class="font-semibold mt-4">Start by entering your basic information:</p>
+    <ul class="list-disc pl-6 space-y-2">
+      <li>Current age</li>
+      <li>Target retirement end age</li>
+      <li>Current annual income after tax</li>
+      <li>Current annual spending</li>
+      <li>Current invested assets</li>
+      <li>Desired Barista FIRE age (when you want to switch to part-time work)</li>
+      <li>Expected annual spending in retirement</li>
+      <li>Expected monthly income during Barista FIRE phase</li>
+    </ul>
+
+    <h3 class="text-xl font-bold mt-8">Investment Assumptions</h3>
+    <p>Configure your investment settings with these options:</p>
+    <ul class="list-disc pl-6 space-y-2">
+      <li><strong>Investment Growth Rate</strong> (adjustable from 0-20%, default: 10%). The <a href="https://www.investopedia.com/ask/answers/042415/what-average-annual-return-sp-500.asp">S&P 500's historical average return</a> is about 10% before inflation.</li>
+      <li><strong>Inflation Rate</strong> (adjustable from 0-10%, default: 3%). The Federal Reserve <a href="https://www.federalreserve.gov/economy-at-a-glance-inflation-pce.htm">targets 2% average inflation</a>, but a higher rate provides a safety margin.</li>
+      <li><strong>Safe Withdrawal Rate</strong> (adjustable from 1-9%, default: 4%). Based on the <a href="https://en.wikipedia.org/wiki/Trinity_study">Trinity Study's 4% rule</a> for sustainable retirement withdrawals.</li>
+    </ul>
+
+    <p class="mt-4">
+      The calculator uses these inputs to determine your Barista FIRE number - the amount needed invested before you can transition to part-time work. This number is calculated considering both your part-time income and your target retirement spending.
+    </p>
+
+    <h3 class="text-xl font-bold mt-8">Advanced Options</h3>
+    <p class="mt-4">Fine-tune your calculations with social security inputs:</p>
+    <ul class="list-disc pl-6 space-y-2">
+      <li>Monthly Social Security benefits: Expected monthly payment amount</li>
+      <li>Social Security start age: When you plan to begin taking benefits (62-70 years old)</li>
+    </ul>
+
+    <h2 class="text-2xl font-bold mt-8 mb-4">Understanding the Results</h2>
+    <div class="space-y-8">
+      <div>
+        <p class="font-bold mb-2">Key Numbers Explained:</p>
+        <ul class="list-disc pl-6 space-y-2">
+          <li><strong>Barista FIRE Number:</strong> The amount needed invested before transitioning to part-time work. This factors in your planned part-time income and reduced expenses.</li>
+          <li><strong>Additional Savings Needed:</strong> How much more you need to save to reach your Barista FIRE number.</li>
+          <li><strong>Traditional FIRE Number:</strong> The amount needed for full financial independence without any work income.</li>
+          <li><strong>Future Value of Current Investments:</strong> Projected value of your current portfolio at your Barista FIRE age.</li>
+        </ul>
+      </div>
+
+    <p class="mt-4">Here's a critical concept to understand in this calculator. "Today's Dollars" refers to the present value of money after accounting for inflation. This is an important concept in financial planning because it helps you understand the real purchasing power of your money in the future.</p>
+
+            <ImageEmbed src="/images/barista-fire.jpg" alt="Barista FIRE" description="How I would approach Barista FIRE." />
+
+
+    <p class="mt-4">For example, when the calculator shows "$773,428 in today's dollars", it means that while your actual future balance might be higher due to inflation, the amount shown represents what that money would be worth in terms of today's purchasing power.</p>
+
+    <p class="mt-4">This is achieved in the calculator through the calculateRealRate function which adjusts the investment returns by subtracting inflation. <strong>So if you have:</strong></p>
+
+      <ul class="list-disc pl-6 space-y-2">
+          <li><strong>10% investment growth rate</strong></li>
+          <li><strong>3% inflation rate</strong></li>
+          <li>The calculator uses <strong>the real rate (approximately 6.8%)</strong> to show you values in today's purchasing power</li>
+        </ul>
+
+    <p class="mt-4">This approach makes it easier to understand how much your future money would be worth in terms of what you can buy with it today.</p>
+
+    <p class="mt-4">This is why all the numbers in the calculator - your FIRE number, projected net worth, etc. - are shown in today's dollars, making them more relatable to your current lifestyle and spending needs.</p>
+
+
+      <div>
+        <p class="font-bold mb-2">The Math Behind Barista FIRE:</p>
+        <pre class="bg-skin-card p-4 rounded-lg overflow-x-auto">
+<code>Annual Need in Retirement = Retirement Spending - (Monthly Barista Income × 12)
+Barista FIRE Number = (Annual Need in Retirement × 100) ÷ Safe Withdrawal Rate</code>
+        </pre>
+      </div>
+    </div>
+
+    <h2 class="text-2xl font-bold mt-8 mb-4">Using the Interactive Chart</h2>
+    <p>
+      The calculator provides an interactive chart showing multiple scenarios:
+    </p>
+    <ul class="list-disc pl-6 space-y-2">
+      <li><strong>Barista FIRE Net Worth (Green Line):</strong> Shows how your portfolio grows if you transition to part-time work at your target Barista FIRE age.</li>
+      <li><strong>Keep Current Job Net Worth (Blue Line):</strong> Shows portfolio growth if you maintain your current job and savings rate.</li>
+      <li><strong>FIRE Number (Red Line):</strong> Your traditional FIRE target that would support full retirement.</li>
+      <li><strong>Social Security Impact (Purple Line, Optional):</strong> Shows how Social Security benefits affect your retirement income.</li>
+    </ul>
+
+    <p class="mt-4">
+      Toggle different scenarios on/off to visualize how they affect your retirement timeline. Use the inflation adjustment toggle to see values in today's dollars or future dollars.
+    </p>
+
+<div class="prose prose-lg max-w-none mt-2 text-skin-base">
+    <h2 class="text-2xl font-bold mb-4">About this Calculator</h2>
+<p>
+  The inspiration for this calculator's development came after reading Anita Kinoshita's (CFLP) article <a href="https://theretiredmillennial.substack.com/p/i-like-to-tango-with-luck" target="_blank">"I Like to Tango with Luck"</a> on her blog, Her FI Story. Her personal journey and insights about Coast FI helped shape my understanding of how financial independence goals need to adapt to different income levels and life circumstances.
+</p>
+
+<p class="mt-4">
+  What's particularly impressive about Anita's story is how she managed to accumulate $150,000+ in investments by age 30, while working as a software engineer outside of high-paying tech hubs like Silicon Valley. For perspective, at 30, I was still focused on saving for my first house down payment and paying off student loans.
+</p>
+
+<p class="mt-4">
+  As Anita explains, reaching Coast FI gave her the confidence to make bold career changes: "I had a 6 month emergency fund and had reached Coast FI, so I felt like I had the best safety net to make a radical career change, and give an alternative lifestyle a try." Her story demonstrates how having the right financial foundation – in her case, "$12,000 of an emergency fund, and $150,000ish+ invested at age 30" – can provide the security needed to make life-changing decisions.
+</p>
+
+  <XEmbed url="https://twitter.com/theretiredm/status/1812992116798447850/" />
+
+<p class="mt-4">
+  What particularly resonated with me was her observation about balancing logic with intuition: "Every radical decision I've made has been rational and spiritual/emotional, where if I don't do it, I just feel super uncomfortable, but once I make the leap, I feel such a peace of mind not only because it always makes sense mathematically... but because the fruit of the decisions is always SO MUCH BETTER than I could have imagined."
+</p>
+
+<p class="mt-4">
+  This calculator aims to bring the same clarity to your financial decisions that Anita found in her journey. By providing concrete numbers adjusted for different income levels, I hope this will help you find that sweet spot between mathematical sense and personal fulfillment too.
+</p>
+</div>
+
+    <h2 class="text-2xl font-bold mt-8 mb-4">Next Steps After Reaching Barista FIRE</h2>
+    <p class="mt-4 mb-4">
+      Personally, I don't think I'd like Barista FIRE. I worked enough of these jobs while in high-school and college and would rather just keep working a corporate desk job than get a job waiting tables for 20 hours per week. Once you've reached your Barista FIRE number, consider these steps before making the transition:
+    </p>
+
+            <ImageEmbed src="/images/starbucks.jpg" alt="Starbucks coffee" description="It's cool there are a few places like Starbucks allowing employees to get healthcare benefits while working part-time." />
+
+
+    <ul class="list-disc pl-6 space-y-2">
+      <li><strong>Research Part-Time Options:</strong> Investigate employers offering good benefits for part-time workers.</li>
+      <li><strong>Health Insurance Planning:</strong> Understand healthcare costs and coverage options.</li>
+      <li><strong>Emergency Fund:</strong> Build a larger emergency fund to handle income fluctuations.</li>
+      <li><strong>Skills Assessment:</strong> Consider what part-time work aligns with your skills and interests. Most part-time jobs don't seem fun.</li>
+      <li><strong>Lifestyle Adjustments:</strong> Practice living on your reduced budget before making the switch. Make sure you know what it feels like to live this way before going all in.</li>
+    </ul>
+
+    <p class="mt-4">
+      Remember that Barista FIRE offers flexibility so you can adjust your work hours and income as needed while your investments continue growing. This approach provides a balance between financial independence and maintaining an active, purposeful lifestyle.
+    </p>
+  </div>
+
+  <main>
+    <article>
+      <slot />
+    </article>
+    <AuthorBox />
+  </main>
+</div>
+</IndexPage>

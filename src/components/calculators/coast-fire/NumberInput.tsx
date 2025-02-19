@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Info } from 'lucide-react';
-import { Tooltip } from '../../ui/Tooltip';
+import { InfoTooltip } from './InfoTooltip';
 
 interface NumberInputProps {
   label: string;
@@ -10,6 +9,7 @@ interface NumberInputProps {
   max?: number;
   prefix?: string;
   tooltip?: string;
+  formatCommas?: boolean;
 }
 
 export function NumberInput({
@@ -19,44 +19,67 @@ export function NumberInput({
   min,
   max,
   prefix,
-  tooltip
+  tooltip,
+  formatCommas = false
 }: NumberInputProps) {
-  const [localValue, setLocalValue] = useState<string>(value.toString());
+  const [localValue, setLocalValue] = useState<string>(
+    formatCommas ? formatNumberWithCommas(value) : value.toString()
+  );
+
+  // Format number with commas
+  function formatNumberWithCommas(num: number): string {
+    return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  }
+
+  // Remove commas for processing
+  function removeCommas(str: string): string {
+    return str.replace(/,/g, '');
+  }
 
   // Update local value when prop value changes
   useEffect(() => {
-    setLocalValue(value.toString());
-  }, [value]);
+    setLocalValue(formatCommas ? formatNumberWithCommas(value) : value.toString());
+  }, [value, formatCommas]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const input = e.target.value;
-    setLocalValue(input);
+    const cleanInput = removeCommas(input);
     
-    // If input is empty, don't update parent state yet
-    if (input === '') {
+    // Allow empty input for better UX
+    if (cleanInput === '') {
+      setLocalValue('');
       return;
     }
 
-    const numValue = parseInt(input, 10);
-    if (isNaN(numValue)) {
+    // Only allow numbers
+    if (!/^\d*$/.test(cleanInput)) {
       return;
     }
+
+    const numValue = parseInt(cleanInput, 10);
+    
+    // Update local display value
+    setLocalValue(formatCommas ? formatNumberWithCommas(numValue) : cleanInput);
 
     // Update parent state if within bounds
-    if (max !== undefined && numValue > max) {
-      onChange(max);
-    } else if (min !== undefined && numValue < min) {
-      onChange(min);
-    } else {
-      onChange(numValue);
+    if (!isNaN(numValue)) {
+      if (max !== undefined && numValue > max) {
+        onChange(max);
+      } else if (min !== undefined && numValue < min) {
+        onChange(min);
+      } else {
+        onChange(numValue);
+      }
     }
   };
 
   const handleBlur = () => {
+    const cleanInput = removeCommas(localValue);
+    
     // On blur, if empty or invalid, reset to min value
-    if (localValue === '' || isNaN(parseInt(localValue, 10))) {
+    if (cleanInput === '' || isNaN(parseInt(cleanInput, 10))) {
       const defaultValue = min !== undefined ? min : 0;
-      setLocalValue(defaultValue.toString());
+      setLocalValue(formatCommas ? formatNumberWithCommas(defaultValue) : defaultValue.toString());
       onChange(defaultValue);
     }
   };
@@ -65,11 +88,7 @@ export function NumberInput({
     <div className="space-y-2">
       <label className="flex items-center text-sm font-medium text-gray-700">
         {label}
-        {tooltip && (
-          <Tooltip content={tooltip}>
-            <Info className="w-4 h-4 text-gray-500 inline-block ml-2" />
-          </Tooltip>
-        )}
+        {tooltip && <InfoTooltip text={tooltip} />}
       </label>
       <div className="relative">
         {prefix && (
@@ -78,12 +97,12 @@ export function NumberInput({
           </span>
         )}
         <input
-          type="number"
+          type="text"
+          inputMode="numeric"
+          pattern="[0-9,]*"
           value={localValue}
           onChange={handleChange}
           onBlur={handleBlur}
-          min={min}
-          max={max}
           className={`
             w-full px-4 py-2
             border border-gray-300 rounded-lg

@@ -1,33 +1,31 @@
-export interface CoastFireInputs {
+export interface CalculatorState {
   currentAge: number;
-  retirementAge: number;
-  annualSpending: number;
+  endAge: number;
   currentInvestedAssets: number;
+  targetRetirementAge: number;
+  retirementAnnualSpending: number;
   monthlyContributions: number;
   investmentGrowthRate: number;
   inflationRate: number;
   safeWithdrawalRate: number;
-  advancedOptions?: {
-    monthlySocialSecurity: number;
-    socialSecurityStartAge: number;
-  };
+  showAdvancedFields: boolean;
+  monthlySocialSecurity: number;
+  socialSecurityAge: number;
+  showExtendedChart: boolean;
+  selectedChartLines: string[];
 }
 
-export interface CoastFireResults {
-  targetFireNumber: number;
-  futureValueCurrentInvestments: number;
-  coastFireNumber: number;
-  additionalNeeded: number;
-  progressPercentage: number;
-  timelineData: TimelineDataPoint[];
-  currentInvestedAssets: number; // Add this to support the new progress bar
-}
-
-export interface TimelineDataPoint {
+export interface ChartData {
   age: number;
-  withContributions: number;
-  withoutContributions: number;
-  coastFireNumber: number;
-  fireNumber: number;
-  withSocialSecurity?: number;
+  coastFireNetWorth: number;
+  currentPathNetWorth: number;
+  noContributionsAfterCoastNetWorth: number;
+  fullFireNumber: number;
+  socialSecurityImpact: number | undefined;
+}
+
+export interface Message {
+  type: 'success' | 'warning' | 'action' | 'info' | 'opportunity';
+  priority: number;
+  message: string;
 }

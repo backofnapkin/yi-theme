@@ -13,7 +13,7 @@ export const frontmatter = {
   description: "Calculate when you can stop saving for retirement and let compound interest do the rest with this Coast FIRE calculator.",
   author: "Brett Lindenberg",
   category: "Personal Finance Calculators",
-  date: "2025-02-11",
+  date: "2025-02-18",
   tags: [""],
   image: {
     url: "",
@@ -89,7 +89,7 @@ const schema = {
     <h3 class="text-xl font-bold mt-8">Investment Assumptions</h3>
     <p>Configure your investment settings with these options:</p>
     <ul class="list-disc pl-6 space-y-2">
-      <li><strong>Investment Growth Rate</strong> (adjustable from 0-20%, default: 10%). The <a href="https://www.investopedia.com/ask/answers/042415/what-average-annual-return-sp-500.asp">S&P 500's historical average return</a> is about 10% before inflation.</li>
+      <li><strong>Investment Growth Rate</strong> (adjustable from 0-20%, default: 8%). The <a href="https://www.investopedia.com/ask/answers/042415/what-average-annual-return-sp-500.asp">S&P 500's historical average return</a> is about 10% before inflation. I went with a more conservative 8% by default.</li>
       <li><strong>Inflation Rate</strong> (adjustable from 0-10%, default: 3%). The Federal Reserve <a href="https://www.federalreserve.gov/economy-at-a-glance-inflation-pce.htm">targets 2% average inflation</a> over time, but entering a higher rate will ensure you're prepared if we go through years with higher inflation than expected.</li>
       <li><strong>Safe Withdrawal Rate</strong> (adjustable from 1-9%, default: 4%). Based on the <a href="https://en.wikipedia.org/wiki/Trinity_study">Trinity Study's 4% rule</a> for retirement withdrawals.</li>
     </ul>
@@ -101,7 +101,7 @@ const schema = {
 <h3 class="text-xl font-bold mt-8">Customizing Your Withdrawal Rate</h3>
 
 <p class="mt-4">
-  While 4% serves as a reliable baseline, your specific situation might call for a different rate. A more conservative 3% withdrawal rate could extend your portfolio's life indefinitely - potentially 35 years or more - making it ideal for those seeking extra security or planning for a longer retirement. This lower rate requires a larger nest egg but provides more peace of mind.
+  While 4% serves as an industry standard baseline, your specific situation might call for a different rate. A more conservative 3% withdrawal rate could extend your portfolio's life indefinitely - potentially 35 years or more - making it ideal for those seeking extra security or planning for a longer retirement. This lower rate requires a larger nest egg but provides more peace of mind.
 </p>
 
 <ImageEmbed src="/images/Coast-FIRE-Calculation.jpg" alt="working out Coast FIRE" description="I'll need investment returns to remain at 10% annually over the longterm now that I'm in my 40s." />
@@ -123,9 +123,9 @@ const schema = {
       <div>
         <p class="font-bold mb-2">Key Numbers Explained:</p>
         <ul class="list-disc pl-6 space-y-2">
-          <li><strong>Target FIRE Number:</strong> The total FIRE amount you need saved for retirement <a href="https://www.bankrate.com/retirement/rule-of-25/">(Annual Spending × 25 for a 4% withdrawal rate)</a>. Your Target FIRE number will change based the Annual Spend in Retirment and Safe Withdrawal Rate you enter.</li>
+          <li><strong>Traditional FIRE Number:</strong> The total FIRE amount you need saved for retirement <a href="https://www.bankrate.com/retirement/rule-of-25/">(Annual Spending × 25 for a 4% withdrawal rate)</a>. Your Target FIRE number will change based the Annual Spend in Retirment and Safe Withdrawal Rate you enter.</li>
           <li><strong>Coast FIRE Number:</strong> The amount needed today that will grow to your target by retirement without any additional contributions. This is heavily influenced by the Annual Investment Growth Rate % you select and Retirement Age.</li>
-          <li><strong>Future Value of Current Investments:</strong> Projected value of your current portfolio at retirement based on your inputs.</li>
+          <li><strong>Projected Net Worth:</strong> Projected value of your current portfolio at retirement based on your inputs.</li>
           <li><strong>Additional Amount Needed:</strong> How much more you need to save to reach your Coast FIRE number that will allow your investments to do the heavy lifting for retirement.</li>
         </ul>
       </div>
@@ -155,15 +155,15 @@ Coast FIRE Number = Target FIRE Number ÷ (1 + Growth Rate)^Years to Retirement<
       The calculator provides an interactive chart showing multiple scenarios:
     </p>
     <ul class="list-disc pl-6 space-y-2">
-      <li><strong>With Contributions (Blue Line):</strong> Shows portfolio growth if you continue making your monthly contributions after reaching Coast Fire.</li>
-      <li><strong>No Contributions (Green Line):</strong> Shows how your current investments would grow without any additional contributions. This is the "Coast FIRE" path - relying solely on compound interest of existing investments.</li>
-      <li><strong>Coast FIRE Number (Purple Line):</strong> The target amount needed today that would grow to support your retirement. Represents the minimum amount needed to "coast" to retirement without further saving.</li>
+      <li><strong>With Continued Monthly Contributions (Green Line):</strong> Shows portfolio growth if you continue making your monthly contributions after reaching Coast Fire.</li>
+      <li><strong>No Contributions After Coast FIRE (Dashed Green Line):</strong> Shows how your current investments would grow without any additional contributions. This is the "Coast FIRE" path - relying solely on compound interest of existing investments.</li>
+      <li><strong>Coast FIRE Number (Blue Line):</strong> The target amount needed today that would grow to support your retirement. Represents the minimum amount needed to "coast" to retirement without further saving.</li>
       <li><strong>FIRE Number (Red Line):</strong> Your final retirement target (annual spending × 25 for 4% withdrawal rate). This is the amount needed to support your desired retirement spending.</li>
       <li><strong>With Social Security (Purple Line, Optional):</strong> Shows how Social Security benefits impact your total retirement income. Adds your expected monthly Social Security benefit to your investment portfolio.</li>
     </ul>
 
     <p class="mt-4">
-      Toggle different scenarios on/off to visualize how they affect your retirement timeline. I also encourage you to test out the inflation adjustment toggle to see values in today's dollars or future dollars.
+      Toggle different scenarios on/off to visualize how they affect your retirement timeline. I also encourage you to test out the inflation adjustments and returns to test different scenerios.
     </p>
 
     <h2 class="text-2xl font-bold mt-4 mb-4">Next Steps After Reaching Coast FIRE</h2>

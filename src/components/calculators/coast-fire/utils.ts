@@ -148,9 +148,10 @@ export const getFIREMessage = (state: CalculatorState): Message[] => {
   const coastFireNumber = calculateCoastFireNumber(state);
   const yearsToCoastFire = calculateYearsToCoastFire(state);
   const isOnTrack = yearsToCoastFire !== null;
+  const hasReachedCoastFire = state.currentInvestedAssets >= coastFireNumber;
   
   // Primary Coast FIRE status message
-  if (state.currentInvestedAssets >= coastFireNumber) {
+  if (hasReachedCoastFire) {
     messages.push({
       type: 'success',
       priority: 1,
@@ -202,8 +203,8 @@ export const getFIREMessage = (state: CalculatorState): Message[] => {
     });
   }
 
-  // Monthly Contributions Messages
-  if (state.monthlyContributions < 100) {
+  // Monthly Contributions Messages - only show if Coast FIRE hasn't been reached
+  if (!hasReachedCoastFire && state.monthlyContributions < 100) {
     messages.push({
       type: 'warning',
       priority: 2,

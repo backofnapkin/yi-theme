@@ -4,6 +4,7 @@ import { InfoTooltip } from './InfoTooltip';
 import { formatMoney } from './utils';
 import { RangeInput } from './RangeInput';
 import { NumberInput } from './NumberInput';
+import { AgeInput } from './AgeInput';
 import { generateChartData, calculateCoastFireNumber, calculateFullFireNumber, calculateYearsToCoastFire } from './utils';
 
 interface InputFieldsProps {
@@ -120,6 +121,16 @@ ${state.showAdvancedFields ? '- Social Security impact is shown from your select
     } as React.ChangeEvent<HTMLInputElement>);
   };
 
+  const handleAgeChange = (name: string) => (value: string) => {
+    onChange({
+      target: {
+        name,
+        value,
+        type: 'number'
+      }
+    } as React.ChangeEvent<HTMLInputElement>);
+  };
+
   return (
     <div className="space-y-6">
       <div className="flex justify-between items-center">
@@ -134,22 +145,31 @@ ${state.showAdvancedFields ? '- Social Security impact is shown from your select
       
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {/* Age Inputs */}
-        <NumberInput
+        <AgeInput
           label="Current Age"
           value={state.currentAge}
-          onChange={handleNumberChange('currentAge')}
+          onChange={handleAgeChange('currentAge')}
           min={15}
           max={99}
           tooltip="Your current age. This is the starting point for all calculations."
         />
 
-        <NumberInput
+        <AgeInput
           label="End Age"
           value={state.endAge}
-          onChange={handleNumberChange('endAge')}
+          onChange={handleAgeChange('endAge')}
           min={65}
           max={100}
           tooltip="The age until which you want to plan your retirement. Must be higher than your current age and target retirement age."
+        />
+
+        <AgeInput
+          label="Target Retirement Age"
+          value={state.targetRetirementAge}
+          onChange={handleAgeChange('targetRetirementAge')}
+          min={45}
+          max={99}
+          tooltip="The age at which you plan to retire. Your investments need to grow to support this."
         />
 
         {/* Assets and Retirement Age */}
@@ -171,15 +191,6 @@ ${state.showAdvancedFields ? '- Social Security impact is shown from your select
           prefix="$"
           formatCommas={true}
           tooltip="How much you plan to invest each month. This helps project your future portfolio value."
-        />
-
-        <NumberInput
-          label="Target Retirement Age"
-          value={state.targetRetirementAge}
-          onChange={handleNumberChange('targetRetirementAge')}
-          min={45}
-          max={99}
-          tooltip="The age at which you plan to retire. Your investments need to grow to support this."
         />
 
         {/* Retirement Spending */}

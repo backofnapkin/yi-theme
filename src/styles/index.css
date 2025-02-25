@@ -132,6 +132,21 @@ menu {
   .image-cols-4 {
     @apply grid gap-4 grid-cols-4 my-2
   }
+
+  /* Updated rules with higher specificity */
+  section button.asset-allocation-remove-btn {
+    background-color: #dc2626; /* Tailwind red-600 */
+    border-color: #b91c1c; /* Tailwind red-700 */
+  }
+
+  section button.asset-allocation-remove-btn:hover {
+    background-color: #b91c1c; /* Tailwind red-700 */
+    border-color: #991b1b; /* Tailwind red-800 */
+  }
+
+  section button.asset-allocation-remove-btn svg {
+    color: #ffffff; /* Ensures X icon stays white */
+  }
 }
 
 * {
@@ -375,5 +390,18 @@ Applies link colors specifically to content links in .astro pages
     background: var(--color-fill);
     border: 1px solid var(--color-border);
     border-radius: 0.5rem;
+  }
+}
+
+/* Force Tailwind classes for Monte Carlo chart */
+@layer utilities {
+  .text-emerald-600 {
+    color: #059669;
+  }
+  .text-amber-600 {
+    color: #d97706;
+  }
+  .text-orange-600 {
+    color: #ea580c;
   }
 }

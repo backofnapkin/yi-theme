@@ -12,7 +12,8 @@ export default {
   content: [
     './src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}',
     './src/components/**/*.{js,ts,jsx,tsx}',
-    './src/pages/**/*.{js,ts,jsx,tsx,astro}'
+    './src/pages/**/*.{js,ts,jsx,tsx,astro}',
+    './src/styles/index.css' // Added to ensure Tailwind scans index.css
   ],
   safelist: [
     // Base utility classes
@@ -50,6 +51,11 @@ export default {
     'from-emerald-600', // For line charts - positive trends + radio button
     'from-red-600',     // For line charts - negative trends
     // Theme red colors
+    'bg-red-600',      // For button background
+    'bg-red-700',      // For hover background
+    'border-red-700',  // For button border
+    'border-red-800',  // For hover border
+    'text-white',      // For X icon color
     'bg-skin-red-light',
     'bg-skin-red-bg',
     'bg-emerald-600', // Made for radio button
@@ -57,11 +63,14 @@ export default {
     'border-skin-red-border',
     'border-purple-100', // Border panel color
     'border-purple-200', // Border panel color
+    'text-emerald-600', // For 75th
+    'text-amber-600',   // For 25th
+    'text-orange-600',  // For 5th
     'text-skin-red-text',
     'text-skin-emerald-text', 
     // Patterns for dynamic classes
     {
-      pattern: /(border|bg|from|to)-(emerald|amber|green|orange|slate|stone|zinc|purple)-(50|100|200|300|400|500|600)/,
+      pattern: /(border|bg|from|to|text)-(emerald|amber|green|orange|slate|stone|zinc|purple|red|blue)-(50|100|200|300|400|500|600|700|800)/,
       variants: ['hover', 'focus']
     }
   ],

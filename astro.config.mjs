@@ -24,8 +24,8 @@ export default defineConfig({
   integrations: [
     sitemap(),
     tailwind({
-      // Add Tailwind configuration here
       config: {
+        path: './tailwind.config.js', // Explicitly point to your config file
         applyBaseStyles: false,
         jit: true
       }

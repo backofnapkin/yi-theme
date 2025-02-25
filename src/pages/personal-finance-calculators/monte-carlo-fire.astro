@@ -1,0 +1,367 @@
+---
+import IndexPage from "../../layouts/IndexPage.astro";
+import MonteCarloFireCalculator from "../../components/calculators/monte-carlo-fire/MonteCarloFireCalculator";
+import { Calculator } from 'lucide-react';
+import YouTubeEmbed from '../../components/YouTubeEmbed.astro';
+import ImageEmbed from '../../components/ImageEmbed.astro';
+import AuthorBox from '../../components/AuthorBox.astro';
+import XEmbed from '../../components/XEmbed.astro';
+
+export const frontmatter = {
+  comment: false,
+  donate: false,
+  title: "Monte Carlo Retirement Calculator & Risk Assessment Tool",
+  description: "Simulate thousands of retirement scenarios to understand your probability of success. Model market volatility, inflation, and withdrawal strategies for more realistic planning.",
+  author: "Brett Lindenberg",
+  category: "Personal Finance Calculators",
+  date: "2025-02-24",
+  tags: [""],
+  image: {
+    url: "",
+    alt: ""
+  }
+};
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": frontmatter.title,
+  "description": frontmatter.description,
+  "applicationCategory": "FinanceApplication",
+  "operatingSystem": "Web Browser",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "featureList": [
+    "Probability of Success Analysis",
+    "Multiple Market Scenarios",
+    "Retirement Portfolio Forecasting",
+    "Volatility Modeling",
+    "Inflation Risk Assessment",
+    "Sequence of Returns Risk Analysis",
+    "Withdrawal Strategy Optimization",
+    "Interactive Charts and Visualizations"
+  ]
+};
+---
+
+<IndexPage
+  title={frontmatter.title}
+  description={frontmatter.description}
+  author={frontmatter.author}
+  date={frontmatter.date}
+  comment={frontmatter.comment}
+  donate={frontmatter.donate}
+  image={frontmatter.image}
+  category={frontmatter.category}
+  tags={frontmatter.tags}>
+
+<script type="application/ld+json" set:html={JSON.stringify(schema)} />
+<div class="min-h-screen bg-skin-fill pt-4 px-4 sm:px-6 lg:px-8">
+  <div class="max-w-7xl mx-auto">
+    <div class="not-prose mt-2">
+      <MonteCarloFireCalculator client:load />
+    </div>
+  </div>
+  <div class="prose prose-lg max-w-none mt-4 text-skin-base">
+    <h2 class="text-2xl font-bold mb-4">How to Use This Calculator</h2>
+    <p>
+      Traditional retirement calculators often give you a false sense of certainty. They might tell you that you'll have exactly $2.3 million at age 65 and that your money will last precisely until age 92. But anyone who's watched the markets knows this precision is an illusion. Real investment returns can be unpredictable over the longterm.
+    </p>
+
+    <p class="mt-4">
+      That's where Monte Carlo analysis comes in. Named after the famous casino, this approach acknowledges that we can't predict the future with certainty, but we can model thousands of possible futures to understand the range of potential outcomes. Rather than a single yes-or-no answer to "Will I have enough?", you get a probability of success that better reflects the uncertainty in financial planning.
+    </p>
+
+    <p class="mt-4">
+      To get started with this calculator, you'll need to provide information about your current situation and retirement goals. Enter your age, when you want to retire, and how long you expect to live. Input your current savings balance and how much you plan to contribute each year until retirement. Then specify your portfolio allocation between stocks, bonds, and cash. Finally, set your desired annual withdrawal amount during retirement.
+    </p>
+
+    <p class="mt-4">
+      The calculator will then simulate up to 2,000 potential market scenarios based on historical return patterns. Each simulation follows a different random sequence of returns, testing how your portfolio might perform across bull markets, bear markets, and everything in between. The result is a comprehensive view of your retirement readiness that accounts for market volatility, inflation risk, and the critical sequence of returns that traditional calculators often ignore.
+    </p>
+
+    <ImageEmbed 
+      src="/images/monte-carlo-scenarios.png" 
+      alt="monte carlo scenarios" 
+      description="Test your retirement plan against 2,000 different possible scenarios with this tool." 
+    />
+
+   <h2 class="text-2xl font-bold mt-6 mb-4">Download Your Simulation Results</h2>
+    <p>
+      When I was first exploring Monte Carlo analysis for my own retirement planning, I found that the aggregated success probability was informative, but it didn't tell the whole story. I wanted to see exactly how different scenarios unfolded year by year, especially the ones that failed. What did those failure paths look like? When did things go wrong? Could I have made adjustments along the way to avoid running out of money?
+    </p>
+    
+    <p class="mt-4">
+      That's why I've built a download feature into this calculator. The .txt file you can export contains detailed information for each simulated path, showing year-by-year portfolio values, withdrawal amounts, and market returns. This raw data reveals patterns that summary statistics might miss. You might discover, for instance, that most failures happen after a specific age, or that adjusting your withdrawal strategy during market downturns could dramatically improve your outcomes.
+    </p>
+    
+    <p class="mt-4">
+      For the analytically minded, this data is gold. You can import it into Excel, Google Sheets, or your favorite data analysis tool to create custom visualizations, test "what-if" scenarios, or integrate it with other aspects of your financial plan. The .txt format makes it easy to work with, whether you're a spreadsheet novice or a data analysis expert.
+    </p>
+
+    <h3 class="text-xl font-bold mt-8">Understanding the Results</h3>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+      <div class="bg-blue-50 p-4 rounded-lg">
+        <h4 class="font-bold text-blue-900">Success Probability</h4>
+        <p class="text-sm">
+          The success probability represents the percentage of simulated scenarios where your portfolio lasted throughout your expected lifetime while providing your desired income. When you see a number like 85%, it means that in 85% of the simulated market scenarios, your money lasted as long as you needed it to. Conversely, it also means there's a 15% chance that you could outlive your money based on your current plan. Financial planners typically consider probabilities above 80% as relatively safe, while those below 70% may suggest you need to reconsider your retirement strategy by saving more, working longer, spending less in retirement, or adjusting your investment approach.
+        </p>
+      </div>
+      <div class="bg-green-50 p-4 rounded-lg">
+        <h4 class="font-bold text-green-900">Portfolio Duration</h4>
+        <p class="text-sm">
+          The portfolio duration metric shows how long your money might last across different scenarios. The median represents the middle point of all simulations - half lasted longer, half shorter. The 25th percentile shows a more pessimistic scenario, where 75% of simulations lasted longer and 25% didn't make it this far. The 75th percentile shows a more optimistic outcome, where only 25% of simulations lasted longer. The gap between these percentiles gives you a sense of the uncertainty in your plan. A wide gap suggests your outcome is highly dependent on market performance, while a narrow gap indicates more consistency regardless of market behavior. Ideally, the 25th percentile duration should still exceed your life expectancy, giving you confidence that your plan is robust even against unfavorable market conditions.
+        </p>
+      </div>
+    </div>
+
+    <ImageEmbed 
+      src="https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?auto=format&fit=crop&q=80&w=2070" 
+      alt="Diverse investment portfolio" 
+      description="A well-diversified portfolio can help manage risk and improve retirement outcomes." 
+    />
+
+<h2 class="text-2xl font-bold mt-8 mb-4">The Math Behind My Monte Carlo Simulator</h2>
+
+<p>
+  When I built this calculator, I wanted to create something fundamentally different from the overly simplified retirement tools you typically find online. Most calculators use constant returns that create a false sense of certainty. I knew from both my research and personal investing experience that real markets are far messier, and this messiness matters enormously for retirement planning.
+</p>
+
+<p class="mt-4">
+  At the core of this simulator is a sophisticated random number generator that models market volatility. Instead of using simple random functions, I implemented a seeded random number generator that produces statistically realistic market returns. The calculator transforms these random numbers into a normal (Gaussian) distribution with "fat tails" that better reflect real market behavior, where extreme events happen more frequently than a perfect bell curve would suggest.
+</p>
+
+<p class="mt-4">
+  To illustrate this with a concrete example: If you set an expected stock return of 8% with a volatility (standard deviation) of 18%, a traditional calculator would simply grow your portfolio by 8% every single year. My Monte Carlo simulator instead generates returns that might look like: +31.2%, -14.6%, +22.5%, +10.1%, -5.8%, and so on. While these returns average around 8% over long periods, the year-to-year volatility creates dramatically different outcomes, particularly when you're making withdrawals from your portfolio.
+</p>
+
+<p class="mt-4">
+  I also built in serial correlation between yearly returns. Markets don't move with complete independence from year to year – they often exhibit momentum over short periods and mean reversion over longer periods. My simulation links each year's return partially to the previous year's performance, creating more realistic market sequences where good or bad years tend to cluster together somewhat, rather than wildly jumping between extremes.
+</p>
+
+<p class="mt-4">
+  For portfolios with multiple asset classes, the simulator generates separate return sequences for each asset based on your specified return and volatility parameters. This approach captures how diversification affects portfolio performance – sometimes stocks zig while bonds zag, creating a smoother overall return pattern than any single asset would provide.
+</p>
+    <ImageEmbed 
+      src="https://images.unsplash.com/photo-1642543492481-44e81e3914a7?auto=format&fit=crop&q=80&w=2070" 
+      alt="Financial planning with data visualization" 
+      description="Monte Carlo simulations help visualize thousands of possible retirement scenarios." 
+    />
+<p class="mt-4">
+  Let's walk through a simple example: Imagine a portfolio that's 60% stocks and 40% bonds. In a particular simulation year, the stocks might return -8.3% while bonds return +5.2%. Rather than seeing your entire portfolio crash, your overall return would be:
+</p>
+
+<p class="mt-4">
+  (60% × -8.3%) + (40% × 5.2%) = -4.98% + 2.08% = -2.9%
+</p>
+
+<p class="mt-4">
+  This diversification benefit is automatically captured in thousands of different scenarios throughout the simulation runs.
+</p>
+
+<p class="mt-4">
+  I've been particularly careful about modeling the practical factors that erode returns over time. Investment fees are subtracted directly from annual returns. For example, if your portfolio earns 7.5% in a given year and you're paying 0.5% in fees, your net return is 7%. Over a 30-year retirement, this seemingly small difference compounds dramatically.
+</p>
+
+<p class="mt-4">
+  Inflation gradually increases your withdrawal needs year by year to maintain purchasing power. If you start with an annual withdrawal of $50,000 and inflation runs at 2.5%, your second-year withdrawal would be $51,250, your third-year withdrawal $52,531, and so on. By year 30, that same spending power would require $102,324 annually. The simulator accounts for this increasing withdrawal amount automatically.
+</p>
+
+    <ImageEmbed 
+      src="/images/monte-carlo-plans.jpg" 
+      alt="Monte Carlo planning" 
+      description="Sketching out what I wanted to include in this tool." 
+    />
+
+<p class="mt-4">
+  Taxes are handled by adjusting withdrawal amounts upward to ensure you have enough after-tax dollars to meet your spending needs. For instance, if you need $60,000 for spending and have a 20% tax rate, the simulator would actually withdraw $75,000 from your portfolio ($60,000 ÷ 0.8), recognizing that $15,000 goes to taxes while $60,000 goes to your spending.
+</p>
+
+<p class="mt-4">
+  Success in the simulation is defined as maintaining a portfolio balance above a minimal threshold throughout your entire retirement period. The overall success rate shown in your results is simply the percentage of simulated paths that meet this criterion. But beyond this binary outcome, I calculate percentile paths (5th, 25th, 50th, 75th, and 95th) to show you the range of possible outcomes in both favorable and challenging market conditions.
+</p>
+
+<p class="mt-4">
+  To put concrete numbers on this: If you ran 1,000 simulations and 850 of them maintained a positive balance throughout retirement, your success rate would be 85%. Meanwhile, the median (50th percentile) ending balance might be $1.2 million, meaning half the successful scenarios ended with more than this amount and half with less. The 25th percentile might show just $320,000 remaining, while the 75th percentile might show $2.4 million. This spread gives you much more insight into possible outcomes than a single average number could provide.
+</p>
+
+<p class="mt-4">
+  This approach provides a much more nuanced and realistic view of retirement outcomes than traditional calculators. It doesn't predict the future with certainty – no model can do that – but it helps you understand the range of possibilities and how various factors might affect your retirement security. That understanding is the foundation of better retirement planning decisions.
+</p>
+    <h3 class="text-xl font-bold mt-8">Market Assumptions and Historical Perspective</h3>
+    <p>
+      The quality of any Monte Carlo simulation depends heavily on the market assumptions it uses. This calculator draws on extensive historical data to set its default parameters, but it's important to understand these assumptions and consider whether they're appropriate for your situation.
+    </p>
+
+    <p class="mt-4">
+      For stock returns, the default assumption is based on the historical performance of the U.S. stock market over the past century. Large-company U.S. stocks have delivered average annual returns of about 10% before inflation (or about 7% after inflation), with a standard deviation of approximately 15-20%. This means that in about two-thirds of years, returns fell within the range of -10% to +30%, but significant outliers in both directions are common. The simulator uses this distribution to generate random annual returns for the stock portion of your portfolio.
+    </p>
+
+    <p class="mt-4">
+      Bond returns are modeled based on intermediate-term government and corporate bonds, which have historically returned about 5% annually before inflation (2% real returns) with a standard deviation of 5-10%. This lower volatility reflects the more stable nature of fixed income investments, though it's worth noting that bonds can still experience significant price swings, especially in changing interest rate environments.
+    </p>
+
+    <p class="mt-4">
+      Cash and cash equivalents are modeled as short-term treasury bills and high-yield savings accounts with historical returns averaging about 3% annually before inflation (0% real returns) and minimal volatility. While cash provides stability, it's important to recognize that its purchasing power tends to erode over time due to inflation.
+    </p>
+
+        <ImageEmbed 
+      src="/images/retirement-plans.png" 
+      alt="retirement plans" 
+      description="When did retirement planning get so complicated?" 
+    />
+
+    <p class="mt-4">
+      Speaking of inflation, the calculator models this as a separate random variable with a long-term average of about 2.5% annually and moderate volatility. This inflation rate affects both your withdrawal amounts (if you've chosen to increase them with inflation) and the real returns of your investments.
+    </p>
+
+    <p class="mt-4">
+      A critical assumption in any Monte Carlo simulation is how these different asset classes correlate with each other. Historically, stocks and bonds have shown a slightly negative correlation during many periods, meaning bonds often (but not always) provide a cushion when stocks decline. The calculator incorporates these correlation patterns when generating random returns, creating more realistic portfolio behavior than if each asset class were modeled independently.
+    </p>
+
+    <p class="mt-4">
+      It's worth noting that these historical patterns may not perfectly predict future market behavior. Many financial experts suggest that future returns for both stocks and bonds may be somewhat lower than historical averages due to current market valuations, interest rate environments, and demographic trends. For a more conservative analysis, you might consider adjusting the expected return assumptions downward from their historical averages.
+    </p>
+
+    <h2 class="text-2xl font-bold mt-8 mb-4">How Taxes Impact Your Retirement Projections</h2>
+
+<p>
+  One of the most overlooked aspects of retirement planning is the impact of taxes on your withdrawal strategy. Many calculators simply ignore taxes entirely, creating dangerously optimistic projections. When building this simulator, I took a different approach by incorporating tax effects directly into the calculations.
+</p>
+
+<p class="mt-4">
+  Here's how it works: When you enter your desired annual spending amount, say $60,000, that represents what you actually need to live on after taxes have been paid. But to have $60,000 available for spending, you'll need to withdraw more than $60,000 from your portfolio because a portion goes to taxes.
+</p>
+
+<p class="mt-4">
+  The simulator calculates your actual withdrawal amount using this formula:
+</p>
+
+<div class="bg-gray-50 p-4 rounded-lg mt-4 font-mono text-sm overflow-auto">
+  afterTaxWithdrawal = withdrawal / (1 - taxRate / 100)
+</div>
+
+<p class="mt-4">
+  For example, if you enter a tax rate of 20% and want $60,000 for annual spending, the simulator will actually withdraw $75,000 from your portfolio:
+</p>
+
+<div class="bg-gray-50 p-4 rounded-lg mt-4">
+  $60,000 ÷ (1 - 0.20) = $60,000 ÷ 0.80 = $75,000
+</div>
+
+<p class="mt-4">
+  This means $15,000 (20% of $75,000) goes to taxes, leaving you with the $60,000 you need for living expenses. This approach is much more realistic than assuming you can spend every dollar you withdraw.
+</p>
+
+
+        <ImageEmbed 
+      src="/images/tax-in-retirement.png" 
+      alt="retirement tax" 
+      description="News flash: You still need to pay taxes on traditional 401K's in retirement." 
+    />
+
+<p class="mt-4">
+  The tax rate you enter should represent your expected effective tax rate in retirement, not your marginal tax rate. Your effective tax rate is the average rate you pay across all your income, which is typically lower than your marginal rate (the rate on your last dollar of income).
+</p>
+
+<p class="mt-4">
+  For most retirees, an effective tax rate between 10-25% is reasonable, depending on your income level and which state you live in. If you have significant Roth assets that will provide tax-free withdrawals, you might use a lower effective rate. Conversely, if most of your assets are in traditional IRAs or 401(k)s, or if you expect to have substantial taxable income from other sources, you might use a higher effective rate.
+</p>
+
+<p class="mt-4">
+  This tax calculation happens every year of your retirement in the simulation, and the withdrawal amount increases with inflation over time. By year 20 of retirement with 2.5% inflation, that initial $75,000 withdrawal would have grown to approximately $123,000, with $98,400 for spending and $24,600 for taxes.
+</p>
+
+<p class="mt-4">
+  Including taxes this way provides a much more accurate picture of how long your portfolio might last. Ignoring taxes can lead to dramatically overestimating your portfolio's longevity, potentially by 5-10 years or more depending on your tax situation. It's a critical factor that far too many retirement calculators gloss over.
+</p>
+
+    <h3 class="text-xl font-bold mt-8">Beyond the Numbers: The Human Element of Retirement Planning</h3>
+    <p>
+      While Monte Carlo analysis provides a sophisticated approach to modeling market uncertainty, it's important to recognize that it has limitations. The model makes certain mathematical assumptions about market behavior that, while reasonable, can't capture every nuance of real-world finance. Market returns don't always follow the neat statistical distributions that models assume. Extreme events like the 2008 financial crisis or the 2020 pandemic crash can fall outside what historical data would predict.
+    </p>
+
+    <p class="mt-4">
+      More importantly, the calculator assumes a relatively fixed behavior on your part - a consistent contribution strategy before retirement and a steady withdrawal pattern afterward. In reality, most people adapt their financial behavior as circumstances change. During market downturns, retirees often reduce their discretionary spending. When investments perform well, they might take that special vacation or help family members financially. This flexibility, which financial planners sometimes call "dynamic spending," can significantly improve retirement outcomes compared to the rigid withdrawal strategy modeled in most simulations.
+    </p>
+
+    <p class="mt-4">
+      The calculator also doesn't directly account for additional income sources like Social Security, pensions, annuities, or part-time work in retirement. These income streams can dramatically reduce the pressure on your investment portfolio, especially if they cover most of your essential expenses. To account for these, you could reduce your withdrawal amount in the calculator by the amount you expect to receive from these other sources.
+    </p>
+
+    <p class="mt-4">
+      Tax considerations present another layer of complexity that the simulation doesn't directly address. Different account types (traditional IRAs, Roth IRAs, taxable accounts) have different tax treatment, and strategic withdrawal planning across these accounts can extend portfolio longevity beyond what the model might suggest. Similarly, health care costs and long-term care needs represent significant and unpredictable expenses that can impact your retirement plan.
+    </p>
+
+    <p class="mt-4">
+      Perhaps most fundamentally, the calculator assumes that your goal is to maintain a consistent inflation-adjusted income throughout retirement without depleting your principal. But many retirees find that their spending naturally decreases in their later years as travel and activities diminish, with the possible exception of health care costs. Others may be comfortable with a plan that gradually spends down principal, especially if they have limited legacy goals or have other assets (like home equity) that aren't reflected in the portfolio.
+    </p>
+
+    <p class="mt-4">
+      These human elements of retirement planning are why financial planning remains as much art as science. The Monte Carlo simulation provides a valuable framework for understanding the impact of market uncertainty, but it works best when combined with thoughtful consideration of your unique circumstances, values, and priorities.
+    </p>
+
+    <ImageEmbed 
+      src="https://images.unsplash.com/photo-1553729459-efe14ef6055d?auto=format&fit=crop&q=80&w=2070" 
+      alt="Retirement lifestyle" 
+      description="Finding the right balance between retirement lifestyle and financial security is key." 
+    />
+
+<h2 class="text-2xl font-bold mt-6 mb-4">Interpreting Your Success Probability</h2>
+<p>
+  When you run the calculator, you'll get a success probability percentage - but what does this number really mean for your retirement planning? How should you interpret an 82% success rate versus a 76% or a 95%? Is higher always better?
+</p>
+
+<p class="mt-4">
+  Lead researcher at Kitces.com <a href="https://www.kitces.com/blog/the-wrong-side-of-maybe-fallacy-and-the-interpretation-of-monte-carlo-analysis/">Derek Tharp</a> has written extensively on this topic, arguing that success probabilities need contextual interpretation. An extremely high success probability (95%+) might seem desirable, but it typically requires excessive saving or an unnecessarily frugal retirement. The result is often a substantial inheritance left behind - which might be your goal, but could also represent sacrificed quality of life during your retirement years.
+</p>
+
+<p class="mt-4">
+  Conversely, a lower success probability doesn't necessarily mean your plan is doomed. A 70% success rate indicates that your plan works in most market scenarios, failing only in particularly challenging conditions. You might be comfortable with this level of risk, especially if you have flexibility to adjust your spending in retirement or have additional resources (home equity, inheritances, etc.) not reflected in the simulation.
+</p>
+
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
+  <div class="bg-red-50 p-4 rounded-lg">
+    <h4 class="font-bold text-red-900">Below 70% Success Rate</h4>
+    <p class="text-sm">
+      A success probability below 70% suggests significant risk in your retirement plan. This doesn't mean failure is guaranteed, but it indicates vulnerability to adverse market conditions. If your simulation shows this level of success, consider strengthening your plan by increasing savings, delaying retirement, reducing planned withdrawals, or adjusting your investment strategy. The specific adjustments depend on your personal situation - sometimes even small changes can dramatically improve your outcomes.
+    </p>
+  </div>
+  <div class="bg-amber-50 p-4 rounded-lg">
+    <h4 class="font-bold text-amber-900">70% to 85% Success Rate</h4>
+    <p class="text-sm">
+      Many financial planners consider this range ideal for most retirees. It balances the risk of outliving your money against unnecessarily restricting your retirement lifestyle. If you fall in this range, your plan is reasonably solid but not excessively conservative. You might still want to monitor your situation regularly and be prepared to make modest adjustments if market conditions prove challenging, especially in the early years of retirement when sequence risk is highest.
+    </p>
+  </div>
+  <div class="bg-emerald-50 p-4 rounded-lg">
+    <h4 class="font-bold text-emerald-900">Above 85% Success Rate</h4>
+    <p class="text-sm">
+      A success probability above 85% indicates a very conservative plan that succeeds across almost all market scenarios. While this provides significant peace of mind, it may mean you're being unnecessarily frugal or could potentially leave a larger-than-intended estate. If legacy goals aren't a primary concern, you might consider whether increasing your withdrawal rate or retiring earlier would provide a better balance between security and enjoyment of your retirement years.
+    </p>
+  </div>
+</div>
+
+<p class="mt-6">
+  Most importantly, remember that this analysis isn't set in stone. As financial researcher Wade Pfau emphasizes, <a href="http://www.logiapm.com/sites/default/files/users/logiapm/RetirementRisks-RetirementResearcher.pdf">retirement planning comes with risk</a> and should be an ongoing process rather than a one-time decision. Your circumstances will change. Market conditions will evolve. Tax laws will be revised. Health situations may shift. All of these factors suggest revisiting your retirement analysis periodically—perhaps annually as is the default in this calculator.
+</p>
+
+<p class="mt-4">
+  The true value of Monte Carlo analysis isn't in providing a definitive answer, but helping you understand the range of events that could happen leading up to retirement. By gaining this deeper understanding, you can make more informed decisions about saving, investing, and spending before and during retirement.
+</p>
+
+    <p class="text-sm text-gray-600 mt-8">
+      Note: This calculator is for educational purposes only. All projections are hypothetical and do not guarantee future results. Always consult with qualified financial professionals before making investment decisions.
+    </p>
+  </div>
+
+  <main>
+    <article>
+      <slot />
+    </article>
+    <AuthorBox />
+  </main>
+</div>
+</IndexPage>

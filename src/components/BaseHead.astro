@@ -53,27 +53,16 @@ if (title === site.title) {
   {
     mermaid &&
     <script async type="text/javascript" src="https://cdn.bootcdn.net/ajax/libs/mermaid/10.9.0/mermaid.min.js"></script>
-
   }
   {
     config.busuanzi && <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
   }
   <!-- Google tag (gtag.js) -->
-  {
-    config.ga &&
-    <>
-      <script src={"https://www.googletagmanager.com/gtag/js?id=" +　config.ga}></script>
-      <script define:vars={{ga: config.ga}}>
-        window.dataLayer = window.dataLayer || [];
-
-        function gtag() {
-          dataLayer.push(arguments);
-        }
-
-        gtag('js', new Date());
-
-        gtag('config', ga);
-      </script>
-    </>
-  }
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XWRPMHQ74M"></script>
+  <script is:inline>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XWRPMHQ74M');
+  </script>
 </head>

@@ -1,0 +1,197 @@
+---
+import IndexPage from "../layouts/IndexPage.astro";
+import ImageEmbed from '../components/ImageEmbed.astro';
+import AuthorBox from '../components/AuthorBox.astro';
+import YouTubeEmbed from '../components/YouTubeEmbed.astro';
+import { Calculator } from 'lucide-react';
+
+export const frontmatter = {
+  comment: false,
+  donate: false,
+  title: "AI Tools I Use to Build & Launch",
+  description: "Discover the essential AI tools I use to build and launch projects, from idea generation to deployment.",
+  author: "Brett Lindenberg",
+  category: "",
+  date: "2025-03-10",
+  tags: [""],
+  image: {
+    url: "",
+    alt: ""
+  }
+};
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "name": frontmatter.title,
+  "description": frontmatter.description,
+  "author": {
+    "@type": "Person",
+    "name": frontmatter.author
+  },
+  "datePublished": frontmatter.date,
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://backofnapkin.co/tool-list"
+  }
+};
+---
+
+<IndexPage
+  title={frontmatter.title}
+  description={frontmatter.description}
+  author={frontmatter.author}
+  date={frontmatter.date}
+  comment={frontmatter.comment}
+  donate={frontmatter.donate}
+  image={frontmatter.image}
+  category={frontmatter.category}
+  tags={frontmatter.tags}>
+
+<script type="application/ld+json" set:html={JSON.stringify(schema)} />
+<div class="min-h-screen bg-skin-fill pt-2 px-4 sm:px-6 lg:px-8">
+  <div class="max-w-7xl mx-auto">
+    <div class="prose prose-lg max-w-none mt-2 text-skin-base">
+      
+      <h2 class="text-2xl font-bold mt-8 mb-4">Start with a Goal</h2>
+      <p class="mt-4">
+        It's easy to get overwhelmed with the sheer number of AI tools available. But as someone who regularly builds with AI, I've found that mastering a few key tools is far more valuable than constantly chasing the newest releases.
+      </p>
+      <p class="mt-4">
+        The most important first step is having a clear goal in mind for what you're trying to build. This focus will help you select the right AI tools for your specific needs.
+      </p>
+      <p class="mt-4">
+        Personally, I've been building financial projections, websites, landing pages, business calculators, scripts for spreadsheets, web applications, API integrations, and even exploring a few video games. This setup has worked well for these goals, but if I wanted to focus on AI video editing I would be using a different toolset.
+      </p>
+
+    <ImageEmbed src="/images/vs-code.jpg" alt="VS code" description="VS Code loaded on my desktop." />
+
+      
+      <h2 class="text-2xl font-bold mt-8 mb-4">Step 1: What do you want to build?</h2>
+      <p class="mt-4">
+        Your idea is always my starting point. Before diving into any tools, I take time to clearly define what I'm trying to create. Is it a website? A small business tool? A video game? Having a specific vision helps direct all the following steps and ensures I don't waste time with the wrong approaches.
+      </p>
+      <p class="mt-4">
+        The more specific you can be about your goal, the better. For example, instead of "I want to build a website," try "I want to build a portfolio website that showcases my photography with a minimalist design and a contact form people can use to email me."
+      </p>
+      
+      <h2 class="text-2xl font-bold mt-8 mb-4">Step 2: Craft Your Prompt</h2>
+      <p class="mt-4">
+        Once I know what I want to build, I translate my vision into a detailed prompt that I can give to AI tools. More on writing good prompts later, but a good prompt is specific, provides context, and clearly communicates your expectations.
+      </p>
+      <p class="mt-4">
+        For example, instead of "Give me code for a website," try "I need HTML and CSS code for a responsive photography portfolio website with a dark theme, image gallery grid, and contact form. The site should have minimal animations and load quickly."
+      </p>
+      <p class="mt-4">
+        The quality of your prompt directly affects the quality of the AI's output, so it's worth spending time getting this right. In fact, it's not uncommon for me to spend 15 - 30 minutes writing out initial prompts for my calculator builds like this one. 
+      </p>
+      
+      <h2 class="text-2xl font-bold mt-8 mb-4">Step 3: Refine Through Iteration</h2>
+      <p class="mt-4">
+        After receiving the initial output from the AI, I evaluate how well it matches my vision. This is rarely a one-and-done process. Instead, I:
+      </p>
+      <ul class="list-disc pl-8 mt-4 space-y-2">
+        <li>Review what works and what doesn't in the AI's response</li>
+        <li>Provide follow-up prompts with specific feedback ("The gallery layout is perfect, but can we change the color scheme to use more blues and grays?")</li>
+        <li>Ask for variations or alternatives when something isn't quite right</li>
+        <li>Build on successful elements through additional prompts</li>
+      </ul>
+      <p class="mt-4">
+        This iterative approach allows me to gradually shape the AI's output until it closely matches what I had in mind. Sometimes, the AI might even suggest approaches I hadn't considered that improve on my original concept.
+      </p>
+      <p class="mt-4">
+        Remember that building with AI is a conversation, not just a single command. The more you refine your prompts and provide feedback, the closer you'll get to your vision.
+      </p>
+      
+      <ImageEmbed src="/images/snake-game.jpg" alt="snake game" description="I build this snake game with Bolt.new. This took one prompt and 3 minutes of my time." />
+      
+      <h2 class="text-2xl font-bold mt-8 mb-4">My Essential AI Toolkit</h2>
+      <p class="mt-4">
+        Here are the tools I regularly use to build and launch AI-powered products. I recommend starting with the free tiers and upgrading as needed. 
+      </p>
+      <p class="mt-4">
+        Note: By the way, I'm not sponsored by any of these tools listed here. This is simply what works for me at this time.  
+      </p>
+      
+      <h3 class="text-xl font-bold mt-6 mb-3">Tool Building & Coding</h3>
+      <p class="mt-4">
+        To build substantial tools, apps or SaaS products, you'll want one of these:
+      </p>
+      <p class="mt-4">
+        <a href="https://bolt.new" target="_blank" class="text-blue-700 hover:underline">Bolt.new</a> - Think of this as digital building blocks that let you see your creation take shape in real-time. It's like watching your house being built as you design it. Enter in a prompt description the tool or game you want to build, and viola you'll be able to watch Bolt.new build your tool and be able to test it out in the tool. 
+      </p>
+      <p class="mt-4">
+        <a href="https://lovable.dev" target="_blank" class="text-blue-700 hover:underline">Lovable.dev</a> - Similar to Bolt, providing a visual environment where you can create applications without needing to write complicated code. I've heard really great things about Lovable.dev and it's similar to Bolt.new. 
+      </p>
+      
+      <h3 class="text-xl font-bold mt-6 mb-3">Coding & Writing Assistants</h3>
+      <p class="mt-4">
+        You'll need more than one AI tool to build complicated projects. These all-purpose AI tools can help with both coding and content creation. In addition to Bolt.new or Lovable.dev I suggest getting at least one of the following tools:
+      </p>
+      <p class="mt-4">
+        <a href="https://claude.ai" target="_blank" class="text-blue-700 hover:underline">Claude.ai</a> - Anthropic's assistant known for nuanced reasoning and thoughtful responses. I use this regularly to review code or writing. 
+      </p>
+      <p class="mt-4">
+        <a href="https://x.com" target="_blank" class="text-blue-700 hover:underline">Grok</a> - Available as part of X, offers real-time data and a more conversational experience. Grok has gotten very good at coding and creating nice looking stock photography. 
+      </p>
+      <p class="mt-4">
+        <a href="https://chat.openai.com" target="_blank" class="text-blue-700 hover:underline">ChatGPT</a> - OpenAI's widely-used assistant that can help with writing and coding tasks. Can't go wrong with the OG of AI. 
+      </p>
+      <p class="mt-4">
+        <a href="https://gemini.google.com" target="_blank" class="text-blue-700 hover:underline">Gemini</a> - Google's AI that excels at working with both text and images.
+      </p>
+      
+      <h3 class="text-xl font-bold mt-6 mb-3">Specialty AI Tools</h3>
+      <p class="mt-4">
+        Depending on your specific goal, these specialized tools may be valuable:
+      </p>
+      <p class="mt-4">
+        <a href="https://supabase.com" target="_blank" class="text-blue-700 hover:underline">Supabase</a> - Helps store information for your app or website in an organized way and create databases. 
+      </p>
+      <p class="mt-4">
+        <a href="https://midjourney.com" target="_blank" class="text-blue-700 hover:underline">Midjourney</a> - Creates beautiful images based on your descriptions.
+      </p>
+      <p class="mt-4">
+        <a href="https://runwayml.com" target="_blank" class="text-blue-700 hover:underline">Runway</a> - For AI video generation and editing.
+      </p>
+      <p class="mt-4">
+        <a href="https://otter.ai" target="_blank" class="text-blue-700 hover:underline">Otter.ai</a> - Turns spoken words into written text automatically.
+      </p>
+      <p class="mt-4">
+        <a href="https://perplexity.ai" target="_blank" class="text-blue-700 hover:underline">Perplexity</a> - For AI-powered research and finding information quickly.
+      </p>
+      
+      <h3 class="text-xl font-bold mt-6 mb-3">Launching Your AI Tools</h3>
+      <p class="mt-4">
+        Once you've built something with AI, you'll need other tools to launch it to the web. If you want to build a website, launch a video game, SaaS, or anything else you need the ability to take the files that AI creates, and publish them into the world for people to use. These tools allow you to take AI code and actually launch it to the world. 
+      </p>
+      <p class="mt-4">
+        <a href="https://code.visualstudio.com" target="_blank" class="text-blue-700 hover:underline">Visual Studio Code (Also called VS Code)</a> (Free) - I take code that's written by AI tools and copy the files into my VS Code software to be able to work on a project on my local computer. Once you get more complex projects going, you'll need a tool like this to make updates to your product. 
+      </p>
+      <p class="mt-4">
+        <a href="https://github.com" target="_blank" class="text-blue-700 hover:underline">GitHub</a> (Free to start) - After my tool looks good in VS Code, I move the files into my GitHub. This happens easily and fast by connecting VS Code to GitHub with an integration. GitHub is a website that stores code and other files online. 
+      </p>
+      <p class="mt-4">
+        <a href="https://netlify.com" target="_blank" class="text-blue-700 hover:underline">Netlify</a> (Free to start) - Puts your files on the internet so others can use it, connecting directly to where your code is stored. This tool will automatically pull your code updates from Github and publish them into the web. 
+      </p>
+      <p class="mt-4">
+        Domain Name: If you want a tool to have a custom URL like mycooltooideal.co, you'll need to buy a domain name from a place like <a href="https://godaddy.com" target="_blank" class="text-blue-700 hover:underline">GoDaddy</a> or <a href="https://namecheap.com" target="_blank" class="text-blue-700 hover:underline">NameCheap</a>. Netlify also makes it very easy to connect to this for better branding. 
+      </p>
+      
+      <p class="mt-4">
+        Remember, start simple with free plans and upgrade only when necessary. The goal is to build and launch quickly rather than getting caught up in tool complexity or costs.
+      </p>
+      <p class="mt-4">
+        So what should you do next if you want to build a tool fast? Write down a simple idea, and prompt AI with a tool like <a href="https://bolt.new" target="_blank" class="text-blue-700 hover:underline">Bolt.new</a> or <a href="https://lovable.dev" target="_blank" class="text-blue-700 hover:underline">Lovable.dev</a> and find out what results you can get. This is the best way to learn and there's literally nothing you can mess up or break so give it a shot. 
+      </p>
+    </div>
+
+    <main>
+      <article>
+        <slot />
+      </article>
+      <AuthorBox />
+    </main>
+  </div>
+</div>
+</IndexPage>

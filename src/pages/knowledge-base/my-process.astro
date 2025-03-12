@@ -1,0 +1,157 @@
+---
+import IndexPage from "../../layouts/IndexPage.astro";
+import ImageEmbed from '../../components/ImageEmbed.astro';
+import AuthorBox from '../../components/AuthorBox.astro';
+import { CheckCircle } from 'lucide-react';
+
+export const frontmatter = {
+  comment: false,
+  donate: false,
+  title: "My Simple 3-Step Process for Getting Started with AI to Build Tools",
+  description: "A straightforward three-step approach that cuts through the confusion and gets you making progress fast with AI tools.",
+  author: "Brett Lindenberg",
+  category: "Knowledge Base",
+  date: "2025-03-12",
+  tags: [""],
+  image: {
+    url: "",
+    alt: ""
+  }
+};
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "name": frontmatter.title,
+  "description": frontmatter.description,
+  "author": {
+    "@type": "Person",
+    "name": frontmatter.author
+  },
+  "datePublished": frontmatter.date,
+  "articleSection": frontmatter.category,
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://backofnapkin.co/knowledge-base/my-process/"
+  },
+  "keywords": [""]
+};
+---
+
+<IndexPage
+  title={frontmatter.title}
+  description={frontmatter.description}
+  author={frontmatter.author}
+  date={frontmatter.date}
+  comment={frontmatter.comment}
+  donate={frontmatter.donate}
+  image={frontmatter.image}
+  category={frontmatter.category}
+  tags={frontmatter.tags}>
+
+<script type="application/ld+json" set:html={JSON.stringify(schema)} />
+<div class="min-h-screen bg-skin-fill pt-2 px-4 sm:px-6 lg:px-8">
+  <div class="max-w-7xl mx-auto">
+    <div class="prose prose-lg max-w-none mt-2 text-skin-base">
+      <p class="lead text-xl">
+        After working with hundreds of first-time AI users, I've developed this straightforward three-step approach that cuts through the confusion and gets you making progress fast.
+      </p>
+
+      <h2 class="text-2xl font-bold mt-8 mb-4">Step 1: Have an Idea</h2>
+      <p>
+        Start with something specific you want to solve with AI. Start small at first and you'll build from there.
+      </p>
+      <p>
+        I've found that writing down your idea or goal with as many details as possible makes all the difference. When I first began using AI tools, my vague requests yielded results that didn't match up with what I had in my head. Once I started describing exactly what I needed—including context, desired format, and end goals—everything changed.
+      </p>
+      <p class="font-medium mt-4">
+        Remember: The AI can only work with what you give it. The details you give AI, the less it needs to guess when filling in the gaps.
+      </p>
+
+      <ImageEmbed src="/images/prompting-with-claude.jpg" alt="Me working with Claude." description="Me building with Claude." />
+
+       <h3 class="text-xl font-medium mt-6 mb-2">Example 1: Building a Calculator</h3>
+      <p class="mb-2">
+        <strong>Instead of saying:</strong> "I need help building a calculator."
+      </p>
+      <p class="mb-4">
+        <strong>Try being specific like this:</strong> "I want to build a scientific calculator to solve math problems for my middle schooler. The calculator should have yellow buttons with black text and blue function buttons. It needs to handle basic operations (addition, subtraction, multiplication, division) plus more advanced functions like square roots, exponents, and simple trigonometry (sine, cosine, tangent). The interface should be simple enough for a 12-year-old to use without instruction, with clear button labels and a display that shows both the equation and the result. I'd like the calculator to work on both desktop and mobile browsers."
+      </p>
+
+      <h3 class="text-xl font-medium mt-6 mb-2">Example 2: Writing a Business Email</h3>
+      <p class="mb-2">
+        <strong>Instead of asking:</strong> "Help me write an email for work."
+      </p>
+      <p class="mb-4">
+        <strong>Be detailed like this:</strong> "I need to write a follow-up email to a potential client who hasn't responded in two weeks. We had an initial meeting about designing their company website, and I sent a proposal with three pricing tiers. The client seemed enthusiastic during our call but hasn't acknowledged receipt of the proposal. I want to be polite but direct, remind them of the value I can provide, and include a gentle call to action. My tone should be professional but warm, and the email shouldn't be longer than three short paragraphs."
+      </p>
+
+      <p class="mt-4">
+        I would also enter in the exact email I got into the tool for added context if there's no sensitive information.
+      </p>
+
+      <div class="bg-yellow-50 p-4 rounded-lg mt-6 border-l-4 border-yellow-500">
+        <p class="font-bold">Your Action Step:</p>
+        <p>For the next 10 minutes, take the time to write down the tool you want to build or the problem you want to solve with all the details. You can save this in a Google Doc or in the Apple Notes program for later.</p>
+      </div>
+
+    <ImageEmbed src="/images/prompt-example.png" alt="prompt example" description="Here is an example of a real prompt I typed out to build a Monte Carlo projection calculator for this website. I put this prompt into Bolt.new and started building." />
+
+      <h2 class="text-2xl font-bold mt-8 mb-4">Step 2: Start with Any Available AI Tool</h2>
+      <p>
+        Do you have your goals written out? Great. Let's paste the return goal into an AI tool and see what kind of results you get. Seriously, do it right now!
+      </p>
+      <p class="mt-4">
+        Don't get caught in the trap of endlessly researching which AI is "best." Whether you have access to Claude, ChatGPT, Gemini, Bolt.new or Grok—just start there. I've tested them all extensively, and the truth is they're all remarkably capable. Jump in with whatever you have available and don't spend any more time evaluating the pros and cons of different AI tools.
+      </p>
+      <p class="mt-4">
+        Did you get the type of results you were looking for based on your prompt? Contrary to what you've seen on social media, most of the time you won't get exactly what you wanted from the first prompt or you might realize you forgot to add something that you should have in your initial prompt.
+      </p>
+
+      <h2 class="text-2xl font-bold mt-8 mb-4">Step 3: Iterate and Improve</h2>
+      <p>
+        At this point you should have some type of a result from AI, but things probably aren't exactly what you had imagined. Here's what I do next:
+      </p>
+      <ul class="list-disc pl-6 space-y-2">
+        <li>
+          <strong>If I have a specific change I want made, just ask for it.</strong> Literally just ask AI to fix it or change the issue.
+          <p class="italic text-gray-600 mt-1">For example, please position the Monte Carlo chart directly below the "Financial Results" heading.</p>
+        </li>
+        <li>
+          <strong>Ask the AI program for advice or a plan on what to do next.</strong> You might be surprised at the ideas you get.
+          <p class="italic text-gray-600 mt-1">For example, I want to improve this tool from a design standpoint, but I'm not sure what my options are. Can you give me a list of options available to me so I can choose what would work best?</p>
+        </li>
+      </ul>
+
+    <ImageEmbed src="/images/ai-influencer.jpg" alt="AI Influencer." description="I created this realistic looking AI influencer with Grok. And over the next 6 - 12 months this tech will look even better." />
+      
+      <p class="mt-4">
+        From there you continue iterating and making improvements gradually until you get the result you want. You might be done in 5 prompts or in some cases I've worked on larger tools that require more than 100 prompts to get me where I want to be.
+      </p>
+      <p class="mt-4">
+        My own productivity jumped dramatically once I started treating this as an iterative process rather than expecting perfection right away. This is literally how AI works for everyone contrary to the highlights you might be seeing on social media.
+      </p>
+
+      <div class="bg-indigo-50 p-6 rounded-lg mt-4">
+        <h3 class="text-xl font-bold text-indigo-900 mb-4">My top 3 tips for integrating AI tools:</h3>
+        <ol class="list-decimal pl-6 space-y-2">
+          <li>Start with a problem you want to automate or an idea, then work towards it.</li>
+          <li>Keep a simple note file of what works—you'd be surprised how quickly you'll develop a collection of effective prompts.</li>
+          <li>To keep up with everything: Stay subscribed to Build Fast with AI. We are going to be deep diving each week into different projects you can build with AI.</li>
+        </ol>
+      </div>
+
+      <p class="mt-4">
+        I've seen people transform 10X their AI knowledge using this approach. The key is simply getting started rather than overthinking it. Define your problem, use what's available, and keep improving. The results might surprise you and in a couple of weeks you'll probably be surprised at the possibilities of what you can build.
+      </p>
+    </div>
+  </div>
+
+  <main>
+    <article>
+      <slot />
+    </article>
+    <AuthorBox />
+  </main>
+</div>
+</IndexPage>

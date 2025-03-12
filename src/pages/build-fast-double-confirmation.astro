@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Confirmation Successful - Build Fast with AI</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XWRPMHQ74M"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XWRPMHQ74M');
+  </script>
+  <style>
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: linear-gradient(to bottom right, #f8fafc, #f1f5f9);
+      overflow-x: hidden;
+    }
+    
+    h1, h2, h3, .brand-font {
+      font-family: 'Montserrat', sans-serif;
+    }
+    
+    .gradient-text {
+      background: linear-gradient(to right, #059669, #d97706);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      position: relative;
+      display: inline-block;
+      overflow: hidden;
+    }
+    
+    .gradient-text::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, 
+        rgba(255,255,255,0) 0%, 
+        rgba(255,255,255,0.8) 50%, 
+        rgba(255,255,255,0) 100%);
+      transform: translateX(-100%);
+      animation: shine 3s infinite;
+      mix-blend-mode: overlay;
+    }
+    
+    @keyframes shine {
+      0% {
+        transform: translateX(-100%);
+      }
+      20%, 100% {
+        transform: translateX(100%);
+      }
+    }
+    
+    .bubble {
+      background: linear-gradient(to bottom right, #059669, #0ea5e9);
+      padding: 0.5rem 1.5rem;
+      border-radius: 9999px;
+      color: white;
+      font-weight: 600;
+      display: inline-block;
+      transform: rotate(-2deg);
+      box-shadow: 0 10px 25px -5px rgba(5, 150, 105, 0.2);
+      margin-bottom: 1.5rem;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    
+    .card {
+      background: white;
+      border-radius: 1rem;
+      padding: 2rem;
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.05), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
+    }
+    
+    .checklist-item {
+      display: flex;
+      align-items: start;
+      margin-bottom: 1rem;
+    }
+    
+    .check-icon {
+      flex-shrink: 0;
+      width: 1.5rem;
+      height: 1.5rem;
+      border-radius: 9999px;
+      background: linear-gradient(to bottom right, #059669, #10b981);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 1rem;
+      margin-top: 0.125rem;
+      color: white;
+    }
+    
+    .glow {
+      position: absolute;
+      width: 40%;
+      height: 40%;
+      background: radial-gradient(circle, rgba(5, 150, 105, 0.3) 0%, rgba(5, 150, 105, 0) 70%);
+      border-radius: 50%;
+      z-index: -1;
+    }
+    
+    .glow-1 {
+      top: -10%;
+      right: -10%;
+    }
+    
+    .glow-2 {
+      bottom: -10%;
+      left: -10%;
+    }
+    
+    .highlight-box {
+      background: linear-gradient(to bottom right, rgba(5, 150, 105, 0.1), rgba(217, 119, 6, 0.1));
+      border-radius: 0.75rem;
+      padding: 1.5rem;
+      margin: 2rem 0;
+      border-left: 4px solid #059669;
+    }
+    
+    .brett-image {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-right: 1rem;
+    }
+    
+    .signature-section {
+      display: flex;
+      align-items: center;
+      margin-top: 2rem;
+      padding-top: 2rem;
+      border-top: 1px solid #e5e7eb;
+    }
+    
+    .image-showcase {
+      border-radius: 0.75rem;
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+      margin: 1.5rem auto;
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+    
+    .link-button {
+      display: inline-block;
+      background: linear-gradient(to right, #059669, #10b981);
+      color: white;
+      font-weight: 600;
+      padding: 0.75rem 1.5rem;
+      border-radius: 0.5rem;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      margin-top: 1rem;
+    }
+    
+    .link-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 15px -3px rgba(5, 150, 105, 0.2);
+    }
+  </style>
+</head>
+<body>
+  <div class="relative min-h-screen">
+    <!-- Background glows -->
+    <div class="glow glow-1"></div>
+    <div class="glow glow-2"></div>
+    
+    <div class="container mx-auto px-4 py-12">
+      <div class="max-w-3xl mx-auto text-center mb-4">
+        <!-- Brand bubble -->
+        <div class="bubble">
+          Build Fast with AI
+        </div>
+        
+        <!-- Headline -->
+        <h1 class="text-4xl md:text-5xl font-extrabold mb-6">
+          <span class="gradient-text">Hello! You're officially in!</span>
+        </h1>
+        
+        <p class="text-xl text-gray-600 mb-6">
+          Welcome to the community of builders creating tools fast with AI.
+        </p>
+      </div>
+      
+      <!-- Main content -->
+      <div class="max-w-2xl mx-auto">
+        <div class="card">
+          <h2 class="text-2xl font-bold mb-6">
+            Here's what you're in for...
+          </h2>
+          
+          <p class="text-gray-700 mb-4">
+            Each week, you'll get an email from me with a new lesson. Each week, I'll break down how to build a different AI tool—usually something I'm working on right now—so you can watch how different tools are built.
+          </p>
+          
+          <p class="text-gray-700 mb-4">
+            I'll be sharing my exact prompts, tools, and process so you can take or copy whatever applies to your situation. I'm not a coder either so don't worry about not being technical enough to pull this stuff off either.
+          </p>
+          
+          <!-- Center the image -->
+          <div class="my-8">
+            <img src="/images/tool-examples.png" alt="You'll learn to make games, web apps, landing pages and more" class="image-showcase">
+          </div>
+          
+          <h3 class="font-semibold text-lg mb-3">The goal?</h3>
+          <p class="text-gray-700 mb-6">
+            Help you to launch your first AI-built product <em>fast</em>—sometimes in a single day, depending on what you've got in mind. Doesn't matter if it's a SaaS, an agent, a landing page, video game, or some wild idea rolling around your head. I'll show you how to bring it to life, no tech degree needed.
+          </p>
+          
+          <div class="highlight-box">
+            <h3 class="font-semibold text-lg mb-3">Without further delay, here's what you get:</h3>
+            <div class="checklist-item">
+              <div class="check-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+              </div>
+              <div>
+                <span class="font-medium">My Build Fast AI Tool List</span> — these are the exact AI tools I'm using to build everything that I'll being mentioning frequently in this newsletter.
+                <a href="https://backofnapkin.co/tool-list/" class="text-green-600 hover:underline">Check out the tool list here</a>.
+              </div>
+            </div>
+            <div class="checklist-item">
+              <div class="check-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+              </div>
+              <div>
+                <span class="font-medium">Simple 3-step process for using AI to build tools</span> — This will get you more comfortable with the basic process in 10 minutes.
+                <a href="https://backofnapkin.co/knowledge-base/my-process/" class="text-green-600 hover:underline">Read the process here</a>.
+              </div>
+            </div>
+            <div class="checklist-item">
+              <div class="check-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+              </div>
+              <div>
+                <span class="font-medium">Your first detailed build coming tomorrow</span> — This build targets an industry Grok estimates will be valued at $170 billion by 2030. Perfect for AI tools to build.
+              </div>
+            </div>
+          </div>
+          
+          <h3 class="font-semibold text-xl mb-3 mt-8">Allow me to introduce myself...</h3>
+          <p class="text-gray-700 mb-4">
+            I'm Brett Lindenberg. I've been in marketing for 15+ years and hit publish on one of the first-ever food truck blogs (super niche, right?) back in 2013. That little project was my break into digital publishing and made my first $1+ million online. But here's the thing: I never learned squat about coding or building tools. Like, zero clue.
+          </p>
+          
+          <p class="text-gray-700 mb-4">
+            So about six months ago I decided I couldn't ignore AI any longer. Everyone's saying it's the next massive opportunity, but I had no idea where to start. So, I did what I do best: jumped in and started building stuff. Financial calculators, retirement analysis tools, whatever problem I had I'd try to solve with AI.
+          </p>
+          
+          <p class="text-gray-700 mb-4">
+            And get this—I've gone from "How do I even get this live?" to launch 50+ AI projects in just a few months. It's crazy what can happen when you start building fast.
+          </p>
+          
+          <div class="bg-yellow-50 p-4 rounded-lg border-l-4 border-yellow-400 mt-6">
+            <h4 class="font-bold text-yellow-800">One last thing!</h4>
+            <p class="text-gray-700">
+              Add <span class="font-semibold">brett@backofnapkin.co</span> to your contacts so I don't end up in your spam folder. Trust me, you won't want to miss what's coming.
+            </p>
+          </div>
+          
+          <div class="signature-section">
+            <img src="/images/brett-lindenberg-author.jpg" alt="Brett Lindenberg" class="brett-image">
+            <div>
+              <p class="font-semibold">Brett Lindenberg</p>
+              <p class="text-gray-600">Creator at Build Fast with AI</p>
+            </div>
+          </div>
+          
+          <p class="text-gray-700 italic mt-4">
+            P.S. Hit reply and tell me what you want to build fast. I read and reply to this email address.
+          </p>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Footer -->
+    <footer class="py-8 text-center text-gray-500 text-sm">
+      <p>© 2025 Build Fast with AI. All rights reserved.</p>
+    </footer>
+  </div>
+</body>
+</html>

@@ -7,12 +7,12 @@ import ImageEmbed from '../../components/ImageEmbed.astro';
 export const frontmatter = {
   comment: false,
   donate: false,
-  title: "Time Card Calculator - Track Hours Worked & Overtime Pay",
-  description: "Calculate work hours, breaks, and overtime pay with this free time card calculator. Perfect for tracking employee hours and calculating weekly or monthly payroll.",
+  title: "Work Hours Calculator - Weekly Time Card & Overtime Pay",
+  description: "Calculate work hours, breaks, and overtime pay with this free time card calculator. Perfect for tracking employee hours and calculating weekly payroll.",
   author: "Brett Lindenberg",
   category: "Business Calculators",
   date: "2025-03-15",
-  tags: [""],
+  tags: ["time tracking", "payroll", "overtime calculator"],
   image: {
     url: "",
     alt: ""
@@ -40,6 +40,28 @@ const schema = {
     "Mobile-Friendly Interface"
   ]
 };
+
+// Example data
+const exampleWeek = {
+  regularHours: 40,
+  overtimeHours: 5,
+  totalHours: 45,
+  regularPay: 1400,
+  overtimePay: 262.50,
+  totalPay: 1662.50,
+  averageHoursPerDay: 9,
+  shortestDay: 8,
+  longestDay: 10,
+  dailyHours: [
+    { day: 'Monday', startTime: '9:00 AM', endTime: '6:00 PM', breakTime: '60min', totalTime: '8:00', totalDecimal: 8 },
+    { day: 'Tuesday', startTime: '9:00 AM', endTime: '7:00 PM', breakTime: '60min', totalTime: '9:00', totalDecimal: 9 },
+    { day: 'Wednesday', startTime: '8:00 AM', endTime: '7:00 PM', breakTime: '60min', totalTime: '10:00', totalDecimal: 10 },
+    { day: 'Thursday', startTime: '9:00 AM', endTime: '7:00 PM', breakTime: '60min', totalTime: '9:00', totalDecimal: 9 },
+    { day: 'Friday', startTime: '9:00 AM', endTime: '7:00 PM', breakTime: '60min', totalTime: '9:00', totalDecimal: 9 },
+    { day: 'Saturday', startTime: '-', endTime: '-', breakTime: '-', totalTime: '0:00', totalDecimal: 0 },
+    { day: 'Sunday', startTime: '-', endTime: '-', breakTime: '-', totalTime: '0:00', totalDecimal: 0 }
+  ]
+};
 ---
 
 <IndexPage
@@ -60,12 +82,84 @@ const schema = {
     <div class="text-center mb-4">
       <p class="text-lg font-medium text-skin-base">Track your work hours and calculate overtime pay the work hours calculator. Enter the employee name and daily schedule below to get started.</p>
     </div>
+    
+    <!-- Interactive Calculator -->
     <div class="not-prose mt-2">
-      <div id="timeCardCalculator"></div>
+      <div id="timeCardCalculator" class="time-card-calculator">
+      </div>
+    </div>
+
+    <!-- static example -->
+    <div class="mt-8 prose prose-lg max-w-none">
+      <h2 class="text-2xl font-bold">Example Time Card Calculation</h2>
+      <p>Here's an example of a typical work week calculation using our time card calculator:</p>
+
+      <div class="overflow-x-auto">
+        <table class="min-w-full">
+          <thead>
+            <tr>
+              <th>Day</th>
+              <th>Start Time</th>
+              <th>End Time</th>
+              <th>Break</th>
+              <th>Hours Worked</th>
+            </tr>
+          </thead>
+          <tbody>
+            {exampleWeek.dailyHours.map(day => (
+              <tr>
+                <td>{day.day}</td>
+                <td>{day.startTime}</td>
+                <td>{day.endTime}</td>
+                <td>{day.breakTime}</td>
+                <td>{day.totalTime}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
+        <div>
+          <h3 class="text-lg font-semibold">Hours Summary</h3>
+          <ul class="list-none pl-0">
+            <li>Regular Hours: {exampleWeek.regularHours}</li>
+            <li>Overtime Hours: {exampleWeek.overtimeHours}</li>
+            <li>Total Hours: {exampleWeek.totalHours}</li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="text-lg font-semibold">Payment Details</h3>
+          <ul class="list-none pl-0">
+            <li>Regular Pay: ${exampleWeek.regularPay.toFixed(2)}</li>
+            <li>Overtime Pay: ${exampleWeek.overtimePay.toFixed(2)}</li>
+            <li>Total Pay: ${exampleWeek.totalPay.toFixed(2)}</li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="text-lg font-semibold">Time Analysis</h3>
+          <ul class="list-none pl-0">
+            <li>Average Hours/Day: {exampleWeek.averageHoursPerDay}</li>
+            <li>Shortest Day: {exampleWeek.shortestDay} hours</li>
+            <li>Longest Day: {exampleWeek.longestDay} hours</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="mt-8">
+        <h3 class="text-lg font-semibold">Monthly Projection (4 weeks)</h3>
+        <ul class="list-none pl-0">
+          <li>Regular Hours: {(exampleWeek.regularHours * 4).toFixed(1)}</li>
+          <li>Overtime Hours: {(exampleWeek.overtimeHours * 4).toFixed(1)}</li>
+          <li>Total Pay: ${(exampleWeek.totalPay * 4).toFixed(2)}</li>
+        </ul>
+      </div>
     </div>
   </div>
   
-  <div class="prose prose-lg max-w-none mt-4 text-skin-base">
+  <div class="prose prose-lg max-w-none mt-8 text-skin-base">
     <h2 class="text-2xl font-bold mb-4">Making Time Work For You: A Guide to the Time Card Calculator</h2>
     <p>
       Tracking hours accurately isn't just about compliance: it's about ensuring you're compensated fairly for every minute on the clock. Whether you're a small business owner juggling multiple employees or a freelancer billing clients by the hour, this Time Card Calculator makes documenting your work simple.
@@ -82,7 +176,7 @@ const schema = {
       <li><strong>Export Reports:</strong> Download the time card as a TXT or PDF file.</li>
     </ol>
 
-        <ImageEmbed src="/images/time-card.png" alt="time card txt" description="You can download your complete time card information in a txt file." />
+    <ImageEmbed src="/images/time-card.png" alt="time card txt" description="You can download your complete time card information in a txt file." />
     
     <h3 class="text-lg font-bold mb-4">Overtime Calculation: Beyond the Basics</h4>
     <p>
@@ -106,7 +200,8 @@ const schema = {
     <p>
       Enable the monthly summary to estimate earnings over a 4-week period—a feature particularly useful for seasonal businesses planning for peak periods or employees budgeting for a big purchase.
     </p>
-        <ImageEmbed src="/images/track-overtime.jpg" alt="track overtime" description="Track your overtime hours and pay with this time card tool." />
+    <ImageEmbed src="/images/track-overtime.jpg" alt="track overtime" description="Track your overtime hours and pay with this time card tool." />
+    
     <h3 class="text-xl font-bold mb-3">Pro Tips from a Regular User</h3>
     <ul class="list-disc pl-6 space-y-2">
       <li><strong>Consistency is Key:</strong> Develop a habit of entering times in the same format. Accuracy compounds over time.</li>
@@ -123,7 +218,6 @@ const schema = {
     <p class="mt-4">
       Always consult applicable labor laws or a legal professional regarding specific overtime regulations in your jurisdiction. The calculator is a powerful tool, but it works best when configured to match your specific legal requirements.
     </p>
-
   </div>
 
   <main>

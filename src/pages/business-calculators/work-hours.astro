@@ -1,0 +1,146 @@
+---
+import IndexPage from "../../layouts/IndexPage.astro";
+import { Clock } from 'lucide-react';
+import AuthorBox from '../../components/AuthorBox.astro';
+import ImageEmbed from '../../components/ImageEmbed.astro';
+
+export const frontmatter = {
+  comment: false,
+  donate: false,
+  title: "Work Hours Calculator - Create Weekly Time Card & Overtime Pay",
+  description: "Calculate work hours, breaks, and overtime pay with this free time card calculator. Perfect for tracking employee hours and calculating weekly or monthly payroll.",
+  author: "Brett Lindenberg",
+  category: "Business Calculators",
+  date: "2025-03-15",
+  tags: [""],
+  image: {
+    url: "",
+    alt: ""
+  }
+};
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": frontmatter.title,
+  "description": frontmatter.description,
+  "applicationCategory": "BusinessApplication",
+  "operatingSystem": "Web Browser",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "featureList": [
+    "Weekly Time Card Calculator",
+    "Overtime Pay Calculator",
+    "Break Time Tracking",
+    "PDF & TXT Report Export",
+    "Monthly Hour Projections",
+    "Mobile-Friendly Interface"
+  ]
+};
+---
+
+<IndexPage
+  title={frontmatter.title}
+  description={frontmatter.description}
+  author={frontmatter.author}
+  date={frontmatter.date}
+  comment={frontmatter.comment}
+  donate={frontmatter.donate}
+  image={frontmatter.image}
+  category={frontmatter.category}
+  tags={frontmatter.tags}>
+
+<script type="application/ld+json" set:html={JSON.stringify(schema)} />
+
+<div class="min-h-screen bg-skin-fill pt-2 px-4 sm:px-6 lg:px-8">
+  <div class="max-w-7xl mx-auto">
+    <div class="text-center mb-4">
+      <p class="text-lg font-medium text-skin-base">Track your work hours and calculate overtime pay the work hours calculator. Enter the employee name and daily schedule below to get started.</p>
+    </div>
+    <div class="not-prose mt-2">
+      <div id="timeCardCalculator"></div>
+    </div>
+  </div>
+  
+  <div class="prose prose-lg max-w-none mt-4 text-skin-base">
+    <h2 class="text-2xl font-bold mb-4">Making Time Work For You: A Guide to the Time Card Calculator</h2>
+    <p>
+      Tracking hours accurately isn't just about compliance: it's about ensuring you're compensated fairly for every minute on the clock. Whether you're a small business owner juggling multiple employees or a freelancer billing clients by the hour, this Time Card Calculator makes documenting your work simple.
+    </p>
+
+    <h3 class="text-xl font-bold mt-4 mb-3">Quick Start Guide:</h3>
+    <ol class="list-decimal pl-6 space-y-2">
+      <li><strong>Enter Employee Information:</strong> Type the employee's name in the "Name" field to personalize your report and keep records organized for the timesheet.</li>
+      <li><strong>Set Work Schedule:</strong> For each day, select the start and end times from the dropdown menus and enter break duration in minutes.</li>
+      <li><strong>Use Time-Saving Features:</strong> Click "Copy Monday to Friday" to apply Monday's schedule to all weekdays.</li>
+      <li><strong>Configure Payment Settings:</strong> Enter the hourly base pay rate and set the overtime multiplier.</li>
+      <li><strong>Adjust Display Options:</strong> Choose whether to show blank days and monthly projections.</li>
+      <li><strong>Calculate and Review:</strong> Generate the time card report and review the hours summary.</li>
+      <li><strong>Export Reports:</strong> Download the time card as a TXT or PDF file.</li>
+    </ol>
+
+        <ImageEmbed src="/images/time-card.png" alt="time card txt" description="You can download your complete time card information in a txt file." />
+    
+    <h3 class="text-lg font-bold mb-4">Overtime Calculation: Beyond the Basics</h4>
+    <p>
+      The calculator doesn't just add up hours. It also applies overtime rates for hours worked beyond 40 per week. For industries with special overtime rules, the adjustable overtime multiplier allows for customization to match your specific requirements down to the number of minutes worked.
+    </p>
+
+    <h4 class="text-lg font-bold mb-2">Break Management: The Minutes That Matter</h4>
+    <p>
+      In my experience, break time is often overlooked in manual calculations, leading to payroll discrepancies. The calculator's break management feature ensures that unpaid lunch breaks and other time off are properly deducted from total hours, creating a more accurate picture of compensable time.
+    </p>
+    
+    <h4 class="text-lg font-bold mb-2">Time Analysis: Insights That Improve Scheduling</h4>
+    <p>The summary provides valuable insights that can transform how you approach scheduling:</p>
+    <ul class="list-disc pl-6 space-y-1">
+      <li>Average hours worked per day helps identify sustainable workloads.</li>
+      <li>Shortest and longest workdays highlight potential scheduling inefficiencies.</li>
+      <li>Days with overtime (exceeding 8 hours) flag potential burnout risks.</li>
+    </ul>
+
+    <h4 class="text-lg font-bold mt-2 mb-4">Monthly Projections: Financial Planning Made Simple</h4>
+    <p>
+      Enable the monthly summary to estimate earnings over a 4-week period—a feature particularly useful for seasonal businesses planning for peak periods or employees budgeting for a big purchase.
+    </p>
+        <ImageEmbed src="/images/track-overtime.jpg" alt="track overtime" description="Track your overtime hours and pay with this time card tool." />
+    <h3 class="text-xl font-bold mb-3">Pro Tips from a Regular User</h3>
+    <ul class="list-disc pl-6 space-y-2">
+      <li><strong>Consistency is Key:</strong> Develop a habit of entering times in the same format. Accuracy compounds over time.</li>
+      <li><strong>Break it Down:</strong> Even short unpaid breaks like lunch breaks add up. Recording them ensures you're not shortchanging yourself or employees.</li>
+      <li><strong>Weekly Reset:</strong> Start each week fresh by using the reset button. This prevents carrying over errors from previous calculations.</li>
+      <li><strong>Digital Paper Trail:</strong> Download and save time cards regularly. These are invaluable for tax season and dispute resolution.</li>
+      <li><strong>Trust But Verify:</strong> Always double-check totals, especially for complex schedules with varying start times.</li>
+    </ul>
+
+    <h3 class="text-xl font-bold mt-2">Legal Considerations: Staying Compliant</h3>
+    <p class="mt-4">
+      While the calculator follows standard overtime regulations where hours worked beyond 40 hours per week qualify for overtime pay, it's important to note that overtime laws vary by location and industry. In my experience working with businesses across different states, I've seen significant variations in overtime requirements.
+    </p>
+    <p class="mt-4">
+      Always consult applicable labor laws or a legal professional regarding specific overtime regulations in your jurisdiction. The calculator is a powerful tool, but it works best when configured to match your specific legal requirements.
+    </p>
+
+  </div>
+
+  <main>
+    <article>
+      <slot />
+    </article>
+    <AuthorBox />
+  </main>
+</div>
+
+<!-- Include the calculator's CSS -->
+<link rel="stylesheet" href="/src/components/calculators/work-hours/styles.css">
+
+<!-- Include jsPDF for PDF generation -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+<!-- Include the calculator's JavaScript -->
+<script src="/src/components/calculators/work-hours/script.js"></script>
+
+</IndexPage>

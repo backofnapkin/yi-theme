@@ -1,0 +1,190 @@
+.time-card-calculator {
+    --primary-color: rgb(16 185 129);
+    --primary-hover: rgb(4 120 87);
+    --border-color: rgb(229 231 235);
+    --tooltip-bg: rgb(251 251 251);
+    --tooltip-border: rgb(104 157 106);
+    --tooltip-text: rgb(80 73 69);
+    
+    background-color: white;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+    padding: 1.5rem;
+    border: 1px solid rgb(16 185 129 / 0.2);
+  }
+  
+  .time-card-calculator h1 {
+    color: var(--primary-color);
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+  }
+  
+  .time-card-calculator .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+  }
+  
+  .time-card-calculator .form-group {
+    margin-bottom: 1.5rem;
+  }
+  
+  .time-card-calculator label {
+    display: block;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+  }
+  
+  .time-card-calculator input,
+  .time-card-calculator select {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid var(--border-color);
+    border-radius: 0.375rem;
+    font-size: 0.875rem;
+  }
+  
+  .time-card-calculator input:focus,
+  .time-card-calculator select:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 2px rgb(16 185 129 / 0.2);
+  }
+  
+  .time-card-calculator table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin-bottom: 1.5rem;
+  }
+  
+  .time-card-calculator th {
+    text-align: left;
+    padding: 0.5rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+    text-transform: uppercase;
+  }
+  
+  .time-card-calculator td {
+    padding: 0.5rem;
+  }
+  
+  .time-card-calculator tr:nth-child(even) {
+    background-color: rgb(249 250 251);
+  }
+  
+  .time-card-calculator .btn {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    border-radius: 0.375rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  
+  .time-card-calculator .btn-primary {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+  }
+  
+  .time-card-calculator .btn-primary:hover {
+    background-color: var(--primary-hover);
+  }
+  
+  .time-card-calculator .btn-secondary {
+    background-color: white;
+    color: var(--primary-color);
+    border: 1px solid var(--primary-color);
+  }
+  
+  .time-card-calculator .btn-secondary:hover {
+    background-color: rgb(16 185 129 / 0.1);
+  }
+  
+  .time-card-calculator .grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .time-card-calculator h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+  }
+  
+  .time-card-calculator .input-group {
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+  
+  .time-card-calculator .input-group .currency {
+    position: absolute;
+    left: 0.75rem;
+    color: var(--primary-color);
+    font-size: 0.875rem;
+  }
+  
+  .time-card-calculator .input-group .suffix {
+    position: absolute;
+    right: 0.75rem;
+    color: var(--primary-color);
+    font-size: 0.875rem;
+  }
+  
+  .time-card-calculator .input-group input {
+    padding-left: 1.75rem;
+    padding-right: 2.5rem;
+  }
+  
+  .time-card-calculator .checkbox-label {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.5rem;
+    cursor: pointer;
+  }
+  
+  .time-card-calculator .checkbox-label input[type="checkbox"] {
+    width: auto;
+    margin-right: 0.5rem;
+  }
+  
+  .time-card-calculator .checkbox-label span {
+    font-size: 0.875rem;
+    color: var(--primary-color);
+  }
+  
+  @media (max-width: 640px) {
+    .time-card-calculator .header {
+      flex-direction: column;
+      gap: 1rem;
+    }
+    
+    .time-card-calculator .grid {
+      grid-template-columns: 1fr;
+    }
+    
+    .time-card-calculator .download-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      width: 100%;
+    }
+    
+    .time-card-calculator .btn {
+      width: 100%;
+      justify-content: center;
+    }
+  }

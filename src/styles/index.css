@@ -37,7 +37,7 @@ menu {
   :root,
   html[data-theme="light"] {
     --color-fill: 241, 241, 241;
-    --color-fill-secondary: 251, 251, 251;
+    --color-fill-secondary: 248, 249, 250;
     --color-card: 241, 241, 241;
     --color-text: 80, 73, 69;
     --color-text-active: 181, 118, 20;

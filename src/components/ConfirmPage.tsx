@@ -126,7 +126,7 @@ const styles: Record<string, CSSProperties> = {
   }
 };
 
-function ConfirmPage() {
+export const ConfirmPage: React.FC = () => {
   return (
     <>
       <style>{fontStyles}</style>
@@ -246,6 +246,4 @@ function ConfirmPage() {
       </div>
     </>
   );
-}
-
-export default ConfirmPage;
+};

@@ -1,0 +1,168 @@
+/* Prevent Tailwind from overriding input time styling */
+input[type="time"] {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    border: 1px solid #e2e8f0;
+    border-radius: 0.25rem;
+    padding: 0.5rem;
+    width: 100%;
+  }
+  
+  /* Improve the styling of time inputs on Safari */
+  @supports (-webkit-touch-callout: none) {
+    input[type="time"] {
+      padding: 0.45rem;
+    }
+  }
+  
+  /* Custom styling for download buttons with hover effects */
+  .download-btn {
+    transition: all 0.2s ease-in-out;
+  }
+  
+  .download-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Styling for days with overtime */
+  .overtime-day {
+    background-color: rgba(253, 224, 71, 0.2);
+  }
+  
+  /* Animation for calculation transition */
+  .results-container {
+    animation: fadeIn 0.3s ease-in-out;
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  /* Print styles for PDF generation */
+  @media print {
+    .no-print {
+      display: none;
+    }
+    
+    body {
+      font-size: 10pt;
+    }
+    
+    .time-card-display table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    
+    .time-card-display th,
+    .time-card-display td {
+      border: 1px solid #000;
+      padding: 4pt;
+    }
+    
+    .time-card-display thead th {
+      background-color: #f0f4f8 !important;
+      -webkit-print-color-adjust: exact;
+    }
+    
+    .time-card-display tfoot tr:last-child {
+      font-weight: bold;
+    }
+  }
+  
+  /* Mobile responsiveness improvements */
+  @media (max-width: 640px) {
+    .time-card-display .flex {
+      flex-direction: column;
+      align-items: stretch;
+    }
+    
+    .time-card-display .space-x-2 > * {
+      margin-top: 0.5rem;
+      margin-left: 0 !important;
+    }
+    
+    .time-card-display table {
+      font-size: 0.875rem;
+    }
+    
+    .time-card-display th,
+    .time-card-display td {
+      padding: 0.5rem 0.25rem;
+    }
+  }
+  
+  /* Custom focus styles for form elements */
+  .time-card-form input:focus {
+    outline: none;
+    border-color: #10b981; /* emerald-500 */
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2); /* emerald-500 with opacity */
+  }
+  
+  /* Styling for radio buttons and checkboxes */
+  .time-card-form input[type="radio"],
+  .time-card-form input[type="checkbox"] {
+    color: #10b981; /* emerald-500 */
+  }
+  
+  /* Table row hover effect */
+  .time-card-form tbody tr:hover {
+    background-color: rgba(236, 253, 245, 0.5); /* emerald-50 with opacity */
+  }
+  
+  /* Style for section headers */
+  .time-card-form h3 {
+    color: #064e3b; /* emerald-900 */
+    border-bottom: 1px solid #d1fae5; /* emerald-100 */
+    padding-bottom: 0.5rem;
+  }
+  
+  /* Enhanced button styles */
+  .time-card-form button[type="submit"] {
+    transition: all 0.2s ease;
+  }
+  
+  .time-card-form button[type="submit"]:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 6px rgba(16, 185, 129, 0.2); /* emerald-500 with opacity */
+  }
+  
+  /* Styling for the time card display */
+  .time-card-display {
+    transition: all 0.3s ease;
+  }
+  
+  .time-card-display table {
+    border-radius: 0.375rem;
+    overflow: hidden;
+  }
+  
+  .time-card-display th {
+    font-weight: 600;
+  }
+  
+  /* Enhanced section cards */
+  .time-card-display .bg-white {
+    transition: all 0.2s ease;
+  }
+  
+  .time-card-display .bg-white:hover {
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.025);
+  }
+  
+  /* Monthly summary tiles hover effect */
+  .time-card-display .rounded {
+    transition: all 0.2s ease;
+  }
+  
+  .time-card-display .rounded:hover {
+    transform: translateY(-2px);
+  }

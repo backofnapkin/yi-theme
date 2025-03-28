@@ -1,0 +1,274 @@
+---
+import IndexPage from "../../layouts/IndexPage.astro";
+import TreeRemovalCalculator from "../../components/calculators/tree-removal/TreeRemovalCalculator";
+import { Calculator } from 'lucide-react';
+import ImageEmbed from '../../components/ImageEmbed.astro';
+import AuthorBox from '../../components/AuthorBox.astro';
+
+export const frontmatter = {
+  comment: false,
+  donate: false,
+  title: "Tree Removal Cost Calculator: Add Tree Type / Size",
+  description: "Calculate accurate tree removal costs. Consider tree size, type, condition, and location for pricing.",
+  author: "Brett Lindenberg",
+  category: "Lawn Care Calculators",
+  date: "2025-03-27",
+  tags: [""],
+  image: {
+    url: "",
+    alt: ""
+  }
+};
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": frontmatter.title,
+  "description": frontmatter.description,
+  "applicationCategory": "BusinessApplication",
+  "operatingSystem": "Web Browser",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "featureList": [
+    "Tree removal cost estimator",
+    "Multiple tree quote generation",
+    "Cost breakdown by tree type and size",
+    "Additional services pricing",
+    "Printable PDF estimate generation",
+    "Location and condition adjustments"
+  ]
+};
+---
+
+<IndexPage 
+  title={frontmatter.title}
+  description={frontmatter.description}
+  author={frontmatter.author}
+  date={frontmatter.date}
+  comment={frontmatter.comment}
+  donate={frontmatter.donate}
+  image={frontmatter.image}
+  category={frontmatter.category}
+  tags={frontmatter.tags}>
+  <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+
+  <div class="min-h-screen bg-skin-fill py-2 px-4 sm:px-4 lg:px-6">
+    <div class="max-w-7xl mx-auto">
+      <p class="text-base text-skin-base">
+        This tree removal cost calculator to get an accurate estimate for removing trees or stumps. This calculator considers tree size, type, condition, location, and additional services.
+      </p>
+    </div>
+
+    <TreeRemovalCalculator client:load />
+
+    <div class="prose prose-lg max-w-none mt-4 text-skin-base">
+      <h2 class="text-2xl font-bold mb-4">How To Use the Calculator</h2>
+      <p>
+        This tree removal calculator uses <a href="https://www.thisoldhouse.com/gardening/reviews/average-cost-of-tree-removal">industry-standard pricing</a> factors to generate accurate estimates based on the specific characteristics of each tree on a property. The calculator takes into account many variables professional arborists consider when pricing a job.
+      </p>
+
+      <h3 class="text-xl font-bold mt-6">Understanding the Inputs</h3>
+      <ul class="list-decimal pl-6 space-y-2">
+        <li><strong>Tree Size (Height):</strong> Larger trees require more labor, equipment, and time to remove. This all translates into a higher price.</li>
+        <li><strong>Tree Type:</strong> Different species have varying wood densities and structural characteristics that affect removal complexity and safety requirements.</li>
+        <li><strong>Tree Condition:</strong> Dead, dying, or leaning trees present additional safety considerations.</li>
+        <li><strong>Location/Accessibility:</strong> Trees that are difficult to access or near structures require more time and specialized equipment.</li>
+        <li><strong>Additional Services:</strong> Options like stump removal, grinding, debris cleanup, and emergency services add to the total cost.</li>
+      </ul>
+
+      <h3 class="text-xl font-bold mt-4">Tree Type Impact on Removal Costs</h3>
+      <p>Tree species significantly affect removal costs due to differences in wood density, branch structure, and overall size. Here's how various tree types influence pricing:</p>
+      
+      <div class="overflow-x-auto mt-4">
+        <table class="min-w-full bg-white border border-gray-200">
+          <thead>
+            <tr class="bg-gray-100">
+              <th class="px-4 py-2 text-left">Tree Type</th>
+              <th class="px-4 py-2 text-left">Price Adjustment</th>
+              <th class="px-4 py-2 text-left">Reason</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="border-t border-gray-200">
+              <td class="px-4 py-2">Oak</td>
+              <td class="px-4 py-2">+20%</td>
+              <td class="px-4 py-2">Dense wood and large branches increase cutting, lifting, and hauling effort.</td>
+            </tr>
+            <tr class="border-t border-gray-200 bg-gray-50">
+              <td class="px-4 py-2">Maple</td>
+              <td class="px-4 py-2">+10%</td>
+              <td class="px-4 py-2">Complex branch system and moderate wood density require additional time.</td>
+            </tr>
+            <tr class="border-t border-gray-200">
+              <td class="px-4 py-2">Pine</td>
+              <td class="px-4 py-2">+10% (if over 60 feet)</td>
+              <td class="px-4 py-2">Lightweight wood offsets challenges; height can complicate removal near homes if over 60 feet.</td>
+            </tr>
+            <tr class="border-t border-gray-200 bg-gray-50">
+              <td class="px-4 py-2">Sycamore</td>
+              <td class="px-4 py-2">+25%</td>
+              <td class="px-4 py-2">Extremely heavy wood, sprawling roots, and large branches require more equipment and labor.</td>
+            </tr>
+            <tr class="border-t border-gray-200">
+              <td class="px-4 py-2">Elm</td>
+              <td class="px-4 py-2">+20%</td>
+              <td class="px-4 py-2">Branch density and resistance to cutting tools add time and complexity.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <ImageEmbed
+        src="/images/stump.jpg"
+        alt="tree stump"
+        description="How much would you charge to remove this tree stump?"
+      />
+
+      <h2 class="text-2xl font-bold mt-4 mb-4">Tree Size and Cost Correlation</h2>
+      <p>
+        The height and diameter of a tree are primary factors in determining removal costs. Larger trees require more labor, heavier equipment, and present greater safety challenges:
+      </p>
+      
+      <ul class="list-disc pl-6 space-y-2 mt-4">
+        <li><strong>Small trees (up to 30 feet):</strong> $500 - $700</li>
+        <li><strong>Medium trees (30–60 feet):</strong> $700 - $900</li>
+        <li><strong>Large trees (over 60 feet):</strong> $900 - $3,000</li>
+      </ul>
+      
+      <p class="mt-4">
+        Extremely large trees (over 100 feet) or those with complex removal requirements can cost significantly more, sometimes exceeding $5,000 for removal.
+      </p>
+
+      <h2 class="text-2xl font-bold mt-4 mb-4">Factors That Affect Tree Removal Costs</h2>
+      
+      <h3 class="text-xl font-bold mt-6">Location and Accessibility</h3>
+      <p>
+        Trees that are difficult to access or positioned near structures require specialized equipment and techniques:
+      </p>
+      <ul class="list-disc pl-6 space-y-2 mt-2">
+        <li><strong>Easy access (open area):</strong> Standard pricing</li>
+        <li><strong>Medium access (some obstacles):</strong> +10% cost increase</li>
+        <li><strong>Difficult access (near structures/power lines):</strong> +20% cost increase</li>
+      </ul>
+      
+      <h3 class="text-xl font-bold mt-4">Tree Condition</h3>
+      <p>
+        The health and structural integrity of a tree affects removal safety and complexity:
+      </p>
+      <ul class="list-disc pl-6 space-y-2 mt-2">
+        <li><strong>Healthy trees:</strong> Standard pricing</li>
+        <li><strong>Dead or dying trees:</strong> +5% (more brittle and unpredictable)</li>
+        <li><strong>Leaning or hazardous trees:</strong> +10% (require additional safety measures)</li>
+      </ul>
+      
+      <h3 class="text-xl font-bold mt-4">Stump Removal</h3>
+      <p>
+        Tree removal typically doesn't include stump removal. Consider these additional costs:
+      </p>
+      <ul class="list-disc pl-6 space-y-2 mt-2">
+        <li><strong>Stump grinding:</strong> $100 - $200 per stump</li>
+        <li><strong>Complete stump removal:</strong> $150 - $500 per stump</li>
+        <li><strong>Root removal:</strong> Additional $50 - $350 depending on extent</li>
+      </ul>
+
+      <h2 class="text-2xl font-bold mt-6 mb-4">When to Hire a Professional vs. DIY</h2>
+  <p>
+    Ever looked at a tree in your yard and thought, "I could totally take that down myself"? Before you grab a chainsaw and YouTube some tutorials, there are some real considerations to weigh.
+  </p>
+  
+  <div class="grid md:grid-cols-2 gap-6 mt-4">
+    <div class="bg-green-50 p-5 rounded-lg border border-green-100">
+      <h3 class="text-lg font-bold text-green-800">Why the Pros Are Worth It:</h3>
+      <ul class="list-disc pl-6 space-y-2 mt-3">
+        <li>They bring commercial-grade equipment that you'd never want to buy for one job.</li>
+        <li>They carry insurance that protects your property (and your neighbor's) if something goes wrong.</li>
+        <li>They'll haul away all the debris. No renting a truck or making 8 trips to the dump.</li>
+        <li>They know which permits you need and how to get them quickly.</li>
+        <li>They can spot dangers you might miss (like internal rot or widow-maker branches).</li>
+        <li>They have techniques to control exactly where the tree falls.</li>
+      </ul>
+    </div>
+    
+    <div class="bg-red-50 p-5 rounded-lg border border-red-100">
+      <h3 class="text-lg font-bold text-red-800">DIY Dangers to Consider:</h3>
+      <ul class="list-disc pl-6 space-y-2 mt-3">
+        <li>Chainsaw injuries send about <a href="https://www.cdc.gov/natural-disasters/safety/chain-saw-safety.html">36,000 people to the ER annually</a> per the CDC.</li>
+        <li>Trees rarely fall exactly where you want them to (goodbye, garage?).</li>
+        <li>You might hit underground utilities or overhead power lines.</li>
+        <li>What starts as a weekend project can turn into weeks of headaches.</li>
+        <li>Your homeowner's insurance probably won't cover DIY mishaps.</li>
+        <li>Neighbors can sue if your tree damages their property.</li>
+      </ul>
+    </div>
+  </div>
+  
+  <p class="mt-4">
+    Hiring pros costs more money. But most arborists agree: if your tree is taller than 20 feet, near any structures, tangled in power lines, or showing signs of disease, the professional route is money well spent.
+  </p>
+
+  <h2 class="text-2xl font-bold mt-4 mb-4">When's the Best Time to Remove a Tree?</h2>
+  <p>
+  Here's what you should know about seasonal differences:
+  </p>
+  
+  <div class="grid md:grid-cols-2 gap-6 mt-4">
+    <div class="p-4 border border-gray-200 rounded-lg">
+      <h3 class="text-lg font-semibold mb-2">Winter & Late Fall</h3>
+      <p class="mb-2"><strong>Best for:</strong> Lower prices and easier cleanup</p>
+      <ul class="list-disc pl-5 space-y-1">
+        <li>Tree services are less busy (often 10-20% cheaper).</li>
+        <li>No leaves means lighter work and better visibility.</li>
+        <li>Frozen ground supports heavy equipment with less lawn damage.</li>
+        <li>Dormant plants around the tree are less likely to be damaged too.</li>
+      </ul>
+    </div>
+    
+    <div class="p-4 border border-gray-200 rounded-lg">
+      <h3 class="text-lg font-semibold mb-2">Spring & Summer</h3>
+      <p class="mb-2"><strong>Best for:</strong> Disease identification and emergency removal</p>
+      <ul class="list-disc pl-5 space-y-1">
+        <li>Easier to spot diseased trees when they should be leafing out.</li>
+        <li>Better weather for the crew (but expect to pay peak prices).</li>
+        <li>Immediate removal if storm damage occurs.</li>
+        <li>Faster stump grinding when the ground isn't frozen.</li>
+      </ul>
+    </div>
+  </div>
+  
+  <div class="p-5 mt-4 rounded-lg border border-yellow-100">
+    <p class="font-medium">
+      Emergency tree removal after storms or when a tree is threatening your home usually costs a 25-50% premium regardless of season. If you notice a tree is damaged or dying, don't wait for it to become an emergency.
+    </p>
+  </div>
+</div>
+
+      <ul class="list-disc pl-6 space-y-2 mt-2">
+        <li><strong>Winter:</strong> Often less expensive as it's the off-season for many tree services. Frozen ground can also make equipment access easier in some areas.</li>
+        <li><strong>Spring:</strong> Busy season begins, with prices trending upward as demand increases.</li>
+        <li><strong>Summer:</strong> Peak season with highest demand and often higher prices.</li>
+        <li><strong>Fall:</strong> Still busy but gradually decreasing as winter approaches.</li>
+      </ul>
+      
+      <p class="mt-4">
+        Emergency tree removal (after storms or for hazardous situations) almost always command a 25-50% premium regardless of season.
+      </p>
+
+      <h2 class="text-2xl font-bold mt-4 mb-4">Permits and Regulations</h2>
+      <p>
+        Many municipalities require permits for tree removal, especially for trees above a certain size (often 10+ inches in diameter). Other reasons could include protected or heritage tree species conversation areas, wetlands, or public areas.</p>
+      
+      <p class="mt-4">
+        Permit costs typically range from $25 to $100 but can be higher in some areas. Professional tree services usually handle permit applications as part of their service.
+      </p>
+
+      <p class="mt-4">
+        This tool offers a solid starting estimate, but remember that a professional on-site assessment will provide the most accurate pricing for your specific situation and location.
+      </p>
+    </div>
+
+    <AuthorBox />
+  </div>
+</IndexPage>

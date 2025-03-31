@@ -68,10 +68,24 @@ export default {
     'text-orange-600',  // For 5th
     'text-skin-red-text',
     'text-skin-emerald-text', 
+    // NEW: Focus ring classes added for InputField component
+    'focus:ring-emerald-500',
+    'focus:ring-emerald-500/20',
+    'focus:ring-emerald-600',
+    'focus:ring-emerald-600/20', 
+    'focus:border-emerald-500',
+    'focus:border-emerald-600',
+    'focus:ring-3',
+    'focus:outline-none',
     // Patterns for dynamic classes
     {
       pattern: /(border|bg|from|to|text)-(emerald|amber|green|orange|slate|stone|zinc|purple|red|blue)-(50|100|200|300|400|500|600|700|800)/,
       variants: ['hover', 'focus']
+    },
+    // NEW: Pattern for ring utilities added for focus styles
+    {
+      pattern: /ring-(emerald|amber|green|orange)-(50|100|200|300|400|500|600|700|800)(\/[0-9]+)?/,
+      variants: ['focus']
     }
   ],
   darkmode: "class",
@@ -133,9 +147,25 @@ export default {
           third: "#f5ebe0",
           forth: "#e3d5ca",
           fifth: "#d5bdaf"
+        },
+        // NEW: Explicitly defined emerald colors to ensure consistency
+        emerald: {
+          500: '#10b981', // The exact emerald-500 color
+          600: '#059669', // The exact emerald-600 color for focus states
         }
-      }
+      },
+      // NEW: Custom ring opacity for focus states
+      ringOpacity: {
+        '20': '0.2', // 20% opacity for focus ring
+      },
+      // NEW: Custom ring width for focus states
+      ringWidth: {
+        '3': '3px', // 3px ring width to match your original inline styles
+      },
     },
   },
-  plugins: [],
+  // NEW: Consider adding the forms plugin if you want more consistent form styling
+  plugins: [
+    // require('@tailwindcss/forms'), // Uncomment if you install this plugin
+  ],
 }

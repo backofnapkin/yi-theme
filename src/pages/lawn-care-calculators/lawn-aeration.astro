@@ -1,0 +1,187 @@
+---
+import IndexPage from "../../layouts/IndexPage.astro";
+import LawnAerationCalculator from "../../components/calculators/lawn-aeration/AerationCalculator";
+import ImageEmbed from '../../components/ImageEmbed.astro';
+import AuthorBox from '../../components/AuthorBox.astro';
+
+export const frontmatter = {
+  comment: false,
+  donate: false,
+  title: "Lawn Aeration Cost Calculator | Estimate Your Aeration Price",
+  description: "Calculate accurate lawn aeration costs based on yard size, soil type, condition, and slope. Get a PDF estimate for your lawn aeration service.",
+  author: "Brett Lindenberg",
+  category: "Lawn Care Calculators",
+  date: "2025-03-30",
+  tags: [""],
+  image: {
+    url: "",
+    alt: ""
+  }
+};
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": frontmatter.title,
+  "description": frontmatter.description,
+  "applicationCategory": "BusinessApplication",
+  "operatingSystem": "Web Browser",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "featureList": [
+    "Lawn aeration cost estimator",
+    "Soil type adjustment calculations",
+    "Lawn slope pricing adjustments",
+    "Additional services pricing",
+    "Printable PDF estimate generation",
+    "Contact information inclusion"
+  ]
+};
+---
+
+<IndexPage 
+  title={frontmatter.title}
+  description={frontmatter.description}
+  author={frontmatter.author}
+  date={frontmatter.date}
+  comment={frontmatter.comment}
+  donate={frontmatter.donate}
+  image={frontmatter.image}
+  category={frontmatter.category}
+  tags={frontmatter.tags}>
+  <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+
+  <div class="min-h-screen bg-skin-fill py-2 px-4 sm:px-4 lg:px-6">
+    <div class="max-w-7xl mx-auto">
+      <h1 class="text-3xl font-bold text-skin-base mt-4 mb-4">Lawn Aeration Cost Calculator</h1>
+      
+      <p class="text-base text-skin-base mb-6">
+        Use this lawn aeration cost calculator to get an accurate estimate for aerating your lawn. The calculator factors in yard size, soil type, lawn condition, slope, and optional services like fertilization and seeding. You can even download a professional PDF estimate to share with clients or keep for your records.
+      </p>
+      
+      {/* Calculator Component */}
+      <LawnAerationCalculator client:load />
+      
+<div class="prose prose-lg max-w-none mt-4 text-skin-base">
+  <h2 class="text-2xl font-bold mb-4">How to Use the Lawn Aeration Cost Calculator</h2>
+  <p class="mt-4">
+    The Lawn Aeration Cost Calculator helps you generate detailed cost estimates and invoices for lawn aeration services. Whether you're a homeowner planning maintenance or a professional creating client quotes, this tool simplifies the process. Follow these steps to create your personalized aeration invoice that helps educate customers about the benefits of this service.
+  </p>
+
+  <h3 class="text-xl font-bold mt-4">Step-by-Step Guide</h3>
+  <p class="mt-4">Here's how to navigate the calculator and generate your invoice:</p>
+
+  <h4 class="text-lg font-bold mt-4">1. Enter Property Information (Optional)</h4>
+  <p class="mt-4">Start by naming your property for easy reference. In the "Property Name" field, input a label like "Home" or "Rental Property" to identify the lawn being aerated.</p>
+
+  <h4 class="text-lg font-bold mt-4">2. Specify Yard Size and Pricing</h4>
+  <p class="mt-4">Provide details about the lawn’s dimensions and cost structure:</p>
+  <ul class="list-disc pl-6 space-y-2">
+    <li><strong>Yard Size:</strong> Enter the approximate size (e.g., 5000 sq. ft.). The median yard size in the United States <a href="https://www.theatlantic.com/business/archive/2016/07/lawns-census-bigger-homes-smaller-lots/489590/">is 0.14 acres</a> according to The Atlantic.</li>
+    <li><strong>Size Unit:</strong> Choose between "Square Feet" or "Acres."</li>
+    <li><strong>Price Per Unit:</strong> Set your rate (e.g., $0.08 per sq. ft. or $800 per acre). Typical pricing is $0.15/sq. ft. or $800/acre.</li>
+    <li><strong>Price Unit:</strong> Select "Per Sq. Ft" or "Per Acre" to match your pricing model.</li>
+  </ul>
+
+  <ImageEmbed
+    src="/images/home-owner.png"
+    alt="home owner with a lawn aeration quote"
+    description="Home owners always appreciate transparency along with a simple explaination of pricing and services."
+  />
+
+  <h4 class="text-lg font-bold mt-4">3. Select Soil Type</h4>
+  <p class="mt-4">
+    Choose the soil type to account for aeration difficulty. Loam is ideal and incurs no additional cost, while hard clay may slightly increase effort and pricing due to its compactness. Rocky soil could require special equipment, potentially affecting costs, and sandy soil might need more frequent aeration. Wet or muddy conditions are not ideal and may come with a premium if aeration is performed.
+  </p>
+
+  <h4 class="text-lg font-bold mt-4">4. Assess Lawn Condition</h4>
+  <p class="mt-4">
+    Indicate the lawn’s current state, which can influence pricing. A normal lawn uses standard rates, but one with heavy debris might need cleanup first. Weedy lawns could benefit from herbicide treatment, while drought-stressed lawns may require watering beforehand. Thatch-heavy lawns might need dethatching, and those with disease or pest issues could require additional treatments, all potentially adjusting the final cost.
+  </p>
+
+  <h4 class="text-lg font-bold mt-4">5. Define Lawn Slope</h4>
+  <p class="mt-4">
+    Select the slope to adjust for time and effort. Flat lawns (0-2% slope) have no extra cost, and gentle slopes (2-5%) have minimal impact. Moderate slopes (5-10%) might slightly increase costs due to added difficulty, while steep slopes (10-20%) require more effort and could see a moderate cost increase. Very steep slopes (over 20%) often incur a significant surcharge due to the challenge and time involved.
+  </p>
+
+  <h4 class="text-lg font-bold mt-4">6. Add Optional Services</h4>
+  <p class="mt-4">Enhance your invoice with additional services:</p>
+  <ul class="list-disc pl-6 space-y-2">
+    <li><strong>Apply Fertilization:</strong> Check this box to include fertilizing costs, ideal post-aeration.</li>
+    <li><strong>Apply Overseeding:</strong> Add seeding costs for optimal growth after aeration.</li>
+  </ul>
+
+  <h4 class="text-lg font-bold mt-4">7. Provide Contact Information (Optional)</h4>
+  <p class="mt-4">Include your details for a professional invoice:</p>
+  <ul class="list-disc pl-6 space-y-2">
+    <li><strong>Name or Business:</strong> Your name or company name.</li>
+    <li><strong>Email:</strong> Contact email (e.g., your@email.com).</li>
+    <li><strong>Phone:</strong> Phone number (e.g., (123) 456-7890).</li>
+    <li><strong>Address:</strong> Property or business address.</li>
+  </ul>
+
+  <h4 class="text-lg font-bold mt-4">8. Generate Your Invoice</h4>
+  <p class="mt-4">Click "Calculate Lawn Aeration Cost" to see your estimate:</p>
+  <ul class="list-disc pl-6 space-y-2">
+    <li><strong>Lawn Details:</strong> Summarizes size, soil type, condition, and slope.</li>
+    <li><strong>Cost Breakdown:</strong> Shows base cost and total estimate.</li>
+    <li><strong>Recommendations:</strong> Offers tailored advice based on inputs.</li>
+  </ul>
+
+  <ImageEmbed
+    src="/images/lawn-aeration-invoice.png"
+    alt="Sample PDF lawn aeration invoice"
+    description="A professional invoice includes lawn details, cost breakdown, and personalized recommendations you can download via PDF."
+  />
+
+  <h3 class="text-xl font-bold mt-4">Tips for Best Results</h3>
+  <p class="mt-4">
+    To get the most out of the tool, use accurate yard measurements for precise estimates and adjust pricing based on local rates or your business model. Including contact information creates a professional-looking invoice, and reviewing the recommendations can help you upsell services like fertilization or overseeding to enhance the lawn’s health and your revenue.
+  </p>
+
+  <p class="mt-4">
+    This calculator provides a customizable, detailed estimate you can save as a PDF or share with clients. Experiment with different inputs to see how factors affect pricing. The cost break down section helps make you billing clear to customers on the invoice. 
+  </p>
+</div>
+
+        <h2 class="text-2xl font-bold mt-6 mb-4">When to Aerate Your Lawn</h2>
+        <p>You will be asked this by customers so be prepared for it. Here's the best time to aerate depending on your grass type:</p>
+        
+        <div class="grid md:grid-cols-2 gap-6 mt-4">
+          <div class="p-4 border border-skin-base rounded-lg">
+            <h3 class="text-lg font-semibold mb-2">Cool-Season Grasses</h3>
+            <p class="mb-2"><strong>Best time:</strong> Early fall or spring</p>
+            <ul class="list-disc pl-5 space-y-1">
+              <li>Kentucky bluegrass</li>
+              <li>Fescue</li>
+              <li>Ryegrass</li>
+            </ul>
+            <p class="mt-2">Fall aeration allows grass to recover before winter dormancy and prepares it for strong spring growth.</p>
+          </div>
+          
+          <div class="p-4 border border-skin-base rounded-lg">
+            <h3 class="text-lg font-semibold mb-2">Warm-Season Grasses</h3>
+            <p class="mb-2"><strong>Best time:</strong> Late spring or early summer</p>
+            <ul class="list-disc pl-5 space-y-1">
+              <li>Bermuda</li>
+              <li>Zoysia</li>
+              <li>St. Augustine</li>
+              <li>Centipede</li>
+            </ul>
+            <p class="mt-2">Aerate when these grasses are actively growing for optimal recovery and results.</p>
+          </div>
+        </div>
+        
+        <div class="p-5 mt-4 rounded-lg border border-skin-base bg-skin-secondary">
+          <p class="font-medium">
+            Avoid aeration during drought conditions, extremely wet periods, or when grass is dormant. For best results, water your lawn 1-2 days before aeration to soften the soil without making it muddy.
+          </p>
+        </div>
+
+      <AuthorBox />
+    </div>
+  </div>
+</IndexPage>

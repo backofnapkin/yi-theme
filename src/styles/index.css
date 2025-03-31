@@ -78,6 +78,20 @@ menu {
   html[data-theme="dark"] #sun-icon {
     display: block;
   }
+
+  /* Enhanced focus styles matching the radio button colors (emerald-600) */
+  input:focus,
+  select:focus,
+  textarea:focus,
+  button:focus,
+  a:focus,
+  [tabindex]:focus,
+  *:focus-visible {
+    outline: none !important;
+    box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.25) !important; /* emerald-600 at 25% opacity - more noticeable */
+    border-color: #059669 !important; /* emerald-600 */
+    transition: box-shadow 0.2s ease-in-out, border-color 0.2s ease-in-out;
+  }
 }
 
 @layer components {

@@ -1,0 +1,387 @@
+---
+import IndexPage from "../../layouts/IndexPage.astro";
+import { DrinkPriceCalculator } from '../../components/calculators/drink-price/DrinkPriceCalculator';
+import { Calculator } from 'lucide-react';
+import YouTubeEmbed from '../../components/YouTubeEmbed.astro';
+import ImageEmbed from '../../components/ImageEmbed.astro';
+import AuthorBox from '../../components/AuthorBox.astro';
+
+export const frontmatter = {
+    comment: false,
+    donate: false,
+    title: "Drink Cost & Price Calculator for Bars and Restaurants",
+    description: "Calculate optimal drink pricing for your bar or restaurant. Scale ingredient costs, adjust for taxes, and determine profitable pricing strategies.",
+    author: "Brett Lindenberg",
+    category: "Food Business Calculators",
+    date: "2025-03-31",
+    tags: [""],
+    image: {
+        url: "",
+        alt: ""
+    }
+};
+
+const schema = {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": frontmatter.title,
+    "description": frontmatter.description,
+    "applicationCategory": "BusinessApplication",
+    "operatingSystem": "Web Browser",
+    "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+    },
+    "featureList": [
+        "Drink ingredient cost calculator",
+        "Tax-inclusive pricing",
+        "Multiple drink type support",
+        "Ingredient scaling",
+        "Profit margin analysis"
+    ]
+};
+---
+
+<IndexPage
+    title={frontmatter.title}
+    description={frontmatter.description}
+    author={frontmatter.author}
+    date={frontmatter.date}
+    comment={frontmatter.comment}
+    donate={frontmatter.donate}
+    image={frontmatter.image}
+    category={frontmatter.category}
+    tags={frontmatter.tags}>
+
+<script type="application/ld+json" set:html={JSON.stringify(schema)} />
+
+<div class="min-h-screen bg-skin-fill py-2 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-7xl mx-auto">
+        <div class="not-prose my-2">
+            <DrinkPriceCalculator client:load />
+        </div>
+    </div>
+    
+    <div class="prose prose-lg max-w-none mt-4 text-skin-base">
+        <h2 class="text-2xl font-bold mb-4">How to Use the Drink Price Calculator</h2>
+        
+        <p class="mt-4">
+            This calculator helps bars and restaurants accurately price their drinks by calculating ingredient costs, considering tax implications, and allows you to determine your goal markup for each drink. Whether you're managing a cocktail bar, brewery, or restaurant, this calculator simplifies your drink pricing process.
+        </p>
+
+        <p class="mt-4">
+            After you determine the price for all of your mixed drinks, wine or beer, you can easily save the recipes by copying and pasting the results, or saving in a txt or csv file.
+        </p>
+
+        <h3 class="text-xl font-bold mt-4">Step 1: Enter Drink Details</h3>
+        <p class="mt-4">
+            Begin by entering your drink's name and selecting the drink type. Different drink categories (cocktails, beer, wine) have unique pricing considerations, and this calculator adapts accordingly.
+        </p>
+
+        <h3 class="text-xl font-bold mt-4">Step 2: Add Ingredients</h3>
+        <p class="mt-4">
+            Input each ingredient's details, including:
+        </p>
+        <ul class="list-disc pl-6 space-y-2">
+            <li>Ingredient name</li>
+            <li>Amount used and/or size of pour</li>
+            <li>Package size</li>
+            <li>Package price</li>
+        </ul>
+        <p class="mt-4">
+            The calculator will break down the cost of each ingredient in the results section so you can save it for later via copy and paste, .txt or .csv file.
+        </p>
+
+        <h3 class="text-xl font-bold mt-4">Step 3: Configure Pricing Strategy</h3>
+        <p class="mt-4">
+            Customize your pricing approach by:
+        </p>
+        <ul class="list-disc pl-6 space-y-2">
+            <li>Choosing to include or exclude tax</li>
+            <li>Setting your target cost percentage</li>
+            <li>Adding any special notes about the drink</li>
+        </ul>
+
+        <h3 class="text-xl font-bold mt-4">Step 4: Detailed Walkthrough with Example</h3>
+        <p class="mt-4">
+            Let's walk through a complete example to show you exactly how the calculator works. We'll use a classic Mojito cocktail recipe:
+        </p>
+
+        <ImageEmbed src="/images/making-margarita.png" alt="making a margarita" description="Get the suggested markup price for a margarita or any other cocktail with this tool." />
+
+
+        <h4 class="text-lg font-bold mt-4">Example: Pricing a Mojito Cocktail</h4>
+        
+        <div class="bg-gray-100 p-6 rounded-lg my-6">
+            <h5 class="font-bold">Basic Information</h5>
+            <p>First, enter the basic drink information:</p>
+            <ul class="list-disc pl-6 space-y-1">
+                <li><strong>Drink Name:</strong> Mojito</li>
+                <li><strong>Drink Type:</strong> Cocktail</li>
+            </ul>
+            
+            <h5 class="font-bold mt-4">Ingredients Entry</h5>
+            <p>Add each ingredient with its details:</p>
+            
+            <div class="pl-4 border-l-4 border-gray-300 my-4">
+                <p class="font-bold">Ingredient 1: Rum</p>
+                <ul class="list-none space-y-1">
+                    <li><strong>Amount:</strong> 2 oz</li>
+                    <li><strong>Package Size:</strong> 750 mL</li>
+                    <li><strong>Package Price:</strong> $20.00</li>
+                </ul>
+                <p class="mt-2 text-sm italic">The calculator converts: 750 mL = 25.36 oz</p>
+                <p class="text-sm italic">Cost per oz: $20.00 ÷ 25.36 oz = $0.79/oz</p>
+                <p class="text-sm italic">Ingredient cost: 2 oz × $0.79 = $1.58</p>
+            </div>
+            
+            <div class="pl-4 border-l-4 border-gray-300 my-4">
+                <p class="font-bold">Ingredient 2: Lime Juice</p>
+                <ul class="list-none space-y-1">
+                    <li><strong>Amount:</strong> 1 oz</li>
+                    <li><strong>Package Size:</strong> 1 L</li>
+                    <li><strong>Package Price:</strong> $5.00</li>
+                </ul>
+                <p class="mt-2 text-sm italic">The calculator converts: 1 L = 33.81 oz</p>
+                <p class="text-sm italic">Cost per oz: $5.00 ÷ 33.81 oz = $0.15/oz</p>
+                <p class="text-sm italic">Ingredient cost: 1 oz × $0.15 = $0.15</p>
+            </div>
+            
+            <div class="pl-4 border-l-4 border-gray-300 my-4">
+                <p class="font-bold">Ingredient 3: Simple Syrup</p>
+                <ul class="list-none space-y-1">
+                    <li><strong>Amount:</strong> 0.5 oz</li>
+                    <li><strong>Package Size:</strong> 1 L</li>
+                    <li><strong>Package Price:</strong> $3.00</li>
+                </ul>
+                <p class="mt-2 text-sm italic">The calculator converts: 1 L = 33.81 oz</p>
+                <p class="text-sm italic">Cost per oz: $3.00 ÷ 33.81 oz = $0.09/oz</p>
+                <p class="text-sm italic">Ingredient cost: 0.5 oz × $0.09 = $0.05</p>
+            </div>
+            
+            <h5 class="font-bold mt-4">Total Ingredient Cost Calculation</h5>
+            <p>The calculator automatically sums all ingredient costs:</p>
+            <p class="pl-4">$1.58 + $0.15 + $0.05 = <strong>$1.78 total cost</strong></p>
+            
+            <h5 class="font-bold mt-4">Pricing Strategy Configuration</h5>
+            <ul class="list-disc pl-6 space-y-1">
+                <li><strong>Include Tax?</strong> Yes</li>
+                <li><strong>Tax Rate:</strong> 8%</li>
+                <li><strong>Target Cost Percentage:</strong> 20%</li>
+                <li><strong>Special Notes:</strong> "Muddle mint, serve over crushed ice."</li>
+            </ul>
+            
+            <h5 class="font-bold mt-4">Final Price Calculation</h5>
+            <p>The calculator determines the optimal price based on your inputs:</p>
+            <p class="pl-4">Base price = Total cost ÷ Target cost percentage</p>
+            <p class="pl-4">$1.78 ÷ 0.20 = $8.90 (pre-tax)</p>
+            <p class="pl-4">With tax = $8.90 × 1.08 = $9.61</p>
+            <p class="pl-4">Suggested menu price (rounded): <strong>$9.75</strong></p>
+        </div>
+
+        <ImageEmbed src="/images/beer-cans.jpg" alt="beer cans" description="You can determine the suggested markup of beer cans or bottles of any size with this tool." />
+
+
+        <h4 class="text-lg font-bold mt-4">Alternative Example: Bottled Beer</h4>
+        <p class="mt-2">
+            The calculator works for simple drink options tool. For example, here's how it works for bottled beer:
+        </p>
+        
+        <div class="bg-gray-100 p-6 rounded-lg my-6">
+            <h5 class="font-bold">Basic Information</h5>
+            <ul class="list-disc pl-6 space-y-1">
+                <li><strong>Drink Name:</strong> Heineken</li>
+                <li><strong>Drink Type:</strong> Bottled Beer</li>
+            </ul>
+            
+            <h5 class="font-bold mt-4">Ingredients Entry</h5>
+            <div class="pl-4 border-l-4 border-gray-300 my-4">
+                <p class="font-bold">Ingredient: Heineken Bottle</p>
+                <ul class="list-none space-y-1">
+                    <li><strong>Amount:</strong> 1 bottle</li>
+                    <li><strong>Package Size:</strong> 12 oz</li>
+                    <li><strong>Package Price:</strong> $1.50</li>
+                </ul>
+                <p class="mt-2 text-sm italic">Cost: $1.50 per bottle</p>
+            </div>
+            
+            <h5 class="font-bold mt-4">Pricing Strategy Configuration</h5>
+            <ul class="list-disc pl-6 space-y-1">
+                <li><strong>Include Tax?</strong> No (tax added at point of sale)</li>
+                <li><strong>Target Cost Percentage:</strong> 25%</li>
+                <li><strong>Special Notes:</strong> "Serve chilled with lime wedge."</li>
+            </ul>
+            
+            <h5 class="font-bold mt-4">Final Price Calculation</h5>
+            <p class="pl-4">Base price = Total cost ÷ Target cost percentage</p>
+            <p class="pl-4">$1.50 ÷ 0.25 = $6.00</p>
+            <p class="pl-4">Suggested menu price: <strong>$6.00</strong></p>
+        </div>
+
+        <h3 class="text-xl font-bold mt-4">Tips for Accurate Pricing</h3>
+        <ul class="list-disc pl-6 space-y-2">
+            <li><strong>Be precise with measurements:</strong> Use exact amounts for all ingredients to get the most accurate cost calculations.</li>
+            <li><strong>Update costs regularly:</strong> Ingredient prices change over time. Review and update your pricing regularly.</li>
+            <li><strong>Consider garnishes:</strong> Don't forget to include garnishes like mint sprigs, fruit slices, or olives as ingredients with their own costs.</li>
+            <li><strong>Adjust for wastage:</strong> Consider adding a small percentage to ingredient costs to account for spillage or wastage during preparation.</li>
+            <li><strong>Round prices strategically:</strong> The calculator suggests a price, but you may want to round to a psychologically appealing price point (e.g., $9.75 instead of $9.61).</li>
+        </ul>
+
+                <ImageEmbed src="/images/markup-sketch.jpg" alt="markup-sketch" description="Me sketching out how this tool will work." />
+
+
+        <h2 class="text-2xl font-bold mt-4 mb-4">Understanding Drink Pricing</h2>
+        <p>
+            Pricing drinks isn't just about covering costs—it's about understanding your market, maintaining profitability, and creating value for your customers. This calculator provides a data-driven approach to pricing that considers multiple factors.
+        </p>
+
+        <h3 class="text-xl font-bold mt-4">Pricing Considerations</h3>
+        <ul class="list-disc pl-6 space-y-2">
+            <li><strong>Cost Percentage:</strong> Different drink types have varying ideal cost percentages. Cocktails might aim for 20%, while beer could target 25%.</li>
+            <li><strong>Tax Implications:</strong> Easily factor in local tax rates to ensure accurate final pricing.</li>
+            <li><strong>Ingredient Variability:</strong> Account for differences in ingredient costs and package sizes.</li>
+        </ul>
+        
+        <h2 class="text-2xl font-bold mt-4 mb-4">Understanding the Drink Price Calculator's Calculations</h2>
+        <p>
+            The Drink Price Calculator uses a systematic approach to determine accurate pricing for beverages. Here's how the calculations work behind the scenes:
+        </p>
+        
+        <h3 class="text-xl font-bold mt-4">Ingredient Cost Calculation</h3>
+        <p class="mt-4">
+            For each ingredient, the calculator determines the precise cost using this formula:
+        </p>
+        <div class="bg-gray-100 p-4 my-3 font-mono text-center">
+            Ingredient Cost = (Amount Used / Package Size) × Package Price
+        </div>
+        <p class="mt-2">
+            For example:
+        </p>
+        <ul class="list-disc pl-6 space-y-2">
+            <li>If you use 1.5 oz of tequila from a 750 ml bottle that costs $25.99</li>
+            <li>The calculator converts the units if necessary and determines exactly how much that 1.5 oz costs</li>
+        </ul>
+        <p class="mt-2">
+            This method accounts for different units of measurement and package sizes, giving you the true cost of each ingredient portion.
+        </p>
+        
+        <h3 class="text-xl font-bold mt-6">Total Ingredient Cost</h3>
+        <p class="mt-4">
+            The calculator simply adds up all individual ingredient costs:
+        </p>
+        <div class="bg-gray-100 p-4 my-3 font-mono text-center">
+            Total Ingredient Cost = Sum of all individual ingredient costs
+        </div>
+        <p class="mt-2">
+            This gives you the raw material cost for producing one drink.
+        </p>
+        
+        <h3 class="text-xl font-bold mt-4">Target Cost Percentage</h3>
+        <p class="mt-4">
+            The cost percentage represents what portion of your selling price is made up of ingredient costs. Industry standards vary by drink type:
+        </p>
+        <div class="overflow-x-auto my-6">
+            <table class="min-w-full bg-white border border-gray-300">
+                <thead>
+                    <tr>
+                        <th class="border border-gray-300 px-4 py-2 text-left">Beverage Type</th>
+                        <th class="border border-gray-300 px-4 py-2 text-left">Target Pour Cost (%)</th>
+                        <th class="border border-gray-300 px-4 py-2 text-left">Typical Gross Margin (%)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="border border-gray-300 px-4 py-2">Liquor/Cocktails</td>
+                        <td class="border border-gray-300 px-4 py-2">15% - 20%</td>
+                        <td class="border border-gray-300 px-4 py-2">80% - 85%</td>
+                    </tr>
+                    <tr>
+                        <td class="border border-gray-300 px-4 py-2">Wine</td>
+                        <td class="border border-gray-300 px-4 py-2">30% - 40%</td>
+                        <td class="border border-gray-300 px-4 py-2">60% - 70%</td>
+                    </tr>
+                    <tr>
+                        <td class="border border-gray-300 px-4 py-2">Draft Beer</td>
+                        <td class="border border-gray-300 px-4 py-2">20% - 25%</td>
+                        <td class="border border-gray-300 px-4 py-2">75% - 80%</td>
+                    </tr>
+                    <tr>
+                        <td class="border border-gray-300 px-4 py-2">Bottled Beer</td>
+                        <td class="border border-gray-300 px-4 py-2">25% - 30%</td>
+                        <td class="border border-gray-300 px-4 py-2">70% - 75%</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <h4 class="text-lg font-bold mt-6">Industry Standards vs. Market Realities</h4>
+        <p class="mt-2">
+            While these industry standards provide a solid starting point, it's important to understand that they're not one-size-fits-all. Depending on your market and venue type, you may be able to—or even need to—deviate from these standards:
+        </p>
+        <ul class="list-disc pl-6 space-y-2">
+            <li><strong>Premium Venues:</strong> Upscale bars, rooftop lounges, and fine dining establishments in major cities like New York, Los Angeles, or Chicago often maintain higher margins due to elevated ambiance and service.</li>
+            <li><strong>Entertainment Venues:</strong> Sporting arenas, concert venues, and festivals routinely set drink prices 2-3 times higher than standard bars, with pour costs sometimes as low as 10-12%.</li>
+            <li><strong>Tourist Destinations:</strong> Bars and restaurants in Las Vegas, Miami, or other high-traffic tourist areas can often command premium pricing regardless of ingredient costs.</li>
+            <li><strong>Captive Audience Settings:</strong> Hotel bars, airport lounges, and resort establishments can set higher margins due to convenience and limited alternatives.</li>
+        </ul>
+        
+        <h4 class="text-lg font-bold mt-4">References</h4>
+        <p class="mt-2">
+            These standard percentages are supported by multiple industry authorities:
+        </p>
+        <ul class="list-disc pl-6 space-y-2">
+            <li><a href="https://go.restaurant.org/rs/078-ZLA-461/images/National-Restaurant-Association-Alcohol-Trends.pdf" class="text-blue-600 hover:underline" target="_blank">National Restaurant Association</a> - A lot of good data here on how alcohol sales can increase revenue for a restaurant and how different age groups prefer to drink.</li>
+            <li><a href="https://sommelierbusiness.com/en/articles/menu-intel-1/wine-pricing-strategy-profitability-and-adjustments-14.htm" class="text-blue-600 hover:underline" target="_blank">Sommelier Business</a> - This research says you can markup wine 200% - 300% of the retail price depending on your concept.</li>
+        </ul>
+        
+        <p class="mt-4">
+            The calculator uses your target cost percentage to determine the appropriate markup:
+        </p>
+        <div class="bg-gray-100 p-4 my-3 font-mono text-center">
+            Suggested Price = Total Ingredient Cost ÷ (Target Cost Percentage ÷ 100)
+        </div>
+        <p class="mt-2">
+            For example, if your ingredients cost $3 and your target cost percentage is 20%:
+        </p>
+        <p class="pl-6">$3 ÷ 0.2 = $15 suggested price</p>
+        
+        <h3 class="text-xl font-bold mt-6">Tax Considerations</h3>
+        <p class="mt-4">
+            If you choose to include tax in your pricing:
+        </p>
+        <div class="bg-gray-100 p-4 my-3 font-mono text-center">
+            Final Suggested Price = Suggested Price × (1 + Tax Rate ÷ 100)
+        </div>
+        <p class="mt-2">
+            For example, with a suggested price of $15 and an 8.25% tax rate:
+        </p>
+        <p class="pl-6">$15 × 1.0825 = $16.24 final suggested price</p>
+        <p class="mt-4">
+            This approach ensures your pricing accounts for both your desired profit margin and applicable taxes, helping you maintain profitability while setting competitive prices.
+        </p>
+
+        <p class="mt-4">
+        While this calculator provides accurate drink pricing guidance, successful beverage program management requires ongoing attention. Regularly review your ingredient costs, as supplier prices fluctuate with market conditions and seasons. Even small changes in base costs can significantly impact your margins over time.
+    </p>
+    
+    <p class="mt-4">
+        Your pricing strategy should evolve alongside your business. What works during your grand opening may need adjustment as your reputation grows or competition changes. Remember that drink sales often represent 30-40% of a restaurant's revenue and can deliver some of your highest profit margins when priced correctly.
+    </p>
+    
+    <p class="mt-4">
+        Don't hesitate to audit your menu quarterly. Track which drinks sell well and which ones languish. A menu with fewer, well-performing options often outperforms one with too many choices. Replace underperforming drinks with new offerings that match current trends or highlight seasonal ingredients.
+    </p>
+    
+    <p class="mt-4">
+        Finally, experiment with promotions strategically. Happy hours, flight options, or specialty pairings can drive traffic during slower periods and introduce customers to higher-margin offerings. By combining this calculator's pricing precision with regular menu evaluation, you'll build a beverage program that substantially contributes to your restaurant's bottom line.
+    </p>
+
+    <main>
+        <article>
+            <slot />
+        </article>
+        <AuthorBox />
+    </main>
+</div>
+</IndexPage>

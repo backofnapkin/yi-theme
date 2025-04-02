@@ -1,0 +1,246 @@
+---
+import IndexPage from "../../layouts/IndexPage.astro";
+import QuitSmokingCalculator from "../../components/calculators/quit-smoking/QuitSmokingCalculator.jsx";
+import { Calculator } from 'lucide-react';
+import YouTubeEmbed from '../../components/YouTubeEmbed.astro';
+import ImageEmbed from '../../components/ImageEmbed.astro';
+import AuthorBox from '../../components/AuthorBox.astro';
+import { seoMetadata, seoContent } from '../../components/calculators/quit-smoking/seoMetadata.js';
+
+export const frontmatter = {
+    comment: false,
+    donate: false,
+    title: "Quit Smoking Financial Calculator: How Much You Could Save?",
+    description: "Find out how much money you could save by quitting smoking and reinvested those funds.",
+    author: "Brett Lindenberg",
+    category: "Personal Finance Calculators",
+    date: "2025-04-01",
+    tags: [""],
+    image: {
+        url: "",
+        alt: ""
+    }
+};
+
+// Prepare JSON-LD structured data
+const schema = {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": frontmatter.title,
+    "description": frontmatter.description,
+    "applicationCategory": "FinanceApplication",
+    "operatingSystem": "Web Browser",
+    "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+    },
+    "featureList": [
+        "Smoking cost calculator",
+        "Long-term savings projections",
+        "Investment return calculations",
+        "Visual savings chart",
+        "Motivational savings milestones"
+    ]
+};
+---
+
+<IndexPage
+    title={frontmatter.title}
+    description={frontmatter.description}
+    author={frontmatter.author}
+    date={frontmatter.date}
+    comment={frontmatter.comment}
+    donate={frontmatter.donate}
+    image={frontmatter.image}
+    category={frontmatter.category}
+    tags={frontmatter.tags}>
+
+<script type="application/ld+json" set:html={JSON.stringify(schema)} />
+
+<div class="min-h-screen bg-skin-fill py-2 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-7xl mx-auto">
+        <div class="not-prose my-2">
+            <QuitSmokingCalculator client:load />
+        </div>
+    </div>
+    
+    <div class="prose prose-lg max-w-none mt-4 text-skin-base">
+        <h2 class="text-2xl font-bold mb-4">How to Use the Quit Smoking Financial Calculator</h2>
+        
+        <p class="mt-4">
+            {seoContent.introduction}
+        </p>
+
+        <p class="mt-4">
+            After you calculate the projected savings, you can save your results by copying them to the clipboard or downloading as a text file for future reference.
+        </p>
+
+        <h3 class="text-xl font-bold mt-4">Step 1: Enter Your Smoking Habits</h3>
+        <p class="mt-4">
+            Start by entering your daily cigarette consumption. This is the number of cigarettes you smoke each day. Use the slider to select a value between 1 and 60 cigarettes. By default I added 10 cigarettes per day. 
+        </p>
+
+        <p class="mt-4">
+            Based on historical smoking trends from <a href="https://ourworldindata.org/grapher/number-of-cigarettes-smoked-per-smoker-per-day">1947 - 2014 smoking rates and volume</a> has continued to decline over time. 
+        </p>
+
+        <h3 class="text-xl font-bold mt-4">Step 2: Input Cost Information</h3>
+        <p class="mt-4">
+            Provide information about your smoking expenses:
+        </p>
+        <ul class="list-disc pl-6 space-y-2">
+            <li>Cost per pack of cigarettes (the amount you typically pay).</li>
+            <li>Number of cigarettes per pack (usually 20 in the United States, but can vary by region and brand).</li>
+            <li>Expected annual investment return rate if you were to invest the money saved.</li>
+        </ul>
+        <p class="mt-4">
+            The calculator will determine both your direct savings and potential investment growth over a range of time periods.
+        </p>
+
+        <h3 class="text-xl font-bold mt-4">Step 3: View Your Results</h3>
+        <p class="mt-4">
+            After clicking the "Calculate Savings" button, you'll see detailed results showing:
+        </p>
+        <ul class="list-disc pl-6 space-y-2">
+            <li>Total money saved without reinvestment (at 1 month, 1 year, 5 years, 10 years, and 20 years).</li>
+            <li>Potential growth with reinvestment at your selected annual return rate. This is just a projection and investment returns will vary.</li>
+            <li>Visual chart comparing regular savings vs. compound growth.</li>
+            <li>Motivational messages and achievements you can expect to reach based on your savings amount.</li>
+        </ul>
+
+        <ImageEmbed src="/images/total-money-saved.png" alt="money saved from quitting" description="How much will you save when you kick the habit?" />
+
+        <h3 class="text-xl font-bold mt-4">Step 4: Detailed Walkthrough with Example</h3>
+        <p class="mt-4">
+            Let's walk through a complete example to show you exactly how the calculator works. We'll use the example of a typical smoker:
+        </p>
+
+        <div class="bg-gray-100 p-6 rounded-lg my-6">
+            <h5 class="font-bold">Basic Information</h5>
+            <p>First, enter your smoking habits:</p>
+            <ul class="list-disc pl-6 space-y-1">
+                <li><strong>Daily Cigarette Consumption:</strong> 10 cigarettes</li>
+                <li><strong>Cost Per Pack:</strong> $8.00</li>
+                <li><strong>Cigarettes Per Pack:</strong> 20</li>
+                <li><strong>Annual Investment Return Rate:</strong> 10%</li>
+            </ul>
+            
+            <h5 class="font-bold mt-4">Calculation Process</h5>
+            <p>The calculator determines your savings in several steps:</p>
+            
+            <div class="pl-4 border-l-4 border-gray-300 my-4">
+                <p class="font-bold">Step 1: Calculate Daily Cost</p>
+                <p class="mt-2 text-sm italic">Daily cost = (Cigarettes per day / Cigarettes per pack) × Pack cost</p>
+                <p class="text-sm italic">(10 / 20) × $8.00 = $4.00 per day</p>
+            </div>
+            
+            <div class="pl-4 border-l-4 border-gray-300 my-4">
+                <p class="font-bold">Step 2: Calculate Regular Savings</p>
+                <p class="mt-2 text-sm italic">1 month savings = Daily cost × 30 days</p>
+                <p class="text-sm italic">$4.00 × 30 = $120.00</p>
+                <p class="mt-2 text-sm italic">1 year savings = Daily cost × 365 days</p>
+                <p class="text-sm italic">$4.00 × 365 = $1,460.00</p>
+                <p class="mt-2 text-sm italic">5 years savings = $1,460.00 × 5 = $7,300.00</p>
+                <p class="text-sm italic">10 years savings = $1,460.00 × 10 = $14,600.00</p>
+                <p class="text-sm italic">20 years savings = $1,460.00 × 20 = $29,200.00</p>
+            </div>
+            
+            <div class="pl-4 border-l-4 border-gray-300 my-4">
+                <p class="font-bold">Step 3: Calculate Compound Growth</p>
+                <p class="mt-2 text-sm italic">Monthly contribution = $120.00</p>
+                <p class="text-sm italic">Annual return rate = 10%</p>
+                <p class="text-sm italic">Using compound interest formula with monthly compounding:</p>
+                <p class="text-sm italic">1 year growth ≈ $1,533.00</p>
+                <p class="text-sm italic">5 years growth ≈ $9,561.44</p>
+                <p class="text-sm italic">10 years growth ≈ $25,361.50</p>
+                <p class="text-sm italic">20 years growth ≈ $92,655.32</p>
+            </div>
+            
+            <h5 class="font-bold mt-4">Result Interpretation</h5>
+            <p class="pl-4">Regular savings over 20 years: <strong>$29,200.00</strong></p>
+            <p class="pl-4">Compound growth over 20 years: <strong>$92,655.32</strong></p>
+            <p class="pl-4">Additional money earned through investing: <strong>$63,455.32</strong></p>
+            
+        </div>
+
+        <ImageEmbed src="/images/couple-savings.png" alt="couples can save even more" description="Couples who quit together can save even more." />
+
+        <h2 class="text-2xl font-bold mt-4 mb-4">The Power of Compound Interest</h2>
+        <p>
+            {seoContent.investmentGrowth}
+        </p>
+        
+        <h3 class="text-xl font-bold mt-4">How Compound Interest Works</h3>
+        <p class="mt-4">
+            When you invest money saved from quitting smoking, here's how compound interest builds wealth:
+        </p>
+        <div class="bg-gray-100 p-2 my-3 font-mono text-center">
+            Future Value = P × (1 + r/n)^(n×t) + PMT × ((1 + r/n)^(n×t) - 1) / (r/n)
+        </div>
+        <p class="mt-2">
+            Where:
+        </p>
+        <ul class="list-disc pl-6 space-y-2">
+            <li><strong>P</strong> = Principal (starting amount)</li>
+            <li><strong>r</strong> = Annual interest rate (decimal)</li>
+            <li><strong>n</strong> = Number of times interest compounds per year</li>
+            <li><strong>t</strong> = Time in years</li>
+            <li><strong>PMT</strong> = Regular monthly contribution</li>
+        </ul>
+        <p class="mt-4">
+            This formula shows why starting early and contributing regularly (as you would by saving your cigarette money) creates such powerful growth over time.
+        </p>
+        
+        <h3 class="text-xl font-bold mt-6">Investment Options for Your Savings</h3>
+        <div class="overflow-x-auto my-6">
+            <table class="min-w-full bg-white border border-gray-300">
+                <thead>
+                    <tr>
+                        <th class="border border-gray-300 px-4 py-2 text-left">Investment Type</th>
+                        <th class="border border-gray-300 px-4 py-2 text-left">Typical Annual Return</th>
+                        <th class="border border-gray-300 px-4 py-2 text-left">Risk Level</th>
+                        <th class="border border-gray-300 px-4 py-2 text-left">Best For</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="border border-gray-300 px-4 py-2">High-Yield Savings</td>
+                        <td class="border border-gray-300 px-4 py-2">2% - 4%</td>
+                        <td class="border border-gray-300 px-4 py-2">Very Low</td>
+                        <td class="border border-gray-300 px-4 py-2">Emergency funds, short-term goals</td>
+                    </tr>
+                    <tr>
+                        <td class="border border-gray-300 px-4 py-2">Certificates of Deposit</td>
+                        <td class="border border-gray-300 px-4 py-2">3% - 5%</td>
+                        <td class="border border-gray-300 px-4 py-2">Low</td>
+                        <td class="border border-gray-300 px-4 py-2">Medium-term goals (1-5 years)</td>
+                    </tr>
+                    <tr>
+                        <td class="border border-gray-300 px-4 py-2">Index Funds</td>
+                        <td class="border border-gray-300 px-4 py-2">7% - 10%</td>
+                        <td class="border border-gray-300 px-4 py-2">Medium</td>
+                        <td class="border border-gray-300 px-4 py-2">Long-term wealth building</td>
+                    </tr>
+                    <tr>
+                        <td class="border border-gray-300 px-4 py-2">Retirement Accounts</td>
+                        <td class="border border-gray-300 px-4 py-2">7% - 10%</td>
+                        <td class="border border-gray-300 px-4 py-2">Medium</td>
+                        <td class="border border-gray-300 px-4 py-2">Retirement goals, tax advantages</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <p class="mt-4">
+            The financial impact of quitting smoking extends far beyond immediate savings. By redirecting your cigarette money into investments, you're not just improving your health, you're building a foundation for financial freedom. Use this calculator regularly as you progress in your <a href="https://www.cdc.gov/tobacco/campaign/tips/quit-smoking/index.html">quit journey</a> to stay motivated by watching your savings grow.
+        </p>
+        
+    <main>
+        <article>
+            <slot />
+        </article>
+        <AuthorBox />
+    </main>
+</div>
+</IndexPage>

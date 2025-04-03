@@ -1,0 +1,308 @@
+---
+import IndexPage from "../../layouts/IndexPage.astro";
+import TrumpTariffCalculator from "../../components/calculators/trump-tariffs/TrumpTariffCalculator";
+import { Calculator } from 'lucide-react';
+import YouTubeEmbed from '../../components/YouTubeEmbed.astro';
+import ImageEmbed from '../../components/ImageEmbed.astro';
+import AuthorBox from '../../components/AuthorBox.astro';
+
+export const frontmatter = {
+  comment: false,
+  donate: false,
+  title: "The Trump Tariff Calculator: How Much More Will You Pay?",
+  description: "Find out how Trump's tariffs on Canada/Mexico, and China could raise your costs for food, fuel, clothing, and cars.",
+  author: "Brett Lindenberg",
+  category: "Personal Finance Calculators",
+  date: "2025-04-02",
+  tags: [""],
+  image: {
+    url: "",
+    alt: ""
+  }
+};
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": frontmatter.title,
+  "description": frontmatter.description,
+  "applicationCategory": "FinanceApplication",
+  "operatingSystem": "Web Browser",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "featureList": [
+    "Tariff Cost Estimation",
+    "State-Specific Benefits",
+    "Household Expense Analysis",
+    "Food Price Impact",
+    "Fuel Cost Projections",
+    "Clothing Expense Increase",
+    "Vehicle Price Hike Calculator",
+    "Economic Research Insights"
+  ]
+};
+
+// Last updated date for calculator data
+const calculatorLastUpdated = "April 2, 2025";
+---
+
+<IndexPage
+  title={frontmatter.title}
+  description={frontmatter.description}
+  author={frontmatter.author}
+  date={frontmatter.date}
+  comment={frontmatter.comment}
+  donate={frontmatter.donate}
+  image={frontmatter.image}
+  category={frontmatter.category}
+  tags={frontmatter.tags}>
+
+<script type="application/ld+json" set:html={JSON.stringify(schema)} />
+<div class="min-h-screen bg-skin-fill pt-2 px-4 sm:px-6 lg:px-8">
+  <div class="max-w-7xl mx-auto">
+    <div class="not-prose mt-2">
+      <div id="calculator-container">
+        <div class="text-center p-3 text-sm text-gray-500 hidden" id="loading-message">
+          Loading calculator...
+        </div>
+        <TrumpTariffCalculator client:visible />
+        <div class="text-right text-xs text-gray-500 mt-2">
+          Calculator data last updated: {calculatorLastUpdated}
+        </div>
+      </div>
+    </div>
+  </div>
+  
+ <div class="prose prose-lg max-w-none mt-2 text-skin-base">
+    <h2 class="text-2xl font-bold mb-4">How to Use the Trump Tariff Calculator</h2>
+    <p class="mb-4">
+      How could Trump's tariffs impact your personal finances? This tool helps you understand the direct financial impact of the proposed tariffs on groceries, fuel, clothing, or a new car. 
+    </p>
+    <p class="mt-4">
+      Start by entering your total monthly spend and the state you live in. Then enter average costs for groceries, fuel, clothing, and major purchases like an automobile. Then click the "Calculate Your Trump Tariffs" and see your monthly spend before and after the proposed tariffs. This tool can also projects the impact of tariffs announced by the Trump Admin as part of <a href="https://www.cbsnews.com/news/trump-liberation-day-new-tariffs-us/">"Liberation Day"</a> on April 2nd, 2025.
+    </p>
+
+    <p class="mt-4">
+      The calculator taps into research like the <a href="https://www.piie.com/blogs/realtime-economics/trumps-bigger-tariff-proposals-would-cost-typical-american-household-over">Peterson Institute for International Economics (PIIE)</a> study, estimating Trump's proposed tariffs could add $1,200 annually to household expenses with its focus on import reliance and a 90% cost pass-through rate. This mid-range projection mixes with the <a href="https://taxfoundation.org/research/all/federal/trump-tariffs-trade-war/">Tax Foundation</a>'s $1,075 low-end, the <a href="https://www.jec.senate.gov/public/index.cfm/democrats/2024/12/trump-s-tariff-plans-would-drive-up-costs-for-families-and-shrink-the-economy">Joint Economic Committee</a>'s $2,600 high-end, and the <a href="https://budgetlab.yale.edu/research/fiscal-economic-and-distributional-effects-20-tariffs-china-and-25-tariffs-canada-and-mexico">Budget Lab Midpoint</a>'s $1,700 balanced take. Together, they offer a range of financial impacts, showcasing varied approaches and explain how tariffs might impact your budget.
+    </p>
+
+            <ImageEmbed src="/images/liberation-day-tariffs.png" alt="Liberation Day Tariffs" description="Liberation Day Tariffs came in much higher than almost anyone predicted." />
+
+  <h3 class="text-xl font-bold mt-4">Calculations Behind the Tool</h3>
+  <p class="mt-4">
+    This tool calculates your estimated annual cost increase under Trump’s proposed tariffs using your monthly spending, tariff rates, and economic data.
+  </p>
+
+  <h4 class="text-lg font-semibold mt-4">Basic Calculations</h4>
+  <p class="mt-2">
+    The tool uses your monthly spending on groceries, fuel, and clothing. It assumes 30% of grocery spending, 40-60% of fuel spending, and 40-50% of clothing spending is on imported goods according to U.S. import data. Tariff rates are applied: 20-25% for most goods and 34% for Chinese imports. A 90% cost pass-through rate to consumers is used per NBER studies. The monthly tariff impact is multiplied by 12 to get the annual cost increase.
+  </p>
+
+  <h4 class="text-lg font-semibold mt-4">Examples</h4>
+  <p class="mt-2">
+    These calculations use default inputs: $862/month for groceries, $204/month for fuel, and $62/month for clothing.
+  </p>
+  <ul class="list-disc pl-6 space-y-2 mt-2">
+    <li><span class="font-bold">Groceries:</span> $862 × 30% = $258.60. Tariffs: 20% ($51.72) to 25% ($64.65). 90% pass-through: $46.55 to $58.19. Average monthly impact: $52.37. Annual: $52.37 × 12 = <span class="font-bold">$628.44</span>.</li>
+    <li><span class="font-bold">Fuel:</span> $204 × 40-60% = $81.60 to $122.40. 25% tariff, 90% pass-through: $18.36 to $27.54. Average monthly impact: $22.95. Annual: $22.95 × 12 = <span class="font-bold">$275.40</span>.</li>
+    <li><span class="font-bold">Clothing:</span> $62 × 40-50% = $24.80 to $31.00. Tariffs: 20% ($4.46) to 25% ($6.98). 90% pass-through. Average monthly impact: $5.72. Annual: $5.72 × 12 = <span class="font-bold">$68.64</span>.</li>
+    <li><span class="font-bold">Total Annual Impact:</span> $628.44 + $275.40 + $68.64 = <span class="font-bold">$972.48</span>.</li>
+  </ul>
+  <p class="mt-2">
+    The $972.48 is the low-end estimate for these defaults. Higher spending or additional tariffs increase due to Liberation Day Tariffs coming in higher than any report or agency previously expected.
+  </p>
+
+  <h4 class="text-lg font-semibold mt-4">Why Liberation Day Tariffs Are Higher</h4>
+  <p class="mt-2">
+    This tool’s estimates are higher than projections from the <a href="https://www.piie.com" class="text-skin-active hover:underline">Peterson Institute (PIIE)</a> ($1,200/year) and <a href="https://taxfoundation.org" class="text-skin-active hover:underline">Tax Foundation</a> ($1,075/year). Those studies used tariff rates of 10-20% based on Trump’s initial proposals. On April 2, 2025, the Trump Administration announced Liberation Day Tariffs: <a href="https://www.cbsnews.com/news/liberation-day-trump-tariffs-explained/" class="text-skin-active hover:underline">10% on all imports, 34% on Chinese goods</a>, and 25% on autos and steel. These rates are higher than the 10-20% assumed by earlier studies. This tool uses these updated rates, resulting in larger cost increases, such as $15,082.39 for high spending levels.
+  </p>
+
+    <h3 class="text-xl font-bold mt-8">What's a Tariff, Anyway?</h3>
+    <p class="mt-4">
+      Tariffs are taxes on imported goods paid by U.S. importers, who often pass these costs onto consumers through higher prices. For example, a smartphone from China smartphone could be slapped with an additional fee at the border. This fee increases the cost of doing business that someone needs to pay for and usually that person is the consumer. 
+    </p>
+
+    <p class="mt-4">
+  Then there’s the idea of <em>reciprocal tariffs</em>. Trump argued that if a country—like China—hits U.S. exports with, say, a 34% tariff, we should mirror it right back at them with the same rate on their imports. It’s a tit-for-tat strategy meant to level the playing field among trading nations.
+</p>
+
+    <h3 class="text-xl font-bold mt-4">Are Tariffs a Tax Hike in Disguise?</h3>
+    <p class="mt-4">
+      Peggy Hall, <a href="https://substack.com/@peggyhall">Founder of The Healthy American</a>, who's been critical of "Trump's Terrible Tariffs," says tariffs are a sneaky tax hike. Hall argues tariffs don't "Make America Great Again" but instead spike prices and kill jobs. Hall points to Trump's 2018 tariffs, which she says led to a 20% drop in economic activity and a 4% dip in manufacturing jobs, forcing a reversal in 2019. Her big question: If tariffs are so great, why don't all countries put 100% tariffs on everything? 
+    </p>
+
+    <YouTubeEmbed 
+      id="WwRzYu7T550" 
+      title="Trump's TERRIBLE TARIFFS are a TAX HIKE on AMERICANS" 
+      className="mb-1" 
+    />
+
+    <h3 class="text-xl font-bold mt-4">What's Behind the Numbers?</h3>
+    <p class="mt-4">
+    In the short term, almost every expert agrees tariffs will bring short-term pain to the American consumer. Here's how tariffs could impact your personal finances:
+    </p>
+    <ul class="list-disc pl-6 space-y-2 mt-2">
+      <li><strong>Total Spend:</strong> Default's $6,440/month (<a href="https://www.fool.com/money/research/average-monthly-expenses/">Fool.com</a>). We assume a 1.8% average tariff impact—$9.66/month on $536.67—based on moderate estimates.</li>
+      <li><strong>Food:</strong> $862/month default. About 30% of groceries are imported ($173B of $575B total U.S. food spend, BEA 2023). A 25% tariff on Canada/Mexico or 20% on China, with 90% pass-through (NBER average), adds $58-$65/month.</li>
+      <li><strong>Fuel:</strong> $204/month default (<a href="https://www.fool.com/money/research/gas-prices/">Fool.com</a>). Canada's 60% of U.S. crude imports (EIA 2023) means a 25% tariff on 40%-60% of that could bump costs $18-$27/month.</li>
+      <li><strong>Clothing:</strong> $62/month default. With 40%-50% imported ($90B total, Census 2023), a 20%-25% tariff adds $5-$6/month.</li>
+      <li><strong>Cars:</strong> If you're buying, expect $5,000-$15,000 more (<a href="https://www.cnn.com/2025/03/29/business/car-tariffs-prices-explained-dg/index.html">CNN</a>) due to 40% of auto imports from Canada/Mexico.</li>
+    </ul>
+
+    <ImageEmbed src="/images/trump-tariff.png" alt="Trump Tariffs" description="Trump gives a thumbs up on tariffs." />
+
+<h3 class="text-xl font-bold mt-4">Trump's Take: The Long-Term Benefits</h3>
+    <p class="mt-4">
+      President Trump loves touting tariffs as a winning strategy. Trump says tariffs will bring manufacturing jobs back to America and push back against countries like China, Canada, Mexico, and Vietnam, which he claims take advantage of us. The big picture is a thriving U.S. economy with busy factories, smaller trade gaps, and cash flowing in from other countries.
+    </p>
+    <p class="mt-4">
+      Trump sees billions coming in to pay for tax cuts or roads and bridges. He points to his 2018 tariffs saving steel and aluminum jobs, and now he’s going bigger with a 10% tariff on all imports, plus extras like 54% on China, 25% on Canada and Mexico, and 46% on Vietnam. He calls it "Liberation Day" for American industry, betting it’ll force companies to buy or build here, and his fans see it as a bold way to even the score and make the U.S. stand tall, even if prices jump for a while.
+    </p>
+    <p class="mt-4">
+      Critics doubt tariffs will have their intended impact, pointing to past tariffs that hurt countries more than they helped. Trump’s convinced this time is different. Will it pay off? That’s the huge question this calculator can’t settle, but it’ll show you the costs hitting your wallet while we all wait to find out.
+    </p>
+
+    <h3 class="text-xl font-bold mt-4">Trump's Latest Tariff Announcements: Liberation Day Breakdown</h3>
+    <p class="mt-4">
+      On April 2, 2025, President Donald Trump announced a sweeping set of tariffs during his "Liberation Day" event in the White House Rose Garden, calling it a "declaration of America's economic independence." Below is a detailed breakdown of tariffs on more influential countries along with specific exemptions where applicable. You'll find the <a href="https://www.newsweek.com/trump-reciprocal-tariff-chart-2054514">full list of announced tariffs here</a>. 
+    </p>
+    <table class="w-full border-collapse mt-4">
+      <thead>
+        <tr class="bg-gray-100">
+          <th class="border p-2 text-left">Country/Region</th>
+          <th class="border p-2 text-left">Baseline Tariff (Effective Date)</th>
+          <th class="border p-2 text-left">Reciprocal Tariff (Effective Date)</th>
+          <th class="border p-2 text-left">Additional Tariffs (Effective Date)</th>
+          <th class="border p-2 text-left">Scope</th>
+          <th class="border p-2 text-left">Exemptions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="border p-2">United States (General)</td>
+          <td class="border p-2">10% (April 2, 2025)</td>
+          <td class="border p-2">N/A</td>
+          <td class="border p-2">N/A</td>
+          <td class="border p-2">All imports unless exempted</td>
+          <td class="border p-2">Canada, Mexico (from 10% baseline); USMCA-compliant goods (e.g., certain auto parts)</td>
+        </tr>
+        <tr>
+          <td class="border p-2">China</td>
+          <td class="border p-2">10% (April 2, 2025)</td>
+          <td class="border p-2">34% (April 9, 2025) + 20% existing (March 4, 2025) = 54% total</td>
+          <td class="border p-2">25% steel/aluminum (March 12, 2025); 25% cars/parts (April 3, 2025)</td>
+          <td class="border p-2">All goods (consumer, electronics, industrial)</td>
+          <td class="border p-2">None explicitly mentioned</td>
+        </tr>
+        <tr>
+          <td class="border p-2">European Union (EU)</td>
+          <td class="border p-2">10% (April 2, 2025)</td>
+          <td class="border p-2">20% (April 9, 2025) = 30% total</td>
+          <td class="border p-2">25% steel/aluminum (March 12, 2025); 25% cars/parts (April 3, 2025)</td>
+          <td class="border p-2">All EU goods, reflecting EU duties on U.S. exports</td>
+          <td class="border p-2">No broad exemptions; individual EU country deals (e.g., UK) not detailed</td>
+        </tr>
+        <tr>
+          <td class="border p-2">Canada</td>
+          <td class="border p-2">Exempt (April 2, 2025)</td>
+          <td class="border p-2">N/A</td>
+          <td class="border p-2">25% all goods (March 4, 2025, pending suspension); 25% steel/aluminum (March 12, 2025); 25% cars/parts (April 3, 2025, non-USMCA only)</td>
+          <td class="border p-2">Non-exempt goods; softer impact due to baseline exemption</td>
+          <td class="border p-2">10% baseline exemption (temporary); USMCA-compliant goods (e.g., autos, delayed to May 3, 2025)</td>
+        </tr>
+        <tr>
+          <td class="border p-2">Mexico</td>
+          <td class="border p-2">Exempt (April 2, 2025)</td>
+          <td class="border p-2">N/A</td>
+          <td class="border p-2">25% all goods (March 4, 2025, pending suspension); 25% steel/aluminum (March 12, 2025); 25% cars/parts (April 3, 2025, non-USMCA only)</td>
+          <td class="border p-2">Non-exempt goods; similar to Canada</td>
+          <td class="border p-2">10% baseline exemption (temporary); USMCA-compliant goods (e.g., autos, delayed to May 3, 2025)</td>
+        </tr>
+        <tr>
+          <td class="border p-2">Japan</td>
+          <td class="border p-2">10% (April 2, 2025)</td>
+          <td class="border p-2">N/A</td>
+          <td class="border p-2">25% cars/parts (April 3, 2025); 25% steel/aluminum (March 12, 2025)</td>
+          <td class="border p-2">Standard tariffs, key for auto imports</td>
+          <td class="border p-2">None explicitly mentioned</td>
+        </tr>
+        <tr>
+          <td class="border p-2">South Korea</td>
+          <td class="border p-2">10% (April 2, 2025)</td>
+          <td class="border p-2">N/A</td>
+          <td class="border p-2">25% cars/parts (April 3, 2025); 25% steel/aluminum (March 12, 2025)</td>
+          <td class="border p-2">Standard tariffs, impacts auto imports</td>
+          <td class="border p-2">None; KORUS agreement not cited as altering tariffs</td>
+        </tr>
+        <tr>
+          <td class="border p-2">India</td>
+          <td class="border p-2">10% (April 2, 2025)</td>
+          <td class="border p-2">N/A</td>
+          <td class="border p-2">25% steel/aluminum (March 12, 2025)</td>
+          <td class="border p-2">Standard tariffs, potential for future reciprocal rates</td>
+          <td class="border p-2">None explicitly stated</td>
+        </tr>
+        <tr>
+          <td class="border p-2">Vietnam</td>
+          <td class="border p-2">10% (April 2, 2025)</td>
+          <td class="border p-2">N/A (possible up to 50%, April 9, 2025, if specified later)</td>
+          <td class="border p-2">25% steel/aluminum (March 12, 2025); 25% cars/parts (April 3, 2025)</td>
+          <td class="border p-2">Standard tariffs; growing trade partner, may face reciprocal rates</td>
+          <td class="border p-2">None explicitly mentioned; no specific exemptions noted</td>
+        </tr>
+        <tr>
+          <td class="border p-2">Other Countries</td>
+          <td class="border p-2">10% (April 2, 2025)</td>
+          <td class="border p-2">Up to 50% (April 9, 2025, specific countries TBD)</td>
+          <td class="border p-2">25% steel/aluminum (March 12, 2025); 25% cars/parts (April 3, 2025)</td>
+          <td class="border p-2">Varies by trade imbalances (e.g., Brazil, Turkey)</td>
+          <td class="border p-2">None broadly specified beyond Canada/Mexico baseline exemption</td>
+        </tr>
+      </tbody>
+    </table>
+    <p class="mt-4">
+      <strong>Key Notes:</strong> The 25% auto tariff targets non-USMCA-compliant imports, with a grace period until May 3, 2025. Reciprocal tariffs (e.g., China’s 34%, EU’s 20%) match foreign duties on U.S. goods, with Vietnam and others potentially facing up to 50% later. Canada and Mexico’s baseline exemptions are provisional and could shift.
+    </p>
+
+    <h3 class="text-xl font-bold mt-4">The Research Powering This Tool</h3>
+    <p class="mt-4">
+      To ensure this tool provides a comprehensive and well-rounded perspective on the impact of tariffs on Americans, I conducted an in-depth analysis of research papers and reports from a range of reputable sources. These include leading economic think tanks, academic institutions, and governmental committees, each offering unique methodologies to understand tariffs. By pulling together these sources, I hope to present a balanced view on how this could affect American households.
+    </p>
+    <ul class="list-disc pl-6 space-y-2 mt-2">
+      <li><a href="https://taxfoundation.org/research/all/federal/trump-tariffs-trade-war/">Tax Foundation</a>: Predicts a $1,075 annual hit per household. This is the most conservative estimate included in this tool.</li>
+      <li><a href="https://www.piie.com/blogs/realtime-economics/trumps-bigger-tariff-proposals-would-cost-typical-american-household-over">Peterson Institute (PIIE)</a>: The Peterson Institute's analysis highlights that the $1,200 annual cost per household reflects not just direct price increases on imported goods, but also the ripple effects of tariffs on domestic markets, such as higher production costs for U.S. manufacturers reliant on imported materials. </li>
+      <li><a href="https://www.jec.senate.gov/public/index.cfm/democrats/2024/12/trump-s-tariff-plans-would-drive-up-costs-for-families-and-shrink-the-economy">Joint Economic Committee</a>: Warns of $2,600/year. High-end, but eye-opening analysis.</li>
+      <li><a href="https://budgetlab.yale.edu/research/fiscal-economic-and-distributional-effects-20-tariffs-china-and-25-tariffs-canada-and-mexico">Budget Lab Midpoint</a>: Lands around $1,700/year. A balanced take from Yale.</li>
+    </ul>
+
+    <p class="mt-4">
+      Check the boxes in the calculator to see how these studies size up your tariff tab based on current monthly spend.
+    </p>
+
+        <ImageEmbed src="/images/liberation-day.png" alt="Liberation Day" description="Liberation Day was held on April 2, 2025." />
+
+
+    <p class="mt-4">
+      Beyond showing how tariffs might pinch your budget, this tool also highlights the upside for America and your state. Take Alabama, for example: a 25% tariff on $10B in Canadian and Mexican auto parts could spark 300 new manufacturing jobs and $2.5B in revenue, nudging firms like Hyundai to build more locally. Or Arizona, where a 20% tariff on $9B in Chinese electronics might add 250 tech jobs and $1.8B to the coffers, boosting Intel’s footprint. Nationally, Trump’s proposed tariffs could rake in $3.8 trillion over a decade (Tax Foundation, 2025), potentially funding tax cuts or infrastructure while nudging companies to hire stateside. Plug in your state to see how these trade taxes could mean more jobs and cash flow where you live.
+    </p>
+
+    <p class="mt-4">
+      Fun fact: even Biden didn’t ditch all of Trump’s first-term tariffs—he kept levies on over $300B in Chinese goods and added $18B more, like a 100% hit on electric vehicles. From 2018 to 2023, Trump and Biden tariffs generated $233B for the U.S. Treasury (Tax Foundation, 2024), proving they’re a revenue machine, even if they sting at the checkout. This tool blends that historical haul with projections from studies like the <a href="https://taxfoundation.org/research/all/federal/trump-tariffs-trade-war/">Tax Foundation</a> and <a href="https://budgetlab.yale.edu/research/fiscal-economic-and-distributional-effects-20-tariffs-china-and-25-tariffs-canada-and-mexico">Budget Lab</a>, showing how Trump’s new 25% Canada/Mexico and 20% China tariffs could juice job growth.
+    </p>
+
+    <h3 class="text-xl font-bold mt-4">The Big Disclaimer: It's a Moving Target</h3>
+    <p class="mt-4">
+      Here's the deal. No one knows for sure how these tariffs will play out. Trump could cut a deal with Mexico on avocado imports or Canada might hit back with a reciprocal Maple syrup levy by breakfast. Academic research gives us a range, but the Trump Admin could tweak rates, add exemptions, or pivot faster than you can say "trade war." I'll be glued to the updates, updating this tool as tariffs twist and turn because predicting this with total accuracy is not possible. 
+    </p>
+  
+  <main>
+    <article>
+      <slot />
+    </article>
+    <AuthorBox />
+  </main>
+</div>
+</IndexPage>

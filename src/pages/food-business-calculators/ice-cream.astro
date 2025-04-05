@@ -1,0 +1,495 @@
+---
+import IndexPage from "../../layouts/IndexPage.astro";
+import { IceCreamCalculator } from '../../components/calculators/ice-cream';
+import { Calculator } from 'lucide-react';
+import ImageEmbed from '../../components/ImageEmbed.astro';
+import AuthorBox from '../../components/AuthorBox.astro';
+
+export const frontmatter = {
+    comment: false,
+    donate: false,
+    title: "Ice Cream Business Profit Calculator",
+    description: "Calculate potential profits for your ice cream shop or truck. Estimate sales, costs, and revenue with this nteractive business planning tool.",
+    author: "Brett Lindenberg",
+    category: "Food Business Calculators",
+    date: "2025-04-04",
+    tags: [""],
+    image: {
+        url: "",
+        alt: ""
+    }
+};
+
+const schema = {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": frontmatter.title,
+    "description": frontmatter.description,
+    "applicationCategory": "BusinessApplication",
+    "operatingSystem": "Web Browser",
+    "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+    },
+    "featureList": [
+        "Ice cream business profit calculator",
+        "Seasonal sales projection",
+        "Multiple menu item support",
+        "5-year business projection",
+        "Expense breakdown analysis"
+    ]
+};
+---
+
+<IndexPage
+    title={frontmatter.title}
+    description={frontmatter.description}
+    author={frontmatter.author}
+    date={frontmatter.date}
+    comment={frontmatter.comment}
+    donate={frontmatter.donate}
+    image={frontmatter.image}
+    category={frontmatter.category}
+    tags={frontmatter.tags}>
+
+<script type="application/ld+json" set:html={JSON.stringify(schema)} />
+
+<div class="min-h-screen bg-skin-fill py-2 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-7xl mx-auto">
+        <div class="not-prose my-2">
+            <IceCreamCalculator client:load />
+        </div>
+    </div>
+    
+    <div class="prose prose-lg max-w-none mt-4 text-skin-base">
+        <h2 class="text-2xl font-bold mb-4">How to Use the Ice Cream Profit Calculator</h2>
+        
+        <p class="mt-4">
+            This calculator helps ice cream shop owners and food truck operators accurately project their potential profits by calculating ingredient costs, operational expenses, and applying seasonal adjustments. Whether you're planning to open a new ice cream business or optimize an existing one, this calculator will provide valuable insights for your business planning.
+        </p>
+
+        <p class="mt-4">
+            After you determine the profitability of your ice cream business model, you can easily save the data by copying and pasting the results, or downloading it as a text file to include in your business plan.
+        </p>
+
+        <h3 class="text-xl font-bold mt-4">Step 1: Enter Menu Items</h3>
+        <p class="mt-4">
+            Begin by entering details for each menu item you plan to sell:
+        </p>
+        <ul class="list-disc pl-6 space-y-2">
+            <li>Product name (e.g., "Scoop", "Sundae", "Milkshake")</li>
+            <li>Price per unit</li>
+            <li>Estimated units sold per day</li>
+            <li>Cost of ingredients per serving</li>
+            <li>Packaging costs per serving</li>
+        </ul>
+        <p class="mt-4">
+            You can add multiple menu items to create a comprehensive business model. The calculator will analyze each product's contribution to your overall profitability.
+        </p>
+
+        <h3 class="text-xl font-bold mt-4">Step 2: Configure Operational Details</h3>
+        <p class="mt-4">
+            Set your operational parameters:
+        </p>
+        <ul class="list-disc pl-6 space-y-2">
+            <li>Days open per week</li>
+            <li>Months open per year (seasonal businesses can adjust accordingly)</li>
+            <li>Waste percentage (typical ice cream waste ranges from 2-5%)</li>
+        </ul>
+
+        <h3 class="text-xl font-bold mt-4">Step 3: Enter Your Business Expenses</h3>
+        <p class="mt-4">
+            Input your monthly fixed costs:
+        </p>
+        <ul class="list-disc pl-6 space-y-2">
+            <li>Labor expenses</li>
+            <li>Lease or rent payments</li>
+            <li>Utility costs</li>
+            <li>Additional expenses (marketing, insurance, etc.)</li>
+        </ul>
+        
+        <p class="mt-4">
+            The calculator allows you to add custom expense categories to ensure your business model is complete and accurate.
+        </p>
+
+        <h3 class="text-xl font-bold mt-4">Step 4: Calculate and Analyze Results</h3>
+        <p class="mt-4">
+            Click "Calculate Ice Cream Profit" to generate detailed projections, including:
+        </p>
+        <ul class="list-disc pl-6 space-y-2">
+            <li>Daily, monthly, and annual sales figures</li>
+            <li>Profit per unit for each menu item</li>
+            <li>5-year business projection with industry survival milestones</li>
+            <li>Seasonal monthly projection accounting for high and low seasons</li>
+            <li>Detailed expense breakdown</li>
+        </ul>
+
+        <ImageEmbed src="/images/ice-cream-customer.png" alt="girl eating ice cream" description="The simple joy of enjoying an ice cream cone." />
+
+        <h3 class="text-xl font-bold mt-4">Step 5: Detailed Walkthrough with Example</h3>
+        <p class="mt-4">
+            Let's walk through a complete example to show you exactly how the calculator works. I'll use a simple ice cream shop model with two menu items:
+        </p>
+        
+        <div class="bg-gray-100 p-4 rounded-lg my-4">
+            <h5 class="font-bold">Menu Items</h5>
+            <div class="pl-4 border-l-4 border-gray-300 my-4">
+                <p class="font-bold">Item 1: Single Scoop</p>
+                <ul class="list-none space-y-1">
+                    <li><strong>Price per Unit:</strong> $5.00</li>
+                    <li><strong>Units Sold per Day:</strong> 80</li>
+                    <li><strong>Cost of Ingredients:</strong> $0.90</li>
+                    <li><strong>Packaging Costs:</strong> $0.35</li>
+                </ul>
+                <p class="mt-2 text-sm italic">Daily Revenue: 80 × $5.00 = $400.00</p>
+                <p class="text-sm italic">Daily Cost: 80 × ($0.90 + $0.35) = $100.00</p>
+            </div>
+            
+            <div class="pl-4 border-l-4 border-gray-300 my-4">
+                <p class="font-bold">Item 1: Sundae</p>
+                <ul class="list-none space-y-1">
+                    <li><strong>Price per Unit:</strong> $7.50</li>
+                    <li><strong>Units Sold per Day:</strong> 40</li>
+                    <li><strong>Cost of Ingredients:</strong> $1.50</li>
+                    <li><strong>Packaging Costs:</strong> $0.50</li>
+                </ul>
+                <p class="mt-2 text-sm italic">Daily Revenue: 40 × $7.50 = $300.00</p>
+                <p class="text-sm italic">Daily Cost: 40 × ($1.50 + $0.50) = $80.00</p>
+            </div>
+            
+            <h5 class="font-bold mt-4">Operational Details</h5>
+            <ul class="list-disc pl-6 space-y-1">
+                <li><strong>Days Open per Week:</strong> 7</li>
+                <li><strong>Months Open per Year:</strong> 12</li>
+                <li><strong>Waste Percentage:</strong> 2.5%</li>
+            </ul>
+            
+            <h5 class="font-bold mt-4">Monthly Expenses</h5>
+            <ul class="list-disc pl-6 space-y-1">
+                <li><strong>Labor:</strong> $5,000</li>
+                <li><strong>Lease:</strong> $3,500</li>
+                <li><strong>Utilities:</strong> $600</li>
+                <li><strong>Marketing:</strong> $400</li>
+            </ul>
+            
+            <h5 class="font-bold mt-4">Calculation Results</h5>
+            <p class="pl-4">Total Daily Sales: $400.00 + $300.00 = $700.00</p>
+            <p class="pl-4">Total Daily Ingredient Cost: $100.00 + $80.00 = $180.00</p>
+            <p class="pl-4">Waste Cost (2.5%): $180.00 × 0.025 = $4.50</p>
+            <p class="pl-4">Total Daily Cost: $184.50</p>
+            <p class="pl-4">Daily Fixed Costs: ($5,000 + $3,500 + $600 + $400) ÷ 30 = $316.67</p>
+            <p class="pl-4">Daily Profit: $700.00 - $184.50 - $316.67 = $198.83</p>
+            <p class="pl-4">Monthly Sales: $700.00 × 30 = $21,000.00</p>
+            <p class="pl-4">Annual Sales: $21,000.00 × 12 = $252,000.00</p>
+        </div>
+
+        <ImageEmbed src="/images/ice-cream-employee.png" alt="ice cream employee" description="This calculator helps you create accurate financial projections for your ice cream business plan." />
+
+        <h3 class="text-xl font-bold mt-4">Understanding Seasonal Adjustments</h3>
+        <p class="mt-4">
+            Ice cream sales typically follow seasonal patterns. The calculator automatically adjusts your projected revenue based on the Seasona Monthly Projection chart in the results section to provide a more realistic view of monthly sales.
+        </p>
+        
+        <div class="overflow-x-auto my-6">
+            <table class="min-w-full bg-white border border-gray-300">
+                <thead>
+                    <tr>
+                        <th class="border border-gray-300 px-4 py-2 text-left">Season</th>
+                        <th class="border border-gray-300 px-4 py-2 text-left">Months</th>
+                        <th class="border border-gray-300 px-4 py-2 text-left">Sales Factor</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="border border-gray-300 px-4 py-2">Winter</td>
+                        <td class="border border-gray-300 px-4 py-2">December, January, February</td>
+                        <td class="border border-gray-300 px-4 py-2">0.6 (40% decrease)</td>
+                    </tr>
+                    <tr>
+                        <td class="border border-gray-300 px-4 py-2">Spring</td>
+                        <td class="border border-gray-300 px-4 py-2">March, April, May</td>
+                        <td class="border border-gray-300 px-4 py-2">0.9 (10% decrease)</td>
+                    </tr>
+                    <tr>
+                        <td class="border border-gray-300 px-4 py-2">Summer</td>
+                        <td class="border border-gray-300 px-4 py-2">June, July, August</td>
+                        <td class="border border-gray-300 px-4 py-2">1.3 (30% increase)</td>
+                    </tr>
+                    <tr>
+                        <td class="border border-gray-300 px-4 py-2">Fall</td>
+                        <td class="border border-gray-300 px-4 py-2">September, October, November</td>
+                        <td class="border border-gray-300 px-4 py-2">0.8 (20% decrease)</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <p class="mt-4">
+            These factors help provide a more realistic projection, especially for ice cream businesses that face significant seasonal fluctuations.
+        </p>
+
+        <h3 class="text-xl font-bold mt-4">Tips for Accurate Profit Projections</h3>
+        <ul class="list-disc pl-6 space-y-2">
+            <li><strong>Be conservative with sales estimates:</strong> It's better to underestimate sales and be pleasantly surprised than to overestimate and face financial challenges.</li>
+            <li><strong>Account for all costs:</strong> Include every expense, no matter how small. Little costs add up quickly in food service businesses.</li>
+            <li><strong>Consider location factors:</strong> High-traffic areas may generate more sales but typically come with higher rent costs.</li>
+            <li><strong>Plan for equipment maintenance:</strong> Ice cream machines require regular maintenance; factor these costs into your projections.</li>
+            <li><strong>Update costs regularly:</strong> Ingredient prices, especially dairy, can fluctuate significantly. Review and update your pricing regularly.</li>
+        </ul>
+
+        <h3 class="text-xl font-bold mt-4">Typical Profit Margins in the Ice Cream Industry</h3>
+        <p class="mt-4">
+            Ice cream businesses typically maintain gross profit margins between 60-70% on product costs. However, when accounting for all operating expenses, <a href="https://pos.toasttab.com/blog/on-the-line/ice-cream-shop-revenue">net profit margins of 10-25%</a> are more common. Here's how profit margins typically break down:
+        </p>
+
+                <ImageEmbed src="/images/ice-cream-truck.png" alt="ice cream truck" description="You can use these projections for an ice cream truck business as well." />
+
+        
+        <div class="overflow-x-auto my-6">
+            <table class="min-w-full bg-white border border-gray-300">
+                <thead>
+                    <tr>
+                        <th class="border border-gray-300 px-4 py-2 text-left">Business Type</th>
+                        <th class="border border-gray-300 px-4 py-2 text-left">Gross Margin</th>
+                        <th class="border border-gray-300 px-4 py-2 text-left">Net Profit Margin</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="border border-gray-300 px-4 py-2">Ice Cream Shop (Premium)</td>
+                        <td class="border border-gray-300 px-4 py-2">65-75%</td>
+                        <td class="border border-gray-300 px-4 py-2">15-25%</td>
+                    </tr>
+                    <tr>
+                        <td class="border border-gray-300 px-4 py-2">Ice Cream Shop (Standard)</td>
+                        <td class="border border-gray-300 px-4 py-2">60-70%</td>
+                        <td class="border border-gray-300 px-4 py-2">10-20%</td>
+                    </tr>
+                    <tr>
+                        <td class="border border-gray-300 px-4 py-2">Ice Cream Truck</td>
+                        <td class="border border-gray-300 px-4 py-2">55-65%</td>
+                        <td class="border border-gray-300 px-4 py-2">15-30%</td>
+                    </tr>
+                    <tr>
+                        <td class="border border-gray-300 px-4 py-2">Ice Cream Cart/Kiosk</td>
+                        <td class="border border-gray-300 px-4 py-2">60-70%</td>
+                        <td class="border border-gray-300 px-4 py-2">20-35%</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <h3 class="text-xl font-bold mt-4">Business Survival Statistics</h3>
+        <p class="mt-4">
+            The ice cream industry faces the same challenges as other food service businesses. According to industry data from <a href="https://www.limepack.eu/blog/ice-cream/ice-cream-shop-failure-rates-strategies-for-success">LimePack</a>:
+        </p>
+        <ul class="list-disc pl-6 space-y-2">
+            <li>Approximately 20% of ice cream shops fail within their first year of operation.</li>
+            <li>Around 50% don't reach their five-year anniversary.</li>
+            <li>Businesses that survive beyond 5 years have significantly better long-term prospects.</li>
+        </ul>
+        
+        <p class="mt-4">
+            The calculator incorporates these industry milestones into the 5-year projection chart to help you visualize critical survival thresholds.
+        </p>
+        
+        <h3 class="text-xl font-bold mt-4">Key Success Factors</h3>
+        <p class="mt-4">
+            Profitable ice cream businesses typically excel in these areas:
+        </p>
+        <ul class="list-disc pl-6 space-y-2">
+            <li><strong>Location:</strong> High foot traffic areas with good visibility.</li>
+            <li><strong>Product quality:</strong> Consistently excellent ice cream that brings customers back.</li>
+            <li><strong>Menu innovation:</strong> Regular introduction of new flavors and seasonal specialties.</li>
+            <li><strong>Operational efficiency:</strong> Tight control of labor costs and waste management.</li>
+            <li><strong>Marketing:</strong> Effective local promotion and social media presence.</li>
+        </ul>
+        
+        <h3 class="text-xl font-bold mt-4">Common Expenses in Ice Cream Businesses</h3>
+        <p class="mt-4">
+            When planning your ice cream business, be sure to account for all these typical expenses. 
+        </p>
+        
+        <div class="overflow-x-auto my-6">
+            <table class="min-w-full bg-white border border-gray-300">
+                <thead>
+                    <tr>
+                        <th class="border border-gray-300 px-4 py-2 text-left">Expense Category</th>
+                        <th class="border border-gray-300 px-4 py-2 text-left">Examples</th>
+                        <th class="border border-gray-300 px-4 py-2 text-left">Typical % of Revenue</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="border border-gray-300 px-4 py-2">Cost of Goods Sold</td>
+                        <td class="border border-gray-300 px-4 py-2">Ice cream ingredients, toppings, cones, packaging</td>
+                        <td class="border border-gray-300 px-4 py-2">30-40%</td>
+                    </tr>
+                    <tr>
+                        <td class="border border-gray-300 px-4 py-2">Labor</td>
+                        <td class="border border-gray-300 px-4 py-2">Staff wages, benefits, training</td>
+                        <td class="border border-gray-300 px-4 py-2">25-35%</td>
+                    </tr>
+                    <tr>
+                        <td class="border border-gray-300 px-4 py-2">Occupancy</td>
+                        <td class="border border-gray-300 px-4 py-2">Rent/lease, property taxes, common area maintenance</td>
+                        <td class="border border-gray-300 px-4 py-2">10-15%</td>
+                    </tr>
+                    <tr>
+                        <td class="border border-gray-300 px-4 py-2">Utilities</td>
+                        <td class="border border-gray-300 px-4 py-2">Electricity, water, gas, internet</td>
+                        <td class="border border-gray-300 px-4 py-2">3-7%</td>
+                    </tr>
+                    <tr>
+                        <td class="border border-gray-300 px-4 py-2">Marketing</td>
+                        <td class="border border-gray-300 px-4 py-2">Advertising, promotions, social media</td>
+                        <td class="border border-gray-300 px-4 py-2">2-5%</td>
+                    </tr>
+                    <tr>
+                        <td class="border border-gray-300 px-4 py-2">Insurance</td>
+                        <td class="border border-gray-300 px-4 py-2">Liability, property, workers' compensation</td>
+                        <td class="border border-gray-300 px-4 py-2">1-3%</td>
+                    </tr>
+                    <tr>
+                        <td class="border border-gray-300 px-4 py-2">Equipment</td>
+                        <td class="border border-gray-300 px-4 py-2">Maintenance, repairs, replacements</td>
+                        <td class="border border-gray-300 px-4 py-2">2-4%</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <section class="prose max-w-none mt-12">
+  <h2 class="text-2xl font-bold mb-4">How the Ice Cream Profit Calculator Works</h2>
+  
+  <p class="mt-4">
+    This calculator uses standard business accounting methods to project revenue, expenses, and profit for ice cream businesses. The calculations follow established financial modeling practices with adjustments specific to the ice cream industry.
+  </p>
+
+  <h3 class="text-xl font-bold mt-6 mb-3">Core Financial Calculations</h3>
+  
+  <div class="overflow-x-auto my-6">
+    <table class="min-w-full bg-white border border-gray-300">
+      <thead>
+        <tr>
+          <th class="border border-gray-300 px-4 py-2 text-left">Metric</th>
+          <th class="border border-gray-300 px-4 py-2 text-left">Formula</th>
+          <th class="border border-gray-300 px-4 py-2 text-left">Example</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="border border-gray-300 px-4 py-2">Daily Revenue</td>
+          <td class="border border-gray-300 px-4 py-2">Sum(Price × Units Sold) for all menu items</td>
+          <td class="border border-gray-300 px-4 py-2">$6 × 50 scoops = $300/day</td>
+        </tr>
+        <tr>
+          <td class="border border-gray-300 px-4 py-2">Daily COGS</td>
+          <td class="border border-gray-300 px-4 py-2">Sum((Ingredient Cost + Packaging Cost) × Units Sold × (1 + Waste %)) for all menu items</td>
+          <td class="border border-gray-300 px-4 py-2">($1.00 + $0.45) × 50 × 1.025 = $74.31/day</td>
+        </tr>
+        <tr>
+          <td class="border border-gray-300 px-4 py-2">Monthly Revenue</td>
+          <td class="border border-gray-300 px-4 py-2">Daily Revenue × Days Open × 4.33 (weeks per month)</td>
+          <td class="border border-gray-300 px-4 py-2">$300 × 7 × 4.33 = $9,093/month</td>
+        </tr>
+        <tr>
+          <td class="border border-gray-300 px-4 py-2">Monthly Fixed Expenses</td>
+          <td class="border border-gray-300 px-4 py-2">Sum of all monthly expenses (Labor, Lease, etc.)</td>
+          <td class="border border-gray-300 px-4 py-2">$5,000 + $4,000 = $9,000/month</td>
+        </tr>
+        <tr>
+          <td class="border border-gray-300 px-4 py-2">Monthly Profit</td>
+          <td class="border border-gray-300 px-4 py-2">Monthly Revenue - Monthly COGS - Monthly Fixed Expenses</td>
+          <td class="border border-gray-300 px-4 py-2">$9,093 - $2,251 - $9,000 = -$2,158/month</td>
+        </tr>
+        <tr>
+          <td class="border border-gray-300 px-4 py-2">Annual Values</td>
+          <td class="border border-gray-300 px-4 py-2">Monthly Value × Months Open per Year</td>
+          <td class="border border-gray-300 px-4 py-2">-$2,158 × 12 = -$25,896/year</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3 class="text-xl font-bold mt-6 mb-3">Unit Economics</h3>
+  <p class="mt-4">
+    The profit per unit calculation focuses on the direct costs associated with each menu item:
+  </p>
+  <div class="bg-gray-100 p-4 my-3 font-mono">
+    Direct Cost Per Unit = (Ingredient Cost + Packaging Cost) × (1 + Waste %)
+  </div>
+  <div class="bg-gray-100 p-4 my-3 font-mono">
+    Profit Per Unit = Price - Direct Cost Per Unit
+  </div>
+  <div class="bg-gray-100 p-4 my-3 font-mono">
+    Margin = (Profit Per Unit / Price) × 100%
+  </div>
+  <p class="mt-4">
+    For example, a $6 scoop with $1.00 in ingredients, $0.45 in packaging, and 2.5% waste would have:
+  </p>
+  <ul class="list-disc pl-6 space-y-2 mb-6">
+    <li>Direct Cost = ($1.00 + $0.45) × 1.025 = $1.49</li>
+    <li>Profit Per Unit = $6.00 - $1.49 = $4.51</li>
+    <li>Margin = ($4.51 / $6.00) × 100% = 75.2%</li>
+  </ul>
+
+  <h3 class="text-xl font-bold mt-6 mb-3">Growth Projections</h3>
+  <p class="mt-4">
+    The 5-year projection applies your specified growth rates annually:
+  </p>
+  <div class="bg-gray-100 p-4 my-3 font-mono">
+    Year N Revenue = Year (N-1) Revenue × (1 + Annual Revenue Growth %)
+  </div>
+  <div class="bg-gray-100 p-4 my-3 font-mono">
+    Year N Expenses = Year (N-1) Expenses × (1 + Annual Expense Growth %)
+  </div>
+
+  <p class="mt-4">
+    All calculated values are meant as projections based on the inputs provided. Actual business performance may vary due to market conditions, execution, and other factors not captured in these calculations.
+  </p>
+</section>
+        
+        <h2 class="text-2xl font-bold mt-8 mb-4">Using Calculator Results in Your Business Plan</h2>
+        <p class="mt-4">
+            The results from this calculator provide valuable data for your business plan. Here's how to effectively use this information:
+        </p>
+        
+        <h3 class="text-xl font-bold mt-4">Financial Projections</h3>
+        <p class="mt-4">
+            Include the following elements in your ice cream business plan's financial section:
+        </p>
+        <ul class="list-disc pl-6 space-y-2">
+            <li><strong>Projected Revenue:</strong> Use the daily, monthly, and annual sales figures.</li>
+            <li><strong>Cost Structure:</strong> Include the detailed expense breakdown.</li>
+            <li><strong>Profit Margins:</strong> Highlight your profit per unit for each menu item.</li>
+            <li><strong>Seasonal Adjustments:</strong> Incorporate the monthly projection data to show understanding of seasonal fluctuations.</li>
+            <li><strong>Long-term Outlook:</strong> Use the 5-year projection to demonstrate your growth strategy and sustainability.</li>
+        </ul>
+        
+        <p class="mt-4">
+            Run the calculator multiple times with different scenarios to understand how changes in key variables affect your profitability. Try higher sales with lower costs. Lower sales with higher costs to see how much wiggle room there is in your business plan. 
+        </p>
+        
+        <h3 class="text-xl font-bold mt-4">Breakeven Analysis</h3>
+        <p class="mt-4">
+            Use the calculator to determine your breakeven point—the sales volume needed to cover all costs. This information is crucial for setting realistic goals and knowing how many scoops or soft-serve you need to sell each week to cover costs.
+        </p>
+        
+        <p class="mt-4">
+            I suggest auditing your menu quarterly. Track which products sell well and which ones don't perform as expected. A focused menu with fewer, high-performing items often outperforms one with too many choices. Replace underperforming products with new offerings that match current trends or highlight seasonal ingredients.
+        </p>
+    
+        <p class="mt-4">
+            Finally, remember that ice cream businesses thrive on creating memorable experiences. While this calculator focuses on the financial aspects of your business, the quality of your product and customer service will ultimately determine your long-term success. By combining solid financial planning with exceptional product quality, you'll build an ice cream business that delights customers and generates sustainable profits.
+        </p>
+
+    <main>
+        <article>
+            <slot />
+        </article>
+        <AuthorBox />
+    </main>
+</div>
+</IndexPage>
